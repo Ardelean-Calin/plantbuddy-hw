@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name PlantBuddy)(type Legacy)(uri ${KIPRJMOD}/lib/sym/PlantBuddy.lib)(options "")(descr ""))
+  (lib (name PidgeonRepeller)(type Legacy)(uri D:/Projects/PidgeonRepeller/01_Hardware/PidgeonRepeller.lib)(options "")(descr ""))
+)

@@ -1,0 +1,11 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP CN3063
+F https://datasheet.lcsc.com/szlcsc/ShangHai-Consonance-Elec-CN3063_C28078.pdf
+$ENDCMP
+#
+$CMP SHT20
+F https://datasheet.lcsc.com/szlcsc/Sensirion-SHT20_C53865.pdf
+$ENDCMP
+#
+#End Doc Library
