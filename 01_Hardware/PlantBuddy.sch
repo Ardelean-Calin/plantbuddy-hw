@@ -56,17 +56,6 @@ F 3 "~" H 3675 2000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 3675 2100
-$Comp
-L power:VCC #PWR05
-U 1 1 5F79DB75
-P 1675 1700
-F 0 "#PWR05" H 1675 1550 50  0001 C CNN
-F 1 "VCC" H 1690 1873 50  0000 C CNN
-F 2 "" H 1675 1700 50  0001 C CNN
-F 3 "" H 1675 1700 50  0001 C CNN
-	1    1675 1700
-	1    0    0    -1  
-$EndComp
 Text Label 3550 1900 2    50   ~ 0
 fHumidity
 Wire Wire Line
@@ -96,7 +85,6 @@ F 4 "C14663" H 1675 1800 50  0001 C CNN "LCSC"
 $EndComp
 Wire Wire Line
 	1675 1700 1900 1700
-Connection ~ 1675 1700
 $Comp
 L power:GND #PWR06
 U 1 1 5F7A256D
@@ -182,17 +170,6 @@ F 3 "" H 900 1000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 900  1000
-$Comp
-L power:VCC #PWR07
-U 1 1 5F7A3D8C
-P 1700 1000
-F 0 "#PWR07" H 1700 850 50  0001 C CNN
-F 1 "VCC" H 1715 1173 50  0000 C CNN
-F 2 "" H 1700 1000 50  0001 C CNN
-F 3 "" H 1700 1000 50  0001 C CNN
-	1    1700 1000
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1700 1000 1500 1000
 Wire Wire Line
@@ -311,7 +288,7 @@ N1: Pull-up can be omitted
 Text Notes 6475 675  0    50   ~ 0
 Special layout considerations:
 Text Notes 6475 775  0    50   ~ 10
-pic/PCB-Considerations.jpg
+98_Other/PCB-Considerations.jpg
 $Comp
 L Device:Antenna_Shield AE1
 U 1 1 5F7B40C5
@@ -352,7 +329,7 @@ $Comp
 L Device:R_Small R13
 U 1 1 5F7C98A8
 P 5775 4325
-F 0 "R13" H 5625 4375 50  0000 L CNN
+F 0 "R13" H 5575 4375 50  0000 L CNN
 F 1 "10k" H 5575 4275 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 5775 4325 50  0001 C CNN
 F 3 "~" H 5775 4325 50  0001 C CNN
@@ -640,28 +617,16 @@ F 4 "C14213" H 10175 5750 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L PidgeonRepeller:Q_DUAL_NMOS_FS8205 Q2
+L PidgeonRepeller:Q_DUAL_NMOS_FS8205 Q3
 U 2 1 5F8AAEF8
 P 9975 6150
-F 0 "Q2" V 10224 6150 50  0000 C CNN
+F 0 "Q3" V 10224 6150 50  0000 C CNN
 F 1 "FS8205" V 10315 6150 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-6" H 10175 6150 50  0001 C CNN
 F 3 "~" H 10175 6150 50  0001 C CNN
 F 4 "C32254" H 9975 6150 50  0001 C CNN "LCSC"
 	2    9975 6150
 	0    1    1    0   
-$EndComp
-$Comp
-L PidgeonRepeller:Q_DUAL_NMOS_FS8205 Q3
-U 1 1 5F8AC644
-P 10375 6150
-F 0 "Q3" V 10624 6150 50  0000 C CNN
-F 1 "FS8205" V 10715 6150 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23-6" H 10575 6150 50  0001 C CNN
-F 3 "~" H 10575 6150 50  0001 C CNN
-F 4 "C32254" H 10375 6150 50  0001 C CNN "LCSC"
-	1    10375 6150
-	0    -1   1    0   
 $EndComp
 Wire Wire Line
 	9675 5450 9625 5450
@@ -1888,4 +1853,20 @@ Text Notes 7800 3275 0    26   ~ 0
 Should be ~~3.1pF\nbut considering\nparasitic capacitances\nwe chose this value
 Text Notes 7800 3350 0    26   ~ 0
 RoT: ~~0.3pF per PAD
+$Comp
+L PidgeonRepeller:Q_DUAL_NMOS_FS8205 Q3
+U 1 1 5F8AC644
+P 10375 6150
+F 0 "Q3" V 10624 6150 50  0000 C CNN
+F 1 "FS8205" V 10715 6150 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-6" H 10575 6150 50  0001 C CNN
+F 3 "~" H 10575 6150 50  0001 C CNN
+F 4 "C32254" H 10375 6150 50  0001 C CNN "LCSC"
+	1    10375 6150
+	0    -1   1    0   
+$EndComp
+Text Label 1700 1000 2    50   ~ 0
+Vhum
+Text Label 1675 1700 0    50   ~ 0
+Vhum
 $EndSCHEMATC
