@@ -389,7 +389,7 @@ U 1 1 5F80C318
 P 900 4525
 F 0 "SC1" H 1008 4621 50  0000 L CNN
 F 1 "Solar_Cell" H 1008 4530 50  0000 L CNN
-F 2 "TestPoint:TestPoint_2Pads_Pitch5.08mm_Drill1.3mm" V 900 4585 50  0001 C CNN
+F 2 "PlantBuddy:SolarCell" V 900 4585 50  0001 C CNN
 F 3 "~" V 900 4585 50  0001 C CNN
 	1    900  4525
 	1    0    0    -1  
@@ -1631,18 +1631,6 @@ $EndComp
 NoConn ~ 5775 3625
 NoConn ~ 5775 3725
 $Comp
-L Device:C_Small C16
-U 1 1 5FA07683
-P 7325 4275
-F 0 "C16" H 7450 4325 50  0000 L CNN
-F 1 "100nF" H 7425 4250 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 7325 4275 50  0001 C CNN
-F 3 "~" H 7325 4275 50  0001 C CNN
-F 4 "C14663" H 7325 4275 50  0001 C CNN "LCSC"
-	1    7325 4275
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C_Small C9
 U 1 1 5FA07E6E
 P 5425 2725
@@ -1668,15 +1656,6 @@ F 3 "" H 5325 2725 50  0001 C CNN
 	1    5325 2725
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7325 4425 7125 4425
-Connection ~ 7125 4425
-Wire Wire Line
-	7125 4125 7325 4125
-Wire Wire Line
-	7325 4425 7325 4375
-Wire Wire Line
-	7325 4175 7325 4125
 NoConn ~ 7125 4025
 Wire Wire Line
 	8475 2500 8475 2550
@@ -1869,4 +1848,5 @@ Text Label 1700 1000 2    50   ~ 0
 Vhum
 Text Label 1675 1700 0    50   ~ 0
 Vhum
+NoConn ~ 7125 4125
 $EndSCHEMATC

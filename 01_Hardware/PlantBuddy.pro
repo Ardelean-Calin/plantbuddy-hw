@@ -1,4 +1,4 @@
-update=10/13/20 14:32:57
+update=10/14/20 12:17:32
 version=1
 last_client=kicad
 [general]
@@ -242,6 +242,17 @@ Enabled=0
 [pcbnew/Netclasses/Default]
 Name=Default
 Clearance=0.2
+TrackWidth=0.1524
+ViaDiameter=0.55
+ViaDrill=0.3
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/1]
+Name=CapacitiveProbe
+Clearance=0.127
 TrackWidth=0.1524
 ViaDiameter=0.55
 ViaDrill=0.3
