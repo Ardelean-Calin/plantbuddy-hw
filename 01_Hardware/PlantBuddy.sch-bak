@@ -38,9 +38,10 @@ L Device:R_Small R9
 U 1 1 5F799CF9
 P 3675 2200
 F 0 "R9" H 3734 2246 50  0000 L CNN
-F 1 "Rb" H 3734 2155 50  0000 L CNN
+F 1 "330k" H 3734 2155 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" H 3675 2200 50  0001 C CNN
 F 3 "~" H 3675 2200 50  0001 C CNN
+F 4 "C17629" H 3675 2200 50  0001 C CNN "LCSC"
 	1    3675 2200
 	1    0    0    -1  
 $EndComp
@@ -49,9 +50,10 @@ L Device:R_Small R8
 U 1 1 5F79A78D
 P 3675 2000
 F 0 "R8" H 3734 2046 50  0000 L CNN
-F 1 "Ra" H 3734 1955 50  0000 L CNN
+F 1 "330k" H 3734 1955 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" H 3675 2000 50  0001 C CNN
 F 3 "~" H 3675 2000 50  0001 C CNN
+F 4 "C17629" H 3675 2000 50  0001 C CNN "LCSC"
 	1    3675 2000
 	1    0    0    -1  
 $EndComp
@@ -381,7 +383,7 @@ F 2 "Package_TO_SOT_SMD:SOT-23-5" H 2050 4350 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ina138.pdf" H 2050 4355 50  0001 C CNN
 F 4 "C47914" V 2050 4350 50  0001 C CNN "LCSC"
 	1    2050 4350
-	0    1    1    0   
+	0    -1   1    0   
 $EndComp
 $Comp
 L Device:Solar_Cell SC1
@@ -422,28 +424,24 @@ F 4 "C23178" H 2050 4750 50  0001 C CNN "LCSC"
 	1    2050 4750
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	2050 4850 1750 4850
 Connection ~ 2050 4850
 Wire Wire Line
 	900  4625 900  4850
 Wire Wire Line
 	900  4050 900  4325
 Wire Wire Line
-	1750 4250 1750 4850
-Wire Wire Line
 	2050 4650 2500 4650
 Connection ~ 2050 4650
 $Comp
 L power:+3.3V #PWR08
 U 1 1 5F81D2F2
-P 2350 4250
-F 0 "#PWR08" H 2350 4100 50  0001 C CNN
-F 1 "+3.3V" H 2475 4350 50  0000 C CNN
-F 2 "" H 2350 4250 50  0001 C CNN
-F 3 "" H 2350 4250 50  0001 C CNN
-	1    2350 4250
-	1    0    0    -1  
+P 1750 4250
+F 0 "#PWR08" H 1750 4100 50  0001 C CNN
+F 1 "+3.3V" H 1875 4350 50  0000 C CNN
+F 2 "" H 1750 4250 50  0001 C CNN
+F 3 "" H 1750 4250 50  0001 C CNN
+	1    1750 4250
+	-1   0    0    -1  
 $EndComp
 Text Notes 2375 3975 0    50   ~ 0
 To Load
@@ -543,8 +541,8 @@ $Comp
 L Device:R_Small R17
 U 1 1 5F88B2CB
 P 7775 5875
-F 0 "R17" H 7716 5921 50  0000 R CNN
-F 1 "120k" H 7716 5830 50  0000 R CNN
+F 0 "R17" H 7750 5925 50  0000 R CNN
+F 1 "120k" H 7750 5825 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 7775 5875 50  0001 C CNN
 F 3 "~" H 7775 5875 50  0001 C CNN
 F 4 "C25808" H 7775 5875 50  0001 C CNN "LCSC"
@@ -761,8 +759,6 @@ Text Label 7525 3225 2    50   ~ 0
 ~HEN~
 Wire Wire Line
 	7125 3225 7525 3225
-Text Notes 4300 2400 0    50   ~ 0
-Footprint TBD
 Wire Wire Line
 	9100 4875 9100 5400
 Wire Wire Line
@@ -835,9 +831,6 @@ F 3 "" H 2700 2500 50  0001 C CNN
 	1    2700 2500
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1750 4850 900  4850
-Connection ~ 1750 4850
 Connection ~ 900  4850
 $Comp
 L power:GND #PWR023
@@ -1286,7 +1279,7 @@ F 3 "" H 10450 825 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Notes 7050 6725 0    50   ~ 0
-N3: Never debug this circuit w/o battery connected.
+N3: Avoid debugging this circuit w/o battery connected.
 $Comp
 L Device:D_Schottky_Small D1
 U 1 1 5F85AD8B
@@ -1336,7 +1329,7 @@ F 0 "D2" V 7696 3730 50  0000 R CNN
 F 1 "Status" V 7605 3730 50  0000 R CNN
 F 2 "LED_SMD:LED_0603_1608Metric" V 7650 3800 50  0001 C CNN
 F 3 "~" V 7650 3800 50  0001 C CNN
-F 4 "C72043" V 7650 3800 50  0001 C CNN "LCSC"
+F 4 "C2286" V 7650 3800 50  0001 C CNN "LCSC"
 	1    7650 3800
 	0    -1   -1   0   
 $EndComp
@@ -1356,10 +1349,10 @@ L Device:R_Small R16
 U 1 1 5F86CA65
 P 7650 3600
 F 0 "R16" V 7454 3600 50  0000 C CNN
-F 1 "160R" V 7545 3600 50  0000 C CNN
+F 1 "1k" V 7545 3600 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 7650 3600 50  0001 C CNN
 F 3 "~" H 7650 3600 50  0001 C CNN
-F 4 "C22814" V 7650 3600 50  0001 C CNN "LCSC"
+F 4 "C21190" V 7650 3600 50  0001 C CNN "LCSC"
 	1    7650 3600
 	-1   0    0    1   
 $EndComp
@@ -1631,18 +1624,6 @@ $EndComp
 NoConn ~ 5775 3625
 NoConn ~ 5775 3725
 $Comp
-L Device:C_Small C16
-U 1 1 5FA07683
-P 7325 4275
-F 0 "C16" H 7450 4325 50  0000 L CNN
-F 1 "100nF" H 7425 4250 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 7325 4275 50  0001 C CNN
-F 3 "~" H 7325 4275 50  0001 C CNN
-F 4 "C14663" H 7325 4275 50  0001 C CNN "LCSC"
-	1    7325 4275
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C_Small C9
 U 1 1 5FA07E6E
 P 5425 2725
@@ -1668,15 +1649,6 @@ F 3 "" H 5325 2725 50  0001 C CNN
 	1    5325 2725
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7325 4425 7125 4425
-Connection ~ 7125 4425
-Wire Wire Line
-	7125 4125 7325 4125
-Wire Wire Line
-	7325 4425 7325 4375
-Wire Wire Line
-	7325 4175 7325 4125
 NoConn ~ 7125 4025
 Wire Wire Line
 	8475 2500 8475 2550
@@ -1748,7 +1720,7 @@ F 0 "L3" V 9250 2875 50  0000 R CNN
 F 1 "3.3nH" V 9150 2875 50  0000 R CNN
 F 2 "Inductor_SMD:L_0402_1005Metric" H 9075 2775 50  0001 C CNN
 F 3 "~" H 9075 2775 50  0001 C CNN
-F 4 "C27124" H 9075 2775 50  0001 C CNN "LCSC"
+F 4 "C77122" H 9075 2775 50  0001 C CNN "LCSC"
 	1    9075 2775
 	0    -1   -1   0   
 $EndComp
@@ -1807,10 +1779,10 @@ L Device:C_Small C26
 U 1 1 5F860759
 P 9550 2775
 F 0 "C26" V 9350 2850 50  0000 R CNN
-F 1 "22pF" V 9425 2875 50  0000 R CNN
+F 1 "20pF" V 9425 2875 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 9550 2775 50  0001 C CNN
 F 3 "~" H 9550 2775 50  0001 C CNN
-F 4 "C1555" H 9550 2775 50  0001 C CNN "LCSC"
+F 4 "C1554" H 9550 2775 50  0001 C CNN "LCSC"
 	1    9550 2775
 	0    1    1    0   
 $EndComp
@@ -1869,4 +1841,20 @@ Text Label 1700 1000 2    50   ~ 0
 Vhum
 Text Label 1675 1700 0    50   ~ 0
 Vhum
+NoConn ~ 7125 4125
+Text Notes 3975 2175 0    50   ~ 0
+eN5: With 330k we get a nice \n~~1.4MHz signal for 1pF\nand a 1kHz signal at 1nF
+Wire Wire Line
+	900  4850 2050 4850
+$Comp
+L power:GND #PWR?
+U 1 1 5F89C24C
+P 2350 4250
+F 0 "#PWR?" H 2350 4000 50  0001 C CNN
+F 1 "GND" H 2355 4077 50  0000 C CNN
+F 2 "" H 2350 4250 50  0001 C CNN
+F 3 "" H 2350 4250 50  0001 C CNN
+	1    2350 4250
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
