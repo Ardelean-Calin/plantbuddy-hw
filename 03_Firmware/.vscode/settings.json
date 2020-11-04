@@ -1,0 +1,8 @@
+{
+    "git.ignoreLimitWarning": true,
+    "files.associations": {
+        "gpio.h": "c",
+        "gpio_common_all.h": "c",
+        "gpio_common_f24.h": "c"
+    }
+}

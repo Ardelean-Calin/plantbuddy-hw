@@ -1841,7 +1841,6 @@ Text Label 1700 1000 2    50   ~ 0
 Vhum
 Text Label 1675 1700 0    50   ~ 0
 Vhum
-NoConn ~ 7125 4125
 Text Notes 3975 2175 0    50   ~ 0
 eN5: With 330k we get a nice \n~~1.4MHz signal for 1pF\nand a 1kHz signal at 1nF
 Wire Wire Line
@@ -1857,4 +1856,21 @@ F 3 "" H 2350 4250 50  0001 C CNN
 	1    2350 4250
 	1    0    0    -1  
 $EndComp
+Text Notes 1375 5425 0    50   ~ 0
+E1: The maximum output swing is Vss - 1V = 2.3V\nwhich is equivalent to a current of ~~24mA.\nWe need to lower the gain by choosing\nanother resistor value. Say 330k. Do this in\nthe next iteration & solder manually at home
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FA2857E
+P 7375 4125
+F 0 "#PWR?" H 7375 3975 50  0001 C CNN
+F 1 "+3.3V" H 7390 4298 50  0000 C CNN
+F 2 "" H 7375 4125 50  0001 C CNN
+F 3 "" H 7375 4125 50  0001 C CNN
+	1    7375 4125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7375 4125 7125 4125
+Text Notes 7300 4325 0    50   ~ 10
+N5: !WE NEED! SMPSFILT2\nto be connected to VCC
 $EndSCHEMATC

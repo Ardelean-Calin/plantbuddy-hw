@@ -1,0 +1,3 @@
+[submodule "03_Firmware/libopencm3"]
+	path = 03_Firmware/libopencm3
+	url = git://github.com/libopencm3/libopencm3.git
