@@ -68,3 +68,4 @@ dkms.conf
 
 .kicad_pcb-back
 *.lst
+build/

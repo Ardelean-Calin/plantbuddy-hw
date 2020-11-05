@@ -62,7 +62,16 @@ BlueNRG1_Periph_Driver/src/BlueNRG1_spi.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_sysCtrl.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_timer.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_uart.c \
-BlueNRG1_Periph_Driver/src/BlueNRG1_wdg.c 
+BlueNRG1_Periph_Driver/src/BlueNRG1_wdg.c \
+FreeRTOS/Source/portable/GCC/ARM_CM0/port.c \
+FreeRTOS/Source/portable/MemMang/heap_1.c \
+FreeRTOS/Source/croutine.c \
+FreeRTOS/Source/event_groups.c \
+FreeRTOS/Source/list.c \
+FreeRTOS/Source/queue.c \
+FreeRTOS/Source/stream_buffer.c \
+FreeRTOS/Source/tasks.c \
+FreeRTOS/Source/timers.c 
 
 # ASM sources
 ASM_SOURCES = \
@@ -121,7 +130,9 @@ C_INCLUDES =  \
 -IBlueNRG1_Periph_Driver/inc \
 -ICMSIS/Device/ST/BlueNRG1/Include \
 -ICMSIS/Include \
--Ihal/inc
+-Ihal/inc \
+-IFreeRTOS/Source/include \
+-IFreeRTOS/Source/portable/GCC/ARM_CM0 
 
 
 # compile gcc flags

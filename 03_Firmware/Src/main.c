@@ -1,46 +1,29 @@
 
-/******************** (C) COPYRIGHT 2015 STMicroelectronics ********************
-* File Name          : GPIO/IOToggle/main.c 
-* Author             : RF Application Team
-* Version            : V1.1.0
-* Date               : September-2015
-* Description        : Code demostrating the GPIO functionality
-********************************************************************************
-* THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
-* WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
-* AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY DIRECT,
-* INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING FROM THE
-* CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
-* INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
-*******************************************************************************/
+/******************** (C) COPYRIGHT 2020 G&C ********************
+* File Name          : PlantBuddy/main.c 
+* Author             : Ardelean Calin
+* Version            : V0.1
+* Date               : November-2020
+* Description        : Entry point of PlantBuddy
+*****************************************************************/
 
 
 /* Includes ------------------------------------------------------------------*/
-#include "bluenrg_x_device.h"
+#include "BlueNRG1.h"
 #include "BlueNRG1_conf.h"
+#include "system_bluenrg1.h"
+#include "main.h"
 
-/** @addtogroup BlueNRG1_StdPeriph_Examples
-  * @{
-  */
+/* FreeRTOS includes. */
+#include "FreeRTOS.h"
+#include "task.h"
 
-/** @addtogroup GPIO_Examples GPIO Examples
-  * @{
-  */
-
-/** @addtogroup GPIO_InputInterrupt GPIO Input Interrupt Example
-  * @{
-  */
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
+/* Private typedefs ----------------------------------------------------------*/
+/* Private defines -----------------------------------------------------------*/
+/* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-volatile uint32_t lSystickCounter=0;
-
-/* Private function prototypes -----------------------------------------------*/
-void SdkDelayMs(volatile uint32_t lTimeMs);
-
 /* Private functions ---------------------------------------------------------*/
+static void vLEDBlinker( void * pvParameters );
 
 /**
   * @brief  Main program code.
@@ -65,37 +48,29 @@ int main(void)
 
   /* Put the LEDs off */
   GPIO_WriteBit(GPIO_Pin_4, Bit_RESET);
+
+  /* Create our FreeRTOS tasks */
+  xTaskCreate(vLEDBlinker, "LED", 64, (void *) 1, tskIDLE_PRIORITY + 1U, NULL);
+  vTaskStartScheduler();
   
-  /* Configure SysTick to generate interrupt */
-  SysTick_Config(SYST_CLOCK/1000 - 1);  
-  
-  /* Infinite loop */
+  /* Infinite loop. Should never get here */
   while(1) {
-    GPIO_ToggleBits(GPIO_Pin_4);
-    SdkDelayMs(100);
+    
   }
 }
 
-
-/**
-* @brief  Delay function
-* @param  Delay in ms
-* @retval None
-*/
-void SdkDelayMs(volatile uint32_t lTimeMs)
+static void vLEDBlinker( void * pvParameters )
 {
-  uint32_t nWaitPeriod = ~lSystickCounter;
-  
-  if(nWaitPeriod<lTimeMs)
-  {
-    while( lSystickCounter != 0xFFFFFFFF);
-    nWaitPeriod = lTimeMs-nWaitPeriod;
-  }
-  else
-    nWaitPeriod = lTimeMs+ ~nWaitPeriod;
-  
-  while( lSystickCounter != nWaitPeriod ) ;
+    /* The parameter value is expected to be 1 as 1 is passed in the
+    pvParameters value in the call to xTaskCreateStatic(). */
+    configASSERT( ( uint32_t ) pvParameters == 1UL );
 
+    for( ;; )
+    {
+        /* Task code goes here. */
+        GPIO_ToggleBits(GPIO_Pin_4);
+        vTaskDelay(pdMS_TO_TICKS(250U));
+    }
 }
 
 #ifdef  USE_FULL_ASSERT

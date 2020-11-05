@@ -25,25 +25,10 @@
 #include "BlueNRG1_it.h"
 #include "BlueNRG1_conf.h"
 
-
-/** @addtogroup BlueNRG1_StdPeriph_Examples
-* @{
-*/
-
-/** @addtogroup GPIO_Examples
-* @{
-*/ 
-
-/** @addtogroup GPIO_InputInterrupt
-* @{
-*/ 
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern uint32_t lSystickCounter;
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -66,23 +51,6 @@ void HardFault_Handler(void)
 {
   /* Go to infinite loop when Hard Fault exception occurs */
   while (1);
-}
-
-
-/**
-* @brief  This function handles SVCall exception.
-*/
-void SVC_Handler(void)
-{
-}
-
-
-/**
-* @brief  This function handles SysTick Handler.
-*/
-void SysTick_Handler(void)
-{
-  lSystickCounter++;
 }
 
 /******************************************************************************/

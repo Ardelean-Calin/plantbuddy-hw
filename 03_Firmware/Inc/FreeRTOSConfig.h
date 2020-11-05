@@ -1,6 +1,6 @@
 /*
- * FreeRTOS Kernel V10.4.1
- * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * FreeRTOS Kernel V10.1.1
+ * Copyright (C) 2018 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -41,33 +41,41 @@
  * See http://www.freertos.org/a00110.html
  *----------------------------------------------------------*/
 
-/* Ensure stdint is only used by the compiler, and not the assembler. */
+#if (HS_SPEED_XTAL == HS_SPEED_XTAL_32MHZ)
+  #define SYSCLK_FREQ 	32000000            /* System clock frequency */ 
+#elif (HS_SPEED_XTAL == HS_SPEED_XTAL_16MHZ)
+   #define SYSCLK_FREQ 	16000000            /* System clock frequency */ 
+#else
+#error "No definition for SYSCLK_FREQ"
+#endif
 
-#define configUSE_PREEMPTION		1
-#define configUSE_IDLE_HOOK			0
-#define configUSE_TICK_HOOK			0
-#define configCPU_CLOCK_HZ			( ( unsigned long ) 72000000 )
-#define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
-#define configMAX_PRIORITIES		( 5 )
-#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 120 )
-#define configTOTAL_HEAP_SIZE		( ( size_t ) ( 18 * 1024 ) )
-#define configMAX_TASK_NAME_LEN		( 16 )
-#define configUSE_TRACE_FACILITY	1
-#define configUSE_16_BIT_TICKS		0
+#define configUSE_PREEMPTION			1
+#define configUSE_IDLE_HOOK				0
+#define configUSE_TICK_HOOK				0
+#define configCPU_CLOCK_HZ				( SYSCLK_FREQ )
+#define configTICK_RATE_HZ				( ( TickType_t ) 1000 )
+#define configMAX_PRIORITIES			( 5 )
+#define configMINIMAL_STACK_SIZE		( ( unsigned short ) 60 )
+#define configTOTAL_HEAP_SIZE			( ( size_t ) ( 4300 ) )
+#define configMAX_TASK_NAME_LEN			( 5 )
+#define configUSE_TRACE_FACILITY		1
+#define configUSE_16_BIT_TICKS			0
+#define configIDLE_SHOULD_YIELD			1
+#define configUSE_MUTEXES				1
+#define configQUEUE_REGISTRY_SIZE		8
+#define configCHECK_FOR_STACK_OVERFLOW	0
+#define configUSE_RECURSIVE_MUTEXES		1
+#define configUSE_MALLOC_FAILED_HOOK	0
+#define configUSE_APPLICATION_TASK_TAG	0
+#define configUSE_COUNTING_SEMAPHORES	1
+#define configGENERATE_RUN_TIME_STATS	0
+#define configUSE_TICKLESS_IDLE         1
+#define configEXPECTED_IDLE_TIME_BEFORE_SLEEP  2 // 2 ms
+#define configSUPPORT_DYNAMIC_ALLOCATION 1
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES 			0
 #define configMAX_CO_ROUTINE_PRIORITIES ( 2 )
-
-#define configIDLE_SHOULD_YIELD		1
-#define configUSE_MUTEXES				1
-#define configQUEUE_REGISTRY_SIZE		8
-#define configCHECK_FOR_STACK_OVERFLOW	2
-#define configUSE_RECURSIVE_MUTEXES		1
-#define configUSE_MALLOC_FAILED_HOOK	1
-#define configUSE_APPLICATION_TASK_TAG	0
-#define configUSE_COUNTING_SEMAPHORES	1
-#define configGENERATE_RUN_TIME_STATS	0
 
 /* Software timer definitions. */
 #define configUSE_TIMERS				1
@@ -89,11 +97,11 @@ to exclude the API function. */
 header file. */
 #define configASSERT( x ) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
 
-/* Definitions that map the FreeRTOS port interrupt handlers to their libopencm3
+/* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
 standard names - or at least those used in the unmodified vector table. */
-#define vPortSVCHandler sv_call_handler
-#define xPortPendSVHandler pend_sv_handler
-#define xPortSysTickHandler sys_tick_handler
+#define vPortSVCHandler SVC_Handler
+#define xPortPendSVHandler PendSV_Handler
+#define xPortSysTickHandler SysTick_Handler
 
 #endif /* FREERTOS_CONFIG_H */
 
