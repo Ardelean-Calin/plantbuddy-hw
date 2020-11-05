@@ -69,7 +69,7 @@ static void vLEDBlinker( void * pvParameters )
     {
         /* Task code goes here. */
         GPIO_ToggleBits(GPIO_Pin_4);
-        vTaskDelay(pdMS_TO_TICKS(1000U));
+        vTaskDelay(pdMS_TO_TICKS(500U));
     }
 }
 
