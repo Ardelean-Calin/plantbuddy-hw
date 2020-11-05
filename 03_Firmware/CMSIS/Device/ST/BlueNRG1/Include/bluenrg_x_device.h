@@ -38,6 +38,7 @@
 #include "BlueNRG2.h"   
 #else
 #include "BlueNRG1.h"
+#include "BlueNRG1_conf.h"
 #endif
 
 

@@ -106,7 +106,7 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 AS_DEFS = 
 
 # C defines
-C_DEFS =  
+C_DEFS = -DBLUENRG1_DEVICE
 
 
 # AS includes
@@ -130,10 +130,10 @@ CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
-endif
-
-# Prove robustness by having no warnings
+else
+# Release mode
 CFLAGS += -Werror
+endif
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"

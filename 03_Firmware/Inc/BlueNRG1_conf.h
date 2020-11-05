@@ -43,6 +43,22 @@
 /* Exported constants --------------------------------------------------------*/
 /* Uncomment the line below to expanse the "assert_param" macro in the 
    Standard Peripheral Library drivers code */
+/**
+ * User code; Add your own defines here!
+ */
+
+/**
+ * @brief Switch Mode Power supply enabled or not
+ */
+#define SMPS_INDUCTOR SMPS_INDUCTOR_NONE
+/**
+ * @brief Enable external low-speed crystal for RTC
+ */
+#define LS_SOURCE LS_SOURCE_EXTERNAL_32KHZ
+/**
+ * @brief Enable external high-speed 16MHz crystal
+ */
+#define HS_SPEED_XTAL HS_SPEED_XTAL_16MHZ
 
 /* Exported macro ------------------------------------------------------------*/
 #ifdef  USE_FULL_ASSERT

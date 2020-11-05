@@ -41,6 +41,8 @@
  * See http://www.freertos.org/a00110.html
  *----------------------------------------------------------*/
 
+#include "BlueNRG1_conf.h"
+
 #if (HS_SPEED_XTAL == HS_SPEED_XTAL_32MHZ)
   #define SYSCLK_FREQ 	32000000            /* System clock frequency */ 
 #elif (HS_SPEED_XTAL == HS_SPEED_XTAL_16MHZ)
