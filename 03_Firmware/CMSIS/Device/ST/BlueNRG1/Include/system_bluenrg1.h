@@ -68,6 +68,19 @@
 #define _MEMORY_ROM_SIZE_     0x800             /* 2KB */
 #define _MEMORY_ROM_END_      0x100007FF
 
+/**
+ * User code; Add your own defines here!
+ */
+
+/**
+ * @brief Switch Mode Power supply enabled or not
+ */
+#define SMPS_INDUCTOR SMPS_INDUCTOR_NONE
+/**
+ * @brief Enable external low-speed crystal for RTC
+ */
+#define LS_SOURCE LS_SOURCE_EXTERNAL_32KHZ
+
 
 /**
   * @}
