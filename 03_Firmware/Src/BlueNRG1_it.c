@@ -1,6 +1,6 @@
 /**
 ******************************************************************************
-* @file    GPIO/IOToggle/BlueNRG1_it.c 
+* @file    GPIO/IOToggle/BlueNRG1_it.c
 * @author  RF Application Team
 * @version V1.0.0
 * @date    September-2015
@@ -37,20 +37,22 @@
 /******************************************************************************/
 
 /**
-* @brief  This function handles NMI exception.
-*/
+ * @brief  This function handles NMI exception.
+ */
 void NMI_Handler(void)
 {
-  while(1);
+  while (1)
+    ;
 }
 
 /**
-* @brief  This function handles Hard Fault exception.
-*/
+ * @brief  This function handles Hard Fault exception.
+ */
 void HardFault_Handler(void)
 {
   /* Go to infinite loop when Hard Fault exception occurs */
-  while (1);
+  while (1)
+    ;
 }
 
 /******************************************************************************/
@@ -60,17 +62,16 @@ void HardFault_Handler(void)
 /*  file (system_bluenrg1.c).                                               */
 /******************************************************************************/
 
+/**
+ * @}
+ */
 
 /**
-* @}
-*/ 
+ * @}
+ */
 
 /**
-* @}
-*/ 
-
-/**
-* @}
-*/ 
+ * @}
+ */
 
 /******************* (C) COPYRIGHT 2015 STMicroelectronics *****END OF FILE****/

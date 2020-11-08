@@ -4,5 +4,9 @@
         "gpio.h": "c",
         "gpio_common_all.h": "c",
         "gpio_common_f24.h": "c"
-    }
+    },
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        100
+    ]
 }
