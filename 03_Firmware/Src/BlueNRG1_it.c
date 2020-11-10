@@ -22,6 +22,7 @@
 */
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdint.h>
 #include "BlueNRG1_it.h"
 #include "BlueNRG1_conf.h"
 

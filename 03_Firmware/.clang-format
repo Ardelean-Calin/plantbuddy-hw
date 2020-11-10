@@ -18,3 +18,4 @@ ColumnLimit: '100'
 Language: Cpp
 ReflowComments: 'true'
 PointerAlignment: 'Left'
+SortIncludes: 'false'

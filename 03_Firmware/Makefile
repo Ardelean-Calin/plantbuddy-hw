@@ -26,6 +26,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Src/main.c \
 Src/BlueNRG1_it.c \
+Src/sht2x.c \
 hal/src/clock.c \
 hal/src/fifo.c \
 hal/src/gp_timer.c \
