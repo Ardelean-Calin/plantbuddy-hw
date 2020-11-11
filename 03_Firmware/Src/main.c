@@ -16,6 +16,7 @@
 #include "BlueNRG1_i2c.h"
 #include "UserConfig.h"
 #include "system_bluenrg1.h"
+#include "sht2x.h"
 
 /* FreeRTOS includes. */
 #include "FreeRTOS.h"
@@ -47,6 +48,7 @@ int main(void)
 
   /* Create our FreeRTOS tasks */
   xTaskCreate(vLEDBlinker, "LED", 64, (void*)1, tskIDLE_PRIORITY + 1U, NULL);
+  xTaskCreate(vSHT2XPeriodicTask, "SHT2x", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
   vTaskStartScheduler();
 
   /* Infinite loop. Should never get here */
@@ -58,8 +60,8 @@ static void InitHardware()
   GPIO_InitType GPIO_InitStructure;
   I2C_InitType  I2C_InitStructure;
   /* Init GPIO used for LED */
-  /* Enable the GPIO Clock */
-  SysCtrl_PeripheralClockCmd(CLOCK_PERIPH_GPIO, ENABLE);
+  /* Enable the GPIO & I2C Clock */
+  SysCtrl_PeripheralClockCmd(CLOCK_PERIPH_GPIO | SHT2X_I2C_PERIPH_CLK, ENABLE);
 
   /* Configure the LEDs */
   GPIO_InitStructure.GPIO_Pin     = GPIO_Pin_4;
@@ -68,16 +70,16 @@ static void InitHardware()
   GPIO_InitStructure.GPIO_HighPwr = ENABLE;
   GPIO_Init(&GPIO_InitStructure);
 
-  /* Init I2C used for SHT2X temperature and humidity sensor */
-  SysCtrl_PeripheralClockCmd(SHT2X_I2C_PERIPH_CLK, ENABLE);
   // Inits SDA and SCL pins so that they're configured for I2C
   SHT2X_Init_SCL();
   SHT2X_Init_SDA();
   // Then inits the I2C peripheral
   I2C_StructInit(&I2C_InitStructure);
-  I2C_InitStructure.I2C_ClockSpeed    = SHT2X_CLK_SPEED;
+  I2C_InitStructure.I2C_ClockSpeed    = SHT2X_I2C_CLK_SPEED;
   I2C_InitStructure.I2C_OperatingMode = I2C_OperatingMode_Master;
-  I2C_Init(I2C1, &I2C_InitStructure);
+  I2C_Init(SHT2X_I2C_INSTANCE, &I2C_InitStructure);
+  // Clear all I2c pending interrupts
+  I2C_ClearITPendingBit(SHT2X_I2C_INSTANCE, I2C_IT_MSK);
 }
 
 static void vLEDBlinker(void* pvParameters)

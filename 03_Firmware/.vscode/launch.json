@@ -14,9 +14,10 @@
             "preLaunchTask": "build-debug",
             "runToMain": true,
             "svdFile": "${workspaceRoot}/BlueNRG1.svd",
-            "configFiles": ["${workspaceRoot}/OpenOCDConfig.cfg"],
+            "configFiles": [
+                "${workspaceRoot}/OpenOCDConfig.cfg"
+            ],
             "postDebugTask": "stop-openocd"
-            
             // "rtos": "FreeRTOS"
         }
     ]
