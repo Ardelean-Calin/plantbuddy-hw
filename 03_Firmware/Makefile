@@ -52,6 +52,7 @@ BlueNRG1_Periph_Driver/src/BlueNRG1_sysCtrl.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_timer.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_uart.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_wdg.c \
+BlueNRG1_Periph_Driver/src/misc.c \
 FreeRTOS/Source/portable/GCC/ARM_CM0/port.c \
 FreeRTOS/Source/portable/MemMang/heap_1.c \
 FreeRTOS/Source/croutine.c \

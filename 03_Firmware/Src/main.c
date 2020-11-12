@@ -12,8 +12,6 @@
 #include "main.h"
 #include "BlueNRG1.h"
 #include "BlueNRG1_conf.h"
-#include "BlueNRG1_gpio.h"
-#include "BlueNRG1_i2c.h"
 #include "UserConfig.h"
 #include "system_bluenrg1.h"
 #include "sht2x.h"
@@ -26,6 +24,9 @@
 /* Private defines -----------------------------------------------------------*/
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+// TODO: Define this external variable
+extern uint32_t ulTxBufferSHT2X;
+extern uint32_t ulRxBufferSHT2X;
 /* Private functions ---------------------------------------------------------*/
 static void vLEDBlinker(void* pvParameters);
 static void InitHardware(); /* Init hardware peripherals */
@@ -43,6 +44,9 @@ int main(void)
   /* Init the used hardware peripherals */
   InitHardware();
 
+  /* Module init */
+  vSHT2XInit();
+
   /* Put the LEDs off */
   GPIO_WriteBit(GPIO_Pin_4, Bit_RESET);
 
@@ -57,27 +61,27 @@ int main(void)
 
 static void InitHardware()
 {
-  GPIO_InitType GPIO_InitStructure;
-  I2C_InitType  I2C_InitStructure;
+  GPIO_InitType xGPIOConfig;
+  I2C_InitType  xI2CConfig;
   /* Init GPIO used for LED */
   /* Enable the GPIO & I2C Clock */
   SysCtrl_PeripheralClockCmd(CLOCK_PERIPH_GPIO | SHT2X_I2C_PERIPH_CLK, ENABLE);
 
   /* Configure the LEDs */
-  GPIO_InitStructure.GPIO_Pin     = GPIO_Pin_4;
-  GPIO_InitStructure.GPIO_Mode    = GPIO_Output;
-  GPIO_InitStructure.GPIO_Pull    = ENABLE; // Pull down
-  GPIO_InitStructure.GPIO_HighPwr = ENABLE;
-  GPIO_Init(&GPIO_InitStructure);
+  xGPIOConfig.GPIO_Pin     = GPIO_Pin_4;
+  xGPIOConfig.GPIO_Mode    = GPIO_Output;
+  xGPIOConfig.GPIO_Pull    = ENABLE; // Pull down
+  xGPIOConfig.GPIO_HighPwr = ENABLE;
+  GPIO_Init(&xGPIOConfig);
 
   // Inits SDA and SCL pins so that they're configured for I2C
   SHT2X_Init_SCL();
   SHT2X_Init_SDA();
   // Then inits the I2C peripheral
-  I2C_StructInit(&I2C_InitStructure);
-  I2C_InitStructure.I2C_ClockSpeed    = SHT2X_I2C_CLK_SPEED;
-  I2C_InitStructure.I2C_OperatingMode = I2C_OperatingMode_Master;
-  I2C_Init(SHT2X_I2C_INSTANCE, &I2C_InitStructure);
+  I2C_StructInit(&xI2CConfig);
+  xI2CConfig.I2C_ClockSpeed    = SHT2X_I2C_CLK_SPEED;
+  xI2CConfig.I2C_OperatingMode = I2C_OperatingMode_Master;
+  I2C_Init(SHT2X_I2C_INSTANCE, &xI2CConfig);
   // Clear all I2c pending interrupts
   I2C_ClearITPendingBit(SHT2X_I2C_INSTANCE, I2C_IT_MSK);
 }

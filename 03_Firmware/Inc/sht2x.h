@@ -12,10 +12,15 @@
 #define SHT2X_CMD_READ_TEMP_NOHOLD 0xF3
 #define SHT2X_CMD_READ_RH_NOHOLD   0xF5
 
-#define SHT2X_READ_PERIOD  100 // Read a new value every 100ms
-#define SHT2X_READ_DELAY   1   // The delay [ms] from measurement start to read
+/* Here we define the delays between start of measurement and reading of values */
+#define SHT2X_TEMP_14BIT_DELAY 85 // Time in [ms] between start of measurement and read.
+#define SHT2X_RH_14BIT_DELAY   29 // Time in [ms] between start of measurement and read.
+
+#define SHT2X_READ_PERIOD  200 // Read a new value every 200ms
 #define SHT2X_I2C_DATASIZE 2   // We always receive 2 bytes
 
+/* Initialization code */
+void vSHT2XInit(void);
 /* Retreives the current temperature and humidity */
 void vSHT2XPeriodicTask(void* pvParameters);
 
