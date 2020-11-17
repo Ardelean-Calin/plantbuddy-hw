@@ -1871,6 +1871,6 @@ F 3 "" H 7375 4125 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	7375 4125 7125 4125
-Text Notes 7300 4325 0    50   ~ 0
-N5: Maybe need SMPSFILT2\nto be connected to VCC
+Text Notes 7300 4325 0    50   ~ 10
+N5: !WE NEED! SMPSFILT2\nto be connected to VCC
 $EndSCHEMATC

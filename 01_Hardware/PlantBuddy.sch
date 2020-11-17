@@ -1842,7 +1842,7 @@ Vhum
 Text Label 1675 1700 0    50   ~ 0
 Vhum
 Text Notes 3975 2175 0    50   ~ 0
-eN5: With 330k we get a nice \n~~1.4MHz signal for 1pF\nand a 1kHz signal at 1nF
+N5: With 330k we get a nice \n~~1.4MHz signal for 1pF\nand a 1kHz signal at 1nF
 Wire Wire Line
 	900  4850 2050 4850
 $Comp
