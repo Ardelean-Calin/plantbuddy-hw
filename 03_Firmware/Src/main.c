@@ -12,6 +12,7 @@
 #include "main.h"
 #include "BlueNRG1.h"
 #include "BlueNRG1_conf.h"
+#include "BlueNRG1_it.h"
 #include "UserConfig.h"
 #include "system_bluenrg1.h"
 #include "sht2x.h"
@@ -46,6 +47,8 @@ int main(void)
 
   /* Module init */
   vSHT2XInit();
+  // vSoilHumInit();
+  GPIO_WriteBit(GPIO_Pin_6, Bit_RESET);
 
   /* Put the LEDs off */
   GPIO_WriteBit(GPIO_Pin_4, Bit_RESET);
@@ -61,19 +64,35 @@ int main(void)
 
 static void InitHardware()
 {
-  GPIO_InitType xGPIOConfig;
-  I2C_InitType  xI2CConfig;
+  GPIO_InitType xGPIOConfig; // General GPIO configuration
+  I2C_InitType  xI2CConfig;  // I2C configuration
+  NVIC_InitType xNVICConfig; // Interrupt configuration
+  MFT_InitType  xMFTConfig;  // Multi-function timer configuration
   /* Init GPIO used for LED */
   /* Enable the GPIO & I2C Clock */
-  SysCtrl_PeripheralClockCmd(CLOCK_PERIPH_GPIO | SHT2X_I2C_PERIPH_CLK, ENABLE);
+  SysCtrl_PeripheralClockCmd(CLOCK_PERIPH_GPIO | SHT2X_I2C_PERIPH_CLK | CLOCK_PERIPH_MTFX1, ENABLE);
 
-  /* Configure the LEDs */
+  /* Configure the LED */
   xGPIOConfig.GPIO_Pin     = GPIO_Pin_4;
   xGPIOConfig.GPIO_Mode    = GPIO_Output;
   xGPIOConfig.GPIO_Pull    = ENABLE; // Pull down
   xGPIOConfig.GPIO_HighPwr = ENABLE;
   GPIO_Init(&xGPIOConfig);
 
+  /* Configure the fHumidity input */
+  xGPIOConfig.GPIO_Pin     = GPIO_Pin_11;
+  xGPIOConfig.GPIO_Mode    = GPIO_Input;
+  xGPIOConfig.GPIO_Pull    = DISABLE; // Pull down
+  xGPIOConfig.GPIO_HighPwr = DISABLE;
+  GPIO_Init(&xGPIOConfig);
+  /* And the fHumidity enable pin */
+  xGPIOConfig.GPIO_Pin     = GPIO_Pin_6;
+  xGPIOConfig.GPIO_Mode    = GPIO_Output;
+  xGPIOConfig.GPIO_Pull    = DISABLE; // Pull down
+  xGPIOConfig.GPIO_HighPwr = DISABLE;
+  GPIO_Init(&xGPIOConfig);
+
+  /* Configure the SHT2X i2c pins */
   // Inits SDA and SCL pins so that they're configured for I2C
   SHT2X_Init_SCL();
   SHT2X_Init_SDA();
@@ -84,6 +103,30 @@ static void InitHardware()
   I2C_Init(SHT2X_I2C_INSTANCE, &xI2CConfig);
   // Clear all I2c pending interrupts
   I2C_ClearITPendingBit(SHT2X_I2C_INSTANCE, I2C_IT_MSK);
+
+  /* Configure timers */
+  /* Soil humidity measurement using MFT */
+  xMFTConfig.MFT_Mode   = MFT_MODE_3;
+  xMFTConfig.MFT_Clock1 = MFT_NO_CLK;
+  xMFTConfig.MFT_Clock2 = MFT_EXTERNAL_EVENT;
+  xMFTConfig.MFT_CRA    = 0xFFFF;
+  xMFTConfig.MFT_CRB    = 0xFFFF;
+  MFT_Init(MFT1, &xMFTConfig);
+
+  /* Set the counter values */
+  MFT_SetCounter(MFT1, 0xFFFF, 0xFFFF);
+
+  /* Enable MFT Interrupts */
+  xNVICConfig.NVIC_IRQChannel                   = MFT1B_IRQn;
+  xNVICConfig.NVIC_IRQChannelPreemptionPriority = LOW_PRIORITY;
+  xNVICConfig.NVIC_IRQChannelCmd                = ENABLE;
+  NVIC_Init(&xNVICConfig);
+
+  MFT_SelectCapturePin(MFT1_TIMERB, 11); // 11 is GPIO11 => we don't use the GPIO_Pin_11 define here
+  MFT_TnEDGES(MFT1, MFT_RISING, MFT_RISING);
+  MFT_EnableIT(MFT1, MFT_IT_TND, ENABLE);
+  /* Start MFT timer */
+  MFT_Cmd(MFT1, ENABLE);
 }
 
 static void vLEDBlinker(void* pvParameters)

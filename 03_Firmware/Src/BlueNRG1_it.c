@@ -64,8 +64,18 @@ void HardFault_Handler(void)
 /******************************************************************************/
 
 /**
- * @}
+ * @brief  This function handles MFTB interrupt request.
+ * @param  None
+ * @retval None
  */
+void MFT1B_Handler(void)
+{
+  if ((MFT_StatusIT(MFT1, MFT_IT_TND) != RESET))
+  {
+    /* Clear the interrupt */
+    MFT_ClearIT(MFT1, MFT_IT_TND);
+  }
+}
 
 /**
  * @}
