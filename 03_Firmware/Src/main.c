@@ -25,9 +25,6 @@
 /* Private defines -----------------------------------------------------------*/
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-// TODO: Define this external variable
-extern uint32_t ulTxBufferSHT2X;
-extern uint32_t ulRxBufferSHT2X;
 /* Private functions ---------------------------------------------------------*/
 static void vLEDBlinker(void* pvParameters);
 static void InitHardware(); /* Init hardware peripherals */
