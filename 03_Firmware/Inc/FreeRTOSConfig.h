@@ -51,29 +51,30 @@
 #error "No definition for SYSCLK_FREQ"
 #endif
 
-#define configUSE_PREEMPTION                  1
-#define configUSE_IDLE_HOOK                   0
-#define configUSE_TICK_HOOK                   0
-#define configCPU_CLOCK_HZ                    (SYSCLK_FREQ)
-#define configTICK_RATE_HZ                    ((TickType_t)1000)
-#define configMAX_PRIORITIES                  (5)
-#define configMINIMAL_STACK_SIZE              ((unsigned short)60)
-#define configTOTAL_HEAP_SIZE                 ((size_t)(4300))
-#define configMAX_TASK_NAME_LEN               (5)
-#define configUSE_TRACE_FACILITY              1
-#define configUSE_16_BIT_TICKS                0
-#define configIDLE_SHOULD_YIELD               1
-#define configUSE_MUTEXES                     1
-#define configQUEUE_REGISTRY_SIZE             8
 #define configCHECK_FOR_STACK_OVERFLOW        0
-#define configUSE_RECURSIVE_MUTEXES           1
-#define configUSE_MALLOC_FAILED_HOOK          0
+#define configCPU_CLOCK_HZ                    (SYSCLK_FREQ)
+#define configEXPECTED_IDLE_TIME_BEFORE_SLEEP 2 // 2 ms
+#define configGENERATE_RUN_TIME_STATS         0
+#define configIDLE_SHOULD_YIELD               1
+#define configMAX_PRIORITIES                  (5)
+#define configMAX_TASK_NAME_LEN               (16)
+#define configMINIMAL_STACK_SIZE              ((unsigned short)60)
+#define configQUEUE_REGISTRY_SIZE             8
+#define configSUPPORT_DYNAMIC_ALLOCATION      1
+#define configTICK_RATE_HZ                    ((TickType_t)1000)
+#define configTOTAL_HEAP_SIZE                 ((size_t)(4300))
+#define configUSE_16_BIT_TICKS                0
 #define configUSE_APPLICATION_TASK_TAG        0
 #define configUSE_COUNTING_SEMAPHORES         1
-#define configGENERATE_RUN_TIME_STATS         0
+#define configUSE_IDLE_HOOK                   0
+#define configUSE_MALLOC_FAILED_HOOK          0
+#define configUSE_MUTEXES                     1
+#define configUSE_PREEMPTION                  1
+#define configUSE_RECURSIVE_MUTEXES           1
+#define configUSE_TASK_NOTIFICATIONS          1
+#define configUSE_TICK_HOOK                   0
 #define configUSE_TICKLESS_IDLE               1
-#define configEXPECTED_IDLE_TIME_BEFORE_SLEEP 2 // 2 ms
-#define configSUPPORT_DYNAMIC_ALLOCATION      1
+#define configUSE_TRACE_FACILITY              1
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES           0

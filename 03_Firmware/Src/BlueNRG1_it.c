@@ -24,12 +24,15 @@
 /* Includes ------------------------------------------------------------------*/
 #include "BlueNRG1_it.h"
 #include "BlueNRG1_conf.h"
+#include "FreeRTOS.h"
+#include "task.h"
 #include <stdint.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern TaskHandle_t xSoilHumItrTaskHandler;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -70,11 +73,16 @@ void HardFault_Handler(void)
  */
 void MFT1B_Handler(void)
 {
+  BaseType_t xHigherPriorityTaskWoken;
+  xHigherPriorityTaskWoken = pdFALSE;
+
   if ((MFT_StatusIT(MFT1, MFT_IT_TND) != RESET))
   {
     /* Clear the interrupt */
     MFT_ClearIT(MFT1, MFT_IT_TND);
-    /* Delegate processing to task */
+    /* Delegate processing of timer underflow to task */
+    vTaskNotifyGiveFromISR(xSoilHumItrTaskHandler, &xHigherPriorityTaskWoken);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
   }
 }
 

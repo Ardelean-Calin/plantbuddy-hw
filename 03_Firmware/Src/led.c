@@ -19,6 +19,9 @@ void vLEDInit()
   GPIO_Init(&xGPIOConfig);
   /* Put the LED off */
   GPIO_WriteBit(LED_PIN, Bit_RESET);
+
+  /* Create tjhe FreeRTOS task */
+  xTaskCreate(vLEDPeriodicTask, "StatusLED", 64, (void*)1, tskIDLE_PRIORITY + 1U, NULL);
 }
 
 void vLEDPeriodicTask(void* pvParams)

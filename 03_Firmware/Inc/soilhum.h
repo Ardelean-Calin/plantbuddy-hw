@@ -11,6 +11,6 @@
 /* Public function defines */
 void vSoilHumInit(void);
 void vSoilHumPeriodicTask(void* pvParams);
-void vSoilHumTimerInterrupt(void);
+void vSoilHumTimerInterrupt(void* pvParams);
 
 #endif

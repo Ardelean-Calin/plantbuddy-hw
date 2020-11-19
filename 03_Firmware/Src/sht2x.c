@@ -57,6 +57,9 @@ void vSHT2XInit(void)
 
   /* Reset the SHT2X */
   vTransmitCmd(SHT2X_CMD_RESET);
+
+  /* Create our FreeRTOS tasks */
+  xTaskCreate(vSHT2XPeriodicTask, "SHT2x", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
 }
 
 /**

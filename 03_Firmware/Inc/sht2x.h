@@ -24,8 +24,8 @@
 #define SHT2X_Init_SDA() GPIO_InitI2c1DataPin13()
 
 /* Here we define the delays between start of measurement and reading of values */
-#define SHT2X_TEMP_14BIT_DELAY 85 // Time in [ms] between start of measurement and read.
-#define SHT2X_RH_14BIT_DELAY   29 // Time in [ms] between start of measurement and read.
+#define SHT2X_TEMP_14BIT_DELAY 100 // Time in [ms] between start of measurement and read. (min 85)
+#define SHT2X_RH_14BIT_DELAY   30  // Time in [ms] between start of measurement and read. (min 29)
 
 #define SHT2X_READ_PERIOD 200 // Read a new value every 200ms
 

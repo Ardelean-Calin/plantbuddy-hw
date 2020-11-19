@@ -44,11 +44,7 @@ int main(void)
   vSHT2XInit();
   vSoilHumInit();
 
-  /* Create our FreeRTOS tasks */
-  xTaskCreate(vLEDPeriodicTask, "LED", 64, (void*)1, tskIDLE_PRIORITY + 1U, NULL);
-  xTaskCreate(vSHT2XPeriodicTask, "SHT2x", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
-  xTaskCreate(vSoilHumPeriodicTask, "SHum", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
-
+  /* Tasks were created by module initializer. Now start scheduler */
   vTaskStartScheduler();
 
   /* Infinite loop. Should never get here */
