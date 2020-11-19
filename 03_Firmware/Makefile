@@ -27,6 +27,8 @@ C_SOURCES =  \
 Src/main.c \
 Src/BlueNRG1_it.c \
 Src/sht2x.c \
+Src/led.c \
+Src/soilhum.c \
 hal/src/clock.c \
 hal/src/fifo.c \
 hal/src/gp_timer.c \

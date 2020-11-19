@@ -2,7 +2,6 @@
 #include "BlueNRG1_i2c.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "UserConfig.h"
 
 /* Function prototypes */
 static void vTransmitCmd(uint8_t ucCommand);
@@ -18,7 +17,25 @@ uint16_t uwSHT2XRawRH;
  * @brief Initialises this module.
  */
 void vSHT2XInit(void)
-{ /* Initializes this module */
+{
+  /* First configure the appropriate pins in I2C mode */
+  I2C_InitType xI2CConfig; // I2C configuration
+  /* Enable the I2C Clock */
+  SysCtrl_PeripheralClockCmd(SHT2X_I2C_PERIPH_CLK, ENABLE);
+
+  /* Configure the SHT2X i2c pins */
+  // Inits SDA and SCL pins so that they're configured for I2C
+  SHT2X_Init_SCL();
+  SHT2X_Init_SDA();
+  // Then inits the I2C peripheral
+  I2C_StructInit(&xI2CConfig);
+  xI2CConfig.I2C_ClockSpeed    = SHT2X_I2C_CLK_SPEED;
+  xI2CConfig.I2C_OperatingMode = I2C_OperatingMode_Master;
+  I2C_Init(SHT2X_I2C_INSTANCE, &xI2CConfig);
+  // Clear all I2c pending interrupts
+  I2C_ClearITPendingBit(SHT2X_I2C_INSTANCE, I2C_IT_MSK);
+
+  /* The properly initialize this module */
   xI2CTransaction.Address       = SHT2X_I2C_ADDRESS;
   xI2CTransaction.Operation     = I2C_Operation_Write;
   xI2CTransaction.AddressType   = I2C_AddressType_7Bit;
@@ -97,8 +114,7 @@ static void vReadData(uint8_t* pucDestBuf, uint8_t ucLength)
   // Read the received bytes into an array.
   // NOTE: I am ignoring checksum for now, might be useful to implement later
   i = ucLength;
-  do
-  {
+  do {
     i--;
     *(pucDestBuf + i) = I2C_ReceiveData(SHT2X_I2C_INSTANCE);
   } while (i > 0);

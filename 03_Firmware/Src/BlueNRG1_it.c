@@ -22,9 +22,9 @@
 */
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdint.h>
 #include "BlueNRG1_it.h"
 #include "BlueNRG1_conf.h"
+#include <stdint.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -74,6 +74,7 @@ void MFT1B_Handler(void)
   {
     /* Clear the interrupt */
     MFT_ClearIT(MFT1, MFT_IT_TND);
+    /* Delegate processing to task */
   }
 }
 
