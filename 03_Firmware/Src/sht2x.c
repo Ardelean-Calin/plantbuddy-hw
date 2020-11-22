@@ -4,15 +4,16 @@
 #include "task.h"
 
 /* Function prototypes */
-static void vTransmitCmd(uint8_t ucCommand);
-static void vReadData(uint8_t* pucDestBuf, uint8_t ucLength);
-static void vRequestData(uint8_t ucReg, uint8_t ucLength, uint8_t* pucDestBuf, uint8_t ucDelay);
+static void vSHT2XWriteRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucTxBuffer);
+static void vSHT2XReadRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucRxBuffer,
+                               uint8_t ucDelay);
+static void vSHT2XSetResolution(tSHT2XMeasResolution xResolution);
 
 static I2C_TransactionType xI2CTransaction;
 
 uint16_t uwSHT2XRawTemp;
 uint16_t uwSHT2XRawRH;
-
+uint8_t  ucUserReg;
 /**
  * @brief Initialises this module.
  */
@@ -45,6 +46,7 @@ void vSHT2XInit(void)
 
   uwSHT2XRawTemp = 0;
   uwSHT2XRawRH   = 0;
+  ucUserReg      = 0;
 
   /* Flush TX and RX buffers */
   I2C_FlushRx(SHT2X_I2C_INSTANCE);
@@ -54,9 +56,6 @@ void vSHT2XInit(void)
   I2C_FlushTx(SHT2X_I2C_INSTANCE);
   while (I2C_WaitFlushTx(SHT2X_I2C_INSTANCE) == I2C_OP_ONGOING)
     ;
-
-  /* Reset the SHT2X */
-  vTransmitCmd(SHT2X_CMD_RESET);
 
   /* Create our FreeRTOS tasks */
   xTaskCreate(vSHT2XPeriodicTask, "SHT2x", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
@@ -68,46 +67,54 @@ void vSHT2XInit(void)
 void vSHT2XPeriodicTask(void* pvParameters)
 {
   TickType_t       xLastWakeTime;
-  const TickType_t xFrequency = pdMS_TO_TICKS(SHT2X_READ_PERIOD);
+  const TickType_t xFrequency = pdMS_TO_TICKS(I2C_Operation_Read_PERIOD);
+  xLastWakeTime               = xTaskGetTickCount();
+  /* Reset the SHT2X */
+  vSHT2XWriteRegister(SHT2X_CMD_RESET, 0, NULL);
+  /* Wait 20ms for the reset to be complete  */
+  vTaskDelay(pdMS_TO_TICKS(20));
 
-  xLastWakeTime = xTaskGetTickCount();
   for (;;)
   {
     /* Run periodically */
     vTaskDelayUntil(&xLastWakeTime, xFrequency);
     // Request temperature data
-    vRequestData(SHT2X_CMD_READ_TEMP_NOHOLD,
-                 SHT2X_I2C_DATASIZE,
-                 (uint8_t*)(&uwSHT2XRawTemp),
-                 SHT2X_TEMP_14BIT_DELAY);
+    vSHT2XReadRegister(SHT2X_CMD_READ_TEMP_NOHOLD,
+                       SHT2X_I2C_DATASIZE,
+                       (uint8_t*)(&uwSHT2XRawTemp),
+                       SHT2X_TEMP_14BIT_DELAY);
     // Request humidity data
-    vRequestData(SHT2X_CMD_READ_RH_NOHOLD,
-                 SHT2X_I2C_DATASIZE,
-                 (uint8_t*)&uwSHT2XRawRH,
-                 SHT2X_RH_14BIT_DELAY);
+    vSHT2XReadRegister(SHT2X_CMD_READ_RH_NOHOLD,
+                       SHT2X_I2C_DATASIZE,
+                       (uint8_t*)&uwSHT2XRawRH,
+                       SHT2X_RH_14BIT_DELAY);
   }
 }
 
-/**
- * @brief Transmits a command to the SHT2X. Command can be: Read T/RH, Reset, Write User Register
- */
-static void vTransmitCmd(uint8_t ucCommand)
+static void vSHT2XWriteRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucTxBuffer)
 {
+  // Write request to given register
   xI2CTransaction.Operation = I2C_Operation_Write;
-  xI2CTransaction.Length    = 1;
+  xI2CTransaction.Length    = ucLength + 1;
   I2C_BeginTransaction(SHT2X_I2C_INSTANCE, &xI2CTransaction);
-  I2C_FillTxFIFO(SHT2X_I2C_INSTANCE, ucCommand);
+  // The register address
+  I2C_FillTxFIFO(SHT2X_I2C_INSTANCE, ucRegister);
+  // Now the data bytes
+  for (uint8_t i = 0; i < ucLength; i++) { I2C_FillTxFIFO(SHT2X_I2C_INSTANCE, pucTxBuffer[i]); }
+  // Wait for transaction to be complete
   while (I2C_GetStatus(SHT2X_I2C_INSTANCE) != I2C_OP_OK)
     ; // Wait for Tx
 }
 
-/**
- * @brief Reads a certain number of bytes from the I2C bus
- */
-static void vReadData(uint8_t* pucDestBuf, uint8_t ucLength)
+static void vSHT2XReadRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucRxBuffer,
+                               uint8_t ucDelay)
 {
-  uint8_t i;
+  uint8_t ucIndex;
 
+  // Start measurement
+  vSHT2XWriteRegister(ucRegister, 0, NULL);
+  vTaskDelay(pdMS_TO_TICKS(ucDelay));
+  // Read request to given register
   xI2CTransaction.Operation = I2C_Operation_Read;
   xI2CTransaction.Length    = ucLength;
   I2C_BeginTransaction(SHT2X_I2C_INSTANCE, &xI2CTransaction);
@@ -116,25 +123,18 @@ static void vReadData(uint8_t* pucDestBuf, uint8_t ucLength)
 
   // Read the received bytes into an array.
   // NOTE: I am ignoring checksum for now, might be useful to implement later
-  i = ucLength;
+  ucIndex = ucLength;
   do {
-    i--;
-    *(pucDestBuf + i) = I2C_ReceiveData(SHT2X_I2C_INSTANCE);
-  } while (i > 0);
-}
+    ucIndex--;
+    *(pucRxBuffer + ucIndex) = I2C_ReceiveData(SHT2X_I2C_INSTANCE);
+  } while (ucIndex > 0);
 
-/**
- * @brief Requests either temperature or humidity data (specified via the ucCommand parameter)
- */
-static void vRequestData(uint8_t ucCommand, uint8_t ucLength, uint8_t* pucDestBuf, uint8_t ucDelay)
-{
-  /* Request some data after issuing a command */
-  vTransmitCmd(ucCommand);
-  vTaskDelay(pdMS_TO_TICKS(ucDelay));
-  vReadData(pucDestBuf, ucLength);
   /* Clear RX buffer */
   I2C_FlushRx(SHT2X_I2C_INSTANCE);
   while (I2C_WaitFlushRx(SHT2X_I2C_INSTANCE) == I2C_OP_ONGOING)
+    ;
+  I2C_FlushTx(SHT2X_I2C_INSTANCE);
+  while (I2C_WaitFlushTx(SHT2X_I2C_INSTANCE) == I2C_OP_ONGOING)
     ;
   // Clear all I2c pending interrupts
   I2C_ClearITPendingBit(SHT2X_I2C_INSTANCE, I2C_IT_MSK);

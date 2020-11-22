@@ -27,7 +27,15 @@
 #define SHT2X_TEMP_14BIT_DELAY 100 // Time in [ms] between start of measurement and read. (min 85)
 #define SHT2X_RH_14BIT_DELAY   30  // Time in [ms] between start of measurement and read. (min 29)
 
-#define SHT2X_READ_PERIOD 200 // Read a new value every 200ms
+#define I2C_Operation_Read_PERIOD 200 // Read a new value every 200ms
+
+typedef enum
+{
+  SHT2X_RES_RH12_T14 = 0b00,
+  SHT2X_RES_RH08_T12,
+  SHT2X_RES_RH10_T13,
+  SHT2X_RES_RH11_T11,
+} tSHT2XMeasResolution;
 
 /* Initialization code */
 void vSHT2XInit(void);

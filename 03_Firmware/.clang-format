@@ -11,7 +11,7 @@ AllowAllArgumentsOnNextLine: 'true'
 AllowShortBlocksOnASingleLine: 'true'
 AllowShortCaseLabelsOnASingleLine: 'true'
 AllowShortLoopsOnASingleLine: 'true'
-BinPackParameters: 'false'
+BinPackParameters: 'true'
 BinPackArguments: 'false'
 BreakBeforeBraces: Allman
 BreakStringLiterals: 'true'
