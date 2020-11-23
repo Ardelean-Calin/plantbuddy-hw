@@ -8,7 +8,6 @@ static void vI2CReInit(void);
 static void vSHT2XWriteRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucTxBuffer);
 static void vSHT2XReadRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucRxBuffer,
                                uint8_t ucDelay);
-static void vSHT2XSetResolution(tSHT2XMeasResolution xResolution);
 
 static I2C_TransactionType xI2CTransaction;
 

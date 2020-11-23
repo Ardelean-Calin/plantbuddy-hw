@@ -7,7 +7,9 @@
                 "${workspaceFolder}/BlueNRG1_Periph_Driver/inc",
                 "${workspaceFolder}/CMSIS/Include",
                 "${workspaceFolder}/CMSIS/Device/ST/BlueNRG1/Include",
-                "${workspaceFolder}/FreeRTOS/Source/portable/GCC/ARM_CM0/"
+                "${workspaceFolder}/FreeRTOS/Source/portable/GCC/ARM_CM0/",
+                "${workspaceFolder}/FreeRTOS/BlueNRG/",
+                "${workspaceFolder}/Bluetooth_LE/inc"
             ],
             "defines": [
                 "_DEBUG",

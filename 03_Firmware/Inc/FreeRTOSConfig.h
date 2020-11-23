@@ -111,5 +111,6 @@ standard names - or at least those used in the unmodified vector table. */
 #define vPortSVCHandler     SVC_Handler
 #define xPortPendSVHandler  PendSV_Handler
 #define xPortSysTickHandler SysTick_Handler
+// #define portSUPPRESS_TICKS_AND_SLEEP(xIdleTime) vPortSuppressTicksAndSleep(xIdleTime)
 
 #endif /* FREERTOS_CONFIG_H */

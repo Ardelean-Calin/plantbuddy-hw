@@ -63,7 +63,13 @@ FreeRTOS/Source/list.c \
 FreeRTOS/Source/queue.c \
 FreeRTOS/Source/stream_buffer.c \
 FreeRTOS/Source/tasks.c \
-FreeRTOS/Source/timers.c 
+FreeRTOS/Source/timers.c \
+FreeRTOS/BlueNRG/freertos_lp.c \
+Bluetooth_LE/src/stack_dle_api_stubs.c \
+Bluetooth_LE/src/stack_priv_api_stubs.c \
+Bluetooth_LE/src/stack_sc_api_stubs.c \
+Bluetooth_LE/src/stack_slvonly_api_stubs.c \
+Bluetooth_LE/src/stack_user_cfg.c
 
 # ASM sources
 ASM_SOURCES = \
@@ -124,7 +130,9 @@ C_INCLUDES =  \
 -ICMSIS/Include \
 -Ihal/inc \
 -IFreeRTOS/Source/include \
--IFreeRTOS/Source/portable/GCC/ARM_CM0 
+-IFreeRTOS/Source/portable/GCC/ARM_CM0 \
+-IFreeRTOS/BlueNRG/ \
+-IBluetooth_LE/inc
 
 
 # compile gcc flags
@@ -150,8 +158,10 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 LDSCRIPT = BlueNRG1.ld
 
 # libraries
-LIBS = -lc -lm -lnosys 
+LIBS = -lc -lm -lnosys
 LIBDIR = 
+# LIBS += -lbluenrg1_stack
+# LIBDIR += -L./Bluetooth_LE/library
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
 # default action: build all
