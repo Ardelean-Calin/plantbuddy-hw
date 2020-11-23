@@ -25,9 +25,9 @@
 
 /* Here we define the delays between start of measurement and reading of values */
 #define SHT2X_TEMP_14BIT_DELAY 100 // Time in [ms] between start of measurement and read. (min 85)
-#define SHT2X_RH_14BIT_DELAY   30  // Time in [ms] between start of measurement and read. (min 29)
+#define SHT2X_RH_14BIT_DELAY   100 // Time in [ms] between start of measurement and read. (min 29)
 
-#define I2C_Operation_Read_PERIOD 1000 // Read a new value every 200ms
+#define I2C_Operation_Read_PERIOD 1000 // Read a new value every 1000ms
 
 typedef enum
 {

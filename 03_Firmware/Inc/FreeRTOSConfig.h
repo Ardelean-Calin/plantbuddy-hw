@@ -61,7 +61,7 @@
 #define configMINIMAL_STACK_SIZE              ((unsigned short)60)
 #define configQUEUE_REGISTRY_SIZE             8
 #define configSUPPORT_DYNAMIC_ALLOCATION      1
-#define configTICK_RATE_HZ                    ((TickType_t)1000)
+#define configTICK_RATE_HZ                    ((TickType_t)10)
 #define configTOTAL_HEAP_SIZE                 ((size_t)(4300))
 #define configUSE_16_BIT_TICKS                0
 #define configUSE_APPLICATION_TASK_TAG        0
