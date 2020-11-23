@@ -32,7 +32,9 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern TaskHandle_t xSoilHumItrTaskHandler;
+// These two handles are defined in the soilhum module and point to interrupt processing tasks
+extern TaskHandle_t hSoilHumEvtCntrIsrTask;
+extern TaskHandle_t hSoilHumTimCntrIsrTask;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -81,7 +83,27 @@ void MFT1B_Handler(void)
     /* Clear the interrupt */
     MFT_ClearIT(MFT1, MFT_IT_TND);
     /* Delegate processing of timer underflow to task */
-    vTaskNotifyGiveFromISR(xSoilHumItrTaskHandler, &xHigherPriorityTaskWoken);
+    vTaskNotifyGiveFromISR(hSoilHumEvtCntrIsrTask, &xHigherPriorityTaskWoken);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+  }
+}
+
+/**
+ * @brief  This function handles MFTA interrupt request.
+ * @param  None
+ * @retval None
+ */
+void MFT1A_Handler(void)
+{
+  BaseType_t xHigherPriorityTaskWoken;
+  xHigherPriorityTaskWoken = pdFALSE;
+
+  if ((MFT_StatusIT(MFT1, MFT_IT_TNA) != RESET))
+  {
+    /* Clear the interrupt */
+    MFT_ClearIT(MFT1, MFT_IT_TNA);
+    /* Delegate processing of timer underflow to task */
+    vTaskNotifyGiveFromISR(hSoilHumTimCntrIsrTask, &xHigherPriorityTaskWoken);
     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
   }
 }

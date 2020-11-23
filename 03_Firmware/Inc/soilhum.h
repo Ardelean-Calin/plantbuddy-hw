@@ -6,11 +6,10 @@
 #define SOILHUM_PIN_IN_POS (11) // Since this is GPIO11 => pos is 11
 #define SOILHUM_PIN_ENABLE GPIO_Pin_6
 
+#define SOILHUM_MEAS_PERIOD 100  // This amount of ms the soil measurement is active
 #define SOILHUM_TASK_PERIOD 1000 // Update soil humidity measurement every 1000ms
 
 /* Public function defines */
 void vSoilHumInit(void);
-void vSoilHumPeriodicTask(void* pvParams);
-void vSoilHumTimerInterrupt(void* pvParams);
 
 #endif
