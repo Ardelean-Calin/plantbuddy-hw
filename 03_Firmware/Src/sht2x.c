@@ -4,6 +4,7 @@
 #include "task.h"
 
 /* Function prototypes */
+static void vI2CReInit(void);
 static void vSHT2XWriteRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucTxBuffer);
 static void vSHT2XReadRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pucRxBuffer,
                                uint8_t ucDelay);
@@ -14,15 +15,31 @@ static I2C_TransactionType xI2CTransaction;
 uint16_t uwSHT2XRawTemp;
 uint16_t uwSHT2XRawRH;
 uint8_t  ucUserReg;
+
 /**
  * @brief Initialises this module.
  */
 void vSHT2XInit(void)
 {
+  uwSHT2XRawTemp = 0;
+  uwSHT2XRawRH   = 0;
+  ucUserReg      = 0;
+
+  vI2CReInit();
+
+  /* Create our FreeRTOS tasks */
+  xTaskCreate(vSHT2XPeriodicTask, "SHT2x", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
+}
+
+static void vI2CReInit(void)
+{
   /* First configure the appropriate pins in I2C mode */
   I2C_InitType xI2CConfig; // I2C configuration
   /* Enable the I2C Clock */
   SysCtrl_PeripheralClockCmd(SHT2X_I2C_PERIPH_CLK, ENABLE);
+
+  // Disable I2C peripheral
+  I2C_Cmd(SHT2X_I2C_INSTANCE, DISABLE);
 
   /* Configure the SHT2X i2c pins */
   // Inits SDA and SCL pins so that they're configured for I2C
@@ -44,10 +61,6 @@ void vSHT2XInit(void)
   xI2CTransaction.StopCondition = I2C_StopCondition_Enable;
   xI2CTransaction.Length        = 1;
 
-  uwSHT2XRawTemp = 0;
-  uwSHT2XRawRH   = 0;
-  ucUserReg      = 0;
-
   /* Flush TX and RX buffers */
   I2C_FlushRx(SHT2X_I2C_INSTANCE);
   while (I2C_WaitFlushRx(SHT2X_I2C_INSTANCE) == I2C_OP_ONGOING)
@@ -56,9 +69,6 @@ void vSHT2XInit(void)
   I2C_FlushTx(SHT2X_I2C_INSTANCE);
   while (I2C_WaitFlushTx(SHT2X_I2C_INSTANCE) == I2C_OP_ONGOING)
     ;
-
-  /* Create our FreeRTOS tasks */
-  xTaskCreate(vSHT2XPeriodicTask, "SHT2x", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
 }
 
 /**
@@ -69,6 +79,7 @@ void vSHT2XPeriodicTask(void* pvParameters)
   TickType_t       xLastWakeTime;
   const TickType_t xFrequency = pdMS_TO_TICKS(I2C_Operation_Read_PERIOD);
   xLastWakeTime               = xTaskGetTickCount();
+
   /* Reset the SHT2X */
   vSHT2XWriteRegister(SHT2X_CMD_RESET, 0, NULL);
   /* Wait 20ms for the reset to be complete  */
@@ -101,6 +112,7 @@ static void vSHT2XWriteRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* p
   I2C_FillTxFIFO(SHT2X_I2C_INSTANCE, ucRegister);
   // Now the data bytes
   for (uint8_t i = 0; i < ucLength; i++) { I2C_FillTxFIFO(SHT2X_I2C_INSTANCE, pucTxBuffer[i]); }
+
   // Wait for transaction to be complete
   while (I2C_GetStatus(SHT2X_I2C_INSTANCE) != I2C_OP_OK)
     ; // Wait for Tx
@@ -118,13 +130,15 @@ static void vSHT2XReadRegister(uint8_t ucRegister, uint8_t ucLength, uint8_t* pu
   xI2CTransaction.Operation = I2C_Operation_Read;
   xI2CTransaction.Length    = ucLength;
   I2C_BeginTransaction(SHT2X_I2C_INSTANCE, &xI2CTransaction);
+
   while (SHT2X_I2C_INSTANCE->SR_b.LENGTH < ucLength)
     ; // Wait for Rx
 
   // Read the received bytes into an array.
   // NOTE: I am ignoring checksum for now, might be useful to implement later
   ucIndex = ucLength;
-  do {
+  do
+  {
     ucIndex--;
     *(pucRxBuffer + ucIndex) = I2C_ReceiveData(SHT2X_I2C_INSTANCE);
   } while (ucIndex > 0);
