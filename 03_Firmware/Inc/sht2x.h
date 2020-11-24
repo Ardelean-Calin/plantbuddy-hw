@@ -18,16 +18,23 @@
 #define SHT2X_I2C_PERIPH_CLK CLOCK_PERIPH_I2C1 // We use I2C1 for our sensor
 #define SHT2X_I2C_PIN_SDA    GPIO_Pin_13
 #define SHT2X_I2C_PIN_SCL    GPIO_Pin_12
-#define SHT2X_I2C_DATASIZE   2 // We always receive 2 bytes
+#define SHT2X_I2C_DATASIZE   3 // We always receive 3 bytes
 
 #define SHT2X_Init_SCL() GPIO_InitI2c1ClkPin12()
 #define SHT2X_Init_SDA() GPIO_InitI2c1DataPin13()
 
 /* Here we define the delays between start of measurement and reading of values */
-#define SHT2X_TEMP_14BIT_DELAY 100 // Time in [ms] between start of measurement and read. (min 85)
-#define SHT2X_RH_14BIT_DELAY   100 // Time in [ms] between start of measurement and read. (min 29)
+#define SHT2X_TEMP_MEAS_DELAY 100 // Time in [ms] between start of measurement and read. (min 22)
+#define SHT2X_RH_MEAS_DELAY   100 // Time in [ms] between start of measurement and read. (min 4)
 
-#define I2C_Operation_Read_PERIOD 1000 // Read a new value every 1000ms
+/* User register defines */
+#define SHT21_MASK_USER_PROTECTED 0x7E
+#define SHT21_USER_RES_RH8T12     0x01
+#define SHT21_USER_RES_RH10T13    0x80
+#define SHT21_USER_RES_RH11T11    0x81
+#define SHT21_USER_RES_RH12T14    0x00
+
+#define SHT2X_TASK_PERIOD 1000 // Read new temperature and humidity data every X period
 
 typedef enum
 {
@@ -39,7 +46,5 @@ typedef enum
 
 /* Initialization code */
 void vSHT2XInit(void);
-/* Retreives the current temperature and humidity */
-void vSHT2XPeriodicTask(void* pvParameters);
 
 #endif
