@@ -5,9 +5,9 @@
 
 TaskHandle_t    hSoilHumEvtCntrIsrTask; // The handler of our event interrupt processing task
 TaskHandle_t    hSoilHumTimCntrIsrTask; // The handler of our internal counter interrupt processing
+uint32_t        ulSoilHumFrequency;     // Frequency of the square wave received from the 555 timer
 static uint16_t uwTimEvtOverflowCtr;    // Number of overflows of the event timer
 static uint16_t uwTimIntOverflowCtr;    // Number of overflows of the internal timer
-static uint32_t ulSoilHumFrequency;     // Frequency of the square wave received from the 555 timer
 static uint32_t ulTimIntValue;          // An internal timer which we use to keep precise time
 
 static void vSoilHumPeriodicTask(void* pvParams);
