@@ -13,6 +13,7 @@
 #include "BlueNRG1_conf.h"
 #include "BlueNRG1_it.h"
 #include "UserConfig.h"
+#include "ble.h"
 #include "led.h"
 #include "sht2x.h"
 #include "soilhum.h"
@@ -43,6 +44,7 @@ int main(void)
   vLEDInit();
   vSHT2XInit();
   vSoilHumInit();
+  vBLEInit();
 
   /* Tasks were created by module initializer. Now start scheduler */
   vTaskStartScheduler();

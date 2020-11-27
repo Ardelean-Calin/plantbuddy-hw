@@ -25,6 +25,8 @@
 #include "BlueNRG1_it.h"
 #include "BlueNRG1_conf.h"
 #include "FreeRTOS.h"
+#include "bluenrg1_stack.h"
+#include "semphr.h"
 #include "task.h"
 #include <stdint.h>
 
@@ -67,6 +69,20 @@ void HardFault_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (system_bluenrg1.c).                                               */
 /******************************************************************************/
+
+extern SemaphoreHandle_t radioActivitySemaphoreHandle;
+
+void Blue_Handler(void)
+{
+  // BaseType_t xHigherPriorityTaskWoken;
+
+  RAL_Isr();
+
+  /* Unblock BTLE_StackTick(). */
+  // xSemaphoreGiveFromISR(radioActivitySemaphoreHandle, &xHigherPriorityTaskWoken);
+  // /* A context switch should be performed if xHigherPriorityTaskWoken is equal to pdTRUE. */
+  // portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
 
 /**
  * @brief  This function handles MFTB interrupt request.

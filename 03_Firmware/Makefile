@@ -29,6 +29,7 @@ Src/BlueNRG1_it.c \
 Src/sht2x.c \
 Src/led.c \
 Src/soilhum.c \
+Src/ble.c \
 hal/src/clock.c \
 hal/src/fifo.c \
 hal/src/gp_timer.c \
@@ -37,7 +38,6 @@ hal/src/miscutil.c \
 hal/src/osal.c \
 hal/src/radio_ota.c \
 hal/src/sleep.c \
-hal/src/vtimer.c \
 CMSIS/Device/ST/BlueNRG1/Source/system_bluenrg1.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_adc.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_dma.c \
@@ -69,7 +69,8 @@ Bluetooth_LE/src/stack_dle_api_stubs.c \
 Bluetooth_LE/src/stack_priv_api_stubs.c \
 Bluetooth_LE/src/stack_sc_api_stubs.c \
 Bluetooth_LE/src/stack_slvonly_api_stubs.c \
-Bluetooth_LE/src/stack_user_cfg.c
+Bluetooth_LE/src/stack_user_cfg.c \
+BLE_Application/Utils/src/ble_utils.c
 
 # ASM sources
 ASM_SOURCES = \
@@ -132,7 +133,9 @@ C_INCLUDES =  \
 -IFreeRTOS/Source/include \
 -IFreeRTOS/Source/portable/GCC/ARM_CM0 \
 -IFreeRTOS/BlueNRG/ \
--IBluetooth_LE/inc
+-IBluetooth_LE/inc \
+-IBLE_Application/layers_inc \
+-IBLE_Application/Utils/inc
 
 
 # compile gcc flags
@@ -160,8 +163,9 @@ LDSCRIPT = BlueNRG1.ld
 # libraries
 LIBS = -lc -lm -lnosys
 LIBDIR = 
-# LIBS += -lbluenrg1_stack
-# LIBDIR += -L./Bluetooth_LE/library
+# Include bluenrg stack
+LIBS += -lbluenrg1_stack
+LIBDIR += -L./Bluetooth_LE/library
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
 # default action: build all
