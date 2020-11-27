@@ -4,10 +4,6 @@ $CMP CN3063
 F https://datasheet.lcsc.com/szlcsc/ShangHai-Consonance-Elec-CN3063_C28078.pdf
 $ENDCMP
 #
-$CMP OPT3001
-F https://www.ti.com/lit/ds/symlink/opt3001.pdf
-$ENDCMP
-#
 $CMP SHT20
 F https://datasheet.lcsc.com/szlcsc/Sensirion-SHT20_C53865.pdf
 $ENDCMP
