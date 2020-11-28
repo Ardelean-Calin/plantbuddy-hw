@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source D:\Projects\PlantBuddy\01_Hardware\PlantBuddy.sch)
-    (date "11/28/20 12:35:23")
+    (date "11/28/20 13:45:03")
     (tool "Eeschema (5.1.6)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -441,7 +441,7 @@
       (tstamp 5F7817A6))
     (comp (ref U1)
       (value OPT3001)
-      (footprint PlantBuddy:OPT3001DNPR)
+      (footprint Package_DFN_QFN:DFN-6-1EP_2x2mm_P0.65mm_EP1x1.6mm)
       (datasheet https://www.ti.com/lit/ds/symlink/opt3001.pdf)
       (fields
         (field (name LCSC) C90462))

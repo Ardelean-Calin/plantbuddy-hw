@@ -500,12 +500,12 @@ Connection ~ 625  1625
 $Comp
 L power:GND #PWR026
 U 1 1 5F7A91A0
-P 850 4800
-F 0 "#PWR026" H 850 4550 50  0001 C CNN
-F 1 "GND" H 855 4627 50  0000 C CNN
-F 2 "" H 850 4800 50  0001 C CNN
-F 3 "" H 850 4800 50  0001 C CNN
-	1    850  4800
+P 1375 4800
+F 0 "#PWR026" H 1375 4550 50  0001 C CNN
+F 1 "GND" H 1225 4725 50  0000 C CNN
+F 2 "" H 1375 4800 50  0001 C CNN
+F 3 "" H 1375 4800 50  0001 C CNN
+	1    1375 4800
 	-1   0    0    -1  
 $EndComp
 Text Notes 1950 5050 2    50   ~ 0
@@ -662,20 +662,10 @@ Wire Wire Line
 	1775 5925 2050 5925
 Wire Wire Line
 	2450 4300 2450 4400
-Wire Wire Line
-	850  4425 850  4200
-Wire Wire Line
-	850  4200 1375 4200
-Wire Wire Line
-	850  4800 1375 4800
-Wire Wire Line
-	850  4800 850  4625
-Connection ~ 850  4800
 Entry Wire Line
 	2050 5825 2150 5725
 Entry Wire Line
 	2050 5925 2150 5825
-Connection ~ 1375 4200
 Entry Wire Line
 	2050 4400 2150 4500
 Wire Wire Line
@@ -936,18 +926,6 @@ F 4 "C70377" H 2875 7225 50  0001 C CNN "LCSC"
 F 5 "CR2032-BS-6-1" H 2875 7225 50  0001 C CNN "MFR"
 	1    2875 7225
 	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C15
-U 1 1 5F8A81CB
-P 850 4525
-F 0 "C15" H 975 4600 50  0000 L CNN
-F 1 "100nF" H 950 4525 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 850 4525 50  0001 C CNN
-F 3 "~" H 850 4525 50  0001 C CNN
-F 4 "C1525" H 850 4525 50  0001 C CNN "LCSC"
-	1    850  4525
-	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:R_Small R15
@@ -1439,10 +1417,10 @@ Text Label 7525 3525 2    50   ~ 0
 LEDY
 Wire Wire Line
 	7525 3525 7125 3525
+Text Label 9850 4325 0    50   ~ 0
+LEDY
 Wire Bus Line
 	2150 4500 2600 4500
 Wire Bus Line
 	2150 4500 2150 5825
-Text Label 9850 4325 0    50   ~ 0
-LEDY
 $EndSCHEMATC
