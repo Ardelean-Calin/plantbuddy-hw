@@ -49,11 +49,14 @@ void vBLEInit(void)
     ;
 
   /* Create tasks */
-  xTaskCreate(vBLEPeriodicTask, 'BLET', 64, NULL, tskIDLE_PRIORITY + 1, NULL);
+  xTaskCreate(vBLEPeriodicTask, "BLETask", 64, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
 static void vBLEPeriodicTask(void* pvParams)
 {
+  TickType_t       xLastWakeTime;
+  const TickType_t xFrequency = pdMS_TO_TICKS(BLE_TASK_PERIOD_MS);
+  xLastWakeTime               = xTaskGetTickCount();
   /* To make sure no other BLE functions are called from other tasks. */
   //   xSemaphoreTake(BLETickSemaphoreHandle, portMAX_DELAY);
 
@@ -62,17 +65,18 @@ static void vBLEPeriodicTask(void* pvParams)
 
   /* Start Beacon Non Connectable Mode*/
   //   Start_Beaconing();
+  Set_DeviceConnectable(ADV_INTERVAL_SLOW_MS);
 
   /* BLE is initialized. Let other tasks call BLE functions. */
   //   xSemaphoreGive(BLETickSemaphoreHandle);
 
   while (1)
   {
+    vTaskDelayUntil(&xLastWakeTime, xFrequency);
     /* Take the semaphore to avoid that other ACI functions can interrupt the
        execution of BTLE_StackTick();   */
     // xSemaphoreTake(BLETickSemaphoreHandle, portMAX_DELAY);
     BTLE_StackTick();
-    Set_DeviceConnectable(ADV_INTERVAL_SLOW_MS);
     // xSemaphoreGive(BLETickSemaphoreHandle);
     if (BlueNRG_Stack_Perform_Deep_Sleep_Check() != SLEEPMODE_RUNNING)
     {
@@ -88,7 +92,8 @@ static void vBLEStackInit(void)
   uint16_t         service_handle;
   uint16_t         dev_name_char_handle;
   uint16_t         appearance_char_handle;
-  uint8_t          device_name[] = {'P', 'l', 'a', 'n', 't', 'B', 'u', 'd', 'd', 'y'};
+  // "PlantBuddy but ciphered with Affine Cipher"
+  uint8_t device_name[] = {'F', 'l', 'i', 'v', 'z', 'N', 'e', 'x', 'x', 'y'};
 
   /* Configure Public address */
   ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET, CONFIG_DATA_PUBADDR_LEN, bdaddr);
@@ -137,7 +142,7 @@ static void Set_DeviceConnectable(uint16_t adv_interval)
 {
   uint8_t ret;
   uint8_t local_name[] = {
-      AD_TYPE_COMPLETE_LOCAL_NAME, 'P', 'l', 'a', 'n', 't', 'B', 'u', 'd', 'd', 'y'};
+      AD_TYPE_COMPLETE_LOCAL_NAME, 'F', 'l', 'i', 'v', 'z', 'N', 'e', 'x', 'x', 'y'};
 
   hci_le_set_scan_response_data(0, NULL);
 
