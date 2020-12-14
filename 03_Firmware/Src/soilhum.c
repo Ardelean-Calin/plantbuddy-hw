@@ -8,7 +8,7 @@ TaskHandle_t    hSoilHumTimCntrIsrTask; // The handler of our internal counter i
 uint32_t        ulSoilHumFrequency;     // Frequency of the square wave received from the 555 timer
 static uint16_t uwTimEvtOverflowCtr;    // Number of overflows of the event timer
 static uint16_t uwTimIntOverflowCtr;    // Number of overflows of the internal timer
-static uint32_t ulTimIntValue;          // An internal timer which we use to keep precise time
+static volatile uint32_t ulTimIntValue; // An internal timer which we use to keep precise time
 
 static void vSoilHumPeriodicTask(void* pvParams);
 static void vSoilHumEvtTimerInterrupt(void* pvParams);
@@ -112,7 +112,8 @@ static void vSoilHumPeriodicTask(void* pvParams)
   uint32_t   ulSensorSigEdgeCount; // Number of rising edges since last task invocation
   TickType_t xLastWakeTime;
 
-  const TickType_t xFrequency = pdMS_TO_TICKS(SOILHUM_TASK_PERIOD);
+  const TickType_t xFrequency  = pdMS_TO_TICKS(SOILHUM_TASK_PERIOD);
+  const TickType_t xMeasPeriod = pdMS_TO_TICKS(SOILHUM_MEAS_PERIOD);
 
   xLastWakeTime = xTaskGetTickCount();
   for (;;)
@@ -124,9 +125,8 @@ static void vSoilHumPeriodicTask(void* pvParams)
     MFT_SetCounter(MFT1, 0xFFFF, 0xFFFF);
     /* Enable soil humidity measurement */
     GPIO_WriteBit(SOILHUM_PIN_ENABLE, Bit_RESET);
-    /* Wait 100ms. This approach might not be super precise => TODO: use the second MFT to count in
-     * parallel. Much more precise this way */
-    vTaskDelay(pdMS_TO_TICKS(SOILHUM_MEAS_PERIOD));
+    /* Wait 100ms. Uses the second counter to count in parallel. Much more precise this way */
+    vTaskDelay(xMeasPeriod);
     /* Disable soil humidity measurement. Preserve power */
     GPIO_WriteBit(SOILHUM_PIN_ENABLE, Bit_SET);
 
@@ -138,7 +138,7 @@ static void vSoilHumPeriodicTask(void* pvParams)
     ulSensorSigEdgeCount = (uwTimEvtOverflowCtr << 16) + uwCurrExtTimVal;
     ulTimIntValue        = (uwTimIntOverflowCtr << 16) + uwCurrIntTimVal;
 
-    ulSoilHumFrequency = (uint64_t)(ulSensorSigEdgeCount * 1000000) / ulTimIntValue;
+    ulSoilHumFrequency = (uint64_t)(((uint64_t)ulSensorSigEdgeCount * 1000000) / ulTimIntValue);
     /* Measurement done. IDLE task takes over and goes to sleep */
   }
 }

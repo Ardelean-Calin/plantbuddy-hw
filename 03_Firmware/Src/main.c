@@ -42,9 +42,9 @@ int main(void)
 
   /* Module init */
   vLEDInit();
-  vSHT2XInit();
+  // vSHT2XInit();
   vSoilHumInit();
-  vBLEInit();
+  // vBLEInit();
 
   /* Tasks were created by module initializer. Now start scheduler */
   vTaskStartScheduler();

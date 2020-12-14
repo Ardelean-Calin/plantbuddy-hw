@@ -51,7 +51,7 @@
 /**
  * @brief Switch Mode Power supply enabled or not
  */
-#define SMPS_INDUCTOR SMPS_INDUCTOR_NONE
+#define SMPS_INDUCTOR SMPS_INDUCTOR_10uH
 /**
  * @brief Enable external low-speed crystal for RTC
  */
