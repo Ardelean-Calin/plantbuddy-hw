@@ -41,10 +41,10 @@ int main(void)
   SystemInit();
 
   /* Module init */
+  vBLEInit(); // For some reason, BLE needs to be first...
   vLEDInit();
   // vSHT2XInit();
   vSoilHumInit();
-  // vBLEInit();
 
   /* Tasks were created by module initializer. Now start scheduler */
   vTaskStartScheduler();

@@ -49,7 +49,7 @@ void vBLEInit(void)
     ;
 
   /* Create tasks */
-  xTaskCreate(vBLEPeriodicTask, "BLETask", 64, NULL, tskIDLE_PRIORITY + 1, NULL);
+  xTaskCreate(vBLEPeriodicTask, "BLETask", 128, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
 static void vBLEPeriodicTask(void* pvParams)
@@ -70,7 +70,7 @@ static void vBLEPeriodicTask(void* pvParams)
   /* BLE is initialized. Let other tasks call BLE functions. */
   //   xSemaphoreGive(BLETickSemaphoreHandle);
 
-  while (1)
+  for (;;)
   {
     vTaskDelayUntil(&xLastWakeTime, xFrequency);
     /* Take the semaphore to avoid that other ACI functions can interrupt the
@@ -87,6 +87,7 @@ static void vBLEPeriodicTask(void* pvParams)
 
 static void vBLEStackInit(void)
 {
+  /*TODO This is messing with the FreeRTOS */
   uint8_t          bdaddr[] = {0x01, 0x00, 0x80, 0xE1, 0x80, 0x02};
   volatile uint8_t ret;
   uint16_t         service_handle;
