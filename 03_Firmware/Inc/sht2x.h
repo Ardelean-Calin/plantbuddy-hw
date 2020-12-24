@@ -1,7 +1,7 @@
 #ifndef SHT2X_H__
 #define SHT2X_H__
 
-#define SHT2X_I2C_ADDRESS 0x40 // The I2C Address of an SHT2x
+#define SHT2X_I2C_ADDRESS 0x70 // The I2C Address of an SHT2x
 
 /* The supported I2C commands */
 #define SHT2X_CMD_WRITE_USER_REG   0xE6
@@ -11,6 +11,12 @@
 #define SHT2X_CMD_READ_RH_HOLD     0xE5
 #define SHT2X_CMD_READ_TEMP_NOHOLD 0xF3
 #define SHT2X_CMD_READ_RH_NOHOLD   0xF5
+
+#define BYTESWAP(x)                ((uint16_t)((x >> 8) | (x << 8)))
+#define SHT2X_CMD_WAKEUP           BYTESWAP(0x3517)
+#define SHT2X_CMD_SLEEP            BYTESWAP(0xB098)
+#define SHT2X_CMD_START_MEAS_CSEN  BYTESWAP(0x7CA2)
+#define SHT2X_CMD_START_MEAS_CSNEN BYTESWAP(0x7866)
 
 /* Defines for I2C configuration */
 #define SHT2X_I2C_CLK_SPEED  100000 // A measly 100kHz for now
