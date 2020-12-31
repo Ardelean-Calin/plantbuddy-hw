@@ -26,7 +26,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Src/main.c \
 Src/BlueNRG1_it.c \
-Src/sht2x.c \
+Src/shtc3.c \
 Src/led.c \
 Src/soilhum.c \
 Src/ble.c \
@@ -38,6 +38,7 @@ hal/src/miscutil.c \
 hal/src/osal.c \
 hal/src/radio_ota.c \
 hal/src/sleep.c \
+i2c/i2c.c \
 CMSIS/Device/ST/BlueNRG1/Source/system_bluenrg1.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_adc.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_dma.c \
@@ -135,7 +136,8 @@ C_INCLUDES =  \
 -IFreeRTOS/BlueNRG/ \
 -IBluetooth_LE/inc \
 -IBLE_Application/layers_inc \
--IBLE_Application/Utils/inc
+-IBLE_Application/Utils/inc \
+-Ii2c
 
 
 # compile gcc flags

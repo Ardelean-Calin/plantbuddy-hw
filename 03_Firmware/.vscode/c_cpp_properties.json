@@ -4,6 +4,7 @@
             "name": "BlueNRG-1",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/i2c",
                 "${workspaceFolder}/BlueNRG1_Periph_Driver/inc",
                 "${workspaceFolder}/CMSIS/Include",
                 "${workspaceFolder}/CMSIS/Device/ST/BlueNRG1/Include",

@@ -14,8 +14,9 @@
 #include "BlueNRG1_it.h"
 #include "UserConfig.h"
 #include "ble.h"
+#include "i2c.h"
 #include "led.h"
-#include "sht2x.h"
+#include "shtc3.h"
 #include "soilhum.h"
 #include "system_bluenrg1.h"
 #include <stdint.h>
@@ -43,8 +44,15 @@ int main(void)
   /* Module init */
   vBLEInit(); // For some reason, BLE needs to be first...
   vLEDInit();
-  vSHT2XInit();
+  vSHTC3Init();
   vSoilHumInit();
+
+  /* Hardware modules init */
+  i2c_init();
+
+  /* Init FreeRTOS structures used by multiple modules */
+  hI2CSemaphore = xSemaphoreCreateBinary();
+  xSemaphoreGive(hI2CSemaphore);
 
   /* Tasks were created by module initializer. Now start scheduler */
   vTaskStartScheduler();
