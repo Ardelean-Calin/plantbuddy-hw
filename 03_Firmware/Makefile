@@ -39,6 +39,7 @@ hal/src/osal.c \
 hal/src/radio_ota.c \
 hal/src/sleep.c \
 i2c/i2c.c \
+opt3001/opt3001.c \
 CMSIS/Device/ST/BlueNRG1/Source/system_bluenrg1.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_adc.c \
 BlueNRG1_Periph_Driver/src/BlueNRG1_dma.c \
@@ -137,7 +138,8 @@ C_INCLUDES =  \
 -IBluetooth_LE/inc \
 -IBLE_Application/layers_inc \
 -IBLE_Application/Utils/inc \
--Ii2c
+-Ii2c \
+-Iopt3001
 
 
 # compile gcc flags

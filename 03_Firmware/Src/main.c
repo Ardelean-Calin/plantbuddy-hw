@@ -16,6 +16,7 @@
 #include "ble.h"
 #include "i2c.h"
 #include "led.h"
+#include "opt3001.h"
 #include "shtc3.h"
 #include "soilhum.h"
 #include "system_bluenrg1.h"
@@ -46,6 +47,7 @@ int main(void)
   vLEDInit();
   vSHTC3Init();
   vSoilHumInit();
+  vOPT3001Init();
 
   /* Hardware modules init */
   i2c_init();
