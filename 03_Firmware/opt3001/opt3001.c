@@ -3,66 +3,55 @@
 #include "i2c.h"
 #include "task.h"
 
-TaskHandle_t hOPTDoneIsrTask; // The handler of our event interrupt processing task
-
 static eOPT3001State xCurrentState;
 static uint8_t       pucRawData[2];
 static uint8_t       pucMFID[2];
 static uint8_t       pucDID[2];
 /* Constant variables */
 /* The supported I2C commands */
-const uint8_t OPT_READ_MFID   = 0x7E;
-const uint8_t OPT_READ_DID    = 0x7F;
-const uint8_t OPT_CONFIGURE   = 0x01;
-const uint8_t OPT_READ_RESULT = 0x00;
-// const uint8_t OPT_CMD_CONFIG[2] = {0b11001010, 0b000};
-// const uint8_t OPT_CMD_WAKEUP[2]               = {0x35, 0x17};
-// const uint8_t OPT_CMD_SLEEP[2]                = {0xB0, 0x98};
-// const uint8_t OPT_CMD_START_MEAS_STRETCH[2]   = {0x7C, 0xA2};
-// const uint8_t OPT_CMD_START_MEAS_NOSTRETCH[2] = {0x78, 0x66};
-// const uint8_t OPT_CMD_RESET[2]                = {0x80, 0x5D};
+const uint8_t OPT_REGISTER_READ_MFID = 0x7E;
+const uint8_t OPT_REGISTER_READ_DID  = 0x7F;
+const uint8_t OPT_REGISTER_CONFIGURE = 0x01;
+const uint8_t OPT_REGISTER_LOW_LIMIT = 0x02;
+const uint8_t OPT_REGISTER_RESULT    = 0x00;
+
+/* OPT3001 Setup:
+15-12b = 1100    :   Automatic-full-scale mode
+11b    = 1       :   Coversion time (1 = 800ms, more accurate)
+10-9b  = 01      :   Mode of conversion operation (01 = single shot)
+8b     = 0       :   Overflow flag (Read-Only)
+7b     = 0       :   Conversion ready field (Read-Only)
+6b     = 0       :   Flag high field (Read-Only)
+5b     = 0       :   Flag low field (Read-Only)
+4b     = 1       :   Latch field (1 = window-style comparision operation)
+3b     = 1       :   Polarity field (INT pin reports active high)
+2b     = 0       :   Mask exponent field (0 = do not mask exponent)
+1-0b   = 00      :   Fault count field (0 = 1 fault until interrupt)
+*/
+const uint8_t OPT_CMD_CONFIG[2]    = {0xCA, 0x18};
+const uint8_t OPT_CMD_LOW_LIMIT[2] = {0xC0, 0x00}; // Enable EOC interrupts -> not used
+
+uint32_t ulLightIntensity;
 
 /* Static Function prototypes */
-static void vOPTPeriodicTask(void* pvParams); /* Retreives the current light intensity*/
-static void vOPTDoneISR(void* pvParams);
+static void     vOPTPeriodicTask(void* pvParams); /* Retreives the current light intensity*/
+static void     vOPTDoneISR(void* pvParams);
+static uint32_t ulOPTResultToLux(uint8_t* result);
 
 void vOPT3001Init()
 {
-  GPIO_InitType       xGPIOConfig;       // General GPIO configuration
-  NVIC_InitType       xNVICConfig;       // Interrupt configuration
-  GPIO_EXTIConfigType xGPIOExtItrConfig; // GPIO external interrupt configuration
-
-  /* Configure the OPT3001 interrupt */
-  xGPIOConfig.GPIO_Pin     = OPT3001_PIN_INTERRUPT;
-  xGPIOConfig.GPIO_Mode    = GPIO_Input;
-  xGPIOConfig.GPIO_Pull    = ENABLE; // Pull up, internal
-  xGPIOConfig.GPIO_HighPwr = DISABLE;
-  GPIO_Init(&xGPIOConfig);
-
-  xNVICConfig.NVIC_IRQChannel                   = GPIO_IRQn;
-  xNVICConfig.NVIC_IRQChannelPreemptionPriority = LOW_PRIORITY;
-  xNVICConfig.NVIC_IRQChannelCmd                = ENABLE;
-  NVIC_Init(&xNVICConfig);
-
-  // Configure external interrupt
-  xGPIOExtItrConfig.GPIO_Pin      = OPT3001_PIN_INTERRUPT;
-  xGPIOExtItrConfig.GPIO_IrqSense = GPIO_IrqSense_Edge;
-  xGPIOExtItrConfig.GPIO_Event    = GPIO_Event_Low;
-  GPIO_EXTIConfig(&xGPIOExtItrConfig);
-  /* Clear pending interrupt */
-  GPIO_ClearITPendingBit(OPT3001_PIN_INTERRUPT);
-  /* Enable the interrupt */
-  GPIO_EXTICmd(OPT3001_PIN_INTERRUPT, ENABLE);
-
   xCurrentState = OPT_STATE_INIT;
 
   /* Create our FreeRTOS tasks */
   xTaskCreate(vOPTPeriodicTask, "OPT3001", 64, NULL, tskIDLE_PRIORITY + 1U, NULL);
-  xTaskCreate(vOPTDoneISR, "SoilHumExIsrH", 64, NULL, tskIDLE_PRIORITY + 2U, &hOPTDoneIsrTask);
 }
 
 static void vOPTPeriodicTask(void* pvParams)
 {
+  TickType_t xLastWakeTime;
+
+  const TickType_t xFrequency = pdMS_TO_TICKS(OPT_TASK_PERIOD);
+  xLastWakeTime               = xTaskGetTickCount();
   for (;;)
   {
     // This module uses I2C
@@ -71,24 +60,53 @@ static void vOPTPeriodicTask(void* pvParams)
     {
     case OPT_STATE_INIT:
       // Read the MFID
-      i2c_write(OPT_I2C_ADDRESS, &OPT_READ_MFID, 1);
-      i2c_read(OPT_I2C_ADDRESS, pucMFID, 2);
-      i2c_write(OPT_I2C_ADDRESS, &OPT_READ_DID, 1);
-      i2c_read(OPT_I2C_ADDRESS, pucDID, 2);
+      i2c_read_register(OPT_I2C_ADDRESS, OPT_REGISTER_READ_MFID, pucMFID, 2);
+      // Read the DID
+      i2c_read_register(OPT_I2C_ADDRESS, OPT_REGISTER_READ_DID, pucDID, 2);
+      xCurrentState = OPT_STATE_CONFIGURE;
+      break;
+
+    case OPT_STATE_CONFIGURE:
+      // Configure interrupt on every measurement
+      i2c_write_register(OPT_I2C_ADDRESS, OPT_REGISTER_LOW_LIMIT, &OPT_CMD_LOW_LIMIT[0], 2);
+      xCurrentState = OPT_STATE_START_CONVERSION;
+      break;
+    case OPT_STATE_START_CONVERSION:
+      // Start conversion
+      i2c_read_register(OPT_I2C_ADDRESS, OPT_REGISTER_CONFIGURE, pucRawData, 2);
+      i2c_write_register(OPT_I2C_ADDRESS, OPT_REGISTER_CONFIGURE, &OPT_CMD_CONFIG[0], 2);
+      xCurrentState = OPT_STATE_ONGOING;
+      break;
+    case OPT_STATE_ONGOING:
+      // Do nothing, wait for conversion to be ready
+      xCurrentState = OPT_STATE_RESULT;
+      xSemaphoreGive(hI2CSemaphore);
+      vTaskDelayUntil(&xLastWakeTime, xFrequency);
+      break;
+    case OPT_STATE_RESULT:
+      // Result ready, read it
+      // Idea: Maybe in the future we can verify that the result is truly ready with the
+      // Conversion Ready flag (see configuration register)
+      i2c_read_register(OPT_I2C_ADDRESS, OPT_REGISTER_RESULT, pucRawData, 2);
+      // Decode result
+      ulLightIntensity = ulOPTResultToLux(pucRawData);
+      xCurrentState    = OPT_STATE_START_CONVERSION;
       break;
 
     default: break;
     }
     xSemaphoreGive(hI2CSemaphore);
-    vTaskDelay(100);
   }
 }
 
-/**
- * @brief  This interrupt is called whenever the OPT3001 finishes a measurement
- */
-static void vOPTDoneISR(void* pvParams)
+static uint32_t ulOPTResultToLux(uint8_t* result)
 {
-  uint32_t ulNotifiedValue;
-  for (;;) { ulNotifiedValue = ulTaskNotifyTake(pdTRUE, portMAX_DELAY); }
+  uint32_t ulLux;
+
+  uint8_t  exponent   = (result[0] & 0xF0) >> 4;
+  uint16_t fractional = ((result[0] & 0x0F) << 8) | result[1];
+
+  ulLux = (1 << exponent) * fractional;
+
+  return ulLux;
 }

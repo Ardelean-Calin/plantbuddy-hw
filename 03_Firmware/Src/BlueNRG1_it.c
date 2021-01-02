@@ -26,7 +26,6 @@
 #include "BlueNRG1_conf.h"
 #include "FreeRTOS.h"
 #include "bluenrg1_stack.h"
-#include "opt3001.h"
 #include "semphr.h"
 #include "task.h"
 #include <stdint.h>
@@ -38,8 +37,6 @@
 // These two handles are defined in the soilhum module and point to interrupt processing tasks
 extern TaskHandle_t hSoilHumEvtCntrIsrTask;
 extern TaskHandle_t hSoilHumTimCntrIsrTask;
-// This task handler is used by the OPT module
-extern TaskHandle_t hOPTDoneIsrTask;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -123,26 +120,6 @@ void MFT1A_Handler(void)
     MFT_ClearIT(MFT1, MFT_IT_TNA);
     /* Delegate processing of timer underflow to task */
     vTaskNotifyGiveFromISR(hSoilHumTimCntrIsrTask, &xHigherPriorityTaskWoken);
-    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-  }
-}
-
-/**
- * @brief  This function handles GPIO interrupt request.
- * @param  None
- * @retval None
- */
-void GPIO_Handler(void)
-{
-  BaseType_t xHigherPriorityTaskWoken;
-  xHigherPriorityTaskWoken = pdFALSE;
-
-  if ((GPIO_GetITStatusBit(OPT3001_PIN_INTERRUPT) != RESET))
-  {
-    /* Clear the interrupt */
-    GPIO_ClearITPendingBit(OPT3001_PIN_INTERRUPT);
-    /* Delegate processing of timer underflow to task */
-    vTaskNotifyGiveFromISR(hOPTDoneIsrTask, &xHigherPriorityTaskWoken);
     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
   }
 }

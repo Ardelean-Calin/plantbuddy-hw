@@ -56,8 +56,7 @@ int i2c_write(uint8_t addr, const uint8_t* data, uint8_t len)
   for (uint8_t i = 0; i < len; i++) { I2C_FillTxFIFO(SHTC3_I2C_INSTANCE, data[i]); }
 
   // Wait loop
-  do
-  {
+  do {
     if (I2C_GetStatus(SHTC3_I2C_INSTANCE) == I2C_OP_ABORTED)
     {
       return ERROR;
@@ -85,8 +84,7 @@ int i2c_read(uint8_t addr, uint8_t* data, uint8_t len)
   I2C_BeginTransaction(SHTC3_I2C_INSTANCE, &t);
 
   // Wait loop
-  do
-  {
+  do {
     if (I2C_OP_ABORTED == I2C_GetStatus(SHTC3_I2C_INSTANCE))
     {
       return ERROR;
@@ -104,4 +102,18 @@ int i2c_read(uint8_t addr, uint8_t* data, uint8_t len)
   }
 
   return SUCCESS;
+}
+
+void i2c_write_register(uint8_t addr, uint8_t reg, const uint8_t* data, uint8_t len)
+{
+  uint8_t buffer[len + 1];
+  buffer[0] = reg;
+  for (uint8_t i = 0; i < len; i++) { buffer[i + 1] = data[i]; }
+  i2c_write(addr, buffer, len + 1);
+}
+
+void i2c_read_register(uint8_t addr, uint8_t reg, uint8_t* dest, uint8_t len)
+{
+  i2c_write(addr, &reg, 1);
+  i2c_read(addr, dest, len);
 }
