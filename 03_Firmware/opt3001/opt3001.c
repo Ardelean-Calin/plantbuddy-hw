@@ -35,7 +35,6 @@ uint32_t ulLightIntensity;
 
 /* Static Function prototypes */
 static void     vOPTPeriodicTask(void* pvParams); /* Retreives the current light intensity*/
-static void     vOPTDoneISR(void* pvParams);
 static uint32_t ulOPTResultToLux(uint8_t* result);
 
 void vOPT3001Init()
