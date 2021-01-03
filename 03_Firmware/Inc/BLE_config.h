@@ -1,13 +1,17 @@
-#ifndef _REMOTECONTROL_CONFIG_H_
-#define _REMOTECONTROL_CONFIG_H_
+#ifndef _SENSORDEMO_CONFIG_H_
+#define _SENSORDEMO_CONFIG_H_
 
 #include "bluenrg1_stack.h"
 #include "compiler.h"
 #include "stack_user_cfg.h"
 
+#if OTA_EXTENDED_PACKET_LEN == 1
+#include "ota_btl.h"
+#endif
+
 /* This file contains all the information needed to init the BlueNRG-1 stack.
  * These constants and variables are used from the BlueNRG-1 stack to reserve RAM and FLASH
- * according the application requests.
+ * according the application requests
  */
 
 /* Default number of link */
@@ -17,25 +21,96 @@
 /* Default number of GAP and GATT attributes */
 #define DEFAULT_NUM_GATT_ATTRIBUTES 9
 
-/* Number of services requests from the remote control demo */
-#define NUM_APP_GATT_SERVICES 1
+/* Enable/disable Data length extension Max supported ATT_MTU size based on OTA client & server Max
+ * ATT_MTU sizes capabilities */
+#if (CONTROLLER_DATA_LENGTH_EXTENSION_ENABLED == 1) && (OTA_EXTENDED_PACKET_LEN == 1)
+#define OTA_MAX_ATT_MTU_SIZE (OTA_ATT_MTU_SIZE) //(220) /* OTA Client & Server supported ATT_MTU */
+#else /* BlueNRG-1 device: no data length extension support */
+#define OTA_MAX_ATT_MTU_SIZE (DEFAULT_ATT_MTU) /* DEFAULT_ATT_MTU size = 23 bytes */
+#endif
 
-/* Number of attributes requests from the remote control demo */
-#define NUM_APP_GATT_ATTRIBUTES 2
+#if defined(ST_OTA_LOWER_APPLICATION) || defined(ST_OTA_HIGHER_APPLICATION)
+/* Number of services requests from the Sensor demo */
+#define NUM_APP_GATT_SERVICES (2 + 1) /* 2 Sensor services + 1 OTA service */
 
-/* Number of links needed for the demo:
+/* Number of attributes requests from the chat demo */
+#define NUM_APP_GATT_ATTRIBUTES                                                            \
+  (15 + 9) /* 15 attributes x BLE Sensor demo services characteristics + 9 for OTA Service \
+              characteristics */
+
+/**
+ * Set the number of 16-bytes units used on an OTA FW data packet for matching OTA client MAX
+ * ATT_MTU
+ */
+#define OTA_16_BYTES_BLOCKS_NUMBER \
+  ((OTA_MAX_ATT_MTU_SIZE - 4) /    \
+   16) /* 4 bytes for OTA sequence numbers + needs ack + checksum bytes */
+
+/* OTA characteristics maximum lenght */
+#define OTA_MAX_ATT_SIZE (4 + OTA_16_BYTES_BLOCKS_NUMBER * 16)
+
+#else /* NO OTA Service is required */
+
+/* Number of services requests from the sensor demo */
+#define NUM_APP_GATT_SERVICES   2
+
+/* Number of attributes requests from the sensor demo */
+#define NUM_APP_GATT_ATTRIBUTES 15
+
+/* OTA characteristics maximum lenght */
+#define OTA_MAX_ATT_SIZE        (0)
+
+#endif
+
+#define MAX_CHAR_LEN(a, b) ((a) > (b)) ? (a) : (b)
+
+/* Application characteristics maximum lenght */
+#define APP_MAX_ATT_SIZE (6)
+
+/* Number of links needed for the demo: 1
  * Only 1 the default
  */
 #define NUM_LINKS (MIN_NUM_LINK)
 
-/* Number of GATT attributes needed for the remote control demo. */
+/* Maximum number of attribute records that can be added to the first application service:
+ * acceleration service */
+#define MAX_NUMBER_ATTRIBUTES_RECORDS_SERVICE_1 (7)
+
+/* Maximum number of attribute records that can be added to the second application service:
+ * environmental service */
+#define MAX_NUMBER_ATTRIBUTES_RECORDS_SERVICE_2 (10)
+
+/* Number of GATT attributes needed for the sensor demo. */
 #define NUM_GATT_ATTRIBUTES (DEFAULT_NUM_GATT_ATTRIBUTES + NUM_APP_GATT_ATTRIBUTES)
 
-/* Number of GATT services needed for the remote control demo. */
+/* Number of GATT services needed for the sensor demo. */
 #define NUM_GATT_SERVICES (DEFAULT_NUM_GATT_SERVICES + NUM_APP_GATT_SERVICES)
 
+/* Array size for the attribute value for OTA service */
+#if defined(ST_OTA_LOWER_APPLICATION) || defined(ST_OTA_HIGHER_APPLICATION)
+/* OTA service: 4 characteristics (1 notify property): 99 bytes +
+   Image Content characteristic length = 4  + (OTA_16_BYTES_BLOCKS_NUMBER * 16); 4 for sequence
+   number, checksum and needs acks bytes */
+#define OTA_ATT_VALUE_ARRAY_SIZE (99 + (4 + (OTA_16_BYTES_BLOCKS_NUMBER * 16)))
+#else
+#define OTA_ATT_VALUE_ARRAY_SIZE (0) /* No OTA service is used */
+#endif
+
 /* Array size for the attribute value */
-#define ATT_VALUE_ARRAY_SIZE (44 + 20) //(GATT + GAP) = 44 + RC (20) characteristic
+#ifndef SENSOR_EMULATION
+#define ATT_VALUE_ARRAY_SIZE \
+  (43 + 106 +                \
+   OTA_ATT_VALUE_ARRAY_SIZE) //(GATT + GAP) = 43 (Device Name: BlueNRG) + Acceleration (Acceleration
+                             //(27) + Free Fall (21) characteristics) +  Environmental Sensor
+                             //(Temperature (28), Pressure (29)  characteristics)  Services
+#else
+#define ATT_VALUE_ARRAY_SIZE \
+  (43 + 106 + 28 +           \
+   OTA_ATT_VALUE_ARRAY_SIZE) //(GATT + GAP) = 43 (Device Name: BlueNRG) + Acceleration (Acceleration
+                             //(27) + Free Fall (21) characteristics) +  Environmental Sensor
+                             //(Temperature (28) , Pressure (29), Humidity (28) characteristics)
+                             // Services
+#endif
 
 /* Flash security database size */
 #define FLASH_SEC_DB_SIZE (0x400)
@@ -43,13 +118,16 @@
 /* Flash server database size */
 #define FLASH_SERVER_DB_SIZE (0x400)
 
-/* Set supported max value for ATT_MTU enabled by the application. Allowed values in range: [23:158]
- * [New parameter added on BLE stack v2.x] */
+/* Set supported max value for ATT_MTU enabled by the application */
+#if (CONTROLLER_DATA_LENGTH_EXTENSION_ENABLED == 1) && (OTA_EXTENDED_PACKET_LEN == 1)
+#define MAX_ATT_MTU (OTA_MAX_ATT_MTU_SIZE)
+#else
 #define MAX_ATT_MTU (DEFAULT_ATT_MTU)
+#endif
 
 /* Set supported max value for attribute size: it is the biggest attribute size enabled by the
  * application */
-#define MAX_ATT_SIZE (1)
+#define MAX_ATT_SIZE MAX_CHAR_LEN(OTA_MAX_ATT_SIZE, APP_MAX_ATT_SIZE)
 
 /* Set the minumum number of prepare write requests needed for a long write procedure for a
  * characteristic with len > 20bytes:
@@ -154,4 +232,4 @@ const BlueNRG_Stack_Initialization_t BlueNRG_Stack_Init_params = {
     CONFIG_TABLE,
 };
 
-#endif // _REMOTECONTROL_CONFIG_H_
+#endif // _SENSORDEMO_CONFIG_H_
