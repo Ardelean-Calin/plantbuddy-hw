@@ -7,7 +7,7 @@
         {
             "name": "PlantBuddy Debug",
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceRoot}/build/PlantBuddy.elf",
+            "executable": "${workspaceRoot}/build/PlantBuddy.out",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",

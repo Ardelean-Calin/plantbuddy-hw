@@ -4,28 +4,31 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "cmake_environment",
+            "type": "shell",
+            "command": "cmake -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=arm-none-eabi-gcc.cmake -DCMAKE_BUILD_TYPE=Debug -Bbuild -H. -DCMAKE_MAKE_PROGRAM=make",
+            "problemMatcher": []
+        },
+        {
             "label": "build-debug",
-            "windows": {
-                "command": "make.exe",
-                "args": [
-                    "DEBUG=1"
-                ]
+            "dependsOn": [
+                "cmake_environment"
+            ],
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build"
             },
-            "problemMatcher": {
-                "owner": "cpp",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            }
+            "command": "cmake .. && make",
+            "problemMatcher": []
+        },
+        {
+            "label": "build-clean",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "command": "make clean",
+            "problemMatcher": []
         },
         {
             "label": "stop-openocd",
