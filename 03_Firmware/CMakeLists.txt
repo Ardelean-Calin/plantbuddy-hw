@@ -70,6 +70,7 @@ target_compile_definitions(${EXECUTABLE} PRIVATE
         -DBLUENRG1_DEVICE
         -DSMPS_INDUCTOR=SMPS_INDUCTOR_10uH
         -DNO_SMART_POWER_MANAGEMENT
+        -DLS_SOURCE=LS_SOURCE_EXTERNAL_32KHZ
         )
 
 target_include_directories(${EXECUTABLE} PRIVATE

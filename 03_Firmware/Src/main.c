@@ -16,6 +16,7 @@
 #include "ble.h"
 #include "i2c.h"
 #include "led.h"
+#include "memory_map.h"
 #include "opt3001.h"
 #include "shtc3.h"
 #include "soilhum.h"
@@ -31,6 +32,7 @@
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+static void RemapVectorTableToRam(void);
 
 /**
  * @brief  Main program code.
@@ -39,6 +41,9 @@
  */
 int main(void)
 {
+  /* This is where the magic happens, I remap the Interrupt Vector Table to RAM, then in SystemInit
+   * I specify to the microcontroller that it shall use the table found in RAM and not in flash */
+  RemapVectorTableToRam();
   /* System initialization function */
   SystemInit();
 
@@ -61,6 +66,20 @@ int main(void)
 
   /* Infinite loop. Should never get here */
   while (1) {}
+}
+
+static void RemapVectorTableToRam()
+{
+
+  // Copy interrupt vector table to the RAM.
+  volatile uint32_t* VectorTable      = (volatile uint32_t*)&__ram_start__;
+  uint32_t           ui32_VectorIndex = 0;
+
+  for (ui32_VectorIndex = 0; ui32_VectorIndex < 48; ui32_VectorIndex++)
+  {
+    VectorTable[ui32_VectorIndex] =
+        *(__IO uint32_t*)((uint32_t)&__approm_start__ + (ui32_VectorIndex << 2));
+  }
 }
 
 #ifdef USE_FULL_ASSERT

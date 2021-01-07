@@ -953,7 +953,7 @@ void DeviceConfiguration(BOOL coldStart, BOOL waitLS_Ready)
 void SystemInit(void)
 {
   /* Remap the vector table */
-  FLASH->CONFIG = FLASH_PREMAP_MAIN;
+  FLASH->CONFIG = FLASH_REMAP_RAM;
 
   /* Configure all the interrupts priority. 
   * The application can modify the interrupts priority.

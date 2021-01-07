@@ -1,3 +1,6 @@
 [submodule "03_Firmware/libopencm3"]
 	path = 03_Firmware/libopencm3
 	url = git://github.com/libopencm3/libopencm3.git
+[submodule "03_Firmware/bootloader"]
+	path = 03_Firmware/bootloader
+	url = http://calinpi.local:3000/arc4clj/pb-bootloader.git

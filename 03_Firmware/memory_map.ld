@@ -89,3 +89,5 @@ __bootrom_start__ = ORIGIN(REGION_BOOT);
 __bootrom_size__ = LENGTH(REGION_BOOT);
 __approm_start__ = ORIGIN(REGION_FLASH);
 __approm_size__ = LENGTH(REGION_FLASH);
+__ram_start__ = ORIGIN(REGION_RAM);
+__ram_size__ = LENGTH(REGION_RAM);
