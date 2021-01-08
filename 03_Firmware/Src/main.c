@@ -72,7 +72,7 @@ static void RemapVectorTableToRam()
 {
 
   // Copy interrupt vector table to the RAM.
-  volatile uint32_t* VectorTable      = (volatile uint32_t*)&__ram_start__;
+  volatile uint32_t* VectorTable      = (volatile uint32_t*)&__vector_table_ram_start__;
   uint32_t           ui32_VectorIndex = 0;
 
   for (ui32_VectorIndex = 0; ui32_VectorIndex < 48; ui32_VectorIndex++)

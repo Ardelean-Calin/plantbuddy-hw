@@ -39,7 +39,7 @@ SECTIONS
 
 
   /* RAM preamble no init */
-  .ram_preamble_noinit 0x20000000 (NOLOAD) :
+  .ram_preamble_noinit ORIGIN(REGION_RAM) (NOLOAD) :
   {
     . = ALIGN(4);
     . = 0x04 ; /* There is a waste of RAM here */
@@ -47,7 +47,7 @@ SECTIONS
   }  >REGION_RAM
 
   /* RAM preamble initialized */
-  .ram_preamble 0x20000008 /*(NOLOAD)*/ :
+  .ram_preamble (ORIGIN(REGION_RAM) + 0x08) /*(NOLOAD)*/ :
   {
     _sdata2 = .;        /* create a global symbol at data start */
     /* This is used by the startup in order to initialize the .bss section */
@@ -68,13 +68,13 @@ SECTIONS
   }  >REGION_RAM AT> REGION_FLASH
 
   /* RAM preamble no init */
-  .ram_preamble_noinit2 0x20000034 (NOLOAD) :
+  .ram_preamble_noinit2 (ORIGIN(REGION_RAM) + 0x34) (NOLOAD) :
   {
     KEEP(*(.__crash_RAM))
   }  >REGION_RAM
   /* Uninitialized data section */
    
-  .bss.blueRAM 0x200000C0 :
+  .bss.blueRAM (ORIGIN(REGION_RAM) + 0xC0) :
   {
     . = ALIGN(4);
     _sbssblue = .;         /* define a global symbol at .bss.blueRAM start */
