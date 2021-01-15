@@ -6,15 +6,15 @@
         {
             "label": "cmake_environment",
             "type": "shell",
-            "command": "cmake -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=arm-none-eabi-gcc.cmake -DCMAKE_BUILD_TYPE=Debug -Bbuild -H. -DCMAKE_MAKE_PROGRAM=make",
+            "command": "cmake -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=arm-none-eabi-gcc.cmake -DCMAKE_BUILD_TYPE=Debug -Bbuild -H.",
             "problemMatcher": []
         },
         {
             "label": "build-debug",
+            "type": "shell",
             "dependsOn": [
                 "cmake_environment"
             ],
-            "type": "shell",
             "options": {
                 "cwd": "${workspaceRoot}/build"
             },
@@ -33,9 +33,7 @@
         {
             "label": "stop-openocd",
             "type": "shell",
-            "windows": {
-                "command": "pwsh.exe -c 'Stop-Process -Name \"openocd\" -Force'"
-            }
+            "command": "pkill openocd"
         }
     ]
 }

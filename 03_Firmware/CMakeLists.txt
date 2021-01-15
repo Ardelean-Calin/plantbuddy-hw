@@ -57,8 +57,8 @@ set (SOURCE
         Bluetooth_LE/src/stack_slvonly_api_stubs.c
         Bluetooth_LE/src/stack_user_cfg.c
         BLE_Application/Utils/src/ble_utils.c
-        hal/src/context_switch.s
-        inc/memory_map.h
+        # hal/src/context_switch.s
+        Inc/memory_map.h
     )
 
 
@@ -92,6 +92,7 @@ target_include_directories(${EXECUTABLE} PRIVATE
 target_compile_options(${EXECUTABLE} PRIVATE
         -mcpu=cortex-m0
         -mthumb
+        -specs=nano.specs
 
         -fdata-sections
         -ffunction-sections

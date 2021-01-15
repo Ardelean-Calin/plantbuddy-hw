@@ -31,6 +31,7 @@
 /* Private defines -----------------------------------------------------------*/
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+SemaphoreHandle_t hI2CSemaphore;
 /* Private functions ---------------------------------------------------------*/
 static void RemapVectorTableToRam(void);
 

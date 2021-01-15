@@ -91,7 +91,7 @@ typedef enum {
 /** @} */ /* End of group Configuration_of_CMSIS */
 
 #include "core_cm0.h"                           /*!< ARM Cortex-M0 processor and core peripherals                              */
-#include "system_BlueNRG1.h"                    /*!< BlueNRG1 System                                                           */
+#include "system_bluenrg1.h"                    /*!< BlueNRG1 System                                                           */
 
 #ifndef __IM                                    /*!< Fallback for older CMSIS versions                                         */
   #define __IM   __I

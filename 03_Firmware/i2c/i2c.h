@@ -15,7 +15,7 @@
 #define SHTC3_Init_SCL() GPIO_InitI2c1ClkPin12()
 #define SHTC3_Init_SDA() GPIO_InitI2c1DataPin13()
 
-SemaphoreHandle_t hI2CSemaphore;
+extern SemaphoreHandle_t hI2CSemaphore;
 
 /* Public function definitions */
 void i2c_init(void);
