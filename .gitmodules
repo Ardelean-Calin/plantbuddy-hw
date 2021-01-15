@@ -4,3 +4,6 @@
 [submodule "03_Firmware/bootloader"]
 	path = 03_Firmware/bootloader
 	url = http://calinpi.local:3000/arc4clj/pb-bootloader.git
+[submodule "02_Software/01_Programmer"]
+	path = 02_Software/01_Programmer
+	url = http://calinpi.local:3000/arc4clj/pb-programmer.git
