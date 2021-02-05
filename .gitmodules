@@ -7,3 +7,6 @@
 [submodule "02_Software/01_Programmer"]
 	path = 02_Software/01_Programmer
 	url = http://calinpi.local:3000/arc4clj/pb-programmer.git
+[submodule "03_Firmware/lib/nrf-sdk"]
+	path = 03_Firmware/lib/nrf-sdk
+	url = git@github.com:Ardelean-Calin/nrf-sdk.git

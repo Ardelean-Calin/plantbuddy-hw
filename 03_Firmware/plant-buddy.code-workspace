@@ -1,0 +1,31 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "boards.h": "c",
+            "nrf_gpio.h": "c",
+            "nrf_drv_uart.h": "c"
+        },
+        "editor.fontSize": 16
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Cortex Debug",
+                "cwd": "${workspaceRoot}",
+                "executable": "./_build/plant-buddy.out",
+                "request": "launch",
+                "type": "cortex-debug",
+                "servertype": "openocd",
+                "svdFile": "./config/debugger/nrf52810.svd",
+                "runToMain": true,
+                "configFiles": ["./config/debugger/openocd.cfg"]
+            }
+        ]
+    }
+}

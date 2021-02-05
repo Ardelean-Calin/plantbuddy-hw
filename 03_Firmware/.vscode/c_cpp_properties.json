@@ -1,27 +1,16 @@
 {
     "configurations": [
         {
-            "name": "BlueNRG-1",
+            "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/i2c",
-                "${workspaceFolder}/BlueNRG1_Periph_Driver/inc",
-                "${workspaceFolder}/CMSIS/Include",
-                "${workspaceFolder}/CMSIS/Device/ST/BlueNRG1/Include",
-                "${workspaceFolder}/FreeRTOS/Source/portable/GCC/ARM_CM0/",
-                "${workspaceFolder}/FreeRTOS/BlueNRG/",
-                "${workspaceFolder}/Bluetooth_LE/inc"
+                "${workspaceFolder}/lib/nrf-sdk/**"
             ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE",
-                "BLUENRG1_DEVICE"
-            ],
-            "cStandard": "c99",
-            "cppStandard": "c++11",
-            "intelliSenseMode": "gcc-arm",
-            "compilerPath": "/usr/bin/arm-none-eabi-gcc"
+            "defines": ["NRF52810_XXAA"],
+            "compilerPath": "/bin/arm-none-eabi-gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-arm"
         }
     ],
     "version": 4
