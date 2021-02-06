@@ -88,11 +88,12 @@ static void gpiote_init(void)
         APP_ERROR_CHECK(err_code);
     }
 
-    nrf_drv_gpiote_out_config_t config = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
+    nrf_drv_gpiote_out_config_t config1 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
+    nrf_drv_gpiote_out_config_t config2 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(true);
 
     // Configure output pins
-    nrf_drv_gpiote_out_init(LEDY_PIN, &config);
-    nrf_drv_gpiote_out_init(LEDR_PIN, &config);
+    nrf_drv_gpiote_out_init(LEDY_PIN, &config1);
+    nrf_drv_gpiote_out_init(LEDR_PIN, &config2);
 }
 
 /**
@@ -102,9 +103,10 @@ static void periodic_handler_100ms(void* p_context)
 {
     // Call the main state machine! To be defined in another file
     // sm_main_tick();
-    
+
     // For now also toggle the LED to see activity.
     nrf_drv_gpiote_out_toggle(LEDR_PIN);
+    nrf_drv_gpiote_out_toggle(LEDY_PIN);
 }
 
 /**
@@ -142,7 +144,7 @@ int main(void)
     // Initialize GPIOTE module & pins
     gpiote_init();
 
-    // TO-DO: Use the application timer for periodic execution of global state machine every 100ms:
+    // Use the application timer for periodic execution of global state machine every 100ms:
     // https://devzone.nordicsemi.com/nordic/short-range-guides/b/software-development-kit/posts/application-timer-tutorial
     // This method is VERY low power!
     errCode = app_timer_init();
@@ -156,6 +158,10 @@ int main(void)
 
     // BLE Characteristics tutorial:
     // https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
+    while (1)
+    {
+        // App scheduler manages items in the queue
+    }
 }
 
 /**

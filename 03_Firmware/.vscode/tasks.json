@@ -1,0 +1,19 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Flash SoftDevice",
+            "type": "shell",
+            "command": "openocd -f ${workspaceFolder}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"nrf5 mass_erase\" -c \"program ${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.2.0_softdevice.hex verify reset exit\"",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash SoftDevice (No Erase)",
+            "type": "shell",
+            "command": "openocd -f ${workspaceFolder}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.2.0_softdevice.hex verify reset exit\"",
+            "problemMatcher": []
+        }
+    ]
+}
