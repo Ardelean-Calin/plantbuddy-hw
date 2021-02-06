@@ -1,5 +1,6 @@
 ---
 BasedOnStyle: LLVM
+IndentWidth: 4
 AlignAfterOpenBracket: Align
 AlignConsecutiveMacros: 'true'
 AlignConsecutiveAssignments: 'true'
@@ -15,7 +16,7 @@ BinPackParameters: 'true'
 BinPackArguments: 'false'
 BreakBeforeBraces: Allman
 BreakStringLiterals: 'true'
-ColumnLimit: '100'
+ColumnLimit: 120
 Language: Cpp
 ReflowComments: 'true'
 PointerAlignment: 'Left'

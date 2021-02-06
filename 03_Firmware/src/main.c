@@ -48,17 +48,114 @@
  *
  */
 
+#include "app_timer.h"
+#include "nrf_delay.h"
+#include "nrf_drv_clock.h"
+#include "nrf_drv_gpiote.h"
 #include <stdbool.h>
 #include <stdint.h>
-#include "nrf_delay.h"
-#include "nrf_gpio.h"
+
+#define LEDY_PIN 20
+#define LEDR_PIN 18
+
+APP_TIMER_DEF(m_repeated_timer_id_100ms); /**< Handler for repeated timer used to execute main State Machine. */
+
+/**
+ * @brief Function starting the internal LFCLK oscillator.
+ *
+ * @details This is needed by RTC1 which is used by the Application Timer
+ *          (When SoftDevice is enabled the LFCLK is always running and this is not needed).
+ */
+static void lfclk_init(void)
+{
+    ret_code_t err_code;
+    err_code = nrf_drv_clock_init();
+    APP_ERROR_CHECK(err_code);
+
+    nrf_drv_clock_lfclk_request(NULL);
+}
+
+/**
+ * @brief Initializes all used GPIOTE's with the proper configuration.
+ */
+static void gpiote_init(void)
+{
+    ret_code_t err_code;
+    // Only initialize driver if it's not already initialized.
+    if (!nrf_drv_gpiote_is_init())
+    {
+        err_code = nrf_drv_gpiote_init();
+        APP_ERROR_CHECK(err_code);
+    }
+
+    nrf_drv_gpiote_out_config_t config = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
+
+    // Configure output pins
+    nrf_drv_gpiote_out_init(LEDY_PIN, &config);
+    nrf_drv_gpiote_out_init(LEDR_PIN, &config);
+}
+
+/**
+ * @brief Timeout handler for the repeated timer. State machine invocation goes here.
+ */
+static void periodic_handler_100ms(void* p_context)
+{
+    // Call the main state machine! To be defined in another file
+    // sm_main_tick();
+    
+    // For now also toggle the LED to see activity.
+    nrf_drv_gpiote_out_toggle(LEDR_PIN);
+}
+
+/**
+ * @brief Create timers.
+ */
+static void create_timers()
+{
+    ret_code_t err_code;
+
+    // Create timers
+    err_code = app_timer_create(&m_repeated_timer_id_100ms, APP_TIMER_MODE_REPEATED, periodic_handler_100ms);
+    APP_ERROR_CHECK(err_code);
+}
+
+/**
+ * @brief Starts the previously created timers with given periodicity.
+ */
+static void start_timers()
+{
+    ret_code_t err_code;
+
+    // Start timers
+    err_code = app_timer_start(m_repeated_timer_id_100ms, APP_TIMER_TICKS(100), NULL); // 100ms timer
+    APP_ERROR_CHECK(err_code);
+}
 
 /**
  * @brief Function for application main entry.
  */
 int main(void)
 {
-    
+    ret_code_t errCode;
+    // Initialize low-frequency clock which will then be used by our software timer
+    lfclk_init();
+    // Initialize GPIOTE module & pins
+    gpiote_init();
+
+    // TO-DO: Use the application timer for periodic execution of global state machine every 100ms:
+    // https://devzone.nordicsemi.com/nordic/short-range-guides/b/software-development-kit/posts/application-timer-tutorial
+    // This method is VERY low power!
+    errCode = app_timer_init();
+    APP_ERROR_CHECK(errCode);
+
+    create_timers();
+    start_timers();
+
+    // Use the Scheduler and scheduler hooks to execute stuff on interrupts!
+    // https://devzone.nordicsemi.com/nordic/short-range-guides/b/software-development-kit/posts/scheduler-tutorial
+
+    // BLE Characteristics tutorial:
+    // https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
 }
 
 /**
