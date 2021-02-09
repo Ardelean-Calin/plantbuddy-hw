@@ -106,7 +106,6 @@ void soilhum_sm_tick()
             frequency     = (APP_TIMER_TICKS(1000) * counter_value) / elapsed_time_ticks;
             current_state = IDLE;
         }
-
         break;
 
     default: current_state = IDLE; break;
