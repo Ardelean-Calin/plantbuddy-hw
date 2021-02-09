@@ -1,5 +1,7 @@
 #pragma once
 
+#include "nrf_error.h"
+
 // Pin defines
 #define PIN_OUT_LEDY           20
 #define PIN_OUT_LEDR           18

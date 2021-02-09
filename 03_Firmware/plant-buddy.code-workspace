@@ -20,7 +20,8 @@
             "soilhum_sensor.h": "c",
             "nordic_common.h": "c",
             "nrf.h": "c",
-            "bsp.h": "c"
+            "bsp.h": "c",
+            "app_timer.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

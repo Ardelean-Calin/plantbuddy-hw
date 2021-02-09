@@ -55,6 +55,7 @@
 #include "nrf_drv_clock.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
+#include "soilhum_sensor.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -112,8 +113,9 @@ static void ppi_init(void)
  */
 static void periodic_handler_100ms(void* p_context)
 {
-    // Call the main state machine! To be defined in another file
+    // Call the main state machine! To be defined in another file. TODO: Maybe not needed?
     // sm_main_tick();
+    soilhum_sm_tick();
 
     // For now also toggle the LED to see activity.
     nrf_drv_gpiote_out_toggle(PIN_OUT_LEDR);

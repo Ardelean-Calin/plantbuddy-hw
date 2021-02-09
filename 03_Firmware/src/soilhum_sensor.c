@@ -1,14 +1,20 @@
-// clang-format off
 #include "soilhum_sensor.h"
 #include "app_config.h"
-#include "nrf_drv_timer.h"
+#include "app_timer.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
+#include "nrf_drv_timer.h"
 #include <stdint.h>
-// clang-format on
 
 static const nrf_drv_timer_t m_timer0 = NRF_DRV_TIMER_INSTANCE(1);
 static nrf_ppi_channel_t     m_ppi_channel1;
+// Previous and current call times for the timer
+static uint32_t timer_start_tick;
+static uint32_t timer_curr_tick;
+// Holds the current state of our statemachine
+static soilhum_state_t current_state;
+
+static uint32_t frequency;
 
 /**
  * @brief Inits the PPI to be used by GPIOTE module to increment counter
@@ -57,10 +63,52 @@ static void soilhum_timer_init()
 
 void soilhum_init(void)
 {
-    soilhum_cfg_ppi();
+    timer_start_tick = app_timer_cnt_get();
+    timer_curr_tick  = timer_start_tick;
+    current_state    = IDLE;
+
     soilhum_gpio_init();
     soilhum_timer_init();
+    soilhum_cfg_ppi();
 }
 
 // State machine tick
-void soilhum_sm_tick() {}
+void soilhum_sm_tick()
+{
+    uint32_t counter_value      = 0;
+    uint32_t elapsed_time_ticks = 0;
+
+    switch (current_state)
+    {
+    case IDLE:
+        timer_curr_tick    = app_timer_cnt_get();
+        elapsed_time_ticks = app_timer_cnt_diff_compute(timer_curr_tick, timer_start_tick);
+        if (elapsed_time_ticks >= APP_TIMER_TICKS(1000))
+        {
+            timer_start_tick = app_timer_cnt_get();
+            /* Enable 555 timer and counter */
+            nrf_drv_timer_clear(&m_timer0);
+            nrf_drv_gpiote_out_clear(PIN_OUT_SOILHUM_ENABLE);
+            current_state = MEASURING;
+        }
+        break;
+
+    case MEASURING:
+        /* Wait for a time to elapse until we have enough data in the counter */
+        timer_curr_tick    = app_timer_cnt_get();
+        elapsed_time_ticks = app_timer_cnt_diff_compute(timer_curr_tick, timer_start_tick);
+        if (elapsed_time_ticks >= APP_TIMER_TICKS(100))
+        {
+            // The elapsed time is done! Disable 555 timer
+            nrf_drv_gpiote_out_set(PIN_OUT_SOILHUM_ENABLE);
+            // Then read counter value
+            counter_value = nrf_drv_timer_capture_get(&m_timer0, NRF_TIMER_CC_CHANNEL0);
+            frequency     = (APP_TIMER_TICKS(1000) * counter_value) / elapsed_time_ticks;
+            current_state = IDLE;
+        }
+
+        break;
+
+    default: current_state = IDLE; break;
+    }
+}
