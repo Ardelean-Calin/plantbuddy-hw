@@ -6,7 +6,23 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/lib/nrf-sdk/**"
             ],
-            "defines": ["NRF52810_XXAA"],
+            "forcedInclude": [
+                "${workspaceFolder}/config/sdk_config.h"
+            ],
+            "defines": [
+                "APP_TIMER_V2",
+                "APP_TIMER_V2_RTC1_ENABLED",
+                "BOARD_PCA10040",
+                "CONFIG_GPIO_AS_PINRESET",
+                "DEVELOP_IN_NRF52832",
+                "FLOAT_ABI_SOFT",
+                "NRF52810_XXAA",
+                "NRF52_PAN_74",
+                "NRFX_COREDEP_DELAY_US_LOOP_CYCLES=3",
+                "NRF_SD_BLE_API_VERSION=7",
+                "S112",
+                "SOFTDEVICE_PRESENT"
+            ],
             "compilerPath": "/bin/arm-none-eabi-gcc",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",

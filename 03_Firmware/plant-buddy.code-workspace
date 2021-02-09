@@ -10,10 +10,20 @@
             "nrf_gpio.h": "c",
             "nrf_drv_uart.h": "c",
             "app_gpiote.h": "c",
-            "nrfx_clock.h": "c"
+            "nrfx_clock.h": "c",
+            "app_config.h": "c",
+            "nrf_drv_timer.h": "c",
+            "nrfx_timer.h": "c",
+            "nrf_timer.h": "c",
+            "nrfx.h": "c",
+            "nrfx_config.h": "c",
+            "soilhum_sensor.h": "c",
+            "nordic_common.h": "c",
+            "nrf.h": "c",
+            "bsp.h": "c"
         },
         "editor.fontSize": 16,
-        "editor.formatOnSave": false,
+        "editor.formatOnSave": true,
         "editor.rulers": [119]
     },
     "launch": {

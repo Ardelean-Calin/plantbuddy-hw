@@ -48,15 +48,15 @@
  *
  */
 
+#include "app_config.h"
 #include "app_timer.h"
+#include "nrf.h"
 #include "nrf_delay.h"
 #include "nrf_drv_clock.h"
 #include "nrf_drv_gpiote.h"
+#include "nrf_drv_ppi.h"
 #include <stdbool.h>
 #include <stdint.h>
-
-#define LEDY_PIN 20
-#define LEDR_PIN 18
 
 APP_TIMER_DEF(m_repeated_timer_id_100ms); /**< Handler for repeated timer used to execute main State Machine. */
 
@@ -88,12 +88,23 @@ static void gpiote_init(void)
         APP_ERROR_CHECK(err_code);
     }
 
+    // TODO: This should not be here but in some separate "status.c" module
     nrf_drv_gpiote_out_config_t config1 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
     nrf_drv_gpiote_out_config_t config2 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(true);
 
     // Configure output pins
-    nrf_drv_gpiote_out_init(LEDY_PIN, &config1);
-    nrf_drv_gpiote_out_init(LEDR_PIN, &config2);
+    nrf_drv_gpiote_out_init(PIN_OUT_LEDY, &config1);
+    nrf_drv_gpiote_out_init(PIN_OUT_LEDR, &config2);
+}
+
+/**
+ * @brief Initialize PPI
+ */
+static void ppi_init(void)
+{
+    ret_code_t err_code;
+    err_code = nrf_drv_ppi_init();
+    APP_ERROR_CHECK(err_code);
 }
 
 /**
@@ -105,8 +116,8 @@ static void periodic_handler_100ms(void* p_context)
     // sm_main_tick();
 
     // For now also toggle the LED to see activity.
-    nrf_drv_gpiote_out_toggle(LEDR_PIN);
-    nrf_drv_gpiote_out_toggle(LEDY_PIN);
+    nrf_drv_gpiote_out_toggle(PIN_OUT_LEDR);
+    nrf_drv_gpiote_out_toggle(PIN_OUT_LEDY);
 }
 
 /**
@@ -141,7 +152,9 @@ int main(void)
     ret_code_t errCode;
     // Initialize low-frequency clock which will then be used by our software timer
     lfclk_init();
-    // Initialize GPIOTE module & pins
+    // Initialize PPI
+    ppi_init();
+    // Initialize GPIOTE
     gpiote_init();
 
     // Use the application timer for periodic execution of global state machine every 100ms:
