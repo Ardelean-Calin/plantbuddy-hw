@@ -21,7 +21,8 @@
             "nordic_common.h": "c",
             "nrf.h": "c",
             "bsp.h": "c",
-            "app_timer.h": "c"
+            "app_timer.h": "c",
+            "soilhum_driver.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

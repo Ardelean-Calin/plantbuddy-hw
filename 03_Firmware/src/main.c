@@ -39,12 +39,12 @@
  */
 /** @file
  *
- * @defgroup blinky_example_main main.c
+ * @defgroup PlantBuddy main.c
  * @{
- * @ingroup blinky_example
- * @brief Blinky Example Application main file.
+ * @ingroup plantbuddy
+ * @brief PlantBuddy main file.
  *
- * This file contains the source code for a sample application to blink LEDs.
+ * This file contains the source code for a PlantBuddy.
  *
  */
 
@@ -55,7 +55,8 @@
 #include "nrf_drv_clock.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
-#include "soilhum_sensor.h"
+#include "soilhum_driver.h"
+#include "statemachine.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -115,7 +116,8 @@ static void periodic_handler_100ms(void* p_context)
 {
     // Call the main state machine! To be defined in another file. TODO: Maybe not needed?
     // sm_main_tick();
-    soilhum_sm_tick();
+    // TODO: Every 10 calls:
+    //      drv_soilhum_read()
 
     // For now also toggle the LED to see activity.
     nrf_drv_gpiote_out_toggle(PIN_OUT_LEDR);

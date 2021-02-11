@@ -10,10 +10,8 @@ $(OUTPUT_DIRECTORY)/plant-buddy.out: \
 
 # Source files common to all targets
 SRC_FILES += \
+  $(PROJ_DIR)/lib/drv/soilhum_driver.c \
   $(PROJ_DIR)/src/main.c \
-  $(PROJ_DIR)/src/environment_sensor.c \
-  $(PROJ_DIR)/src/lux_sensor.c \
-  $(PROJ_DIR)/src/soilhum_sensor.c \
   $(PROJ_DIR)/src/statemachine.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_lbs/ble_lbs.c \
   $(SDK_ROOT)/components/ble/common/ble_advdata.c \
@@ -73,8 +71,9 @@ SRC_FILES += \
 
 # Include folders common to all targets
 INC_FOLDERS += \
-  ./config \
-  ./inc \
+  $(PROJ_DIR)/config \
+  $(PROJ_DIR)/inc \
+  $(PROJ_DIR)/lib/drv/inc \
   $(SDK_ROOT)/components \
   $(SDK_ROOT)/components/ble/ble_advertising \
   $(SDK_ROOT)/components/ble/ble_dtm \
