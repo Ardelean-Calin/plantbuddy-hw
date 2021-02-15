@@ -26,20 +26,9 @@ static uint16_t*       shtc3_hum_ptr;
 static uint8_t         shtc3_read_buffer[6];
 
 /* Locally-used, static functions */
-static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data);
-static void drv_shtc3_apptimer_init(void);
 static void drv_shtc3_apptimer_handler(void* p_context);
-
-static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
-{
-    UNUSED_PARAMETER(result);
-    UNUSED_PARAMETER(p_user_data);
-
-    // We read the raw data bytes from the sensor. Now we need to process them!
-    *shtc3_temp_ptr = (shtc3_read_buffer[0] << 8) + shtc3_read_buffer[1];
-    *shtc3_hum_ptr  = (shtc3_read_buffer[3] << 8) + shtc3_read_buffer[4];
-    // TODO: Checksum is the third byte of every packet, maybe check it and raise error if problem!
-}
+static void drv_shtc3_apptimer_init(void);
+static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data);
 
 /**
  * @brief Handler for the single-shot timer.
@@ -76,6 +65,23 @@ static void drv_shtc3_apptimer_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
+/**
+ * @brief Called when the TWI Manager read all our data for us.
+ */
+static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
+{
+    UNUSED_PARAMETER(result);
+    UNUSED_PARAMETER(p_user_data);
+
+    // We read the raw data bytes from the sensor. Now we need to process them!
+    *shtc3_temp_ptr = (shtc3_read_buffer[0] << 8) + shtc3_read_buffer[1];
+    *shtc3_hum_ptr  = (shtc3_read_buffer[3] << 8) + shtc3_read_buffer[4];
+    // TODO: Checksum is the third byte of every packet, maybe check it and raise error if problem!
+}
+
+/**
+ * @brief Driver initialization function.
+ */
 void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr)
 {
     m_twi_manager_ptr = twi_mngr_ptr;
@@ -83,11 +89,17 @@ void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr)
     drv_shtc3_apptimer_init();
 }
 
+/**
+ * @brief Starts a temperature and humidity measurement. Non-blocking. The total duration is approx 20ms.
+ * @param[out] temperature Pointer to a memory location in which to store the read temperature.
+ * @param[out] humidity Pointer to a memory location in which to store the read humidity.
+ */
 void drv_shtc3_meas_start(uint16_t* temperature, uint16_t* humidity)
 {
     shtc3_temp_ptr = temperature;
     shtc3_hum_ptr  = humidity;
 
+    // We need to do it with nrf_twi_mngr_perform instead of nrf_twi_mngr_schedule because of the wake-up delay!
     APP_ERROR_CHECK(nrf_twi_mngr_perform(m_twi_manager_ptr, NULL, shtc3_transfer_wakeup, 1, NULL));
     nrf_delay_us(SHTC3_WKUP_DELAY_US);
     APP_ERROR_CHECK(nrf_twi_mngr_perform(m_twi_manager_ptr, NULL, shtc3_transfer_startmeas, 1, NULL));
