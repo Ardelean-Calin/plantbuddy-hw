@@ -6,6 +6,7 @@
 
 APP_TIMER_DEF(m_shtc3_apptimer);
 
+/* The three commands used by our SHTC3 driver */
 static const uint16_t SHTC3_CMD_GOTO_SLEEP = 0x98B0;
 static const uint16_t SHTC3_CMD_WKUP       = 0x1735;
 static const uint16_t SHTC3_START_MEAS     = 0x6678; // Starts a measurement (T first then H)
@@ -88,7 +89,7 @@ void drv_shtc3_meas_start(uint16_t* temperature, uint16_t* humidity)
     shtc3_hum_ptr  = humidity;
 
     APP_ERROR_CHECK(nrf_twi_mngr_perform(m_twi_manager_ptr, NULL, shtc3_transfer_wakeup, 1, NULL));
-    nrf_delay_us(240);
+    nrf_delay_us(SHTC3_WKUP_DELAY_US);
     APP_ERROR_CHECK(nrf_twi_mngr_perform(m_twi_manager_ptr, NULL, shtc3_transfer_startmeas, 1, NULL));
 
     // Turns on an application timer! This will issue a read after X milliseconds
