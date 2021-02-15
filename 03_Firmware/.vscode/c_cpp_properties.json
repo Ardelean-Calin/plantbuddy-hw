@@ -7,6 +7,7 @@
                 "${workspaceFolder}/lib/nrf-sdk/**"
             ],
             "forcedInclude": [
+                "${workspaceFolder}/config/pb_config.h",
                 "${workspaceFolder}/config/sdk_config.h",
                 "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_error.h"
             ],

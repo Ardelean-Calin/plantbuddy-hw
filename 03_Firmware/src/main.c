@@ -56,6 +56,7 @@
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
 #include "nrf_error.h"
+#include "sensors.h"
 #include "status.h"
 #include <stdbool.h>
 #include <stdint.h>
@@ -103,8 +104,12 @@ int main(void)
     err_code = app_timer_init();
     APP_ERROR_CHECK(err_code);
 
+    /* Initialize app scheduler */
+    APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
+
     /* Initialize our different modules */
     status_init();
+    sensors_init();
 
     // Use the Scheduler and scheduler hooks to execute stuff on interrupts!
     // https://devzone.nordicsemi.com/nordic/short-range-guides/b/software-development-kit/posts/scheduler-tutorial
@@ -112,7 +117,6 @@ int main(void)
     // BLE Characteristics tutorial:
     // https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
 
-    APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
     while (1)
     {
         // App scheduler manages items in the queue

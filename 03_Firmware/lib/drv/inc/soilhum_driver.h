@@ -3,4 +3,4 @@
 #include <stdint.h>
 
 void drv_soilhum_init(void);
-void drv_soilhum_read(uint32_t* freq);
+void drv_soilhum_meas_start(uint32_t* freq);

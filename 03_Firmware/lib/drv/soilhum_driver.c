@@ -4,6 +4,7 @@
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
+#include "nrf_gpio.h"
 #include "pb_config.h"
 #include <stdint.h>
 
@@ -36,6 +37,7 @@ static void drv_soilhum_apptimer_handler(void* p_context)
     // The elapsed time is done! Disable 555 timer
     nrf_drv_gpiote_out_set(PIN_OUT_SOILHUM_ENABLE);
     // Then read counter value
+    nrf_drv_timer_capture(&m_timer0, NRF_TIMER_CC_CHANNEL0);
     uint32_t counter_value = nrf_drv_timer_capture_get(&m_timer0, NRF_TIMER_CC_CHANNEL0);
     // And calculate and store the frequency in a variable!
     *freqPointer = (APP_TIMER_TICKS(1000) * counter_value) / APP_TIMER_TICKS(MEAS_DURATION_MS);
@@ -85,6 +87,7 @@ static void drv_soilhum_gpio_init(void)
     freqConfig.pull                       = NRF_GPIO_PIN_NOPULL;
 
     nrf_drv_gpiote_in_init(PIN_IN_SOILHUM_FREQ, &freqConfig, NULL);
+    nrf_drv_gpiote_in_event_enable(PIN_IN_SOILHUM_FREQ, true); // IMPORTANT! Enable event!
 
     nrf_drv_gpiote_out_config_t enableConfig = GPIOTE_CONFIG_OUT_SIMPLE(true);
     nrf_drv_gpiote_out_init(PIN_OUT_SOILHUM_ENABLE, &enableConfig);
@@ -119,7 +122,7 @@ void drv_soilhum_init(void)
  * @brief Reads the soil humidity and puts the resulting value inside the given variable
  * @param[in] freq Pointer to a memory location where the driver shall store the measurement result.
  */
-void drv_soilhum_read(uint32_t* freq)
+void drv_soilhum_meas_start(uint32_t* freq)
 {
     ret_code_t err_code = NRF_SUCCESS;
 
