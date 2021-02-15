@@ -1,10 +1,10 @@
 #include "soilhum_driver.h"
-#include "app_config.h"
 #include "app_timer.h"
 #include "nordic_common.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
+#include "pb_config.h"
 #include <stdint.h>
 
 #define MEAS_DURATION_MS 100

@@ -12,7 +12,7 @@ $(OUTPUT_DIRECTORY)/plant-buddy.out: \
 SRC_FILES += \
   $(PROJ_DIR)/lib/drv/soilhum_driver.c \
   $(PROJ_DIR)/src/main.c \
-  $(PROJ_DIR)/src/statemachine.c \
+  $(PROJ_DIR)/src/status.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_lbs/ble_lbs.c \
   $(SDK_ROOT)/components/ble/common/ble_advdata.c \
   $(SDK_ROOT)/components/ble/common/ble_conn_params.c \

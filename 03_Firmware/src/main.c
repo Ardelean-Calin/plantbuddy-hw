@@ -48,19 +48,21 @@
  *
  */
 
-#include "app_config.h"
+#include "app_scheduler.h"
 #include "app_timer.h"
 #include "nrf.h"
 #include "nrf_delay.h"
 #include "nrf_drv_clock.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
-#include "soilhum_driver.h"
-#include "statemachine.h"
+#include "nrf_error.h"
+#include "status.h"
 #include <stdbool.h>
 #include <stdint.h>
 
-APP_TIMER_DEF(m_repeated_timer_id_100ms); /**< Handler for repeated timer used to execute main State Machine. */
+// Scheduler settings
+#define SCHED_MAX_EVENT_DATA_SIZE APP_TIMER_SCHED_EVENT_DATA_SIZE
+#define SCHED_QUEUE_SIZE          10
 
 /**
  * @brief Function starting the internal LFCLK oscillator.
@@ -78,28 +80,6 @@ static void lfclk_init(void)
 }
 
 /**
- * @brief Initializes all used GPIOTE's with the proper configuration.
- */
-static void gpiote_init(void)
-{
-    ret_code_t err_code;
-    // Only initialize driver if it's not already initialized.
-    if (!nrf_drv_gpiote_is_init())
-    {
-        err_code = nrf_drv_gpiote_init();
-        APP_ERROR_CHECK(err_code);
-    }
-
-    // TODO: This should not be here but in some separate "status.c" module
-    nrf_drv_gpiote_out_config_t config1 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
-    nrf_drv_gpiote_out_config_t config2 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(true);
-
-    // Configure output pins
-    nrf_drv_gpiote_out_init(PIN_OUT_LEDY, &config1);
-    nrf_drv_gpiote_out_init(PIN_OUT_LEDR, &config2);
-}
-
-/**
  * @brief Initialize PPI
  */
 static void ppi_init(void)
@@ -110,74 +90,33 @@ static void ppi_init(void)
 }
 
 /**
- * @brief Timeout handler for the repeated timer. State machine invocation goes here.
- */
-static void periodic_handler_100ms(void* p_context)
-{
-    // Call the main state machine! To be defined in another file. TODO: Maybe not needed?
-    // sm_main_tick();
-    // TODO: Every 10 calls:
-    //      drv_soilhum_read()
-
-    // For now also toggle the LED to see activity.
-    nrf_drv_gpiote_out_toggle(PIN_OUT_LEDR);
-    nrf_drv_gpiote_out_toggle(PIN_OUT_LEDY);
-}
-
-/**
- * @brief Create timers.
- */
-static void create_timers()
-{
-    ret_code_t err_code;
-
-    // Create timers
-    err_code = app_timer_create(&m_repeated_timer_id_100ms, APP_TIMER_MODE_REPEATED, periodic_handler_100ms);
-    APP_ERROR_CHECK(err_code);
-}
-
-/**
- * @brief Starts the previously created timers with given periodicity.
- */
-static void start_timers()
-{
-    ret_code_t err_code;
-
-    // Start timers
-    err_code = app_timer_start(m_repeated_timer_id_100ms, APP_TIMER_TICKS(100), NULL); // 100ms timer
-    APP_ERROR_CHECK(err_code);
-}
-
-/**
  * @brief Function for application main entry.
  */
 int main(void)
 {
-    ret_code_t errCode;
+    ret_code_t err_code;
     // Initialize low-frequency clock which will then be used by our software timer
     lfclk_init();
     // Initialize PPI
     ppi_init();
-    // Initialize GPIOTE
-    gpiote_init();
+    // Initialize app timer module
+    err_code = app_timer_init();
+    APP_ERROR_CHECK(err_code);
 
-    // Use the application timer for periodic execution of global state machine every 100ms:
-    // https://devzone.nordicsemi.com/nordic/short-range-guides/b/software-development-kit/posts/application-timer-tutorial
-    // This method is VERY low power!
-    errCode = app_timer_init();
-    APP_ERROR_CHECK(errCode);
-
-    create_timers();
-    start_timers();
+    /* Initialize our different modules */
+    status_init();
 
     // Use the Scheduler and scheduler hooks to execute stuff on interrupts!
     // https://devzone.nordicsemi.com/nordic/short-range-guides/b/software-development-kit/posts/scheduler-tutorial
 
     // BLE Characteristics tutorial:
     // https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
+
+    APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
     while (1)
     {
         // App scheduler manages items in the queue
+        app_sched_execute();
     }
 }
 
