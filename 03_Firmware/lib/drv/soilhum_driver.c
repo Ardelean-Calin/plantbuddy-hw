@@ -4,7 +4,6 @@
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
-#include "nrf_gpio.h"
 #include "pb_config.h"
 #include <stdint.h>
 
