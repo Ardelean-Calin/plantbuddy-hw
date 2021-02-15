@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "./_build/plant-buddy.out",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "svdFile": "./config/debugger/nrf52810.svd",
+            "runToMain": true,
+            "configFiles": [
+                "./config/debugger/openocd.cfg"
+            ]
+        }
+    ],
+    "compounds": []
+}

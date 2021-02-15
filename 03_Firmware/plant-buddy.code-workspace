@@ -26,24 +26,8 @@
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,
-        "editor.rulers": [119]
-    },
-    "launch": {
-        "version": "0.2.0",
-        "configurations": [
-            {
-                "name": "Cortex Debug",
-                "cwd": "${workspaceRoot}",
-                "executable": "./_build/plant-buddy.out",
-                "request": "launch",
-                "type": "cortex-debug",
-                "servertype": "openocd",
-                "svdFile": "./config/debugger/nrf52810.svd",
-                "runToMain": true,
-                "configFiles": [
-                    "./config/debugger/openocd.cfg"
-                ]
-            }
+        "editor.rulers": [
+            119
         ]
     }
 }
