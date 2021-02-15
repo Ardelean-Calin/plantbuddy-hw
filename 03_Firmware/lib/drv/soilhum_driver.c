@@ -1,6 +1,7 @@
 #include "soilhum_driver.h"
 #include "app_timer.h"
 #include "nordic_common.h"
+#include "nrf.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
