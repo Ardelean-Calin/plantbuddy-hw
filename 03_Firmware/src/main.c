@@ -55,14 +55,16 @@
 #include "nrf_drv_clock.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
+#include "nrf_drv_saadc.h"
 #include "nrf_error.h"
+#include "nrf_soc.h"
 #include "sensors.h"
 #include "status.h"
 #include <stdbool.h>
 #include <stdint.h>
 
 // Scheduler settings
-#define SCHED_MAX_EVENT_DATA_SIZE APP_TIMER_SCHED_EVENT_DATA_SIZE
+#define SCHED_MAX_EVENT_DATA_SIZE MAX(sizeof(nrf_drv_saadc_evt_t), APP_TIMER_SCHED_EVENT_DATA_SIZE)
 #define SCHED_QUEUE_SIZE          10
 
 /**
@@ -117,6 +119,8 @@ int main(void)
     // BLE Characteristics tutorial:
     // https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
 
+    // Enable DC-DC converter for reduced power consumption!
+    sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
     while (1)
     {
         // App scheduler manages items in the queue

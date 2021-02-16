@@ -1,5 +1,6 @@
 #include "sensors.h"
 #include "app_timer.h"
+#include "battery_sensor.h"
 #include "nrf_twi_mngr.h"
 #include "opt3001_driver.h"
 #include "pb_config.h"
@@ -10,6 +11,7 @@ uint32_t soilhumidity;
 uint16_t airhum_raw;
 uint16_t airtemp_raw;
 uint32_t lux;
+uint16_t battery_voltage_mv;
 
 #define SENSORS_UPDATE_PERIOD_MS 1000 // We will call the different sensor update commands every this number of ms
 #define TWI_PENDING_TRANSACTIONS 3    // Size of TWI transactions queue
@@ -27,6 +29,7 @@ static void sensors_apptimer_handler(void* p_context)
     drv_soilhum_meas_start(&soilhumidity);
     drv_shtc3_meas_start(&airtemp_raw, &airhum_raw);
     drv_opt3001_meas_start(&lux);
+    batt_sensor_meas_start();
 }
 
 /**
@@ -70,6 +73,7 @@ void sensors_init(void)
     drv_soilhum_init();
     drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager);
     drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager);
+    batt_sensor_init(&battery_voltage_mv);
 
     sensors_twi_mngr_init();
     // Finally, start the periodic app timer

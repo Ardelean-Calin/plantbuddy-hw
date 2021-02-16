@@ -28,7 +28,11 @@
             "shtc3_driver.h": "c",
             "pb_config.h": "c",
             "opt3001_driver.h": "c",
-            "opt3001.h": "c"
+            "opt3001.h": "c",
+            "nrf_sdh.h": "c",
+            "battery_sensor.h": "c",
+            "nrf_drv_saadc.h": "c",
+            "app_error.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,
