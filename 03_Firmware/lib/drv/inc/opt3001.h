@@ -141,8 +141,8 @@ typedef union
 {
     struct
     {
+        uint16_t exponent : 4;
         uint16_t reading : 12;
-        uint8_t  exponent : 4;
     };
     uint16_t raw;
 } OPT3001_result_t;
