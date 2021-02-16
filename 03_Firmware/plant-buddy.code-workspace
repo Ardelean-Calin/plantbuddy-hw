@@ -26,7 +26,9 @@
             "sensors.h": "c",
             "app_scheduler.h": "c",
             "shtc3_driver.h": "c",
-            "pb_config.h": "c"
+            "pb_config.h": "c",
+            "opt3001_driver.h": "c",
+            "opt3001.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

@@ -12,6 +12,7 @@ $(OUTPUT_DIRECTORY)/plant-buddy.out: \
 SRC_FILES += \
   $(PROJ_DIR)/lib/drv/shtc3_driver.c \
   $(PROJ_DIR)/lib/drv/soilhum_driver.c \
+  $(PROJ_DIR)/lib/drv/opt3001_driver.c \
   $(PROJ_DIR)/src/main.c \
   $(PROJ_DIR)/src/sensors.c \
   $(PROJ_DIR)/src/status.c \

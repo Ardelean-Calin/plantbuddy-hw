@@ -67,6 +67,8 @@ static void drv_shtc3_apptimer_init(void)
 
 /**
  * @brief Called when the TWI Manager read all our data for us.
+ * @param[in] result Parameter used to check for transaction errors.
+ * @param[in] p_user_data Pointer to some user data passed by the TWI Manager.
  */
 static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
 {
@@ -81,6 +83,7 @@ static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
 
 /**
  * @brief Driver initialization function.
+ * @param[in] twi_mngr_ptr Pointer to the global TWI Transaction Manager
  */
 void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr)
 {

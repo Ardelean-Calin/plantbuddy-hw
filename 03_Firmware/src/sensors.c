@@ -9,6 +9,7 @@
 uint32_t soilhumidity;
 uint16_t airhum_raw;
 uint16_t airtemp_raw;
+uint32_t lux;
 
 #define SENSORS_UPDATE_PERIOD_MS 1000 // We will call the different sensor update commands every this number of ms
 #define TWI_PENDING_TRANSACTIONS 3    // Size of TWI transactions queue
@@ -25,6 +26,7 @@ static void sensors_apptimer_handler(void* p_context)
     /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
     drv_soilhum_meas_start(&soilhumidity);
     drv_shtc3_meas_start(&airtemp_raw, &airhum_raw);
+    drv_opt3001_meas_start(&lux);
 }
 
 /**
@@ -67,6 +69,7 @@ void sensors_init(void)
 {
     drv_soilhum_init();
     drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager);
+    drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager);
 
     sensors_twi_mngr_init();
     // Finally, start the periodic app timer
