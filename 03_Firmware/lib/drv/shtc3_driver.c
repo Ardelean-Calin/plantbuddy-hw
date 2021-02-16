@@ -84,24 +84,23 @@ static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
 /**
  * @brief Driver initialization function.
  * @param[in] twi_mngr_ptr Pointer to the global TWI Transaction Manager
+ * @param[out] temperature Pointer to a memory location in which to store the read temperature.
+ * @param[out] humidity Pointer to a memory location in which to store the read humidity.
  */
-void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr)
+void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr, uint16_t* temperature, uint16_t* humidity)
 {
     m_twi_manager_ptr = twi_mngr_ptr;
+    shtc3_temp_ptr    = temperature;
+    shtc3_hum_ptr     = humidity;
     // TODO: We will implement sensor reading and writing using TWI Transaction manager!
     drv_shtc3_apptimer_init();
 }
 
 /**
  * @brief Starts a temperature and humidity measurement. Non-blocking. The total duration is approx 20ms.
- * @param[out] temperature Pointer to a memory location in which to store the read temperature.
- * @param[out] humidity Pointer to a memory location in which to store the read humidity.
  */
-void drv_shtc3_meas_start(uint16_t* temperature, uint16_t* humidity)
+void drv_shtc3_meas_start(void)
 {
-    shtc3_temp_ptr = temperature;
-    shtc3_hum_ptr  = humidity;
-
     // We need to do it with nrf_twi_mngr_perform instead of nrf_twi_mngr_schedule because of the wake-up delay!
     APP_ERROR_CHECK(nrf_twi_mngr_perform(m_twi_manager_ptr, NULL, shtc3_transfer_wakeup, 1, NULL));
     nrf_delay_us(SHTC3_WKUP_DELAY_US);

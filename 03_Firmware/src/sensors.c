@@ -1,6 +1,7 @@
 #include "sensors.h"
 #include "app_timer.h"
 #include "battery_sensor.h"
+#include "nrf_drv_twi.h"
 #include "nrf_twi_mngr.h"
 #include "opt3001_driver.h"
 #include "pb_config.h"
@@ -19,17 +20,19 @@ uint16_t battery_voltage_mv;
 APP_TIMER_DEF(m_sensors_periodic_timer);                      // App timer used by this module
 NRF_TWI_MNGR_DEF(m_twi_manager, TWI_PENDING_TRANSACTIONS, 0); // TWI Transaction manager
 
+static void sensors_apptimer_handler(void* p_context);
+static void sensors_apptimer_init(void);
+static void sensors_apptimer_start(void);
+static void sensors_start_measurements(void);
+static void sensors_twi_mngr_init(void);
+
 /**
  * @brief Handler for the periodic apptimer. Here we will call our measurement start commands.
  * @param[in] p_context Timer context passed whenever we started the timer.
  */
 static void sensors_apptimer_handler(void* p_context)
 {
-    /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
-    drv_soilhum_meas_start(&soilhumidity);
-    drv_shtc3_meas_start(&airtemp_raw, &airhum_raw);
-    drv_opt3001_meas_start(&lux);
-    batt_sensor_meas_start();
+    sensors_start_measurements();
 }
 
 /**
@@ -56,6 +59,18 @@ static void sensors_apptimer_start(void)
     APP_ERROR_CHECK(err_code);
 }
 
+/**
+ * @brief Starts all sensor measurements!
+ */
+static void sensors_start_measurements(void)
+{
+    /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
+    drv_soilhum_meas_start();
+    drv_shtc3_meas_start();
+    drv_opt3001_meas_start();
+    batt_sensor_meas_start();
+}
+
 static void sensors_twi_mngr_init(void)
 {
     nrf_drv_twi_config_t twi_config = NRF_DRV_TWI_DEFAULT_CONFIG;
@@ -70,13 +85,15 @@ static void sensors_twi_mngr_init(void)
  */
 void sensors_init(void)
 {
-    drv_soilhum_init();
-    drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager);
-    drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager);
+    drv_soilhum_init(&soilhumidity);
+    drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager, &airtemp_raw, &airhum_raw);
+    drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager, &lux);
     batt_sensor_init(&battery_voltage_mv);
 
     sensors_twi_mngr_init();
     // Finally, start the periodic app timer
     sensors_apptimer_init();
     sensors_apptimer_start();
+    // Start an initial round of measurements
+    sensors_start_measurements();
 }

@@ -52,5 +52,5 @@ typedef union
     uint8_t raw[4];
 } opt3001_packet_t;
 
-void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr);
-void drv_opt3001_meas_start(uint32_t* lux_ptr);
+void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, uint32_t* lux_ptr);
+void drv_opt3001_meas_start(void);

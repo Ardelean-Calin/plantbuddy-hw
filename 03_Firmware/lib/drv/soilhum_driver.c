@@ -13,6 +13,9 @@
 // App timer used by this module
 APP_TIMER_DEF(m_soilhum_sm_timer);
 
+// Holds the measured frequency
+uint32_t* freqPointer;
+
 static const nrf_drv_timer_t m_timer0 = NRF_DRV_TIMER_INSTANCE(1);
 static nrf_ppi_channel_t     m_ppi_channel1;
 
@@ -30,9 +33,6 @@ static void drv_soilhum_timer_init(void);
 static void drv_soilhum_apptimer_handler(void* p_context)
 {
     UNUSED_PARAMETER(p_context);
-
-    // Holds the measured frequency
-    uint32_t* freqPointer = (uint32_t*)p_context;
 
     // The elapsed time is done! Disable 555 timer
     nrf_drv_gpiote_out_set(PIN_OUT_SOILHUM_ENABLE);
@@ -109,9 +109,12 @@ static void drv_soilhum_timer_init(void)
 
 /**
  * @brief Initializes the Soil Humidity driver.
+ * @param[in] freq Pointer to a memory location where the driver shall store the measurement result.
  */
-void drv_soilhum_init(void)
+void drv_soilhum_init(uint32_t* freq)
 {
+    freqPointer = freq;
+
     drv_soilhum_gpio_init();
     drv_soilhum_timer_init();
     drv_soilhum_cfg_ppi();
@@ -120,9 +123,8 @@ void drv_soilhum_init(void)
 
 /**
  * @brief Reads the soil humidity and puts the resulting value inside the given variable
- * @param[in] freq Pointer to a memory location where the driver shall store the measurement result.
  */
-void drv_soilhum_meas_start(uint32_t* freq)
+void drv_soilhum_meas_start(void)
 {
     ret_code_t err_code = NRF_SUCCESS;
 
@@ -130,6 +132,6 @@ void drv_soilhum_meas_start(uint32_t* freq)
     nrf_drv_timer_clear(&m_timer0);
     nrf_drv_gpiote_out_clear(PIN_OUT_SOILHUM_ENABLE);
     /* Start the app timer as well */
-    app_timer_start(m_soilhum_sm_timer, APP_TIMER_TICKS(MEAS_DURATION_MS), (void*)freq);
+    app_timer_start(m_soilhum_sm_timer, APP_TIMER_TICKS(MEAS_DURATION_MS), NULL);
     APP_ERROR_CHECK(err_code);
 }

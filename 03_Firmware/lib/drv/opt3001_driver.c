@@ -61,11 +61,13 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data)
 /**
  * @brief Initializes this module.
  * @param[in] twi_mngr_ptr Pointer to the global TWI Transaction Manager
+ * @param[in] lux_ptr Pointer to a memory location store for the lux value
  */
-void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr)
+void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, uint32_t* lux_ptr)
 {
-
     twi_mngr = twi_mngr_ptr;
+    luxPhys  = lux_ptr;
+
     drv_opt3001_apptimer_init(); // Init apptimer used for timing i2c transactions
 }
 
@@ -73,10 +75,8 @@ void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr)
  * @brief Starts measurement of the light intensity using OPT3001.
  * @param[in] twi_mngr_ptr Pointer to the global TWI Transaction Manager
  */
-void drv_opt3001_meas_start(uint32_t* lux_ptr)
+void drv_opt3001_meas_start(void)
 {
-    luxPhys = lux_ptr;
-
     nrf_twi_mngr_schedule(twi_mngr, &meas_start); // Writing to the configure register starts the operation
 
     app_timer_start(m_opt3001_apptimer, APP_TIMER_TICKS(OPT3001_CFG_CONVERSION_TIME_MS), NULL);
