@@ -25,7 +25,11 @@
                 "Clean",
                 "Build (Debug)"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "Flash SoftDevice",

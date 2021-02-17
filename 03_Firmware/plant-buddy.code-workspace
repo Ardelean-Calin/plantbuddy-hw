@@ -32,7 +32,9 @@
             "nrf_sdh.h": "c",
             "battery_sensor.h": "c",
             "nrf_drv_saadc.h": "c",
-            "app_error.h": "c"
+            "app_error.h": "c",
+            "ble_advertising.h": "c",
+            "ble_app.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

@@ -50,6 +50,7 @@
 
 #include "app_scheduler.h"
 #include "app_timer.h"
+#include "ble_app.h"
 #include "nrf.h"
 #include "nrf_delay.h"
 #include "nrf_drv_clock.h"
@@ -57,6 +58,7 @@
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_saadc.h"
 #include "nrf_error.h"
+#include "nrf_pwr_mgmt.h"
 #include "nrf_soc.h"
 #include "sensors.h"
 #include "status.h"
@@ -66,6 +68,24 @@
 // Scheduler settings
 #define SCHED_MAX_EVENT_DATA_SIZE MAX(sizeof(nrf_drv_saadc_evt_t), APP_TIMER_SCHED_EVENT_DATA_SIZE)
 #define SCHED_QUEUE_SIZE          10
+
+static void idle_state_handle(void);
+static void lfclk_init(void);
+static void ppi_init(void);
+static void power_management_init(void);
+
+/**
+ * @brief Function for handling the idle state (main loop).
+ *
+ * @details If there is no pending log operation, then sleep until next the next event occurs.
+ */
+static void idle_state_handle(void)
+{
+    // if (NRF_LOG_PROCESS() == false)
+    // {
+    nrf_pwr_mgmt_run();
+    // }
+}
 
 /**
  * @brief Function starting the internal LFCLK oscillator.
@@ -80,6 +100,16 @@ static void lfclk_init(void)
     APP_ERROR_CHECK(err_code);
 
     nrf_drv_clock_lfclk_request(NULL);
+}
+
+/**
+ * @brief Function for initializing power management.
+ */
+static void power_management_init(void)
+{
+    ret_code_t err_code;
+    err_code = nrf_pwr_mgmt_init();
+    APP_ERROR_CHECK(err_code);
 }
 
 /**
@@ -105,6 +135,8 @@ int main(void)
     // Initialize app timer module
     err_code = app_timer_init();
     APP_ERROR_CHECK(err_code);
+    // Initialize power manager
+    power_management_init();
 
     /* Initialize app scheduler */
     APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
@@ -121,10 +153,14 @@ int main(void)
 
     // Enable DC-DC converter for reduced power consumption!
     sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
+
+    // Start the BLE Interface
+    ble_app_init();
     while (1)
     {
         // App scheduler manages items in the queue
         app_sched_execute();
+        idle_state_handle();
     }
 }
 
