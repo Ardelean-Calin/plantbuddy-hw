@@ -59,6 +59,7 @@
                 "Rebuild (Debug)",
                 "Bootloader (Rebuild)",
                 "Mass Erase",
+                "Flash App",
                 "Flash SoftDevice",
                 "Flash Bootloader",
                 "Flash Bootloader Settings"
@@ -92,6 +93,14 @@
             "detail": "Flashes the Secure Bootloader Settings without erasing the memory first.",
             "type": "shell",
             "command": "openocd -f ${workspaceFolder}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceFolder}/secure_bootloader/_build/bootloader_setting.hex verify reset exit\"",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash App",
+            "dependsOn": "Build (Debug)",
+            "detail": "Flashes the Application Firmware",
+            "type": "shell",
+            "command": "openocd -f ${workspaceFolder}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceFolder}/_build/plant-buddy.hex verify reset exit\"",
             "problemMatcher": []
         },
         {
