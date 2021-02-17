@@ -147,4 +147,4 @@ SECTIONS
 } INSERT AFTER .text
 
 
-INCLUDE "nrf_common.ld"
+INCLUDE "../config/linker/nrf_common.ld"
