@@ -165,9 +165,12 @@ static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event)
 int main(void)
 {
     ret_code_t err_code;
+
+#ifndef DEBUG
     // Initialize the async SVCI interface to bootloader before any interrupts are enabled.
     err_code = ble_dfu_buttonless_async_svci_init();
     APP_ERROR_CHECK(err_code);
+#endif
 
     // Initialize low-frequency clock which will then be used by our software timer
     lfclk_init();

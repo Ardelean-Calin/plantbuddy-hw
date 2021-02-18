@@ -3,6 +3,8 @@
 #include "nrf_drv_gpiote.h"
 #include "pb_config.h"
 
+#define BLINK_EVERY_N_100ms 50
+
 APP_TIMER_DEF(m_periodic_timer_100ms); /**< Handler for repeated timer used to blink LEDs. */
 
 /* Static functions */
@@ -11,11 +13,15 @@ static void status_app_timer_init(void);
 static void status_app_timer_start(void);
 static void status_gpiote_init(void);
 
+static uint32_t invocation;
+
 static void status_app_timer_handler(void* p_context)
 {
     /* Toggle LEDs to indicate status. Runs in thread mode! */
-    nrf_drv_gpiote_out_toggle(PIN_OUT_LEDR);
-    nrf_drv_gpiote_out_toggle(PIN_OUT_LEDY);
+    if (invocation++ % BLINK_EVERY_N_100ms == 0)
+        nrf_drv_gpiote_out_set(PIN_OUT_LEDY);
+    else
+        nrf_drv_gpiote_out_clear(PIN_OUT_LEDY);
 }
 
 /**
@@ -57,7 +63,7 @@ static void status_gpiote_init(void)
 
     // TODO: This should not be here but in some separate "status.c" module
     nrf_drv_gpiote_out_config_t config1 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
-    nrf_drv_gpiote_out_config_t config2 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(true);
+    nrf_drv_gpiote_out_config_t config2 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
 
     // Configure output pins
     nrf_drv_gpiote_out_init(PIN_OUT_LEDY, &config1);
@@ -69,6 +75,7 @@ static void status_gpiote_init(void)
  */
 void status_init()
 {
+    invocation = 0;
     // Initialize GPIOTE for this module
     status_gpiote_init();
 
