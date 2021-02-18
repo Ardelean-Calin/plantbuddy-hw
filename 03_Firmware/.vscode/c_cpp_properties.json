@@ -26,7 +26,8 @@
                 "SOFTDEVICE_PRESENT",
                 "BL_SETTINGS_ACCESS_ONLY",
                 "NRF_DFU_SVCI_ENABLED",
-                "NRF_DFU_TRANSPORT_BLE=1"
+                "NRF_DFU_TRANSPORT_BLE=1",
+                "DEBUG"
             ],
             "compilerPath": "/bin/arm-none-eabi-gcc",
             "cStandard": "gnu17",
