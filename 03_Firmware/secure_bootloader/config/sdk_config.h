@@ -160,7 +160,7 @@
  
 
 #ifndef NRF_BL_DFU_ENTER_METHOD_BUTTONLESS
-#define NRF_BL_DFU_ENTER_METHOD_BUTTONLESS 0
+#define NRF_BL_DFU_ENTER_METHOD_BUTTONLESS 1
 #endif
 
 // </h> 
@@ -1160,7 +1160,7 @@
 
 // <s> NRF_DFU_BLE_ADV_NAME - Default advertising name.
 #ifndef NRF_DFU_BLE_ADV_NAME
-#define NRF_DFU_BLE_ADV_NAME "DfuTarg"
+#define NRF_DFU_BLE_ADV_NAME "FlivzNexxy-DFU"
 #endif
 
 // <o> NRF_DFU_BLE_ADV_INTERVAL - Advertising interval (in units of 0.625 ms) 
