@@ -142,7 +142,7 @@ int main(void)
     APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
     /* Initialize our different modules */
-    status_init();
+    // status_init();
     sensors_init();
 
     // Use the Scheduler and scheduler hooks to execute stuff on interrupts!
