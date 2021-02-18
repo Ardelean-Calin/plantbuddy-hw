@@ -34,7 +34,8 @@
             "nrf_drv_saadc.h": "c",
             "app_error.h": "c",
             "ble_advertising.h": "c",
-            "ble_app.h": "c"
+            "ble_app.h": "c",
+            "ble_app_config.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

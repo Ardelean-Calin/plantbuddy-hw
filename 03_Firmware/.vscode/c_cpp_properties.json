@@ -23,7 +23,10 @@
                 "NRFX_COREDEP_DELAY_US_LOOP_CYCLES=3",
                 "NRF_SD_BLE_API_VERSION=7",
                 "S112",
-                "SOFTDEVICE_PRESENT"
+                "SOFTDEVICE_PRESENT",
+                "BL_SETTINGS_ACCESS_ONLY",
+                "NRF_DFU_SVCI_ENABLED",
+                "NRF_DFU_TRANSPORT_BLE=1"
             ],
             "compilerPath": "/bin/arm-none-eabi-gcc",
             "cStandard": "gnu17",

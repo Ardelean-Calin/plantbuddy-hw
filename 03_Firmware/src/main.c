@@ -51,6 +51,7 @@
 #include "app_scheduler.h"
 #include "app_timer.h"
 #include "ble_app.h"
+#include "ble_dfu.h"
 #include "nrf.h"
 #include "nrf_delay.h"
 #include "nrf_drv_clock.h"
@@ -73,6 +74,12 @@ static void idle_state_handle(void);
 static void lfclk_init(void);
 static void ppi_init(void);
 static void power_management_init(void);
+static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event);
+
+/**
+ * @brief Register application shutdown handler with priority 0.
+ */
+NRF_PWR_MGMT_HANDLER_REGISTER(app_shutdown_handler, 0);
 
 /**
  * @brief Function for handling the idle state (main loop).
@@ -123,11 +130,45 @@ static void ppi_init(void)
 }
 
 /**
+ * @brief Power management handler.
+ */
+static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event)
+{
+    switch (event)
+    {
+    case NRF_PWR_MGMT_EVT_PREPARE_DFU:
+        // NRF_LOG_INFO("Power management wants to reset to DFU mode\r\n");
+        // Change this code to tailor to your reset strategy.
+        // Returning false here means that the device is not ready to jump to DFU mode yet.
+        //
+        // Here is an example using a variable to delay resetting the device:
+        // if (!m_ready_for_reset)
+        // {
+        //     return false;
+        // }
+        break;
+
+    default:
+        // Implement any of the other events available from the power management module:
+        //      -NRF_PWR_MGMT_EVT_PREPARE_SYSOFF
+        //      -NRF_PWR_MGMT_EVT_PREPARE_WAKEUP
+        //      -NRF_PWR_MGMT_EVT_PREPARE_RESET
+        return true;
+    }
+    // NRF_LOG_INFO("Power management allowed to reset to DFU mode\r\n");
+    return true;
+}
+
+/**
  * @brief Function for application main entry.
  */
 int main(void)
 {
     ret_code_t err_code;
+    // Initialize the async SVCI interface to bootloader before any interrupts are enabled.
+    err_code = ble_dfu_buttonless_async_svci_init();
+    APP_ERROR_CHECK(err_code);
+
     // Initialize low-frequency clock which will then be used by our software timer
     lfclk_init();
     // Initialize PPI
@@ -142,7 +183,7 @@ int main(void)
     APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
     /* Initialize our different modules */
-    // status_init();
+    status_init();
     sensors_init();
 
     // Use the Scheduler and scheduler hooks to execute stuff on interrupts!

@@ -10,6 +10,7 @@
 #include "ble_app_config.h"
 #include "ble_conn_params.h"
 #include "ble_conn_state.h"
+#include "ble_dfu.h"
 #include "ble_hci.h"
 #include "ble_srv_common.h"
 #include "fds.h"
@@ -150,7 +151,32 @@ static void on_yys_evt(ble_yy_service_t     * p_yy_service,
 }
 */
 
-/**@brief Function for initializing services that will be used by the application.
+/**
+ * @brief Event handler for the Buttonless DFU service! Can be used to do stuff on certain events
+ */
+static void ble_dfu_buttonless_evt_handler(ble_dfu_buttonless_evt_type_t event)
+{
+    switch (event)
+    {
+    case BLE_DFU_EVT_BOOTLOADER_ENTER_PREPARE:
+        // NRF_LOG_INFO("Device is preparing to enter bootloader mode\r\n");
+        break;
+
+    case BLE_DFU_EVT_BOOTLOADER_ENTER:
+        // NRF_LOG_INFO("Device will enter bootloader mode\r\n");
+        break;
+
+    case BLE_DFU_EVT_BOOTLOADER_ENTER_FAILED:
+        // NRF_LOG_ERROR("Device will enter bootloader mode\r\n");
+        break;
+    default:
+        // NRF_LOG_INFO("Unknown event from ble_dfu.\r\n");
+        break;
+    }
+}
+
+/**
+ * @brief Function for initializing services that will be used by the application.
  */
 static void services_init(void)
 {
@@ -161,6 +187,11 @@ static void services_init(void)
     qwr_init.error_handler = nrf_qwr_error_handler;
 
     err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
+    APP_ERROR_CHECK(err_code);
+
+    ble_dfu_buttonless_init_t dfus_init = {.evt_handler = ble_dfu_buttonless_evt_handler};
+
+    err_code = ble_dfu_buttonless_init(&dfus_init);
     APP_ERROR_CHECK(err_code);
 
     /* YOUR_JOB: Add code to initialize the services used by the application.
