@@ -11,6 +11,13 @@
             "problemMatcher": []
         },
         {
+            "label": "Build (Release)",
+            "detail": "Builds the PlantBuddy Hex with debug information.",
+            "type": "shell",
+            "command": "make -j4 RELEASE=1",
+            "problemMatcher": []
+        },
+        {
             "label": "Clean",
             "detail": "Removes all build artifacts.",
             "type": "shell",
@@ -30,6 +37,16 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Rebuild (Release)",
+            "detail": "Rebuilds the PlantBuddy Hex without debug information after running the 'Clean' task.",
+            "type": "shell",
+            "dependsOn": [
+                "Clean",
+                "Build (Release)"
+            ],
+            "problemMatcher": []
         },
         {
             "label": "Mass Erase",
@@ -56,7 +73,7 @@
             "label": "Reflash everything",
             "detail": "Flashes the Secure Bootloader and its settings, the S112 softdevice and our application.",
             "dependsOn": [
-                "Rebuild (Debug)",
+                "Rebuild (Release)",
                 "Bootloader (Rebuild)",
                 "Mass Erase",
                 "Flash App",
@@ -165,7 +182,7 @@
             "label": "Package DFU (App)",
             "detail": "Create DFU Package for Application",
             "type": "shell",
-            "dependsOn": "Build (Debug)",
+            "dependsOn": "Rebuild (Release)",
             "command": "nrfutil pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU.zip --sd-req 0x103",
             "problemMatcher": []
         },
