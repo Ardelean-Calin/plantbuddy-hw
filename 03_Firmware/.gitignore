@@ -3,4 +3,4 @@ _build/
 .vscode/.cortex-debug.registers.state.json
 secure_bootloader/private.key
 secure_bootloader/nrf52hf_armgcc/armgcc/micro_ecc_lib_nrf52.a
-PlantBuddy_DFU.zip
+PlantBuddy*_DFU.zip

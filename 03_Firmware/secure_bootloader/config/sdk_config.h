@@ -1069,7 +1069,7 @@
 // <i> the current app or SoftDevice without knowing the signature key.
 
 #ifndef NRF_DFU_SINGLE_BANK_APP_UPDATES
-#define NRF_DFU_SINGLE_BANK_APP_UPDATES 0
+#define NRF_DFU_SINGLE_BANK_APP_UPDATES 1
 #endif
 
 // </h> 

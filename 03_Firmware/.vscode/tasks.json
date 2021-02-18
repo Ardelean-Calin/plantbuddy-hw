@@ -131,17 +131,52 @@
                 "cwd": "${workspaceRoot}/secure_bootloader/"
             },
             "dependsOn": [
-                "uECC (Link Library)",
-                "Bootloader (Clean)"
+                "Bootloader (Clean)",
+                "uECC (Link Library)"
             ],
             "command": "make -j4",
             "problemMatcher": []
         },
         {
-            "label": "Package DFU",
-            "detail": "Create DFU Package",
+            "label": "Bootloader (Build)",
+            "detail": "Builds the OTA bootloader.",
             "type": "shell",
-            "command": "nrfutil pkg generate --hw-version 52 --application-version ${input:AppVersion} --application _build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_DFU.zip --sd-req 0x103",
+            "options": {
+                "cwd": "${workspaceRoot}/secure_bootloader/"
+            },
+            "dependsOn": [
+                "uECC (Link Library)"
+            ],
+            "command": "make -j4",
+            "problemMatcher": []
+        },
+        {
+            "label": "Merge Bootloader + Settings",
+            "detail": "Merge Bootloader and Bootloader settings Hex",
+            "dependsOn": [
+                "Bootloader (Build)",
+                "Build Bootloader Settings"
+            ],
+            "type": "shell",
+            "command": "mergehex --merge ${workspaceFolder}/secure_bootloader/_build/bootloader.hex ${workspaceFolder}/secure_bootloader/_build/bootloader_setting.hex --output ${workspaceRoot}/secure_bootloader/_build/bootloader-with-settings.hex",
+            "problemMatcher": []
+        },
+        {
+            "label": "Package DFU (App)",
+            "detail": "Create DFU Package for Application",
+            "type": "shell",
+            "command": "nrfutil pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU.zip --sd-req 0x103",
+            "problemMatcher": []
+        },
+        {
+            "label": "Package DFU (Bootloader)",
+            "detail": "Create DFU Package for Application and Bootloader",
+            "type": "shell",
+            "dependsOn": [
+                "Merge Bootloader + Settings",
+                "Package DFU (App)"
+            ],
+            "command": "nrfutil pkg generate --hw-version 52 --bootloader-version ${input:BootloaderVersion} --bootloader ./secure_bootloader/_build/bootloader-with-settings.hex --key-file secure_bootloader/private.key PlantBuddy_Bootloader_DFU.zip --sd-req 0x103",
             "problemMatcher": []
         },
     ],
@@ -150,6 +185,12 @@
             "id": "AppVersion",
             "type": "promptString",
             "description": "Application version (default: 1)",
+            "default": "1",
+        },
+        {
+            "id": "BootloaderVersion",
+            "type": "promptString",
+            "description": "Bootloader version (default: 1)",
             "default": "1",
         },
         {
