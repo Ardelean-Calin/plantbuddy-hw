@@ -70,6 +70,7 @@
 #define SCHED_MAX_EVENT_DATA_SIZE MAX(sizeof(nrf_drv_saadc_evt_t), APP_TIMER_SCHED_EVENT_DATA_SIZE)
 #define SCHED_QUEUE_SIZE          10
 
+static void app_softtimers_init(void);
 static void idle_state_handle(void);
 static void lfclk_init(void);
 static void ppi_init(void);
@@ -80,6 +81,16 @@ static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event);
  * @brief Register application shutdown handler with priority 0.
  */
 NRF_PWR_MGMT_HANDLER_REGISTER(app_shutdown_handler, 0);
+
+/**
+ * @brief Initialize the apptimer module.
+ */
+static void app_softtimers_init(void)
+{
+    ret_code_t err_code;
+    err_code = app_timer_init();
+    APP_ERROR_CHECK(err_code);
+}
 
 /**
  * @brief Function for handling the idle state (main loop).
@@ -177,8 +188,7 @@ int main(void)
     // Initialize PPI
     ppi_init();
     // Initialize app timer module
-    err_code = app_timer_init();
-    APP_ERROR_CHECK(err_code);
+    app_timer_init();
     // Initialize power manager
     power_management_init();
 

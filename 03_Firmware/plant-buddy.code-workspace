@@ -36,7 +36,8 @@
             "ble_advertising.h": "c",
             "ble_app.h": "c",
             "ble_app_config.h": "c",
-            "ble_srv_common.h": "c"
+            "ble_srv_common.h": "c",
+            "nrf_twi_mngr.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

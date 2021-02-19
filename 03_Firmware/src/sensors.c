@@ -1,6 +1,7 @@
 #include "sensors.h"
 #include "app_timer.h"
 #include "battery_sensor.h"
+#include "ble_cus.h"
 #include "nrf_drv_twi.h"
 #include "nrf_twi_mngr.h"
 #include "opt3001_driver.h"
@@ -8,13 +9,16 @@
 #include "shtc3_driver.h"
 #include "soilhum_driver.h"
 
+// TODO: This is really NOT the way to go. We need to define the characteristic here or something.
+extern ble_cus_t m_cus_pb;
+
 uint32_t soilhumidity;
 uint16_t airhum_raw;
 uint16_t airtemp_raw;
 uint32_t lux;
 uint16_t battery_voltage_mv;
 
-#define SENSORS_UPDATE_PERIOD_MS 1000 // We will call the different sensor update commands every this number of ms
+#define SENSORS_UPDATE_PERIOD_MS 2000 // We will call the different sensor update commands every this number of ms
 #define TWI_PENDING_TRANSACTIONS 3    // Size of TWI transactions queue
 
 APP_TIMER_DEF(m_sensors_periodic_timer);                      // App timer used by this module
@@ -33,6 +37,7 @@ static void sensors_twi_mngr_init(void);
 static void sensors_apptimer_handler(void* p_context)
 {
     sensors_start_measurements();
+    ble_cus_custom_value_update(&m_cus_pb, lux);
 }
 
 /**

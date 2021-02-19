@@ -19,6 +19,7 @@
 #include "nrf.h"
 #include "nrf_ble_gatt.h"
 #include "nrf_ble_qwr.h"
+#include "nrf_dfu_ble.h"
 #include "nrf_pwr_mgmt.h"
 #include "nrf_sdh.h"
 #include "nrf_sdh_ble.h"
@@ -32,14 +33,18 @@ BLE_ADVERTISING_DEF(m_advertising); /**< Advertising module instance. */
 
 static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID; /**< Handle of the current connection. */
 
-/* YOUR_JOB: Declare all services structure your application is using
+/* Declare all services structure your application is using
  *  BLE_XYZ_DEF(m_xyz);
  */
 BLE_CUS_DEF(m_cus_pb);
 
-// YOUR_JOB: Use UUIDs for service(s) used in your application.
+// Use UUIDs for service(s) used in your application.
 static ble_uuid_t m_adv_uuids[] = /**< Universally unique service identifiers. */
-    {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE}};
+    {
+        {BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE},
+        // {BLE_DFU_SERVICE_UUID, BLE_UUID_TYPE_BLE},
+        // {PB_SERVICE_UUID, BLE_UUID_TYPE_VENDOR_BEGIN},
+};
 
 static void advertising_start(bool erase_bonds);
 
@@ -70,9 +75,12 @@ static void pm_evt_handler(pm_evt_t const* p_evt)
 
     switch (p_evt->evt_id)
     {
-    case PM_EVT_PEERS_DELETE_SUCCEEDED: advertising_start(false); break;
+    case PM_EVT_PEERS_DELETE_SUCCEEDED:
+        advertising_start(false);
+        break;
 
-    default: break;
+    default:
+        break;
     }
 }
 
@@ -177,6 +185,43 @@ static void ble_dfu_buttonless_evt_handler(ble_dfu_buttonless_evt_type_t event)
     }
 }
 
+/**@brief Function for handling the Custom Service Service events.
+ *
+ * @details This function will be called for all Custom Service events which are passed to
+ *          the application.
+ *
+ * @param[in]   p_cus_service  Custom Service structure.
+ * @param[in]   p_evt          Event received from the Custom Service.
+ *
+ */
+static void on_cus_evt(ble_cus_t* p_cus_service, ble_cus_evt_t* p_evt)
+{
+    ret_code_t err_code;
+
+    switch (p_evt->evt_type)
+    {
+    case BLE_CUS_EVT_NOTIFICATION_ENABLED:
+
+        APP_ERROR_CHECK(err_code);
+        break;
+
+    case BLE_CUS_EVT_NOTIFICATION_DISABLED:
+
+        APP_ERROR_CHECK(err_code);
+        break;
+
+    case BLE_CUS_EVT_CONNECTED:
+        break;
+
+    case BLE_CUS_EVT_DISCONNECTED:
+        break;
+
+    default:
+        // No implementation needed.
+        break;
+    }
+}
+
 /**
  * @brief Function for initializing services that will be used by the application.
  */
@@ -197,6 +242,10 @@ static void services_init(void)
     err_code = ble_dfu_buttonless_init(&dfus_init);
     APP_ERROR_CHECK(err_code);
 
+    // Initialize CUS Service init structure to zero.
+    cus_init.evt_handler = on_cus_evt;
+
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.cccd_write_perm);
     BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.read_perm);
     BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.write_perm);
     err_code = ble_cus_init(&m_cus_pb, &cus_init);
@@ -317,9 +366,12 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
         APP_ERROR_CHECK(err_code);
         break;
 
-    case BLE_ADV_EVT_IDLE: sleep_mode_enter(); break;
+    case BLE_ADV_EVT_IDLE:
+        sleep_mode_enter();
+        break;
 
-    default: break;
+    default:
+        break;
     }
 }
 
@@ -460,11 +512,11 @@ static void advertising_init(void)
 
     memset(&init, 0, sizeof(init));
 
-    init.advdata.name_type               = BLE_ADVDATA_FULL_NAME;
-    init.advdata.include_appearance      = true;
-    init.advdata.flags                   = BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE;
-    init.advdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
-    init.advdata.uuids_complete.p_uuids  = m_adv_uuids;
+    init.advdata.name_type              = BLE_ADVDATA_FULL_NAME;
+    init.advdata.flags                  = BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE;
+    init.srdata.include_appearance      = true;
+    init.srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
+    init.srdata.uuids_complete.p_uuids  = m_adv_uuids;
 
     init.config.ble_adv_fast_enabled  = true;
     init.config.ble_adv_fast_interval = APP_ADV_INTERVAL;

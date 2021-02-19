@@ -55,7 +55,8 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data)
     UNUSED_PARAMETER(p_user_data);
 
     // Calculate the physical lux value from the raw one
-    *luxPhys = (uint32_t)((1 << opt3001_meas_result.exponent) * opt3001_meas_result.reading) / 100;
+    *luxPhys =
+        (uint32_t)((uint32_t)(1 << opt3001_meas_result.exponent) * (uint32_t)(opt3001_meas_result.reading)) / 100;
 }
 
 /**
