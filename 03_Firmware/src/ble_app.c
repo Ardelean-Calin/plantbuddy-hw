@@ -10,6 +10,7 @@
 #include "ble_app_config.h"
 #include "ble_conn_params.h"
 #include "ble_conn_state.h"
+#include "ble_cus.h"
 #include "ble_dfu.h"
 #include "ble_hci.h"
 #include "ble_srv_common.h"
@@ -34,6 +35,7 @@ static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID; /**< Handle of the curr
 /* YOUR_JOB: Declare all services structure your application is using
  *  BLE_XYZ_DEF(m_xyz);
  */
+BLE_CUS_DEF(m_cus_pb);
 
 // YOUR_JOB: Use UUIDs for service(s) used in your application.
 static ble_uuid_t m_adv_uuids[] = /**< Universally unique service identifiers. */
@@ -182,6 +184,7 @@ static void services_init(void)
 {
     ret_code_t         err_code;
     nrf_ble_qwr_init_t qwr_init = {0};
+    ble_cus_init_t     cus_init = {0};
 
     // Initialize Queued Write Module.
     qwr_init.error_handler = nrf_qwr_error_handler;
@@ -194,6 +197,10 @@ static void services_init(void)
     err_code = ble_dfu_buttonless_init(&dfus_init);
     APP_ERROR_CHECK(err_code);
 
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.read_perm);
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.write_perm);
+    err_code = ble_cus_init(&m_cus_pb, &cus_init);
+    APP_ERROR_CHECK(err_code);
     /* YOUR_JOB: Add code to initialize the services used by the application.
        ble_xxs_init_t                     xxs_init;
        ble_yys_init_t                     yys_init;
@@ -503,8 +510,8 @@ void ble_app_init(void)
     ble_stack_init();
     gap_params_init();
     gatt_init();
-    advertising_init();
     services_init();
+    advertising_init();
     conn_params_init();
     peer_manager_init();
 

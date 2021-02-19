@@ -18,6 +18,7 @@ SRC_FILES += \
   $(PROJ_DIR)/src/main.c \
   $(PROJ_DIR)/src/sensors.c \
   $(PROJ_DIR)/src/status.c \
+  $(PROJ_DIR)/src/custom_services/ble_cus.c \
   $(SDK_ROOT)/components/ble/ble_advertising/ble_advertising.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_dfu/ble_dfu_unbonded.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_dfu/ble_dfu.c \
@@ -101,6 +102,7 @@ SRC_FILES += \
 INC_FOLDERS += \
   $(PROJ_DIR)/config \
   $(PROJ_DIR)/inc \
+  $(PROJ_DIR)/src/custom_services \
   $(PROJ_DIR)/lib/drv/inc \
   $(SDK_ROOT)/components \
   $(SDK_ROOT)/components/ble/ble_advertising \
