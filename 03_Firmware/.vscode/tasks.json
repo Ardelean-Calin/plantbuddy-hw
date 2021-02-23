@@ -183,7 +183,7 @@
             "detail": "Create DFU Package for Application",
             "type": "shell",
             "dependsOn": "Rebuild (Release)",
-            "command": "nrfutil pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU.zip --sd-req 0x103",
+            "command": "nrfutil pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU_v${input:AppVersion}.zip --sd-req 0x103",
             "problemMatcher": []
         },
         {
