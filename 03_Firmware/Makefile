@@ -10,15 +10,15 @@ $(OUTPUT_DIRECTORY)/plant-buddy.out: \
 
 # Source files common to all targets
 SRC_FILES += \
-  $(PROJ_DIR)/lib/drv/opt3001_driver.c \
-  $(PROJ_DIR)/lib/drv/shtc3_driver.c \
-  $(PROJ_DIR)/lib/drv/soilhum_driver.c \
-  $(PROJ_DIR)/src/battery_sensor.c \
-  $(PROJ_DIR)/src/ble_app.c \
+  $(PROJ_DIR)/src/ble/ble_app.c \
+  $(PROJ_DIR)/src/ble/custom_services/ble_cus.c \
+  $(PROJ_DIR)/src/drivers/battery/battery_sensor.c \
+  $(PROJ_DIR)/src/drivers/opt3001/opt3001_driver.c \
+  $(PROJ_DIR)/src/drivers/shtc3/shtc3_driver.c \
+  $(PROJ_DIR)/src/drivers/soilhum/soilhum_driver.c \
   $(PROJ_DIR)/src/main.c \
-  $(PROJ_DIR)/src/sensors.c \
-  $(PROJ_DIR)/src/status.c \
-  $(PROJ_DIR)/src/custom_services/ble_cus.c \
+  $(PROJ_DIR)/src/modules/sensors.c \
+  $(PROJ_DIR)/src/modules/status.c \
   $(SDK_ROOT)/components/ble/ble_advertising/ble_advertising.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_dfu/ble_dfu_unbonded.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_dfu/ble_dfu.c \
@@ -102,8 +102,14 @@ SRC_FILES += \
 INC_FOLDERS += \
   $(PROJ_DIR)/config \
   $(PROJ_DIR)/inc \
-  $(PROJ_DIR)/src/custom_services \
-  $(PROJ_DIR)/lib/drv/inc \
+  $(PROJ_DIR)/src/ble \
+  $(PROJ_DIR)/src/ble/custom_characteristics \
+  $(PROJ_DIR)/src/ble/custom_services \
+  $(PROJ_DIR)/src/drivers \
+  $(PROJ_DIR)/src/drivers/battery \
+  $(PROJ_DIR)/src/drivers/opt3001 \
+  $(PROJ_DIR)/src/drivers/shtc3 \
+  $(PROJ_DIR)/src/drivers/soilhum \
   $(SDK_ROOT)/components \
   $(SDK_ROOT)/components/ble/ble_advertising \
   $(SDK_ROOT)/components/ble/ble_dtm \
@@ -139,9 +145,9 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/libraries/atomic_fifo \
   $(SDK_ROOT)/components/libraries/atomic_flags \
   $(SDK_ROOT)/components/libraries/balloc \
+  $(SDK_ROOT)/components/libraries/bootloader \
   $(SDK_ROOT)/components/libraries/bootloader/ble_dfu \
   $(SDK_ROOT)/components/libraries/bootloader/dfu \
-  $(SDK_ROOT)/components/libraries/bootloader \
   $(SDK_ROOT)/components/libraries/button \
   $(SDK_ROOT)/components/libraries/cli \
   $(SDK_ROOT)/components/libraries/crc16 \
