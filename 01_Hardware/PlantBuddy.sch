@@ -1206,4 +1206,6 @@ Wire Bus Line
 	2150 4500 2600 4500
 Wire Bus Line
 	2150 4500 2150 5825
+Text Notes 7550 6350 0    50   ~ 0
+TODO: Muta reset btn-ul mai sus, altfel nu il pot\naccesa din cauza pamantului
 $EndSCHEMATC
