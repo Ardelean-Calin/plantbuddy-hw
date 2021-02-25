@@ -10,7 +10,7 @@
 #include "ble_app_config.h"
 #include "ble_conn_params.h"
 #include "ble_conn_state.h"
-#include "ble_cus.h"
+#include "ble_cus_pb.h"
 #include "ble_dfu.h"
 #include "ble_hci.h"
 #include "ble_srv_common.h"
@@ -36,7 +36,7 @@ static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID; /**< Handle of the curr
 /* Declare all services structure your application is using
  *  BLE_XYZ_DEF(m_xyz);
  */
-BLE_CUS_DEF(m_cus_pb);
+BLE_CUS_PB_DEF(m_cus_pb);
 
 // Use UUIDs for service(s) used in your application.
 static ble_uuid_t m_adv_uuids[] = /**< Universally unique service identifiers. */
@@ -169,18 +169,14 @@ static void ble_dfu_buttonless_evt_handler(ble_dfu_buttonless_evt_type_t event)
     switch (event)
     {
     case BLE_DFU_EVT_BOOTLOADER_ENTER_PREPARE:
-        // NRF_LOG_INFO("Device is preparing to enter bootloader mode\r\n");
         break;
 
     case BLE_DFU_EVT_BOOTLOADER_ENTER:
-        // NRF_LOG_INFO("Device will enter bootloader mode\r\n");
         break;
 
     case BLE_DFU_EVT_BOOTLOADER_ENTER_FAILED:
-        // NRF_LOG_ERROR("Device will enter bootloader mode\r\n");
         break;
     default:
-        // NRF_LOG_INFO("Unknown event from ble_dfu.\r\n");
         break;
     }
 }
@@ -194,26 +190,26 @@ static void ble_dfu_buttonless_evt_handler(ble_dfu_buttonless_evt_type_t event)
  * @param[in]   p_evt          Event received from the Custom Service.
  *
  */
-static void on_cus_evt(ble_cus_t* p_cus_service, ble_cus_evt_t* p_evt)
+static void on_cus_evt(ble_cus_pb_t* p_cus_service, ble_cus_pb_evt_t* p_evt)
 {
     ret_code_t err_code;
 
     switch (p_evt->evt_type)
     {
-    case BLE_CUS_EVT_NOTIFICATION_ENABLED:
+    case BLE_CUS_PB_EVT_NOTIFICATION_ENABLED:
 
         APP_ERROR_CHECK(err_code);
         break;
 
-    case BLE_CUS_EVT_NOTIFICATION_DISABLED:
+    case BLE_CUS_PB_EVT_NOTIFICATION_DISABLED:
 
         APP_ERROR_CHECK(err_code);
         break;
 
-    case BLE_CUS_EVT_CONNECTED:
+    case BLE_CUS_PB_EVT_CONNECTED:
         break;
 
-    case BLE_CUS_EVT_DISCONNECTED:
+    case BLE_CUS_PB_EVT_DISCONNECTED:
         break;
 
     default:
@@ -229,7 +225,7 @@ static void services_init(void)
 {
     ret_code_t         err_code;
     nrf_ble_qwr_init_t qwr_init = {0};
-    ble_cus_init_t     cus_init = {0};
+    ble_cus_pb_init_t  cus_init = {0};
 
     // Initialize Queued Write Module.
     qwr_init.error_handler = nrf_qwr_error_handler;
@@ -245,10 +241,7 @@ static void services_init(void)
     // Initialize CUS Service init structure to zero.
     cus_init.evt_handler = on_cus_evt;
 
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.char_lflux_attr_md.cccd_write_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.char_lflux_attr_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&cus_init.char_lflux_attr_md.write_perm);
-    err_code = ble_cus_init(&m_cus_pb, &cus_init);
+    err_code = ble_cus_pb_init(&m_cus_pb, &cus_init);
     APP_ERROR_CHECK(err_code);
     /* YOUR_JOB: Add code to initialize the services used by the application.
        ble_xxs_init_t                     xxs_init;
@@ -362,8 +355,6 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     switch (ble_adv_evt)
     {
     case BLE_ADV_EVT_FAST:
-        // NRF_LOG_INFO("Fast advertising.");
-        APP_ERROR_CHECK(err_code);
         break;
 
     case BLE_ADV_EVT_IDLE:
@@ -387,12 +378,10 @@ static void ble_evt_handler(ble_evt_t const* p_ble_evt, void* p_context)
     switch (p_ble_evt->header.evt_id)
     {
     case BLE_GAP_EVT_DISCONNECTED:
-        // NRF_LOG_INFO("Disconnected.");
         // LED indication will be changed when advertising starts.
         break;
 
     case BLE_GAP_EVT_CONNECTED:
-        // NRF_LOG_INFO("Connected.");
         APP_ERROR_CHECK(err_code);
         m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
         err_code      = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
@@ -401,7 +390,6 @@ static void ble_evt_handler(ble_evt_t const* p_ble_evt, void* p_context)
 
     case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
     {
-        // NRF_LOG_DEBUG("PHY update request.");
         ble_gap_phys_t const phys = {
             .rx_phys = BLE_GAP_PHY_AUTO,
             .tx_phys = BLE_GAP_PHY_AUTO,
@@ -413,7 +401,6 @@ static void ble_evt_handler(ble_evt_t const* p_ble_evt, void* p_context)
 
     case BLE_GATTC_EVT_TIMEOUT:
         // Disconnect on GATT Client timeout event.
-        // NRF_LOG_DEBUG("GATT Client Timeout.");
         err_code =
             sd_ble_gap_disconnect(p_ble_evt->evt.gattc_evt.conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
         APP_ERROR_CHECK(err_code);
@@ -421,7 +408,6 @@ static void ble_evt_handler(ble_evt_t const* p_ble_evt, void* p_context)
 
     case BLE_GATTS_EVT_TIMEOUT:
         // Disconnect on GATT Server timeout event.
-        // NRF_LOG_DEBUG("GATT Server Timeout.");
         err_code =
             sd_ble_gap_disconnect(p_ble_evt->evt.gatts_evt.conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
         APP_ERROR_CHECK(err_code);
@@ -497,8 +483,6 @@ static void delete_bonds(void)
 {
     ret_code_t err_code;
 
-    // NRF_LOG_INFO("Erase bonds!");
-
     err_code = pm_peers_delete();
     APP_ERROR_CHECK(err_code);
 }
@@ -562,13 +546,12 @@ void ble_app_init(void)
     ble_stack_init();
     gap_params_init();
     gatt_init();
+
     services_init();
     advertising_init();
+
     conn_params_init();
     peer_manager_init();
-
-    // Start execution.
-    // NRF_LOG_INFO("Template example started.");
 
     advertising_start(erase_bonds);
     tx_power_set();

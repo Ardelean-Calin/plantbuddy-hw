@@ -2,6 +2,10 @@
     "folders": [
         {
             "path": "."
+        },
+        {
+            "name": "plant-buddy @ 84c706d",
+            "uri": "gitlens://84c706d/home/calin/Projects/plant-buddy?{\"path\":\"/home/calin/Projects/plant-buddy\",\"ref\":\"84c706d59d382343ab634da08c165369443e4f79\",\"repoPath\":\"/home/calin/Projects/plant-buddy\"}"
         }
     ],
     "settings": {
@@ -39,7 +43,8 @@
             "ble_srv_common.h": "c",
             "nrf_twi_mngr.h": "c",
             "ble_gattc.h": "c",
-            "char_lflux.h": "c"
+            "char_lflux.h": "c",
+            "ble_cus.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

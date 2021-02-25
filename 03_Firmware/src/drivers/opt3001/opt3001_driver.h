@@ -2,6 +2,7 @@
 
 #include "nrf_twi_mngr.h"
 #include "opt3001.h"
+#include "opt3001_types.h"
 
 #define OPT3001_CFG_CONVERSION_TIME    OPT3001_800MS
 #define OPT3001_CFG_CONVERSION_TIME_MS (OPT3001_CFG_CONVERSION_TIME == OPT3001_800MS ? 880 : 110)
@@ -41,16 +42,6 @@
         OPT3001_READ(&CONCAT_2(transfer_name, _reg_addr), p_buffer, 2), \
     }
 /* Helper macros END */
-
-typedef union
-{
-    struct
-    {
-        uint32_t address : 8;
-        uint32_t config : 16;
-    };
-    uint8_t raw[4];
-} opt3001_packet_t;
 
 void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, uint32_t* lux_ptr);
 void drv_opt3001_meas_start(void);

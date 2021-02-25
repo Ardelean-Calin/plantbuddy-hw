@@ -1,6 +1,7 @@
 #include "opt3001_driver.h"
 #include "app_timer.h"
 #include "nrf_twi_mngr.h"
+#include "opt3001_types.h"
 
 /* App timer definition */
 APP_TIMER_DEF(m_opt3001_apptimer);
@@ -13,7 +14,7 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data);
 /* Static and constant variables */
 static nrf_twi_mngr_t*  twi_mngr;
 static OPT3001_result_t opt3001_meas_result;
-static uint32_t*        luxPhys;
+static luminous_flux_t* luxPhys;
 
 /* TWI Transaction definitions */
 // Measurement start transaction
@@ -56,7 +57,8 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data)
 
     // Calculate the physical lux value from the raw one
     *luxPhys =
-        (uint32_t)((uint32_t)(1 << opt3001_meas_result.exponent) * (uint32_t)(opt3001_meas_result.reading)) / 100;
+        (luminous_flux_t)((uint32_t)(1 << opt3001_meas_result.exponent) * (uint32_t)(opt3001_meas_result.reading)) /
+        100;
 }
 
 /**
@@ -64,7 +66,7 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data)
  * @param[in] twi_mngr_ptr Pointer to the global TWI Transaction Manager
  * @param[in] lux_ptr Pointer to a memory location store for the lux value
  */
-void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, uint32_t* lux_ptr)
+void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, luminous_flux_t* lux_ptr)
 {
     twi_mngr = twi_mngr_ptr;
     luxPhys  = lux_ptr;

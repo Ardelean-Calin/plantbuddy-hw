@@ -1,6 +1,7 @@
-#include "ble_cus.h"
+#include "ble_cus_pb.h"
 #include "ble_srv_common.h"
-#include "char_lflux.h"
+#include "char_lumflux.h"
+#include "nrf_error.h"
 #include "sdk_common.h"
 #include <string.h>
 
@@ -9,13 +10,13 @@
  * @param[in]   p_cus       Custom Service structure.
  * @param[in]   p_ble_evt   Event received from the BLE stack.
  */
-static void on_connect(ble_cus_t* p_cus, ble_evt_t const* p_ble_evt)
+static void on_connect(ble_cus_pb_t* p_cus, ble_evt_t const* p_ble_evt)
 {
     p_cus->conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
 
-    ble_cus_evt_t evt;
+    ble_cus_pb_evt_t evt;
 
-    evt.evt_type = BLE_CUS_EVT_CONNECTED;
+    evt.evt_type = BLE_CUS_PB_EVT_CONNECTED;
 
     p_cus->evt_handler(p_cus, &evt);
 }
@@ -25,14 +26,14 @@ static void on_connect(ble_cus_t* p_cus, ble_evt_t const* p_ble_evt)
  * @param[in]   p_cus       Custom Service structure.
  * @param[in]   p_ble_evt   Event received from the BLE stack.
  */
-static void on_disconnect(ble_cus_t* p_cus, ble_evt_t const* p_ble_evt)
+static void on_disconnect(ble_cus_pb_t* p_cus, ble_evt_t const* p_ble_evt)
 {
     UNUSED_PARAMETER(p_ble_evt);
     p_cus->conn_handle = BLE_CONN_HANDLE_INVALID;
 
-    ble_cus_evt_t evt;
+    ble_cus_pb_evt_t evt;
 
-    evt.evt_type = BLE_CUS_EVT_DISCONNECTED;
+    evt.evt_type = BLE_CUS_PB_EVT_DISCONNECTED;
 
     p_cus->evt_handler(p_cus, &evt);
 }
@@ -42,31 +43,31 @@ static void on_disconnect(ble_cus_t* p_cus, ble_evt_t const* p_ble_evt)
  * @param[in]   p_cus       Custom Service structure.
  * @param[in]   p_ble_evt   Event received from the BLE stack.
  */
-static void on_write(ble_cus_t* p_cus, ble_evt_t const* p_ble_evt)
+static void on_write(ble_cus_pb_t* p_cus, ble_evt_t const* p_ble_evt)
 {
     ble_gatts_evt_write_t const* p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
 
     // Custom Value Characteristic Written to.
-    if (p_evt_write->handle == p_cus->char_lflux_handles.value_handle)
+    if (p_evt_write->handle == p_cus->char_lumflux_handle.value_handle)
     {
         // Do nothing
     }
 
     // Check if the Custom value CCCD is written to and that the value is the appropriate length, i.e 2 bytes.
-    // if ((p_evt_write->handle == p_cus->char_lflux_handles.cccd_handle) && (p_evt_write->len == 2))
+    // if ((p_evt_write->handle == p_cus->char_lumflux_handle.cccd_handle) && (p_evt_write->len == 2))
     // {
     //     // CCCD written, call application event handler
     //     if (p_cus->evt_handler != NULL)
     //     {
-    //         ble_cus_evt_t evt;
+    //         ble_cus_pb_evt_t evt;
 
     //         if (ble_srv_is_notification_enabled(p_evt_write->data))
     //         {
-    //             evt.evt_type = BLE_CUS_EVT_NOTIFICATION_ENABLED;
+    //             evt.evt_type = BLE_CUS_PB_EVT_NOTIFICATION_ENABLED;
     //         }
     //         else
     //         {
-    //             evt.evt_type = BLE_CUS_EVT_NOTIFICATION_DISABLED;
+    //             evt.evt_type = BLE_CUS_PB_EVT_NOTIFICATION_DISABLED;
     //         }
     //         // Call the application event handler.
     //         p_cus->evt_handler(p_cus, &evt);
@@ -74,9 +75,9 @@ static void on_write(ble_cus_t* p_cus, ble_evt_t const* p_ble_evt)
     // }
 }
 
-void ble_cus_on_ble_evt(ble_evt_t const* p_ble_evt, void* p_context)
+void ble_cus_pb_on_ble_evt(ble_evt_t const* p_ble_evt, void* p_context)
 {
-    ble_cus_t* p_cus = (ble_cus_t*)p_context;
+    ble_cus_pb_t* p_cus = (ble_cus_pb_t*)p_context;
 
     // NRF_LOG_INFO("BLE event received. Event type = %d\r\n", p_ble_evt->header.evt_id);
     if (p_cus == NULL || p_ble_evt == NULL)
@@ -108,15 +109,15 @@ void ble_cus_on_ble_evt(ble_evt_t const* p_ble_evt, void* p_context)
     }
 }
 
-uint32_t ble_cus_init(ble_cus_t* p_cus, const ble_cus_init_t* p_cus_init)
+uint32_t ble_cus_pb_init(ble_cus_pb_t* p_cus, const ble_cus_pb_init_t* p_cus_init)
 {
     if (p_cus == NULL || p_cus_init == NULL)
     {
         return NRF_ERROR_NULL;
     }
 
-    uint32_t   err_code;
-    ble_uuid_t ble_uuid;
+    volatile uint32_t err_code;
+    ble_uuid_t        ble_uuid;
 
     // Initialize service structure
     p_cus->evt_handler = p_cus_init->evt_handler;
@@ -138,5 +139,8 @@ uint32_t ble_cus_init(ble_cus_t* p_cus, const ble_cus_init_t* p_cus_init)
     }
 
     // Add Custom Value characteristic
-    return char_lflux_add_to_service(p_cus, p_cus_init);
+    err_code = char_lumflux_add_to_service(p_cus);
+    VERIFY_SUCCESS(err_code);
+
+    return err_code;
 }
