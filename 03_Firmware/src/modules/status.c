@@ -3,7 +3,11 @@
 #include "nrf_drv_gpiote.h"
 #include "pb_config.h"
 
+#ifndef DEBUG
 #define BLINK_EVERY_N_100ms 50
+#else
+#define BLINK_EVERY_N_100ms 2
+#endif
 
 APP_TIMER_DEF(m_periodic_timer_100ms); /**< Handler for repeated timer used to blink LEDs. */
 

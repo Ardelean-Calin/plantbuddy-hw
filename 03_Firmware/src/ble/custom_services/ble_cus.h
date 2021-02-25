@@ -56,19 +56,18 @@ typedef void (*ble_cus_evt_handler_t)(ble_cus_t* p_bas, ble_cus_evt_t* p_evt);
 typedef struct
 {
     ble_cus_evt_handler_t evt_handler; /**< Event handler to be called for handling events in the Custom Service. */
-    uint8_t               initial_custom_value; /**< Initial custom value */
-    ble_srv_cccd_security_mode_t
-        custom_value_char_attr_md; /**< Initial security level for Custom characteristics attribute */
+    uint8_t               initial_custom_value;      /**< Initial custom value */
+    ble_srv_cccd_security_mode_t char_lflux_attr_md; /**< Initial security level for Custom characteristics attribute */
 } ble_cus_init_t;
 
 /**@brief Custom Service structure. This contains various status information for the service. */
 struct ble_cus_s
 {
     ble_cus_evt_handler_t    evt_handler; /**< Event handler to be called for handling events in the Custom Service. */
-    uint16_t                 service_handle;       /**< Handle of Custom Service (as provided by the BLE stack). */
-    ble_gatts_char_handles_t custom_value_handles; /**< Handles related to the Custom Value characteristic. */
-    uint16_t                 conn_handle; /**< Handle of the current connection (as provided by the BLE stack, is
-                                             BLE_CONN_HANDLE_INVALID if not in a connection). */
+    uint16_t                 service_handle;     /**< Handle of Custom Service (as provided by the BLE stack). */
+    ble_gatts_char_handles_t char_lflux_handles; /**< Handles related to the Luminous Flux characteristic. */
+    uint16_t                 conn_handle;        /**< Handle of the current connection (as provided by the BLE stack, is
+                                                    BLE_CONN_HANDLE_INVALID if not in a connection). */
     uint8_t uuid_type;
 };
 
@@ -93,18 +92,3 @@ uint32_t ble_cus_init(ble_cus_t* p_cus, const ble_cus_init_t* p_cus_init);
  * @param[in]   p_ble_evt  Event received from the BLE stack.
  */
 void ble_cus_on_ble_evt(ble_evt_t const* p_ble_evt, void* p_context);
-
-/**@brief Function for updating the custom value.
- *
- * @details The application calls this function when the cutom value should be updated. If
- *          notification has been enabled, the custom value characteristic is sent to the client.
- *
- * @note
- *
- * @param[in]   p_bas          Custom Service structure.
- * @param[in]   Custom value
- *
- * @return      NRF_SUCCESS on success, otherwise an error code.
- */
-
-uint32_t ble_cus_custom_value_update(ble_cus_t* p_cus, uint32_t custom_value);

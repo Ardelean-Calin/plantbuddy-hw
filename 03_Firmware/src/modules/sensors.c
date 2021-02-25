@@ -2,6 +2,7 @@
 #include "app_timer.h"
 #include "battery_sensor.h"
 #include "ble_cus.h"
+#include "char_lflux.h"
 #include "nrf_drv_twi.h"
 #include "nrf_twi_mngr.h"
 #include "opt3001_driver.h"
@@ -37,7 +38,7 @@ static void sensors_twi_mngr_init(void);
 static void sensors_apptimer_handler(void* p_context)
 {
     sensors_start_measurements();
-    ble_cus_custom_value_update(&m_cus_pb, lux);
+    char_lflux_update(&m_cus_pb, lux);
 }
 
 /**

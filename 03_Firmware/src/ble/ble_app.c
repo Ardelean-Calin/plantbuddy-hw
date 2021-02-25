@@ -245,9 +245,9 @@ static void services_init(void)
     // Initialize CUS Service init structure to zero.
     cus_init.evt_handler = on_cus_evt;
 
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.cccd_write_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&cus_init.custom_value_char_attr_md.write_perm);
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.char_lflux_attr_md.cccd_write_perm);
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.char_lflux_attr_md.read_perm);
+    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&cus_init.char_lflux_attr_md.write_perm);
     err_code = ble_cus_init(&m_cus_pb, &cus_init);
     APP_ERROR_CHECK(err_code);
     /* YOUR_JOB: Add code to initialize the services used by the application.
