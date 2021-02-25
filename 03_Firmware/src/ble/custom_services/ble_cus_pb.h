@@ -4,11 +4,7 @@
 #include "ble_srv_common.h"
 #include <stdbool.h>
 #include <stdint.h>
-
-#include "ble.h"
-#include "ble_srv_common.h"
-#include <stdbool.h>
-#include <stdint.h>
+#include <string.h>
 
 /**@brief   Macro for defining a ble_hrs instance.
  *
@@ -29,6 +25,7 @@
 
 #define CUSTOM_SERVICE_UUID 0x1400
 #define LUM_FLUX_CHAR_UUID  0x1401
+#define SOIL_HUM_CHAR_UUID  0x1402
 
 /**@brief Custom Service event type. */
 typedef enum
@@ -56,9 +53,6 @@ typedef void (*ble_cus_pb_evt_handler_t)(ble_cus_pb_t* p_bas, ble_cus_pb_evt_t* 
 typedef struct
 {
     ble_cus_pb_evt_handler_t evt_handler; /**< Event handler to be called for handling events in the Custom Service. */
-    uint8_t                  initial_custom_value; /**< Initial custom value */
-    ble_srv_cccd_security_mode_t
-        char_lumflux_sec_mode; /**< Initial security level for Custom characteristics attribute */
 } ble_cus_pb_init_t;
 
 /**@brief Custom Service structure. This contains various status information for the service. */
@@ -70,6 +64,7 @@ struct ble_cus_pb_s
     uint16_t                 conn_handle;    /**< Handle of the current connection (as provided by the BLE stack, is
                                                 BLE_CONN_HANDLE_INVALID if not in a connection). */
     ble_gatts_char_handles_t char_lumflux_handle; /**< Handle of the Luminous Flux characteristic. */
+    ble_gatts_char_handles_t char_soilhum_handle; /**< Handle of the Soil humidity characteristic. */
 };
 
 /**@brief Function for initializing the Custom Service.

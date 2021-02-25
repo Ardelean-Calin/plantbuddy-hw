@@ -1,9 +1,11 @@
-#include "ble_cus_pb.h"
 #include "ble_srv_common.h"
-#include "char_lumflux.h"
 #include "nrf_error.h"
 #include "sdk_common.h"
 #include <string.h>
+
+#include "ble_cus_pb.h"
+#include "char_lumflux.h"
+#include "char_soilhum.h"
 
 /**@brief Function for handling the Connect event.
  *
@@ -138,8 +140,12 @@ uint32_t ble_cus_pb_init(ble_cus_pb_t* p_cus, const ble_cus_pb_init_t* p_cus_ini
         return err_code;
     }
 
-    // Add Custom Value characteristic
+    // Add Luminous Flux characteristic
     err_code = char_lumflux_add_to_service(p_cus);
+    VERIFY_SUCCESS(err_code);
+
+    // Add Soil Humidity characteristic
+    err_code = char_soilhum_add_to_service(p_cus);
     VERIFY_SUCCESS(err_code);
 
     return err_code;

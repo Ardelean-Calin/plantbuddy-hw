@@ -3,6 +3,7 @@
 #include "battery_sensor.h"
 #include "ble_cus_pb.h"
 #include "char_lumflux.h"
+#include "char_soilhum.h"
 #include "nrf_drv_twi.h"
 #include "nrf_twi_mngr.h"
 #include "opt3001_driver.h"
@@ -13,7 +14,7 @@
 // TODO: This is really NOT the way to go. We need to define the characteristic here or something.
 extern ble_cus_pb_t m_cus_pb;
 
-uint32_t        soilhumidity;
+soilhum_t       soilhumidity;
 uint16_t        airhum_raw;
 uint16_t        airtemp_raw;
 luminous_flux_t lux;
@@ -39,6 +40,7 @@ static void sensors_apptimer_handler(void* p_context)
 {
     sensors_start_measurements();
     char_lumflux_update(&m_cus_pb, lux);
+    char_soilhum_update(&m_cus_pb, soilhumidity);
 }
 
 /**

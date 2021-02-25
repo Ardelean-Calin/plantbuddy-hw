@@ -44,7 +44,9 @@
             "nrf_twi_mngr.h": "c",
             "ble_gattc.h": "c",
             "char_lflux.h": "c",
-            "ble_cus.h": "c"
+            "ble_cus.h": "c",
+            "ble_cus_pb.h": "c",
+            "char_lumflux.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,
