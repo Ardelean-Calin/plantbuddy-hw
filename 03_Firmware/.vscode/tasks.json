@@ -7,14 +7,14 @@
             "label": "Build (Debug)",
             "detail": "Builds the PlantBuddy Hex with debug information.",
             "type": "shell",
-            "command": "make -j4 DEBUG=1",
+            "command": "make -j6 DEBUG=1",
             "problemMatcher": []
         },
         {
             "label": "Build (Release)",
             "detail": "Builds the PlantBuddy Hex with debug information.",
             "type": "shell",
-            "command": "make -j4 RELEASE=1",
+            "command": "make -j6 RELEASE=1",
             "problemMatcher": []
         },
         {
@@ -127,7 +127,7 @@
             "options": {
                 "cwd": "${workspaceRoot}/secure_bootloader/nrf52hf_armgcc/armgcc/"
             },
-            "command": "make -j4",
+            "command": "make -j6",
             "problemMatcher": []
         },
         {
@@ -151,7 +151,7 @@
                 "Bootloader (Clean)",
                 "uECC (Link Library)"
             ],
-            "command": "make -j4",
+            "command": "make -j6",
             "problemMatcher": []
         },
         {
@@ -164,7 +164,7 @@
             "dependsOn": [
                 "uECC (Link Library)"
             ],
-            "command": "make -j4",
+            "command": "make -j6",
             "problemMatcher": []
         },
         {
