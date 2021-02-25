@@ -21,8 +21,8 @@ nrf_twi_mngr_transfer_t const shtc3_transfer_startmeas[] = {
 
 /* Locally-used, static variables */
 static nrf_twi_mngr_t* m_twi_manager_ptr;
-static uint16_t*       shtc3_temp_ptr;
-static uint16_t*       shtc3_hum_ptr;
+static airtemp_t*      shtc3_temp_ptr;
+static airhum_t*       shtc3_hum_ptr;
 static uint8_t         shtc3_read_buffer[6];
 
 /* Locally-used, static functions */
@@ -87,7 +87,7 @@ static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
  * @param[out] temperature Pointer to a memory location in which to store the read temperature.
  * @param[out] humidity Pointer to a memory location in which to store the read humidity.
  */
-void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr, uint16_t* temperature, uint16_t* humidity)
+void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr, airtemp_t* temperature, airhum_t* humidity)
 {
     m_twi_manager_ptr = twi_mngr_ptr;
     shtc3_temp_ptr    = temperature;

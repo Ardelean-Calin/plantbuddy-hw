@@ -14,6 +14,8 @@ SRC_FILES += \
   $(PROJ_DIR)/src/ble/custom_services/ble_cus_pb.c \
   $(PROJ_DIR)/src/ble/custom_characteristics/char_lumflux.c \
   $(PROJ_DIR)/src/ble/custom_characteristics/char_soilhum.c \
+  $(PROJ_DIR)/src/ble/custom_characteristics/char_airtemp.c \
+  $(PROJ_DIR)/src/ble/custom_characteristics/char_airhum.c \
   $(PROJ_DIR)/src/drivers/battery/battery_sensor.c \
   $(PROJ_DIR)/src/drivers/opt3001/opt3001_driver.c \
   $(PROJ_DIR)/src/drivers/shtc3/shtc3_driver.c \

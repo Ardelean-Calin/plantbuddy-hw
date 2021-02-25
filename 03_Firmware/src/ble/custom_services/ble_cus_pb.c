@@ -4,6 +4,8 @@
 #include <string.h>
 
 #include "ble_cus_pb.h"
+#include "char_airhum.h"
+#include "char_airtemp.h"
 #include "char_lumflux.h"
 #include "char_soilhum.h"
 
@@ -146,6 +148,14 @@ uint32_t ble_cus_pb_init(ble_cus_pb_t* p_cus, const ble_cus_pb_init_t* p_cus_ini
 
     // Add Soil Humidity characteristic
     err_code = char_soilhum_add_to_service(p_cus);
+    VERIFY_SUCCESS(err_code);
+
+    // Add Air Temperature characteristic
+    err_code = char_airtemp_add_to_service(p_cus);
+    VERIFY_SUCCESS(err_code);
+
+    // Add Air Humidity characteristic
+    err_code = char_airhum_add_to_service(p_cus);
     VERIFY_SUCCESS(err_code);
 
     return err_code;

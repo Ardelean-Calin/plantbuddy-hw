@@ -46,7 +46,9 @@
             "char_lflux.h": "c",
             "ble_cus.h": "c",
             "ble_cus_pb.h": "c",
-            "char_lumflux.h": "c"
+            "char_lumflux.h": "c",
+            "char_airtemp.h": "c",
+            "char_airhum.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

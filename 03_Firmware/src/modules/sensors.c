@@ -1,22 +1,28 @@
-#include "sensors.h"
+/* Nordic-specific includes */
 #include "app_timer.h"
-#include "battery_sensor.h"
-#include "ble_cus_pb.h"
-#include "char_lumflux.h"
-#include "char_soilhum.h"
 #include "nrf_drv_twi.h"
 #include "nrf_twi_mngr.h"
+/* Drivers */
+#include "battery_sensor.h"
 #include "opt3001_driver.h"
-#include "pb_config.h"
 #include "shtc3_driver.h"
 #include "soilhum_driver.h"
+/* BLE Characteristics */
+#include "char_airhum.h"
+#include "char_airtemp.h"
+#include "char_lumflux.h"
+#include "char_soilhum.h"
+/* Other includes */
+#include "ble_cus_pb.h"
+#include "pb_config.h"
+#include "sensors.h"
 
 // TODO: This is really NOT the way to go. We need to define the characteristic here or something.
 extern ble_cus_pb_t m_cus_pb;
 
 soilhum_t       soilhumidity;
-uint16_t        airhum_raw;
-uint16_t        airtemp_raw;
+airhum_t        airhum_raw;
+airtemp_t       airtemp_raw;
 luminous_flux_t lux;
 uint16_t        battery_voltage_mv;
 
@@ -41,6 +47,8 @@ static void sensors_apptimer_handler(void* p_context)
     sensors_start_measurements();
     char_lumflux_update(&m_cus_pb, lux);
     char_soilhum_update(&m_cus_pb, soilhumidity);
+    char_airtemp_update(&m_cus_pb, airtemp_raw);
+    char_airhum_update(&m_cus_pb, airhum_raw);
 }
 
 /**

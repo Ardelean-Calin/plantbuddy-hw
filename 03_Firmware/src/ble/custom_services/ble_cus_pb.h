@@ -26,6 +26,8 @@
 #define CUSTOM_SERVICE_UUID 0x1400
 #define LUM_FLUX_CHAR_UUID  0x1401
 #define SOIL_HUM_CHAR_UUID  0x1402
+#define AIRTEMP_CHAR_UUID   0x1403
+#define AIRHUM_CHAR_UUID    0x1404
 
 /**@brief Custom Service event type. */
 typedef enum
@@ -64,7 +66,9 @@ struct ble_cus_pb_s
     uint16_t                 conn_handle;    /**< Handle of the current connection (as provided by the BLE stack, is
                                                 BLE_CONN_HANDLE_INVALID if not in a connection). */
     ble_gatts_char_handles_t char_lumflux_handle; /**< Handle of the Luminous Flux characteristic. */
-    ble_gatts_char_handles_t char_soilhum_handle; /**< Handle of the Soil humidity characteristic. */
+    ble_gatts_char_handles_t char_soilhum_handle; /**< Handle of the Soil Humidity characteristic. */
+    ble_gatts_char_handles_t char_airtemp_handle; /**< Handle of the Air Temperature characteristic. */
+    ble_gatts_char_handles_t char_airhum_handle;  /**< Handle of the Air Humidity characteristic. */
 };
 
 /**@brief Function for initializing the Custom Service.

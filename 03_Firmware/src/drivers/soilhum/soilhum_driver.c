@@ -14,7 +14,7 @@
 APP_TIMER_DEF(m_soilhum_sm_timer);
 
 // Holds the measured frequency
-uint32_t* freqPointer;
+soilhum_t* freqPointer;
 
 static const nrf_drv_timer_t m_timer0 = NRF_DRV_TIMER_INSTANCE(1);
 static nrf_ppi_channel_t     m_ppi_channel1;
@@ -111,7 +111,7 @@ static void drv_soilhum_timer_init(void)
  * @brief Initializes the Soil Humidity driver.
  * @param[in] freq Pointer to a memory location where the driver shall store the measurement result.
  */
-void drv_soilhum_init(uint32_t* freq)
+void drv_soilhum_init(soilhum_t* freq)
 {
     freqPointer = freq;
 
