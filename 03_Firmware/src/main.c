@@ -199,12 +199,6 @@ int main(void)
     status_init();
     sensors_init();
 
-    // Use the Scheduler and scheduler hooks to execute stuff on interrupts!
-    // https://devzone.nordicsemi.com/nordic/short-range-guides/b/software-development-kit/posts/scheduler-tutorial
-
-    // BLE Characteristics tutorial:
-    // https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
-
     // Enable DC-DC converter for reduced power consumption!
     sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
 
@@ -217,7 +211,3 @@ int main(void)
         idle_state_handle();
     }
 }
-
-/**
- *@}
- **/
