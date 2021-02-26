@@ -41,7 +41,9 @@
     static nrf_twi_mngr_transfer_t const transfer_name[]                    = {            \
         OPT3001_READ(&CONCAT_2(transfer_name, _reg_addr), p_buffer, 2), \
     }
+
+#define OPT3001_EXP_EXTRACT(byte) ((byte & OPT3001_EXP_MASK) >> 4)
 /* Helper macros END */
 
-void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, uint32_t* lux_ptr);
+void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, luminous_flux_t* lux_ptr);
 void drv_opt3001_meas_start(void);

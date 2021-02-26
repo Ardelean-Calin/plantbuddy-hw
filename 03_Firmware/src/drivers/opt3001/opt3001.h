@@ -2,7 +2,9 @@
 
 #include <stdint.h>
 
-#define OPT3001_ADDR 0x44
+#define OPT3001_ADDR      0x44
+#define OPT3001_EXP_MASK  0xF0
+#define OPT3001_READ_MASK 0xFFF
 
 /**
  * Register addresses of the sensor.
@@ -137,12 +139,7 @@ typedef union
  * The same result format is used when setting the upper or lower level limits
  * of the sensor.
  */
-typedef union
+typedef struct
 {
-    struct
-    {
-        uint16_t exponent : 4;
-        uint16_t reading : 12;
-    };
-    uint16_t raw;
+    uint8_t raw[2];
 } OPT3001_result_t;

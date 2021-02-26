@@ -14,16 +14,16 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data);
 /* Static and constant variables */
 static nrf_twi_mngr_t*  twi_mngr;
 static OPT3001_result_t opt3001_meas_result;
-static luminous_flux_t* luxPhys;
+static luminous_flux_t* lux_phys;
 
 /* TWI Transaction definitions */
 // Measurement start transaction
-OTP3001_WRITE_TRANSFER_DEF(OPT3001_CONFIG, 0x00CA, meas_start_transfer); // Single-shot, 800ms conversion time
-OPT3001_TRANSACTION_DEF(meas_start, meas_start_transfer, NULL);
+OTP3001_WRITE_TRANSFER_DEF(OPT3001_CONFIG, 0x00CA, tr_meas_start_transfer); // Single-shot, 800ms conversion time
+OPT3001_TRANSACTION_DEF(meas_start, tr_meas_start_transfer, NULL);
 
 // Data extraction transaction (after measurement is done)
-OTP3001_READ_TRANSFER_DEF(OPT3001_RESULT, &opt3001_meas_result, data_extract_trans);
-OPT3001_TRANSACTION_DEF(data_extract, data_extract_trans, drv_opt3001_meas_done_cb);
+OTP3001_READ_TRANSFER_DEF(OPT3001_RESULT, (uint8_t*)&opt3001_meas_result, tr_data_extract_trans);
+OPT3001_TRANSACTION_DEF(data_extract, tr_data_extract_trans, drv_opt3001_meas_done_cb);
 /* TWI Transaction definitions END */
 
 /**
@@ -56,9 +56,9 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data)
     UNUSED_PARAMETER(p_user_data);
 
     // Calculate the physical lux value from the raw one
-    *luxPhys =
-        (luminous_flux_t)((uint32_t)(1 << opt3001_meas_result.exponent) * (uint32_t)(opt3001_meas_result.reading)) /
-        100;
+    uint32_t exponent = 1 << OPT3001_EXP_EXTRACT(opt3001_meas_result.raw[0]);
+    uint32_t reading  = ((opt3001_meas_result.raw[0] << 8) + opt3001_meas_result.raw[1]) & OPT3001_READ_MASK;
+    *lux_phys         = (luminous_flux_t)((reading * exponent) / 100);
 }
 
 /**
@@ -69,7 +69,7 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data)
 void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, luminous_flux_t* lux_ptr)
 {
     twi_mngr = twi_mngr_ptr;
-    luxPhys  = lux_ptr;
+    lux_phys = lux_ptr;
 
     drv_opt3001_apptimer_init(); // Init apptimer used for timing i2c transactions
 }
