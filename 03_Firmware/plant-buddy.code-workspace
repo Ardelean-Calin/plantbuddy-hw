@@ -44,7 +44,9 @@
             "ble_cus_pb.h": "c",
             "char_lumflux.h": "c",
             "char_airtemp.h": "c",
-            "char_airhum.h": "c"
+            "char_airhum.h": "c",
+            "char_pb_sensors.h": "c",
+            "app_util_platform.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

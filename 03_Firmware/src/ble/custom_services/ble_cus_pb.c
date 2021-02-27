@@ -4,10 +4,7 @@
 #include <string.h>
 
 #include "ble_cus_pb.h"
-#include "char_airhum.h"
-#include "char_airtemp.h"
-#include "char_lumflux.h"
-#include "char_soilhum.h"
+#include "char_pb_sensors.h"
 
 /**@brief Function for handling the Connect event.
  *
@@ -107,6 +104,10 @@ void ble_cus_pb_on_ble_evt(ble_evt_t const* p_ble_evt, void* p_context)
                     NRF_LOG_INFO("EXCHANGE_MTU_REQUEST event received.\r\n");
                     break;
         */
+    case BLE_GATTS_EVT_RW_AUTHORIZE_REQUEST:
+        // TODO: Here we can do stuff on read, like feed a timeout timer
+        __NOP();
+        break;
     default:
         // No implementation needed.
         break;
@@ -142,20 +143,8 @@ uint32_t ble_cus_pb_init(ble_cus_pb_t* p_cus, const ble_cus_pb_init_t* p_cus_ini
         return err_code;
     }
 
-    // Add Luminous Flux characteristic
-    err_code = char_lumflux_add_to_service(p_cus);
-    VERIFY_SUCCESS(err_code);
-
-    // Add Soil Humidity characteristic
-    err_code = char_soilhum_add_to_service(p_cus);
-    VERIFY_SUCCESS(err_code);
-
-    // Add Air Temperature characteristic
-    err_code = char_airtemp_add_to_service(p_cus);
-    VERIFY_SUCCESS(err_code);
-
-    // Add Air Humidity characteristic
-    err_code = char_airhum_add_to_service(p_cus);
+    // Add Sensor data characteristic
+    err_code = char_pb_sensors_add_to_service(p_cus);
     VERIFY_SUCCESS(err_code);
 
     return err_code;
