@@ -40,7 +40,7 @@ Connection ~ 1900 1700
 Wire Wire Line
 	1675 1700 1900 1700
 $Comp
-L power:GND #PWR06
+L PlantBuddy-rescue:GND-power #PWR06
 U 1 1 5F7A256D
 P 1675 1900
 F 0 "#PWR06" H 1675 1650 50  0001 C CNN
@@ -91,7 +91,7 @@ Wire Wire Line
 Text Label 10175 900  0    50   ~ 0
 SWCLK
 $Comp
-L power:GND #PWR040
+L PlantBuddy-rescue:GND-power #PWR040
 U 1 1 5F81A7B8
 P 10450 1100
 F 0 "#PWR040" H 10450 850 50  0001 C CNN
@@ -102,7 +102,7 @@ F 3 "" H 10450 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR09
+L PlantBuddy-rescue:GND-power #PWR09
 U 1 1 5F89441F
 P 2700 2500
 F 0 "#PWR09" H 2700 2250 50  0001 C CNN
@@ -113,7 +113,7 @@ F 3 "" H 2700 2500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+BATT #PWR010
+L PlantBuddy-rescue:+BATT-power #PWR010
 U 1 1 5F85BEB5
 P 1375 5625
 F 0 "#PWR010" H 1375 5475 50  0001 C CNN
@@ -124,7 +124,7 @@ F 3 "" H 1375 5625 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR038
+L PlantBuddy-rescue:GND-power #PWR038
 U 1 1 5F8EDD3C
 P 5150 2375
 F 0 "#PWR038" H 5150 2125 50  0001 C CNN
@@ -137,7 +137,7 @@ $EndComp
 Wire Wire Line
 	10400 4400 10400 4325
 $Comp
-L power:GND #PWR019
+L PlantBuddy-rescue:GND-power #PWR019
 U 1 1 5F8E4C67
 P 6575 5125
 F 0 "#PWR019" H 6575 4875 50  0001 C CNN
@@ -171,7 +171,7 @@ Wire Wire Line
 Wire Wire Line
 	7975 4900 8100 4900
 $Comp
-L power:GND #PWR024
+L PlantBuddy-rescue:GND-power #PWR024
 U 1 1 5F9806CE
 P 7875 5100
 F 0 "#PWR024" H 7875 4850 50  0001 C CNN
@@ -205,7 +205,7 @@ SDA
 Text Label 2050 5825 2    50   ~ 0
 SCL
 $Comp
-L power:GND #PWR0101
+L PlantBuddy-rescue:GND-power #PWR0101
 U 1 1 5FBEAB3C
 P 1375 6325
 F 0 "#PWR0101" H 1375 6075 50  0001 C CNN
@@ -222,7 +222,7 @@ Wire Wire Line
 Text Notes 2050 6650 2    50   ~ 0
 0 to 83865 Lux Light sensor
 $Comp
-L power:+BATT #PWR0102
+L PlantBuddy-rescue:+BATT-power #PWR0102
 U 1 1 5FC30EFA
 P 625 1625
 F 0 "#PWR0102" H 625 1475 50  0001 C CNN
@@ -234,7 +234,7 @@ F 3 "" H 625 1625 50  0001 C CNN
 $EndComp
 Connection ~ 625  1625
 $Comp
-L power:GND #PWR026
+L PlantBuddy-rescue:GND-power #PWR026
 U 1 1 5F7A91A0
 P 1375 4800
 F 0 "#PWR026" H 1375 4550 50  0001 C CNN
@@ -253,7 +253,7 @@ Wire Wire Line
 Wire Wire Line
 	2700 4050 2450 4050
 $Comp
-L power:+BATT #PWR0105
+L PlantBuddy-rescue:+BATT-power #PWR0105
 U 1 1 5FC54A7F
 P 3725 7025
 F 0 "#PWR0105" H 3725 6875 50  0001 C CNN
@@ -264,7 +264,7 @@ F 3 "" H 3725 7025 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR0106
+L PlantBuddy-rescue:GND-power #PWR0106
 U 1 1 5FC54E7E
 P 3725 7325
 F 0 "#PWR0106" H 3725 7075 50  0001 C CNN
@@ -275,7 +275,7 @@ F 3 "" H 3725 7325 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+BATT #PWR0107
+L PlantBuddy-rescue:+BATT-power #PWR0107
 U 1 1 5FC5A54D
 P 2450 4050
 F 0 "#PWR0107" H 2450 3900 50  0001 C CNN
@@ -287,7 +287,7 @@ F 3 "" H 2450 4050 50  0001 C CNN
 $EndComp
 Connection ~ 2450 4050
 $Comp
-L power:+BATT #PWR0108
+L PlantBuddy-rescue:+BATT-power #PWR0108
 U 1 1 5FC5ABA5
 P 1375 4200
 F 0 "#PWR0108" H 1375 4050 50  0001 C CNN
@@ -298,7 +298,7 @@ F 3 "" H 1375 4200 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:+BATT #PWR0109
+L PlantBuddy-rescue:+BATT-power #PWR0109
 U 1 1 5FC5B8EB
 P 10450 800
 F 0 "#PWR0109" H 10450 650 50  0001 C CNN
@@ -311,7 +311,7 @@ $EndComp
 Text Notes 10000 1675 0    50   ~ 0
 TODO:\nPut it in such a way that\n it is small and hidden\nWe will need to build \na programming rig for it!
 $Comp
-L power:+BATT #PWR0110
+L PlantBuddy-rescue:+BATT-power #PWR0110
 U 1 1 5FC6607C
 P 7850 1600
 F 0 "#PWR0110" H 7850 1450 50  0001 C CNN
@@ -395,7 +395,7 @@ Wire Wire Line
 Text Notes 2825 7700 0    50   ~ 0
 Reverse-voltage protection
 $Comp
-L power:GND #PWR0111
+L PlantBuddy-rescue:GND-power #PWR0111
 U 1 1 5FC9D7EF
 P 8950 5675
 F 0 "#PWR0111" H 8950 5425 50  0001 C CNN
@@ -410,7 +410,7 @@ Wire Wire Line
 Wire Wire Line
 	8425 5675 8275 5675
 $Comp
-L power:+BATT #PWR0112
+L PlantBuddy-rescue:+BATT-power #PWR0112
 U 1 1 5FCBCC7F
 P 8275 5475
 F 0 "#PWR0112" H 8275 5325 50  0001 C CNN
@@ -435,7 +435,7 @@ Connection ~ 1375 6325
 Text Notes 9825 5225 0    50   ~ 0
 Yellow status LED => short blinks\nto notify user of different actions
 $Comp
-L Device:R_Small R1
+L PlantBuddy-rescue:R_Small-Device R1
 U 1 1 5FCB6EA2
 P 8275 5575
 F 0 "R1" H 8125 5625 50  0000 L CNN
@@ -447,7 +447,7 @@ F 4 "C25744" H 8275 5575 50  0001 C CNN "LCSC"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Switch:SW_Push SW2
+L PlantBuddy-rescue:SW_Push-Switch SW2
 U 1 1 5FC9C6CC
 P 8625 5675
 F 0 "SW2" H 8575 5525 50  0000 C CNN
@@ -459,7 +459,7 @@ F 4 "C388883" H 8625 5675 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Q_NMOS_GSD Q2
+L PlantBuddy-rescue:Q_NMOS_GSD-Device Q2
 U 1 1 5FC7486C
 P 3350 7225
 F 0 "Q2" V 3599 7225 50  0000 C CNN
@@ -471,7 +471,7 @@ F 4 "C20917" V 3350 7225 50  0001 C CNN "LCSC"
 	0    -1   1    0   
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x01 J3
+L PlantBuddy-rescue:Conn_01x01-Connector_Generic J3
 U 1 1 5FC6BCF8
 P 3250 4725
 F 0 "J3" H 3225 4550 50  0000 L CNN
@@ -482,7 +482,7 @@ F 3 "~" H 3250 4725 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x01 J2
+L PlantBuddy-rescue:Conn_01x01-Connector_Generic J2
 U 1 1 5FC6B510
 P 3250 4625
 F 0 "J2" H 3225 4825 50  0000 L CNN
@@ -493,7 +493,7 @@ F 3 "~" H 3250 4625 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C3
+L PlantBuddy-rescue:C_Small-Device C3
 U 1 1 5FC58638
 P 975 5925
 F 0 "C3" H 825 6025 50  0000 L CNN
@@ -505,7 +505,7 @@ F 4 "C1525" H 975 5925 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Sensor_Humidity:SHTC3 U6
+L PlantBuddy-rescue:SHTC3-Sensor_Humidity U6
 U 1 1 5FC00783
 P 1475 4500
 F 0 "U6" H 1719 4546 50  0000 L CNN
@@ -517,7 +517,7 @@ F 4 "C194656" H 1475 4500 50  0001 C CNN "LCSC"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C16
+L PlantBuddy-rescue:C_Small-Device C16
 U 1 1 5FC9C991
 P 7350 1700
 F 0 "C16" H 7442 1746 50  0000 L CNN
@@ -529,7 +529,7 @@ F 4 "C52923" H 7350 1700 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C5
+L PlantBuddy-rescue:C_Small-Device C5
 U 1 1 5FC9BF20
 P 6650 1975
 F 0 "C5" H 6742 2021 50  0000 L CNN
@@ -541,7 +541,7 @@ F 4 "C1525" H 6650 1975 50  0001 C CNN "LCSC"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Device:L_Small L4
+L PlantBuddy-rescue:L_Small-Device L4
 U 1 1 5FC85C22
 P 7350 1975
 F 0 "L4" V 7535 1975 50  0000 C CNN
@@ -553,7 +553,7 @@ F 4 "C1046" V 7350 1975 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Battery_Cell BT1
+L PlantBuddy-rescue:Battery_Cell-Device BT1
 U 1 1 5FC5077F
 P 2875 7225
 F 0 "BT1" H 2993 7321 50  0000 L CNN
@@ -566,7 +566,7 @@ F 5 "CR2032-BS-6-1" H 2875 7225 50  0001 C CNN "MFR"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R15
+L PlantBuddy-rescue:R_Small-Device R15
 U 1 1 5F7AB23C
 P 2700 4200
 F 0 "R15" H 2759 4246 50  0000 L CNN
@@ -578,7 +578,7 @@ F 4 "C25744" H 2700 4200 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R14
+L PlantBuddy-rescue:R_Small-Device R14
 U 1 1 5F7AA80B
 P 2450 4200
 F 0 "R14" H 2509 4246 50  0000 L CNN
@@ -590,7 +590,7 @@ F 4 "C25744" H 2450 4200 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C12
+L PlantBuddy-rescue:C_Small-Device C12
 U 1 1 5F9CA7B8
 P 7850 1700
 F 0 "C12" H 7975 1750 50  0000 L CNN
@@ -602,7 +602,7 @@ F 4 "C1525" H 7850 1700 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C13
+L PlantBuddy-rescue:C_Small-Device C13
 U 1 1 5F96F76E
 P 7650 5000
 F 0 "C13" H 7559 4954 50  0000 R CNN
@@ -614,7 +614,7 @@ F 4 "C1547" H 7650 5000 50  0001 C CNN "LCSC"
 	1    0    0    1   
 $EndComp
 $Comp
-L Device:C_Small C14
+L PlantBuddy-rescue:C_Small-Device C14
 U 1 1 5F96F125
 P 8100 5000
 F 0 "C14" H 8008 4954 50  0000 R CNN
@@ -626,7 +626,7 @@ F 4 "C1547" H 8100 5000 50  0001 C CNN "LCSC"
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:Crystal_Small Y2
+L PlantBuddy-rescue:Crystal_Small-Device Y2
 U 1 1 5F96EABD
 P 7875 4900
 F 0 "Y2" H 7875 5125 50  0000 C CNN
@@ -638,7 +638,7 @@ F 4 "C32346" H 7875 4900 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C11
+L PlantBuddy-rescue:C_Small-Device C11
 U 1 1 5F8E6679
 P 6825 5025
 F 0 "C11" H 6733 4979 50  0000 R CNN
@@ -650,7 +650,7 @@ F 4 "C1547" H 6825 5025 50  0001 C CNN "LCSC"
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:C_Small C6
+L PlantBuddy-rescue:C_Small-Device C6
 U 1 1 5F8E556C
 P 6325 5025
 F 0 "C6" H 6234 4979 50  0000 R CNN
@@ -662,7 +662,7 @@ F 4 "C1547" H 6325 5025 50  0001 C CNN "LCSC"
 	1    0    0    1   
 $EndComp
 $Comp
-L Device:R_Small R16
+L PlantBuddy-rescue:R_Small-Device R16
 U 1 1 5F86CA65
 P 10400 4500
 F 0 "R16" V 10204 4500 50  0000 C CNN
@@ -674,7 +674,7 @@ F 4 "C11702" V 10400 4500 50  0001 C CNN "LCSC"
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:LED_Small D2
+L PlantBuddy-rescue:LED_Small-Device D2
 U 1 1 5F86A474
 P 10400 4700
 F 0 "D2" V 10446 4630 50  0000 R CNN
@@ -686,7 +686,7 @@ F 4 "C2286" V 10400 4700 50  0001 C CNN "LCSC"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Device:C_Small C2
+L PlantBuddy-rescue:C_Small-Device C2
 U 1 1 5F8CAA05
 P 1775 2300
 F 0 "C2" H 1900 2375 50  0000 L CNN
@@ -698,7 +698,7 @@ F 4 "C1525" H 1775 2300 50  0001 C CNN "LCSC"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R12
+L PlantBuddy-rescue:R_Small-Device R12
 U 1 1 5F89EE4B
 P 6000 3575
 F 0 "R12" H 6059 3621 50  0000 L CNN
@@ -710,7 +710,7 @@ F 4 "C25744" H 6000 3575 50  0001 C CNN "LCSC"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C10
+L PlantBuddy-rescue:C_Small-Device C10
 U 1 1 5F89342A
 P 8275 1700
 F 0 "C10" H 8400 1750 50  0000 L CNN
@@ -722,7 +722,7 @@ F 4 "C1525" H 8275 1700 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Antenna_Shield AE1
+L PlantBuddy-rescue:Antenna_Shield-Device AE1
 U 1 1 5F7B40C5
 P 5250 2175
 F 0 "AE1" H 5394 2214 50  0000 L CNN
@@ -733,7 +733,7 @@ F 3 "~" H 5250 2275 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R2
+L PlantBuddy-rescue:R_Small-Device R2
 U 1 1 5F7A2C9F
 P 625 1775
 F 0 "R2" H 684 1821 50  0000 L CNN
@@ -745,7 +745,7 @@ F 4 "C25744" H 625 1775 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:AO3401A Q1
+L PlantBuddy-rescue:AO3401A-Transistor_FET Q1
 U 1 1 5F79FD2D
 P 1025 1725
 F 0 "Q1" V 1367 1725 50  0000 C CNN
@@ -757,7 +757,7 @@ F 4 "C15127" V 1025 1725 50  0001 C CNN "LCSC"
 	0    1    -1   0   
 $EndComp
 $Comp
-L Device:C_Small C4
+L PlantBuddy-rescue:C_Small-Device C4
 U 1 1 5F7A2F2A
 P 3975 2400
 F 0 "C4" H 4067 2446 50  0000 L CNN
@@ -768,7 +768,7 @@ F 3 "~" H 3975 2400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C1
+L PlantBuddy-rescue:C_Small-Device C1
 U 1 1 5F7A1B63
 P 1675 1800
 F 0 "C1" H 1525 1875 50  0000 L CNN
@@ -780,7 +780,7 @@ F 4 "C1525" H 1675 1800 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R8
+L PlantBuddy-rescue:R_Small-Device R8
 U 1 1 5F79A78D
 P 3675 2000
 F 0 "R8" H 3734 2046 50  0000 L CNN
@@ -792,7 +792,7 @@ F 4 "C25744" H 3675 2000 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R9
+L PlantBuddy-rescue:R_Small-Device R9
 U 1 1 5F799CF9
 P 3675 2200
 F 0 "R9" H 3734 2246 50  0000 L CNN
@@ -804,7 +804,7 @@ F 4 "C25744" H 3675 2200 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Timer:LMC555xM U3
+L PlantBuddy-rescue:LMC555xM-Timer U3
 U 1 1 5F7817A6
 P 2700 2100
 F 0 "U3" H 2375 1750 50  0000 C CNN
@@ -828,7 +828,7 @@ F 4 "C90462" H 1575 6450 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x04 J1
+L PlantBuddy-rescue:Conn_01x04-Connector_Generic J1
 U 1 1 5F817EB3
 P 10650 900
 F 0 "J1" H 10730 892 50  0000 L CNN
@@ -840,7 +840,7 @@ F 4 "C541879" H 10650 900 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:LED_Small D1
+L PlantBuddy-rescue:LED_Small-Device D1
 U 1 1 5FC270B5
 P 10025 4700
 F 0 "D1" V 10071 4630 50  0000 R CNN
@@ -852,7 +852,7 @@ F 4 "C72038" V 10025 4700 50  0001 C CNN "LCSC"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:GND #PWR01
+L PlantBuddy-rescue:GND-power #PWR01
 U 1 1 5FC2781D
 P 10225 4800
 F 0 "#PWR01" H 10225 4550 50  0001 C CNN
@@ -868,7 +868,7 @@ Wire Wire Line
 	10225 4800 10400 4800
 Connection ~ 10225 4800
 $Comp
-L Device:R_Small R3
+L PlantBuddy-rescue:R_Small-Device R3
 U 1 1 5FC33886
 P 10025 4500
 F 0 "R3" V 9829 4500 50  0000 C CNN
@@ -886,7 +886,7 @@ Wire Wire Line
 Text Label 9850 4325 0    50   ~ 0
 LEDY
 $Comp
-L MCU_Nordic:nRF52810-QCxx U2
+L PlantBuddy-rescue:nRF52810-QCxx-MCU_Nordic U2
 U 1 1 601392C1
 P 7150 3075
 F 0 "U2" H 6400 2075 50  0000 C CNN
@@ -898,7 +898,7 @@ F 4 "C519278" H 7150 3075 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C8
+L PlantBuddy-rescue:C_Small-Device C8
 U 1 1 601440B0
 P 6050 2475
 F 0 "C8" H 6142 2521 50  0000 L CNN
@@ -910,7 +910,7 @@ F 4 "C326068" H 6050 2475 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR0103
+L PlantBuddy-rescue:GND-power #PWR0103
 U 1 1 60144A88
 P 6050 2575
 F 0 "#PWR0103" H 6050 2325 50  0001 C CNN
@@ -921,7 +921,7 @@ F 3 "" H 6050 2575 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:L_Small L1
+L PlantBuddy-rescue:L_Small-Device L1
 U 1 1 6014BC37
 P 5750 2375
 F 0 "L1" V 5935 2375 50  0000 C CNN
@@ -938,7 +938,7 @@ Connection ~ 6050 2375
 Wire Wire Line
 	6050 2375 5850 2375
 $Comp
-L Device:C_Small C7
+L PlantBuddy-rescue:C_Small-Device C7
 U 1 1 601721F0
 P 5450 2475
 F 0 "C7" H 5542 2521 50  0000 L CNN
@@ -950,7 +950,7 @@ F 4 "C159809" H 5450 2475 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR0104
+L PlantBuddy-rescue:GND-power #PWR0104
 U 1 1 6017252E
 P 5450 2575
 F 0 "#PWR0104" H 5450 2325 50  0001 C CNN
@@ -974,7 +974,7 @@ XL1
 Wire Wire Line
 	8050 2375 8250 2375
 $Comp
-L power:GND #PWR0113
+L PlantBuddy-rescue:GND-power #PWR0113
 U 1 1 601D2FD0
 P 7150 4075
 F 0 "#PWR0113" H 7150 3825 50  0001 C CNN
@@ -991,7 +991,7 @@ Wire Wire Line
 NoConn ~ 6575 5025
 NoConn ~ 6575 4825
 $Comp
-L Device:Crystal_GND24_Small Y1
+L PlantBuddy-rescue:Crystal_GND24_Small-Device Y1
 U 1 1 5F8E3B8A
 P 6575 4925
 F 0 "Y1" H 6675 5150 50  0000 L CNN
@@ -1030,7 +1030,7 @@ Wire Wire Line
 Text Label 5975 3775 0    50   ~ 0
 SWCLK
 $Comp
-L power:+BATT #PWR0114
+L PlantBuddy-rescue:+BATT-power #PWR0114
 U 1 1 602675D6
 P 7150 2075
 F 0 "#PWR0114" H 7150 1925 50  0001 C CNN
@@ -1047,7 +1047,7 @@ Wire Wire Line
 Wire Wire Line
 	6250 3675 6000 3675
 $Comp
-L power:+BATT #PWR0115
+L PlantBuddy-rescue:+BATT-power #PWR0115
 U 1 1 602A5380
 P 6000 3475
 F 0 "#PWR0115" H 6000 3325 50  0001 C CNN
@@ -1065,7 +1065,7 @@ Wire Wire Line
 	6950 1800 6950 2075
 Connection ~ 7350 1800
 $Comp
-L power:GND #PWR0116
+L PlantBuddy-rescue:GND-power #PWR0116
 U 1 1 602C4F93
 P 7350 1600
 F 0 "#PWR0116" H 7350 1350 50  0001 C CNN
@@ -1076,7 +1076,7 @@ F 3 "" H 7350 1600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L power:GND #PWR0117
+L PlantBuddy-rescue:GND-power #PWR0117
 U 1 1 602D692B
 P 6650 1875
 F 0 "#PWR0117" H 6650 1625 50  0001 C CNN
@@ -1087,7 +1087,7 @@ F 3 "" H 6650 1875 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L power:GND #PWR0118
+L PlantBuddy-rescue:GND-power #PWR0118
 U 1 1 60304C54
 P 8700 1800
 F 0 "#PWR0118" H 8700 1550 50  0001 C CNN
@@ -1098,7 +1098,7 @@ F 3 "" H 8700 1800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C15
+L PlantBuddy-rescue:C_Small-Device C15
 U 1 1 6030ABD4
 P 8700 1700
 F 0 "C15" H 8792 1746 50  0000 L CNN
@@ -1124,7 +1124,7 @@ Wire Wire Line
 Connection ~ 8700 1800
 Connection ~ 8275 1800
 $Comp
-L Device:C_Small C9
+L PlantBuddy-rescue:C_Small-Device C9
 U 1 1 60362D2D
 P 6850 1975
 F 0 "C9" H 6942 2021 50  0000 L CNN
@@ -1160,7 +1160,7 @@ Wire Wire Line
 Wire Wire Line
 	8425 2975 8050 2975
 $Comp
-L power:+BATT #PWR0119
+L PlantBuddy-rescue:+BATT-power #PWR0119
 U 1 1 6045E4C9
 P 8425 2575
 F 0 "#PWR0119" H 8425 2425 50  0001 C CNN
@@ -1181,7 +1181,7 @@ NoConn ~ 8050 3075
 NoConn ~ 8050 3775
 NoConn ~ 8050 3875
 $Comp
-L Device:C_Small C17
+L PlantBuddy-rescue:C_Small-Device C17
 U 1 1 60156A34
 P 875 4500
 F 0 "C17" H 725 4600 50  0000 L CNN
@@ -1202,10 +1202,10 @@ Wire Wire Line
 Connection ~ 1375 4800
 Wire Wire Line
 	875  4600 875  4800
+Text Notes 7550 6350 0    50   ~ 0
+TODO: Muta reset btn-ul mai sus, altfel nu il pot\naccesa din cauza pamantului
 Wire Bus Line
 	2150 4500 2600 4500
 Wire Bus Line
 	2150 4500 2150 5825
-Text Notes 7550 6350 0    50   ~ 0
-TODO: Muta reset btn-ul mai sus, altfel nu il pot\naccesa din cauza pamantului
 $EndSCHEMATC

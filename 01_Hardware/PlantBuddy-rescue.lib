@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# PlantBuddy-rescue_+BATT-power
+# +BATT-power
 #
-DEF PlantBuddy-rescue_+BATT-power #PWR 0 0 Y Y 1 F P
+DEF +BATT-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "PlantBuddy-rescue_+BATT-power" 0 140 50 H V C CNN
+F1 "+BATT-power" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -16,11 +16,11 @@ X +BATT 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_AO3401A-Transistor_FET
+# AO3401A-Transistor_FET
 #
-DEF PlantBuddy-rescue_AO3401A-Transistor_FET Q 0 20 Y N 1 F N
+DEF AO3401A-Transistor_FET Q 0 20 Y N 1 F N
 F0 "Q" 200 75 50 H V L CNN
-F1 "PlantBuddy-rescue_AO3401A-Transistor_FET" 200 0 50 H V L CNN
+F1 "AO3401A-Transistor_FET" 200 0 50 H V L CNN
 F2 "Package_TO_SOT_SMD:SOT-23" 200 -75 50 H I L CIN
 F3 "" 0 0 50 H I L CNN
 $FPLIST
@@ -47,11 +47,11 @@ X D 3 100 200 100 D 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_Antenna_Shield-Device
+# Antenna_Shield-Device
 #
-DEF PlantBuddy-rescue_Antenna_Shield-Device AE 0 40 N N 1 F N
+DEF Antenna_Shield-Device AE 0 40 N N 1 F N
 F0 "AE" -75 175 50 H V R CNN
-F1 "PlantBuddy-rescue_Antenna_Shield-Device" -75 100 50 H V R CNN
+F1 "Antenna_Shield-Device" -75 100 50 H V R CNN
 F2 "" 0 100 50 H I C CNN
 F3 "" 0 100 50 H I C CNN
 DRAW
@@ -68,11 +68,11 @@ X Shield 2 100 -200 100 U 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_Battery_Cell-Device
+# Battery_Cell-Device
 #
-DEF PlantBuddy-rescue_Battery_Cell-Device BT 0 0 N N 1 F N
+DEF Battery_Cell-Device BT 0 0 N N 1 F N
 F0 "BT" 100 100 50 H V L CNN
-F1 "PlantBuddy-rescue_Battery_Cell-Device" 100 0 50 H V L CNN
+F1 "Battery_Cell-Device" 100 0 50 H V L CNN
 F2 "" 0 60 50 V I C CNN
 F3 "" 0 60 50 V I C CNN
 DRAW
@@ -87,11 +87,11 @@ X - 2 0 -100 100 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_C_Small-Device
+# C_Small-Device
 #
-DEF PlantBuddy-rescue_C_Small-Device C 0 10 N N 1 F N
+DEF C_Small-Device C 0 10 N N 1 F N
 F0 "C" 10 70 50 H V L CNN
-F1 "PlantBuddy-rescue_C_Small-Device" 10 -80 50 H V L CNN
+F1 "C_Small-Device" 10 -80 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -105,11 +105,11 @@ X ~ 2 0 -100 80 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_Conn_01x01-Connector_Generic
+# Conn_01x01-Connector_Generic
 #
-DEF PlantBuddy-rescue_Conn_01x01-Connector_Generic J 0 40 Y N 1 F N
+DEF Conn_01x01-Connector_Generic J 0 40 Y N 1 F N
 F0 "J" 0 100 50 H V C CNN
-F1 "PlantBuddy-rescue_Conn_01x01-Connector_Generic" 0 -100 50 H V C CNN
+F1 "Conn_01x01-Connector_Generic" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -122,11 +122,11 @@ X Pin_1 1 -200 0 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_Conn_01x04-Connector_Generic
+# Conn_01x04-Connector_Generic
 #
-DEF PlantBuddy-rescue_Conn_01x04-Connector_Generic J 0 40 Y N 1 F N
+DEF Conn_01x04-Connector_Generic J 0 40 Y N 1 F N
 F0 "J" 0 200 50 H V C CNN
-F1 "PlantBuddy-rescue_Conn_01x04-Connector_Generic" 0 -300 50 H V C CNN
+F1 "Conn_01x04-Connector_Generic" 0 -300 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -145,11 +145,11 @@ X Pin_4 4 -200 -200 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_Crystal_GND24_Small-Device
+# Crystal_GND24_Small-Device
 #
-DEF PlantBuddy-rescue_Crystal_GND24_Small-Device Y 0 40 Y N 1 F N
+DEF Crystal_GND24_Small-Device Y 0 40 Y N 1 F N
 F0 "Y" 50 175 50 H V L CNN
-F1 "PlantBuddy-rescue_Crystal_GND24_Small-Device" 50 100 50 H V L CNN
+F1 "Crystal_GND24_Small-Device" 50 100 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -168,11 +168,11 @@ X 4 4 0 100 25 D 30 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_Crystal_Small-Device
+# Crystal_Small-Device
 #
-DEF PlantBuddy-rescue_Crystal_Small-Device Y 0 40 N N 1 F N
+DEF Crystal_Small-Device Y 0 40 N N 1 F N
 F0 "Y" 0 100 50 H V C CNN
-F1 "PlantBuddy-rescue_Crystal_Small-Device" 0 -100 50 H V C CNN
+F1 "Crystal_Small-Device" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -187,11 +187,11 @@ X 2 2 100 0 50 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_GND-power
+# GND-power
 #
-DEF PlantBuddy-rescue_GND-power #PWR 0 0 Y Y 1 F P
+DEF GND-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "PlantBuddy-rescue_GND-power" 0 -150 50 H V C CNN
+F1 "GND-power" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -200,11 +200,11 @@ X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_LED_Small-Device
+# LED_Small-Device
 #
-DEF PlantBuddy-rescue_LED_Small-Device D 0 10 N N 1 F N
+DEF LED_Small-Device D 0 10 N N 1 F N
 F0 "D" -50 125 50 H V L CNN
-F1 "PlantBuddy-rescue_LED_Small-Device" -175 -100 50 H V L CNN
+F1 "LED_Small-Device" -175 -100 50 H V L CNN
 F2 "" 0 0 50 V I C CNN
 F3 "" 0 0 50 V I C CNN
 $FPLIST
@@ -223,11 +223,11 @@ X A 2 100 0 70 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_LMC555xM-Timer
+# LMC555xM-Timer
 #
-DEF PlantBuddy-rescue_LMC555xM-Timer U 0 20 Y Y 1 F N
+DEF LMC555xM-Timer U 0 20 Y Y 1 F N
 F0 "U" -400 350 50 H V L CNN
-F1 "PlantBuddy-rescue_LMC555xM-Timer" 100 350 50 H V L CNN
+F1 "LMC555xM-Timer" 100 350 50 H V L CNN
 F2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" 850 -400 50 H I C CNN
 F3 "" 850 -400 50 H I C CNN
 $FPLIST
@@ -247,11 +247,11 @@ X DIS 7 500 0 150 L 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_L_Small-Device
+# L_Small-Device
 #
-DEF PlantBuddy-rescue_L_Small-Device L 0 10 N N 1 F N
+DEF L_Small-Device L 0 10 N N 1 F N
 F0 "L" 30 40 50 H V L CNN
-F1 "PlantBuddy-rescue_L_Small-Device" 30 -40 50 H V L CNN
+F1 "L_Small-Device" 30 -40 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -270,11 +270,11 @@ X ~ 2 0 -100 20 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_Q_NMOS_GSD-Device
+# Q_NMOS_GSD-Device
 #
-DEF PlantBuddy-rescue_Q_NMOS_GSD-Device Q 0 0 Y N 1 F N
+DEF Q_NMOS_GSD-Device Q 0 0 Y N 1 F N
 F0 "Q" 200 50 50 H V L CNN
-F1 "PlantBuddy-rescue_Q_NMOS_GSD-Device" 200 -50 50 H V L CNN
+F1 "Q_NMOS_GSD-Device" 200 -50 50 H V L CNN
 F2 "" 200 100 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -298,11 +298,11 @@ X D 3 100 200 100 D 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_R_Small-Device
+# R_Small-Device
 #
-DEF PlantBuddy-rescue_R_Small-Device R 0 10 N N 1 F N
+DEF R_Small-Device R 0 10 N N 1 F N
 F0 "R" 30 20 50 H V L CNN
-F1 "PlantBuddy-rescue_R_Small-Device" 30 -40 50 H V L CNN
+F1 "R_Small-Device" 30 -40 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -315,11 +315,11 @@ X ~ 2 0 -100 30 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_SHTC3-Sensor_Humidity
+# SHTC3-Sensor_Humidity
 #
-DEF PlantBuddy-rescue_SHTC3-Sensor_Humidity U 0 20 Y Y 1 F N
+DEF SHTC3-Sensor_Humidity U 0 20 Y Y 1 F N
 F0 "U" -150 250 50 H V C CNN
-F1 "PlantBuddy-rescue_SHTC3-Sensor_Humidity" -100 -250 50 H V C CNN
+F1 "SHTC3-Sensor_Humidity" -100 -250 50 H V C CNN
 F2 "Sensor_Humidity:Sensirion_DFN-4-1EP_2x2mm_P1mm_EP0.7x1.6mm" 200 -350 50 H I C CNN
 F3 "" -300 450 50 H I C CNN
 $FPLIST
@@ -335,11 +335,11 @@ X NC 5 200 0 100 L 50 50 1 1 N N
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_SW_Push-Switch
+# SW_Push-Switch
 #
-DEF PlantBuddy-rescue_SW_Push-Switch SW 0 40 N N 1 F N
+DEF SW_Push-Switch SW 0 40 N N 1 F N
 F0 "SW" 50 100 50 H V L CNN
-F1 "PlantBuddy-rescue_SW_Push-Switch" 0 -60 50 H V C CNN
+F1 "SW_Push-Switch" 0 -60 50 H V C CNN
 F2 "" 0 200 50 H I C CNN
 F3 "" 0 200 50 H I C CNN
 DRAW
@@ -352,11 +352,11 @@ X 2 2 200 0 100 L 50 50 0 1 P
 ENDDRAW
 ENDDEF
 #
-# PlantBuddy-rescue_nRF52810-QCxx-MCU_Nordic
+# nRF52810-QCxx-MCU_Nordic
 #
-DEF PlantBuddy-rescue_nRF52810-QCxx-MCU_Nordic U 0 20 Y Y 1 F N
+DEF nRF52810-QCxx-MCU_Nordic U 0 20 Y Y 1 F N
 F0 "U" 0 50 50 H V C CNN
-F1 "PlantBuddy-rescue_nRF52810-QCxx-MCU_Nordic" 0 -50 50 H V C CNN
+F1 "nRF52810-QCxx-MCU_Nordic" 0 -50 50 H V C CNN
 F2 "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm" 0 -1350 50 H I C CNN
 F3 "" -500 200 50 H I C CNN
 $FPLIST
@@ -397,26 +397,6 @@ X P0.06 6 900 300 100 L 50 50 1 1 B
 X P0.09 7 900 200 100 L 50 50 1 1 B
 X P0.10 8 900 100 100 L 50 50 1 1 B
 X VDD 9 0 1000 100 D 50 50 1 1 W
-ENDDRAW
-ENDDEF
-#
-# PlantBuddy_OPT3001
-#
-DEF PlantBuddy_OPT3001 U 0 40 Y Y 1 F N
-F0 "U" 100 0 50 H V C CNN
-F1 "PlantBuddy_OPT3001" 250 100 50 H V C CNN
-F2 "PlantBuddy:OPT3001DNPR" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-F4 "C90462" 0 0 50 H I C CNN "LCSC"
-DRAW
-S -300 650 300 150 0 1 0 f
-X VDD 1 0 750 100 D 50 50 1 1 W
-X ADDR 2 -400 250 100 R 50 50 1 1 I
-X GND 3 0 50 100 U 50 50 1 1 W
-X SCL 4 400 550 100 L 50 50 1 1 I
-X INT 5 400 250 100 L 50 50 1 1 O
-X SDA 6 400 450 100 L 50 50 1 1 I
-X PAD 7 0 50 100 U 50 50 1 1 I N
 ENDDRAW
 ENDDEF
 #

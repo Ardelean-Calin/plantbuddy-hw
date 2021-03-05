@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew 5.1.9)
+(kicad_pcb (version 20171130) (host pcbnew "(5.1.9-0-10_14)")
 
   (general
     (thickness 1.6)
@@ -205,9 +205,6 @@
     (fp_text value 100nF (at 0 1.16) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text user %R (at 0 0) (layer F.Fab)
-      (effects (font (size 0.25 0.25) (thickness 0.04)))
-    )
     (fp_line (start -0.5 0.25) (end -0.5 -0.25) (layer F.Fab) (width 0.1))
     (fp_line (start -0.5 -0.25) (end 0.5 -0.25) (layer F.Fab) (width 0.1))
     (fp_line (start 0.5 -0.25) (end 0.5 0.25) (layer F.Fab) (width 0.1))
@@ -218,6 +215,9 @@
     (fp_line (start -0.91 -0.46) (end 0.91 -0.46) (layer F.CrtYd) (width 0.05))
     (fp_line (start 0.91 -0.46) (end 0.91 0.46) (layer F.CrtYd) (width 0.05))
     (fp_line (start 0.91 0.46) (end -0.91 0.46) (layer F.CrtYd) (width 0.05))
+    (fp_text user %R (at 0 0) (layer F.Fab)
+      (effects (font (size 0.25 0.25) (thickness 0.04)))
+    )
     (pad 2 smd roundrect (at 0.48 0) (size 0.56 0.62) (layers F.Cu F.Paste F.Mask) (roundrect_rratio 0.25)
       (net 13 GND))
     (pad 1 smd roundrect (at -0.48 0) (size 0.56 0.62) (layers F.Cu F.Paste F.Mask) (roundrect_rratio 0.25)
@@ -520,11 +520,6 @@
       (net 8 /SWCLK))
     (pad 1 thru_hole rect (at 0 0 180) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 2 +BATT))
-    (model ${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.wrl
-      (at (xyz 0 0 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
-    )
   )
 
   (module Inductor_SMD:L_0402_1005Metric (layer F.Cu) (tedit 5F68FEF0) (tstamp 60137FEF)
@@ -1244,7 +1239,7 @@
       (net 3 "Net-(BT1-Pad2)"))
     (model ${KISYS3DMOD}/Battery.3dshapes/BatteryHolder_Keystone_1060_1x2032.wrl
       (at (xyz 0 0 0))
-      (scale (xyz 1 1 1))
+      (scale (xyz 1 1 1.18))
       (rotate (xyz 0 0 0))
     )
   )
@@ -1758,7 +1753,7 @@
       (net 11 /SCL))
     (pad 1 smd roundrect (at -0.925 -0.5) (size 0.55 0.35) (layers F.Cu F.Mask) (roundrect_rratio 0.25)
       (net 2 +BATT))
-    (model ${KISYS3DMOD}/Sensor_Humidity.3dshapes/Sensirion_DFN-4-1EP_2x2mm_P1mm_EP0.7x1.6mm.wrl
+    (model ${KISYS3DMOD}/Package_DFN_QFN.3dshapes/AMS_QFN-4-1EP_2x2mm_P0.95mm.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
