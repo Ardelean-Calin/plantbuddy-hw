@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>/home/calin/Projects/PlantBuddy/01_Hardware/PlantBuddy.sch</source>
-    <date>Fri 29 Jan 2021 07:06:54 PM EET</date>
+    <source>/home/calin/Projects/plant-buddy/01_Hardware/PlantBuddy.sch</source>
+    <date>Tue 09 Mar 2021 06:23:46 PM EET</date>
     <tool>Eeschema 5.1.9</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -19,28 +19,6 @@
     </sheet>
   </design>
   <components>
-    <comp ref="R1">
-      <value>10k</value>
-      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSC">C25744</field>
-      </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FCB6EA2</tstamp>
-    </comp>
-    <comp ref="SW2">
-      <value>BLE_RST_SW</value>
-      <footprint>Button_Switch_SMD:SW_SPST_EVQP7C</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSC">C388883</field>
-      </fields>
-      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FC9C6CC</tstamp>
-    </comp>
     <comp ref="Q2">
       <value>AO3400A</value>
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
@@ -48,7 +26,7 @@
       <fields>
         <field name="LCSC">C20917</field>
       </fields>
-      <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
+      <libsource lib="PlantBuddy-rescue" part="Q_NMOS_GSD-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC7486C</tstamp>
     </comp>
@@ -56,7 +34,7 @@
       <value>Conn_I2C_SCL</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="PlantBuddy-rescue" part="Conn_01x01-Connector_Generic" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC6BCF8</tstamp>
     </comp>
@@ -64,7 +42,7 @@
       <value>Conn_I2C_SDA</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="PlantBuddy-rescue" part="Conn_01x01-Connector_Generic" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC6B510</tstamp>
     </comp>
@@ -75,7 +53,7 @@
       <fields>
         <field name="LCSC">C1525</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC58638</tstamp>
     </comp>
@@ -86,7 +64,7 @@
       <fields>
         <field name="LCSC">C194656</field>
       </fields>
-      <libsource lib="Sensor_Humidity" part="SHTC3" description="Humidity and Temperature Sensor, +/-2%RH, +/-0.2degC, I2C, 1.62-3.6V, DFN-4"/>
+      <libsource lib="PlantBuddy-rescue" part="SHTC3-Sensor_Humidity" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC00783</tstamp>
     </comp>
@@ -97,7 +75,7 @@
       <fields>
         <field name="LCSC">C52923</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC9C991</tstamp>
     </comp>
@@ -108,7 +86,7 @@
       <fields>
         <field name="LCSC">C1525</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC9BF20</tstamp>
     </comp>
@@ -117,9 +95,9 @@
       <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSC">C1046</field>
+        <field name="LCSC">C95978</field>
       </fields>
-      <libsource lib="Device" part="L_Small" description="Inductor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="L_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC85C22</tstamp>
     </comp>
@@ -131,7 +109,7 @@
         <field name="LCSC">C70377</field>
         <field name="MFR">CR2032-BS-6-1</field>
       </fields>
-      <libsource lib="Device" part="Battery_Cell" description="Single-cell battery"/>
+      <libsource lib="PlantBuddy-rescue" part="Battery_Cell-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC5077F</tstamp>
     </comp>
@@ -142,7 +120,7 @@
       <fields>
         <field name="LCSC">C25744</field>
       </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F7AB23C</tstamp>
     </comp>
@@ -153,7 +131,7 @@
       <fields>
         <field name="LCSC">C25744</field>
       </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F7AA80B</tstamp>
     </comp>
@@ -164,7 +142,7 @@
       <fields>
         <field name="LCSC">C1525</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F9CA7B8</tstamp>
     </comp>
@@ -175,7 +153,7 @@
       <fields>
         <field name="LCSC">C1547</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F96F76E</tstamp>
     </comp>
@@ -186,7 +164,7 @@
       <fields>
         <field name="LCSC">C1547</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F96F125</tstamp>
     </comp>
@@ -197,7 +175,7 @@
       <fields>
         <field name="LCSC">C32346</field>
       </fields>
-      <libsource lib="Device" part="Crystal_Small" description="Two pin crystal, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="Crystal_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F96EABD</tstamp>
     </comp>
@@ -208,7 +186,7 @@
       <fields>
         <field name="LCSC">C1547</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F8E6679</tstamp>
     </comp>
@@ -219,31 +197,9 @@
       <fields>
         <field name="LCSC">C1547</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F8E556C</tstamp>
-    </comp>
-    <comp ref="R16">
-      <value>1k</value>
-      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSC">C11702</field>
-      </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F86CA65</tstamp>
-    </comp>
-    <comp ref="D2">
-      <value>R</value>
-      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSC">C2286</field>
-      </fields>
-      <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F86A474</tstamp>
     </comp>
     <comp ref="C2">
       <value>100nF</value>
@@ -252,20 +208,9 @@
       <fields>
         <field name="LCSC">C1525</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F8CAA05</tstamp>
-    </comp>
-    <comp ref="R12">
-      <value>10k</value>
-      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSC">C25744</field>
-      </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F89EE4B</tstamp>
     </comp>
     <comp ref="C10">
       <value>100nF</value>
@@ -274,7 +219,7 @@
       <fields>
         <field name="LCSC">C1525</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F89342A</tstamp>
     </comp>
@@ -282,7 +227,7 @@
       <value>2.45GHz PCB antenna</value>
       <footprint>RF_Antenna:Texas_SWRA117D_2.4GHz_Right</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Device" part="Antenna_Shield" description="Antenna with extra pin for shielding"/>
+      <libsource lib="PlantBuddy-rescue" part="Antenna_Shield-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F7B40C5</tstamp>
     </comp>
@@ -293,7 +238,7 @@
       <fields>
         <field name="LCSC">C25744</field>
       </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F7A2C9F</tstamp>
     </comp>
@@ -304,7 +249,7 @@
       <fields>
         <field name="LCSC">C15127</field>
       </fields>
-      <libsource lib="Transistor_FET" part="AO3401A" description="-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"/>
+      <libsource lib="PlantBuddy-rescue" part="AO3401A-Transistor_FET" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F79FD2D</tstamp>
     </comp>
@@ -312,7 +257,7 @@
       <value>C_Probe</value>
       <footprint>PlantBuddy:SoilProbe</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F7A2F2A</tstamp>
     </comp>
@@ -323,7 +268,7 @@
       <fields>
         <field name="LCSC">C1525</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F7A1B63</tstamp>
     </comp>
@@ -334,7 +279,7 @@
       <fields>
         <field name="LCSC">C25744</field>
       </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F79A78D</tstamp>
     </comp>
@@ -345,7 +290,7 @@
       <fields>
         <field name="LCSC">C25744</field>
       </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F799CF9</tstamp>
     </comp>
@@ -356,7 +301,7 @@
       <fields>
         <field name="LCSC">C90760</field>
       </fields>
-      <libsource lib="Timer" part="LMC555xM" description="CMOS Timer, 555 compatible, SOIC-8"/>
+      <libsource lib="PlantBuddy-rescue" part="LMC555xM-Timer" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F7817A6</tstamp>
     </comp>
@@ -372,13 +317,13 @@
       <tstamp>5FD09708</tstamp>
     </comp>
     <comp ref="J1">
-      <value>SWD</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical</footprint>
+      <value>SWD+DBG</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="LCSC">C541879</field>
       </fields>
-      <libsource lib="Connector_Generic" part="Conn_01x04" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="Connector_Generic" part="Conn_02x03_Odd_Even" description="Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F817EB3</tstamp>
     </comp>
@@ -389,7 +334,7 @@
       <fields>
         <field name="LCSC">C72038</field>
       </fields>
-      <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="LED_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC270B5</tstamp>
     </comp>
@@ -400,20 +345,9 @@
       <fields>
         <field name="LCSC">C11702</field>
       </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5FC33886</tstamp>
-    </comp>
-    <comp ref="U2">
-      <value>nRF52810-QCxx</value>
-      <footprint>Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm_ThermalVias</footprint>
-      <datasheet>http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf</datasheet>
-      <fields>
-        <field name="LCSC">C519278</field>
-      </fields>
-      <libsource lib="MCU_Nordic" part="nRF52810-QCxx" description="Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-32"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>601392C1</tstamp>
     </comp>
     <comp ref="C8">
       <value>0.8pF</value>
@@ -422,7 +356,7 @@
       <fields>
         <field name="LCSC">C326068</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>601440B0</tstamp>
     </comp>
@@ -433,7 +367,7 @@
       <fields>
         <field name="LCSC">C14033</field>
       </fields>
-      <libsource lib="Device" part="L_Small" description="Inductor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="L_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6014BC37</tstamp>
     </comp>
@@ -444,7 +378,7 @@
       <fields>
         <field name="LCSC">C159809</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>601721F0</tstamp>
     </comp>
@@ -455,7 +389,7 @@
       <fields>
         <field name="LCSC">C90934</field>
       </fields>
-      <libsource lib="Device" part="Crystal_GND24_Small" description="Four pin crystal, GND on pins 2 and 4, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="Crystal_GND24_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5F8E3B8A</tstamp>
     </comp>
@@ -466,7 +400,7 @@
       <fields>
         <field name="LCSC">C23733</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6030ABD4</tstamp>
     </comp>
@@ -477,7 +411,7 @@
       <fields>
         <field name="LCSC">C1546</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60362D2D</tstamp>
     </comp>
@@ -488,91 +422,149 @@
       <fields>
         <field name="LCSC">C1525</field>
       </fields>
-      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <libsource lib="PlantBuddy-rescue" part="C_Small-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60156A34</tstamp>
     </comp>
+    <comp ref="U2">
+      <value>nRF52810-QCxx</value>
+      <footprint>Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm_ThermalVias</footprint>
+      <datasheet>http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf</datasheet>
+      <fields>
+        <field name="LCSC">C519278</field>
+      </fields>
+      <libsource lib="PlantBuddy-rescue" part="nRF52810-QCxx-MCU_Nordic" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>601392C1</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSC">C25744</field>
+      </fields>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>6047E951</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSC">C25744</field>
+      </fields>
+      <libsource lib="PlantBuddy-rescue" part="R_Small-Device" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>604A62C8</tstamp>
+    </comp>
   </components>
   <libparts>
-    <libpart lib="Connector_Generic" part="Conn_01x01">
-      <description>Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+    <libpart lib="Connector_Generic" part="Conn_02x03_Odd_Even">
+      <description>Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <docs>~</docs>
       <footprints>
-        <fp>Connector*:*_1x??_*</fp>
+        <fp>Connector*:*_2x??_*</fp>
       </footprints>
       <fields>
         <field name="Reference">J</field>
-        <field name="Value">Conn_01x01</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Connector_Generic" part="Conn_01x04">
-      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Connector*:*_1x??_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x04</field>
+        <field name="Value">Conn_02x03_Odd_Even</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
         <pin num="2" name="Pin_2" type="passive"/>
         <pin num="3" name="Pin_3" type="passive"/>
         <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="Antenna_Shield">
-      <description>Antenna with extra pin for shielding</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy" part="OPT3001">
+      <docs>https://www.ti.com/lit/ds/symlink/opt3001.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">OPT3001</field>
+        <field name="Footprint">PlantBuddy:OPT3001DNPR</field>
+        <field name="LCSC">C90462</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="ADDR" type="input"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="SCL" type="input"/>
+        <pin num="5" name="INT" type="output"/>
+        <pin num="6" name="SDA" type="input"/>
+        <pin num="7" name="PAD" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="PlantBuddy-rescue" part="AO3401A-Transistor_FET">
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">AO3401A-Transistor_FET</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PlantBuddy-rescue" part="Antenna_Shield-Device">
       <fields>
         <field name="Reference">AE</field>
-        <field name="Value">Antenna_Shield</field>
+        <field name="Value">Antenna_Shield-Device</field>
       </fields>
       <pins>
         <pin num="1" name="A" type="input"/>
         <pin num="2" name="Shield" type="input"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="Battery_Cell">
-      <description>Single-cell battery</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="Battery_Cell-Device">
       <fields>
         <field name="Reference">BT</field>
-        <field name="Value">Battery_Cell</field>
+        <field name="Value">Battery_Cell-Device</field>
       </fields>
       <pins>
         <pin num="1" name="+" type="passive"/>
         <pin num="2" name="-" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="C_Small">
-      <description>Unpolarized capacitor, small symbol</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="C_Small-Device">
       <footprints>
         <fp>C_*</fp>
       </footprints>
       <fields>
         <field name="Reference">C</field>
-        <field name="Value">C_Small</field>
+        <field name="Value">C_Small-Device</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="Crystal_GND24_Small">
-      <description>Four pin crystal, GND on pins 2 and 4, small symbol</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="Conn_01x01-Connector_Generic">
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x01-Connector_Generic</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PlantBuddy-rescue" part="Crystal_GND24_Small-Device">
       <footprints>
         <fp>Crystal*</fp>
       </footprints>
       <fields>
         <field name="Reference">Y</field>
-        <field name="Value">Crystal_GND24_Small</field>
+        <field name="Value">Crystal_GND24_Small-Device</field>
       </fields>
       <pins>
         <pin num="1" name="1" type="passive"/>
@@ -581,24 +573,20 @@
         <pin num="4" name="4" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="Crystal_Small">
-      <description>Two pin crystal, small symbol</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="Crystal_Small-Device">
       <footprints>
         <fp>Crystal*</fp>
       </footprints>
       <fields>
         <field name="Reference">Y</field>
-        <field name="Value">Crystal_Small</field>
+        <field name="Value">Crystal_Small-Device</field>
       </fields>
       <pins>
         <pin num="1" name="1" type="passive"/>
         <pin num="2" name="2" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="LED_Small">
-      <description>Light emitting diode, small symbol</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="LED_Small-Device">
       <footprints>
         <fp>LED*</fp>
         <fp>LED_SMD:*</fp>
@@ -606,16 +594,34 @@
       </footprints>
       <fields>
         <field name="Reference">D</field>
-        <field name="Value">LED_Small</field>
+        <field name="Value">LED_Small-Device</field>
       </fields>
       <pins>
         <pin num="1" name="K" type="passive"/>
         <pin num="2" name="A" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="L_Small">
-      <description>Inductor, small symbol</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="LMC555xM-Timer">
+      <footprints>
+        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LMC555xM-Timer</field>
+        <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="TR" type="input"/>
+        <pin num="3" name="Q" type="output"/>
+        <pin num="4" name="R" type="input"/>
+        <pin num="5" name="CV" type="input"/>
+        <pin num="6" name="THR" type="input"/>
+        <pin num="7" name="DIS" type="input"/>
+        <pin num="8" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="PlantBuddy-rescue" part="L_Small-Device">
       <footprints>
         <fp>Choke_*</fp>
         <fp>*Coil*</fp>
@@ -624,19 +630,17 @@
       </footprints>
       <fields>
         <field name="Reference">L</field>
-        <field name="Value">L_Small</field>
+        <field name="Value">L_Small-Device</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="Q_NMOS_GSD">
-      <description>N-MOSFET transistor, gate/source/drain</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="Q_NMOS_GSD-Device">
       <fields>
         <field name="Reference">Q</field>
-        <field name="Value">Q_NMOS_GSD</field>
+        <field name="Value">Q_NMOS_GSD-Device</field>
       </fields>
       <pins>
         <pin num="1" name="G" type="input"/>
@@ -644,30 +648,43 @@
         <pin num="3" name="D" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="R_Small">
-      <description>Resistor, small symbol</description>
-      <docs>~</docs>
+    <libpart lib="PlantBuddy-rescue" part="R_Small-Device">
       <footprints>
         <fp>R_*</fp>
       </footprints>
       <fields>
         <field name="Reference">R</field>
-        <field name="Value">R_Small</field>
+        <field name="Value">R_Small-Device</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="MCU_Nordic" part="nRF52810-QCxx">
-      <description>Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-32</description>
-      <docs>http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf</docs>
+    <libpart lib="PlantBuddy-rescue" part="SHTC3-Sensor_Humidity">
+      <footprints>
+        <fp>Sensirion*DFN*1EP*2x2mm*P1mm*EP0.7x1.6mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">SHTC3-Sensor_Humidity</field>
+        <field name="Footprint">Sensor_Humidity:Sensirion_DFN-4-1EP_2x2mm_P1mm_EP0.7x1.6mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="SCL" type="input"/>
+        <pin num="3" name="SDA" type="BiDi"/>
+        <pin num="4" name="VSS" type="power_in"/>
+        <pin num="5" name="NC" type="NotConnected"/>
+      </pins>
+    </libpart>
+    <libpart lib="PlantBuddy-rescue" part="nRF52810-QCxx-MCU_Nordic">
       <footprints>
         <fp>QFN*1EP*5x5mm*P0.5mm*</fp>
       </footprints>
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">nRF52810-QCxx</field>
+        <field name="Value">nRF52810-QCxx-MCU_Nordic</field>
         <field name="Footprint">Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm</field>
       </fields>
       <pins>
@@ -706,365 +723,229 @@
         <pin num="33" name="VSS" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="PlantBuddy" part="OPT3001">
-      <docs>https://www.ti.com/lit/ds/symlink/opt3001.pdf</docs>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">OPT3001</field>
-        <field name="Footprint">PlantBuddy:OPT3001DNPR</field>
-        <field name="LCSC">C90462</field>
-      </fields>
-      <pins>
-        <pin num="1" name="VDD" type="power_in"/>
-        <pin num="2" name="ADDR" type="input"/>
-        <pin num="3" name="GND" type="power_in"/>
-        <pin num="4" name="SCL" type="input"/>
-        <pin num="5" name="INT" type="output"/>
-        <pin num="6" name="SDA" type="input"/>
-        <pin num="7" name="PAD" type="input"/>
-      </pins>
-    </libpart>
-    <libpart lib="Sensor_Humidity" part="SHTC1">
-      <aliases>
-        <alias>SHTC3</alias>
-      </aliases>
-      <description>Humidity and Temperature Sensor, +/-3%RH, +/-0.3degC, I2C, 1.62-1.98V, DFN-4</description>
-      <docs>https://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/0_Datasheets/Humidity/Sensirion_Humidity_Sensors_SHTC1_Datasheet.pdf</docs>
-      <footprints>
-        <fp>Sensirion*DFN*1EP*2x2mm*P1mm*EP0.7x1.6mm*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">SHTC1</field>
-        <field name="Footprint">Sensor_Humidity:Sensirion_DFN-4-1EP_2x2mm_P1mm_EP0.7x1.6mm</field>
-      </fields>
-      <pins>
-        <pin num="1" name="VDD" type="power_in"/>
-        <pin num="2" name="SCL" type="input"/>
-        <pin num="3" name="SDA" type="BiDi"/>
-        <pin num="4" name="VSS" type="power_in"/>
-        <pin num="5" name="NC" type="NotConnected"/>
-      </pins>
-    </libpart>
-    <libpart lib="Switch" part="SW_Push">
-      <description>Push button switch, generic, two pins</description>
-      <docs>~</docs>
-      <fields>
-        <field name="Reference">SW</field>
-        <field name="Value">SW_Push</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Timer" part="NE555D">
-      <aliases>
-        <alias>LM555xM</alias>
-        <alias>ICM7555xB</alias>
-        <alias>LMC555xM</alias>
-        <alias>MC1455B</alias>
-        <alias>TLC555xD</alias>
-        <alias>NA555D</alias>
-        <alias>SE555D</alias>
-        <alias>SA555D</alias>
-      </aliases>
-      <description>Precision Timers, 555 compatible, SOIC-8</description>
-      <docs>http://www.ti.com/lit/ds/symlink/ne555.pdf</docs>
-      <footprints>
-        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">NE555D</field>
-        <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
-      </fields>
-      <pins>
-        <pin num="1" name="GND" type="power_in"/>
-        <pin num="2" name="TR" type="input"/>
-        <pin num="3" name="Q" type="output"/>
-        <pin num="4" name="R" type="input"/>
-        <pin num="5" name="CV" type="input"/>
-        <pin num="6" name="THR" type="input"/>
-        <pin num="7" name="DIS" type="input"/>
-        <pin num="8" name="VCC" type="power_in"/>
-      </pins>
-    </libpart>
-    <libpart lib="Transistor_FET" part="TP0610T">
-      <aliases>
-        <alias>VP0610T</alias>
-        <alias>BSS84</alias>
-        <alias>NTR2101P</alias>
-        <alias>BSS83P</alias>
-        <alias>Si2319CDS</alias>
-        <alias>IRLML6401</alias>
-        <alias>IRLML6402</alias>
-        <alias>DMG2301L</alias>
-        <alias>AO3401A</alias>
-        <alias>IRLML9301</alias>
-        <alias>IRLML5203</alias>
-        <alias>Si2371EDS</alias>
-        <alias>TSM2301ACX</alias>
-        <alias>FDN340P</alias>
-      </aliases>
-      <description>-0.18A Id, -60V Vds, P-Channel MOSFET, SOT-23</description>
-      <docs>http://www.vishay.com/docs/70209/70209.pdf</docs>
-      <footprints>
-        <fp>SOT?23*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">Q</field>
-        <field name="Value">TP0610T</field>
-        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
-      </fields>
-      <pins>
-        <pin num="1" name="G" type="input"/>
-        <pin num="2" name="S" type="passive"/>
-        <pin num="3" name="D" type="passive"/>
-      </pins>
-    </libpart>
   </libparts>
   <libraries>
     <library logical="Connector_Generic">
-      <uri>/app/share/kicad/library/Connector_Generic.lib</uri>
-    </library>
-    <library logical="Device">
-      <uri>/app/share/kicad/library/Device.lib</uri>
-    </library>
-    <library logical="MCU_Nordic">
-      <uri>/app/share/kicad/library/MCU_Nordic.lib</uri>
+      <uri>/usr/share/kicad/library/Connector_Generic.lib</uri>
     </library>
     <library logical="PlantBuddy">
-      <uri>/home/calin/Projects/PlantBuddy/01_Hardware/lib/sym/PlantBuddy.lib</uri>
+      <uri>/home/calin/Projects/plant-buddy/01_Hardware/lib/sym/PlantBuddy.lib</uri>
     </library>
-    <library logical="Sensor_Humidity">
-      <uri>/app/share/kicad/library/Sensor_Humidity.lib</uri>
-    </library>
-    <library logical="Switch">
-      <uri>/app/share/kicad/library/Switch.lib</uri>
-    </library>
-    <library logical="Timer">
-      <uri>/app/share/kicad/library/Timer.lib</uri>
-    </library>
-    <library logical="Transistor_FET">
-      <uri>/app/share/kicad/library/Transistor_FET.lib</uri>
+    <library logical="PlantBuddy-rescue">
+      <uri>/home/calin/Projects/plant-buddy/01_Hardware/PlantBuddy-rescue.lib</uri>
     </library>
   </libraries>
   <nets>
-    <net code="1" name="Net-(U2-Pad27)">
-      <node ref="U2" pin="27"/>
+    <net code="1" name="/XC2">
+      <node ref="C6" pin="2"/>
+      <node ref="U2" pin="24"/>
+      <node ref="Y1" pin="1"/>
     </net>
-    <net code="2" name="Net-(U2-Pad26)">
-      <node ref="U2" pin="26"/>
-    </net>
-    <net code="3" name="/XC1">
+    <net code="2" name="/XC1">
       <node ref="C11" pin="2"/>
-      <node ref="Y1" pin="3"/>
       <node ref="U2" pin="23"/>
+      <node ref="Y1" pin="3"/>
     </net>
-    <net code="4" name="Net-(C9-Pad2)">
-      <node ref="C9" pin="2"/>
-      <node ref="U2" pin="22"/>
+    <net code="3" name="Net-(Y1-Pad4)">
+      <node ref="Y1" pin="4"/>
     </net>
-    <net code="5" name="Net-(U2-Pad21)">
-      <node ref="U2" pin="21"/>
+    <net code="4" name="Net-(Y1-Pad2)">
+      <node ref="Y1" pin="2"/>
     </net>
-    <net code="6" name="/XL1">
-      <node ref="U2" pin="2"/>
-      <node ref="Y2" pin="2"/>
-      <node ref="C14" pin="2"/>
-    </net>
-    <net code="7" name="Net-(U2-Pad28)">
-      <node ref="U2" pin="28"/>
-    </net>
-    <net code="8" name="/SCL">
-      <node ref="U1" pin="4"/>
-      <node ref="U6" pin="2"/>
-      <node ref="J3" pin="1"/>
-      <node ref="R14" pin="2"/>
-      <node ref="U2" pin="13"/>
-    </net>
-    <net code="9" name="/SDA">
-      <node ref="U1" pin="6"/>
-      <node ref="R15" pin="2"/>
-      <node ref="J2" pin="1"/>
-      <node ref="U6" pin="3"/>
-      <node ref="U2" pin="12"/>
-    </net>
-    <net code="10" name="Net-(U2-Pad10)">
-      <node ref="U2" pin="10"/>
-    </net>
-    <net code="11" name="Net-(C5-Pad2)">
-      <node ref="C5" pin="2"/>
-      <node ref="U2" pin="1"/>
-    </net>
-    <net code="12" name="/LEDY">
-      <node ref="R3" pin="2"/>
-      <node ref="U2" pin="15"/>
-    </net>
-    <net code="13" name="Net-(C8-Pad1)">
-      <node ref="C8" pin="1"/>
-      <node ref="L1" pin="2"/>
-      <node ref="U2" pin="19"/>
-    </net>
-    <net code="14" name="GND">
+    <net code="5" name="GND">
+      <node ref="C15" pin="2"/>
+      <node ref="C9" pin="1"/>
+      <node ref="U2" pin="29"/>
+      <node ref="U2" pin="33"/>
+      <node ref="C8" pin="2"/>
+      <node ref="J1" pin="6"/>
+      <node ref="D1" pin="1"/>
+      <node ref="C17" pin="2"/>
+      <node ref="U2" pin="20"/>
+      <node ref="C3" pin="2"/>
+      <node ref="C10" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="U1" pin="7"/>
+      <node ref="C6" pin="1"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="C11" pin="1"/>
+      <node ref="C13" pin="1"/>
       <node ref="U6" pin="4"/>
       <node ref="C16" pin="1"/>
       <node ref="C5" pin="1"/>
-      <node ref="Q2" pin="2"/>
-      <node ref="SW2" pin="2"/>
       <node ref="U3" pin="1"/>
-      <node ref="C3" pin="2"/>
-      <node ref="D2" pin="1"/>
-      <node ref="C11" pin="1"/>
-      <node ref="C14" pin="1"/>
-      <node ref="C13" pin="1"/>
-      <node ref="U2" pin="33"/>
-      <node ref="C8" pin="2"/>
-      <node ref="C6" pin="1"/>
-      <node ref="U2" pin="29"/>
-      <node ref="C2" pin="2"/>
-      <node ref="J1" pin="4"/>
-      <node ref="C9" pin="1"/>
-      <node ref="C4" pin="2"/>
-      <node ref="U1" pin="2"/>
-      <node ref="U1" pin="3"/>
-      <node ref="U1" pin="7"/>
-      <node ref="C7" pin="2"/>
-      <node ref="D1" pin="1"/>
-      <node ref="C10" pin="2"/>
-      <node ref="U2" pin="20"/>
-      <node ref="AE1" pin="2"/>
       <node ref="C12" pin="2"/>
-      <node ref="C17" pin="2"/>
       <node ref="C1" pin="2"/>
-      <node ref="C15" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="AE1" pin="2"/>
+      <node ref="U1" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="U1" pin="3"/>
+      <node ref="C14" pin="1"/>
     </net>
-    <net code="15" name="/fHumidity">
-      <node ref="U2" pin="7"/>
-      <node ref="U3" pin="3"/>
+    <net code="6" name="/XL1">
+      <node ref="U2" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="Y2" pin="2"/>
     </net>
-    <net code="16" name="/~SOIL_EN~">
-      <node ref="R2" pin="2"/>
-      <node ref="Q1" pin="1"/>
-      <node ref="U2" pin="6"/>
-    </net>
-    <net code="17" name="Net-(U2-Pad5)">
-      <node ref="U2" pin="5"/>
-    </net>
-    <net code="18" name="+BATT">
-      <node ref="U6" pin="1"/>
-      <node ref="R15" pin="1"/>
-      <node ref="R14" pin="1"/>
-      <node ref="C12" pin="1"/>
-      <node ref="U2" pin="25"/>
-      <node ref="U2" pin="9"/>
-      <node ref="R1" pin="1"/>
-      <node ref="Q2" pin="1"/>
-      <node ref="BT1" pin="1"/>
-      <node ref="C3" pin="1"/>
-      <node ref="Q1" pin="2"/>
-      <node ref="C17" pin="1"/>
-      <node ref="J1" pin="1"/>
-      <node ref="R12" pin="1"/>
-      <node ref="C10" pin="1"/>
-      <node ref="R2" pin="1"/>
-      <node ref="U1" pin="1"/>
-      <node ref="U2" pin="32"/>
-      <node ref="C15" pin="1"/>
-      <node ref="U2" pin="4"/>
-    </net>
-    <net code="19" name="Net-(L4-Pad2)">
-      <node ref="U2" pin="31"/>
-      <node ref="L4" pin="2"/>
-    </net>
-    <net code="20" name="Net-(C16-Pad2)">
-      <node ref="L4" pin="1"/>
-      <node ref="U2" pin="30"/>
-      <node ref="C16" pin="2"/>
-    </net>
-    <net code="21" name="/XL2">
+    <net code="7" name="/XL2">
+      <node ref="C13" pin="2"/>
       <node ref="U2" pin="3"/>
       <node ref="Y2" pin="1"/>
-      <node ref="C13" pin="2"/>
     </net>
-    <net code="22" name="/THR">
-      <node ref="U3" pin="2"/>
-      <node ref="R9" pin="2"/>
-      <node ref="U3" pin="6"/>
-      <node ref="C4" pin="1"/>
-    </net>
-    <net code="23" name="Net-(C1-Pad1)">
-      <node ref="C1" pin="1"/>
-      <node ref="R8" pin="1"/>
-      <node ref="U3" pin="4"/>
-      <node ref="Q1" pin="3"/>
-      <node ref="U3" pin="8"/>
-    </net>
-    <net code="24" name="Net-(AE1-Pad1)">
-      <node ref="C7" pin="1"/>
+    <net code="8" name="Net-(AE1-Pad1)">
       <node ref="L1" pin="1"/>
+      <node ref="C7" pin="1"/>
       <node ref="AE1" pin="1"/>
     </net>
-    <net code="25" name="Net-(R12-Pad2)">
-      <node ref="U2" pin="16"/>
-      <node ref="R12" pin="2"/>
+    <net code="9" name="/SDA">
+      <node ref="U2" pin="12"/>
+      <node ref="J2" pin="1"/>
+      <node ref="U6" pin="3"/>
+      <node ref="R15" pin="2"/>
+      <node ref="U1" pin="6"/>
     </net>
-    <net code="26" name="Net-(D1-Pad2)">
-      <node ref="D1" pin="2"/>
-      <node ref="R3" pin="1"/>
+    <net code="10" name="Net-(C16-Pad2)">
+      <node ref="U2" pin="30"/>
+      <node ref="L4" pin="1"/>
+      <node ref="C16" pin="2"/>
     </net>
-    <net code="27" name="Net-(R8-Pad2)">
-      <node ref="R9" pin="1"/>
-      <node ref="U3" pin="7"/>
-      <node ref="R8" pin="2"/>
+    <net code="11" name="/SCL">
+      <node ref="U6" pin="2"/>
+      <node ref="U1" pin="4"/>
+      <node ref="R14" pin="2"/>
+      <node ref="J3" pin="1"/>
+      <node ref="U2" pin="13"/>
     </net>
-    <net code="28" name="Net-(C2-Pad1)">
+    <net code="12" name="+BATT">
+      <node ref="R2" pin="1"/>
+      <node ref="U2" pin="4"/>
+      <node ref="U2" pin="32"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="U1" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="U2" pin="25"/>
+      <node ref="U6" pin="1"/>
+      <node ref="U2" pin="9"/>
+      <node ref="C12" pin="1"/>
+      <node ref="R14" pin="1"/>
+      <node ref="R15" pin="1"/>
+      <node ref="BT1" pin="1"/>
+      <node ref="R4" pin="1"/>
+      <node ref="C15" pin="1"/>
+      <node ref="C17" pin="1"/>
+      <node ref="R1" pin="1"/>
+      <node ref="C10" pin="1"/>
+      <node ref="J1" pin="1"/>
+    </net>
+    <net code="13" name="/SWCLK">
+      <node ref="J1" pin="3"/>
+      <node ref="U2" pin="17"/>
+    </net>
+    <net code="14" name="/SWDIO">
+      <node ref="U2" pin="18"/>
+      <node ref="J1" pin="5"/>
+    </net>
+    <net code="15" name="/UART_Tx">
+      <node ref="U2" pin="15"/>
+      <node ref="J1" pin="4"/>
+    </net>
+    <net code="16" name="/UART_Rx">
+      <node ref="J1" pin="2"/>
+      <node ref="U2" pin="14"/>
+    </net>
+    <net code="17" name="Net-(C2-Pad1)">
       <node ref="C2" pin="1"/>
       <node ref="U3" pin="5"/>
     </net>
-    <net code="29" name="/LUX_INT">
-      <node ref="U2" pin="8"/>
+    <net code="18" name="Net-(C1-Pad1)">
+      <node ref="U3" pin="8"/>
+      <node ref="R8" pin="1"/>
+      <node ref="U3" pin="4"/>
+      <node ref="C1" pin="1"/>
+      <node ref="Q1" pin="3"/>
+    </net>
+    <net code="19" name="/THR">
+      <node ref="R9" pin="2"/>
+      <node ref="C4" pin="1"/>
+      <node ref="U3" pin="6"/>
+      <node ref="U3" pin="2"/>
+    </net>
+    <net code="20" name="Net-(R8-Pad2)">
+      <node ref="R8" pin="2"/>
+      <node ref="R9" pin="1"/>
+      <node ref="U3" pin="7"/>
+    </net>
+    <net code="21" name="Net-(C8-Pad1)">
+      <node ref="U2" pin="19"/>
+      <node ref="L1" pin="2"/>
+      <node ref="C8" pin="1"/>
+    </net>
+    <net code="22" name="/LEDY">
+      <node ref="R3" pin="2"/>
+      <node ref="U2" pin="10"/>
+    </net>
+    <net code="23" name="Net-(D1-Pad2)">
+      <node ref="R3" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="24" name="/LUX_INT">
       <node ref="U1" pin="5"/>
+      <node ref="U2" pin="8"/>
     </net>
-    <net code="30" name="/LEDR">
-      <node ref="R16" pin="2"/>
-      <node ref="U2" pin="14"/>
+    <net code="25" name="/fHumidity">
+      <node ref="U2" pin="7"/>
+      <node ref="U3" pin="3"/>
     </net>
-    <net code="31" name="/~BLE_RST">
-      <node ref="U2" pin="11"/>
-      <node ref="SW2" pin="1"/>
+    <net code="26" name="/~SOIL_EN~">
+      <node ref="Q1" pin="1"/>
+      <node ref="U2" pin="6"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="27" name="Net-(U2-Pad5)">
+      <node ref="U2" pin="5"/>
+    </net>
+    <net code="28" name="Net-(L4-Pad2)">
+      <node ref="L4" pin="2"/>
+      <node ref="U2" pin="31"/>
+    </net>
+    <net code="29" name="Net-(U2-Pad28)">
+      <node ref="U2" pin="28"/>
+    </net>
+    <net code="30" name="Net-(U2-Pad27)">
+      <node ref="U2" pin="27"/>
+    </net>
+    <net code="31" name="Net-(U2-Pad26)">
+      <node ref="U2" pin="26"/>
+    </net>
+    <net code="32" name="Net-(C9-Pad2)">
+      <node ref="C9" pin="2"/>
+      <node ref="U2" pin="22"/>
+    </net>
+    <net code="33" name="Net-(U2-Pad21)">
+      <node ref="U2" pin="21"/>
+    </net>
+    <net code="34" name="Net-(R1-Pad2)">
       <node ref="R1" pin="2"/>
+      <node ref="U2" pin="16"/>
     </net>
-    <net code="32" name="/XC2">
-      <node ref="Y1" pin="1"/>
-      <node ref="C6" pin="2"/>
-      <node ref="U2" pin="24"/>
+    <net code="35" name="Net-(Q2-Pad1)">
+      <node ref="Q2" pin="1"/>
+      <node ref="R4" pin="2"/>
     </net>
-    <net code="33" name="Net-(Y1-Pad4)">
-      <node ref="Y1" pin="4"/>
+    <net code="36" name="Net-(U2-Pad11)">
+      <node ref="U2" pin="11"/>
     </net>
-    <net code="34" name="Net-(Y1-Pad2)">
-      <node ref="Y1" pin="2"/>
+    <net code="37" name="Net-(C5-Pad2)">
+      <node ref="C5" pin="2"/>
+      <node ref="U2" pin="1"/>
     </net>
-    <net code="35" name="/SWCLK">
-      <node ref="U2" pin="17"/>
-      <node ref="J1" pin="2"/>
-    </net>
-    <net code="36" name="/SWDIO">
-      <node ref="U2" pin="18"/>
-      <node ref="J1" pin="3"/>
-    </net>
-    <net code="37" name="Net-(U6-Pad5)">
+    <net code="38" name="Net-(U6-Pad5)">
       <node ref="U6" pin="5"/>
     </net>
-    <net code="38" name="Net-(D2-Pad2)">
-      <node ref="D2" pin="2"/>
-      <node ref="R16" pin="1"/>
-    </net>
     <net code="39" name="Net-(BT1-Pad2)">
-      <node ref="Q2" pin="3"/>
       <node ref="BT1" pin="2"/>
+      <node ref="Q2" pin="3"/>
     </net>
   </nets>
 </export>

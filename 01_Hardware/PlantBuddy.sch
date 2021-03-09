@@ -83,22 +83,22 @@ Connection ~ 1025 1925
 Text Label 1450 1925 2    50   ~ 0
 ~SOIL_EN~
 Wire Wire Line
-	10450 1000 10175 1000
-Text Label 10175 1000 0    50   ~ 0
+	10050 1000 9775 1000
+Text Label 9775 1000 0    50   ~ 0
 SWDIO
 Wire Wire Line
-	10450 900  10175 900 
-Text Label 10175 900  0    50   ~ 0
+	10050 900  9775 900 
+Text Label 9775 900  0    50   ~ 0
 SWCLK
 $Comp
 L PlantBuddy-rescue:GND-power #PWR040
 U 1 1 5F81A7B8
-P 10450 1100
-F 0 "#PWR040" H 10450 850 50  0001 C CNN
-F 1 "GND" H 10455 927 50  0000 C CNN
-F 2 "" H 10450 1100 50  0001 C CNN
-F 3 "" H 10450 1100 50  0001 C CNN
-	1    10450 1100
+P 10550 1000
+F 0 "#PWR040" H 10550 750 50  0001 C CNN
+F 1 "GND" H 10700 925 50  0001 C CNN
+F 2 "" H 10550 1000 50  0001 C CNN
+F 3 "" H 10550 1000 50  0001 C CNN
+	1    10550 1000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -134,8 +134,6 @@ F 3 "" H 5150 2375 50  0001 C CNN
 	1    5150 2375
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	10400 4400 10400 4325
 $Comp
 L PlantBuddy-rescue:GND-power #PWR019
 U 1 1 5F8E4C67
@@ -255,23 +253,23 @@ Wire Wire Line
 $Comp
 L PlantBuddy-rescue:+BATT-power #PWR0105
 U 1 1 5FC54A7F
-P 3725 7025
-F 0 "#PWR0105" H 3725 6875 50  0001 C CNN
-F 1 "+BATT" H 3740 7198 50  0000 C CNN
-F 2 "" H 3725 7025 50  0001 C CNN
-F 3 "" H 3725 7025 50  0001 C CNN
-	1    3725 7025
+P 3725 6800
+F 0 "#PWR0105" H 3725 6650 50  0001 C CNN
+F 1 "+BATT" H 3740 6973 50  0000 C CNN
+F 2 "" H 3725 6800 50  0001 C CNN
+F 3 "" H 3725 6800 50  0001 C CNN
+	1    3725 6800
 	1    0    0    -1  
 $EndComp
 $Comp
 L PlantBuddy-rescue:GND-power #PWR0106
 U 1 1 5FC54E7E
-P 3725 7325
-F 0 "#PWR0106" H 3725 7075 50  0001 C CNN
-F 1 "GND" H 3730 7152 50  0000 C CNN
-F 2 "" H 3725 7325 50  0001 C CNN
-F 3 "" H 3725 7325 50  0001 C CNN
-	1    3725 7325
+P 3725 7300
+F 0 "#PWR0106" H 3725 7050 50  0001 C CNN
+F 1 "GND" H 3730 7127 50  0000 C CNN
+F 2 "" H 3725 7300 50  0001 C CNN
+F 3 "" H 3725 7300 50  0001 C CNN
+	1    3725 7300
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -300,16 +298,14 @@ $EndComp
 $Comp
 L PlantBuddy-rescue:+BATT-power #PWR0109
 U 1 1 5FC5B8EB
-P 10450 800
-F 0 "#PWR0109" H 10450 650 50  0001 C CNN
-F 1 "+BATT" H 10465 973 50  0000 C CNN
-F 2 "" H 10450 800 50  0001 C CNN
-F 3 "" H 10450 800 50  0001 C CNN
-	1    10450 800 
+P 10050 800
+F 0 "#PWR0109" H 10050 650 50  0001 C CNN
+F 1 "+BATT" H 9900 925 50  0000 C CNN
+F 2 "" H 10050 800 50  0001 C CNN
+F 3 "" H 10050 800 50  0001 C CNN
+	1    10050 800 
 	1    0    0    -1  
 $EndComp
-Text Notes 10000 1675 0    50   ~ 0
-TODO:\nPut it in such a way that\n it is small and hidden\nWe will need to build \na programming rig for it!
 $Comp
 L PlantBuddy-rescue:+BATT-power #PWR0110
 U 1 1 5FC6607C
@@ -321,10 +317,6 @@ F 3 "" H 7850 1600 50  0001 C CNN
 	1    7850 1600
 	1    0    0    -1  
 $EndComp
-Text Label 10225 4325 0    50   ~ 0
-LEDR
-Wire Wire Line
-	10225 4325 10400 4325
 Wire Wire Line
 	1225 1625 1675 1625
 Wire Wire Line
@@ -384,47 +376,12 @@ Wire Wire Line
 	975  5625 1375 5625
 Text Notes 3750 1875 0    50   ~ 0
 N5: The free-air capacitance is 46pF\nyielding a free-air frequency of 700kHz
-Text Notes 7625 6175 0    50   ~ 0
-A really small cheap button to be used\nfor resetting the bluetooth connection\nor reset to default settings
 Wire Wire Line
-	3725 7325 3550 7325
+	3725 7300 3550 7300
 Wire Wire Line
-	2875 7325 3150 7325
-Wire Wire Line
-	2875 7025 3350 7025
-Text Notes 2825 7700 0    50   ~ 0
+	2875 7300 3150 7300
+Text Notes 2825 7675 0    50   ~ 0
 Reverse-voltage protection
-$Comp
-L PlantBuddy-rescue:GND-power #PWR0111
-U 1 1 5FC9D7EF
-P 8950 5675
-F 0 "#PWR0111" H 8950 5425 50  0001 C CNN
-F 1 "GND" H 8955 5502 50  0000 C CNN
-F 2 "" H 8950 5675 50  0001 C CNN
-F 3 "" H 8950 5675 50  0001 C CNN
-	1    8950 5675
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8950 5675 8825 5675
-Wire Wire Line
-	8425 5675 8275 5675
-$Comp
-L PlantBuddy-rescue:+BATT-power #PWR0112
-U 1 1 5FCBCC7F
-P 8275 5475
-F 0 "#PWR0112" H 8275 5325 50  0001 C CNN
-F 1 "+BATT" H 8290 5648 50  0000 C CNN
-F 2 "" H 8275 5475 50  0001 C CNN
-F 3 "" H 8275 5475 50  0001 C CNN
-	1    8275 5475
-	1    0    0    -1  
-$EndComp
-Text Label 7900 5675 0    50   ~ 0
-~BLE_RST
-Wire Wire Line
-	7900 5675 8275 5675
-Connection ~ 8275 5675
 Wire Wire Line
 	975  6025 975  6125
 Connection ~ 1375 5625
@@ -435,39 +392,15 @@ Connection ~ 1375 6325
 Text Notes 9825 5225 0    50   ~ 0
 Yellow status LED => short blinks\nto notify user of different actions
 $Comp
-L PlantBuddy-rescue:R_Small-Device R1
-U 1 1 5FCB6EA2
-P 8275 5575
-F 0 "R1" H 8125 5625 50  0000 L CNN
-F 1 "10k" H 8100 5550 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 8275 5575 50  0001 C CNN
-F 3 "~" H 8275 5575 50  0001 C CNN
-F 4 "C25744" H 8275 5575 50  0001 C CNN "LCSC"
-	1    8275 5575
-	-1   0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:SW_Push-Switch SW2
-U 1 1 5FC9C6CC
-P 8625 5675
-F 0 "SW2" H 8575 5525 50  0000 C CNN
-F 1 "BLE_RST_SW" H 8625 5600 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_EVQP7C" H 8625 5875 50  0001 C CNN
-F 3 "~" H 8625 5875 50  0001 C CNN
-F 4 "C388883" H 8625 5675 50  0001 C CNN "LCSC"
-	1    8625 5675
-	1    0    0    -1  
-$EndComp
-$Comp
 L PlantBuddy-rescue:Q_NMOS_GSD-Device Q2
 U 1 1 5FC7486C
-P 3350 7225
-F 0 "Q2" V 3599 7225 50  0000 C CNN
-F 1 "AO3400A" V 3690 7225 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 3550 7325 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/1811081213_Alpha-Omega-Semicon-AO3400A_C20917.pdf" H 3350 7225 50  0001 C CNN
-F 4 "C20917" V 3350 7225 50  0001 C CNN "LCSC"
-	1    3350 7225
+P 3350 7200
+F 0 "Q2" V 3599 7200 50  0000 C CNN
+F 1 "AO3400A" V 3690 7200 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3550 7300 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/1811081213_Alpha-Omega-Semicon-AO3400A_C20917.pdf" H 3350 7200 50  0001 C CNN
+F 4 "C20917" V 3350 7200 50  0001 C CNN "LCSC"
+	1    3350 7200
 	0    -1   1    0   
 $EndComp
 $Comp
@@ -548,21 +481,21 @@ F 0 "L4" V 7535 1975 50  0000 C CNN
 F 1 "10uH" V 7444 1975 50  0000 C CNN
 F 2 "Inductor_SMD:L_0805_2012Metric" H 7350 1975 50  0001 C CNN
 F 3 "~" H 7350 1975 50  0001 C CNN
-F 4 "C1046" V 7350 1975 50  0001 C CNN "LCSC"
+F 4 "C95978" V 7350 1975 50  0001 C CNN "LCSC"
 	1    7350 1975
 	1    0    0    -1  
 $EndComp
 $Comp
 L PlantBuddy-rescue:Battery_Cell-Device BT1
 U 1 1 5FC5077F
-P 2875 7225
-F 0 "BT1" H 2993 7321 50  0000 L CNN
-F 1 "Li+" H 2993 7230 50  0000 L CNN
-F 2 "PlantBuddy:BatteryHolder_LCSC_2032" V 2875 7285 50  0001 C CNN
-F 3 "~" V 2875 7285 50  0001 C CNN
-F 4 "C70377" H 2875 7225 50  0001 C CNN "LCSC"
-F 5 "CR2032-BS-6-1" H 2875 7225 50  0001 C CNN "MFR"
-	1    2875 7225
+P 2875 7100
+F 0 "BT1" H 2993 7196 50  0000 L CNN
+F 1 "Li+" H 2993 7105 50  0000 L CNN
+F 2 "PlantBuddy:BatteryHolder_LCSC_2032" V 2875 7160 50  0001 C CNN
+F 3 "~" V 2875 7160 50  0001 C CNN
+F 4 "C70377" H 2875 7100 50  0001 C CNN "LCSC"
+F 5 "CR2032-BS-6-1" H 2875 7100 50  0001 C CNN "MFR"
+	1    2875 7100
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -662,30 +595,6 @@ F 4 "C1547" H 6325 5025 50  0001 C CNN "LCSC"
 	1    0    0    1   
 $EndComp
 $Comp
-L PlantBuddy-rescue:R_Small-Device R16
-U 1 1 5F86CA65
-P 10400 4500
-F 0 "R16" V 10204 4500 50  0000 C CNN
-F 1 "1k" V 10295 4500 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 10400 4500 50  0001 C CNN
-F 3 "~" H 10400 4500 50  0001 C CNN
-F 4 "C11702" V 10400 4500 50  0001 C CNN "LCSC"
-	1    10400 4500
-	-1   0    0    1   
-$EndComp
-$Comp
-L PlantBuddy-rescue:LED_Small-Device D2
-U 1 1 5F86A474
-P 10400 4700
-F 0 "D2" V 10446 4630 50  0000 R CNN
-F 1 "R" V 10355 4630 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric" V 10400 4700 50  0001 C CNN
-F 3 "~" V 10400 4700 50  0001 C CNN
-F 4 "C2286" V 10400 4700 50  0001 C CNN "LCSC"
-	1    10400 4700
-	0    -1   -1   0   
-$EndComp
-$Comp
 L PlantBuddy-rescue:C_Small-Device C2
 U 1 1 5F8CAA05
 P 1775 2300
@@ -695,18 +604,6 @@ F 2 "Capacitor_SMD:C_0402_1005Metric" H 1775 2300 50  0001 C CNN
 F 3 "~" H 1775 2300 50  0001 C CNN
 F 4 "C1525" H 1775 2300 50  0001 C CNN "LCSC"
 	1    1775 2300
-	-1   0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:R_Small-Device R12
-U 1 1 5F89EE4B
-P 6000 3575
-F 0 "R12" H 6059 3621 50  0000 L CNN
-F 1 "10k" H 6059 3530 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 6000 3575 50  0001 C CNN
-F 3 "~" H 6000 3575 50  0001 C CNN
-F 4 "C25744" H 6000 3575 50  0001 C CNN "LCSC"
-	1    6000 3575
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -828,15 +725,15 @@ F 4 "C90462" H 1575 6450 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L PlantBuddy-rescue:Conn_01x04-Connector_Generic J1
+L Connector_Generic:Conn_02x03_Odd_Even J1
 U 1 1 5F817EB3
-P 10650 900
-F 0 "J1" H 10730 892 50  0000 L CNN
-F 1 "SWD" H 10730 801 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 10650 900 50  0001 C CNN
-F 3 "~" H 10650 900 50  0001 C CNN
-F 4 "C541879" H 10650 900 50  0001 C CNN "LCSC"
-	1    10650 900 
+P 10250 900
+F 0 "J1" H 10250 700 50  0000 L CNN
+F 1 "SWD+DBG" H 10125 1100 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 10250 900 50  0001 C CNN
+F 3 "~" H 10250 900 50  0001 C CNN
+F 4 "C541879" H 10250 900 50  0001 C CNN "LCSC"
+	1    10250 900 
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -854,19 +751,14 @@ $EndComp
 $Comp
 L PlantBuddy-rescue:GND-power #PWR01
 U 1 1 5FC2781D
-P 10225 4800
-F 0 "#PWR01" H 10225 4550 50  0001 C CNN
-F 1 "GND" H 10230 4627 50  0000 C CNN
-F 2 "" H 10225 4800 50  0001 C CNN
-F 3 "" H 10225 4800 50  0001 C CNN
-	1    10225 4800
+P 10025 4800
+F 0 "#PWR01" H 10025 4550 50  0001 C CNN
+F 1 "GND" H 10030 4627 50  0000 C CNN
+F 2 "" H 10025 4800 50  0001 C CNN
+F 3 "" H 10025 4800 50  0001 C CNN
+	1    10025 4800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	10225 4800 10025 4800
-Wire Wire Line
-	10225 4800 10400 4800
-Connection ~ 10225 4800
 $Comp
 L PlantBuddy-rescue:R_Small-Device R3
 U 1 1 5FC33886
@@ -885,18 +777,6 @@ Wire Wire Line
 	10025 4325 9850 4325
 Text Label 9850 4325 0    50   ~ 0
 LEDY
-$Comp
-L PlantBuddy-rescue:nRF52810-QCxx-MCU_Nordic U2
-U 1 1 601392C1
-P 7150 3075
-F 0 "U2" H 6400 2075 50  0000 C CNN
-F 1 "nRF52810-QCxx" H 7650 2075 50  0000 C CNN
-F 2 "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm_ThermalVias" H 7150 1725 50  0001 C CNN
-F 3 "http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf" H 6650 3275 50  0001 C CNN
-F 4 "C519278" H 7150 3075 50  0001 C CNN "LCSC"
-	1    7150 3075
-	1    0    0    -1  
-$EndComp
 $Comp
 L PlantBuddy-rescue:C_Small-Device C8
 U 1 1 601440B0
@@ -1010,9 +890,6 @@ Wire Wire Line
 	6075 2875 6250 2875
 Wire Wire Line
 	6075 3275 6250 3275
-Wire Wire Line
-	3350 7025 3725 7025
-Connection ~ 3350 7025
 Text Label 8425 2775 2    50   ~ 0
 ~SOIL_EN~
 Text Label 8425 2875 2    50   ~ 0
@@ -1044,19 +921,6 @@ Wire Wire Line
 	8275 3375 8050 3375
 Wire Wire Line
 	8275 3275 8050 3275
-Wire Wire Line
-	6250 3675 6000 3675
-$Comp
-L PlantBuddy-rescue:+BATT-power #PWR0115
-U 1 1 602A5380
-P 6000 3475
-F 0 "#PWR0115" H 6000 3325 50  0001 C CNN
-F 1 "+BATT" H 5800 3550 50  0000 C CNN
-F 2 "" H 6000 3475 50  0001 C CNN
-F 3 "" H 6000 3475 50  0001 C CNN
-	1    6000 3475
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7350 1875 7350 1800
 Wire Wire Line
@@ -1143,20 +1007,10 @@ Wire Wire Line
 	8425 2775 8050 2775
 Wire Wire Line
 	8425 2875 8050 2875
-Text Label 8325 3475 2    50   ~ 0
-LEDR
 Text Label 8425 2975 2    50   ~ 0
 LUX_INT
-Text Label 8450 3175 2    50   ~ 0
-~BLE_RST
-Wire Wire Line
-	8050 3175 8450 3175
-Text Label 8325 3575 2    50   ~ 0
+Text Label 8450 3075 2    50   ~ 0
 LEDY
-Wire Wire Line
-	8050 3575 8325 3575
-Wire Wire Line
-	8050 3475 8325 3475
 Wire Wire Line
 	8425 2975 8050 2975
 $Comp
@@ -1177,7 +1031,6 @@ ADC configured with internal reference\nand gain 1/6 => 0 - 3.6V
 Text Notes 7275 6875 0    50   ~ 0
 Fuck BlueNRG.
 NoConn ~ 8050 2675
-NoConn ~ 8050 3075
 NoConn ~ 8050 3775
 NoConn ~ 8050 3875
 $Comp
@@ -1202,8 +1055,83 @@ Wire Wire Line
 Connection ~ 1375 4800
 Wire Wire Line
 	875  4600 875  4800
-Text Notes 7550 6350 0    50   ~ 0
-TODO: Muta reset btn-ul mai sus, altfel nu il pot\naccesa din cauza pamantului
+Wire Wire Line
+	8050 3075 8450 3075
+$Comp
+L PlantBuddy-rescue:nRF52810-QCxx-MCU_Nordic U2
+U 1 1 601392C1
+P 7150 3075
+F 0 "U2" H 6400 2075 50  0000 C CNN
+F 1 "nRF52810-QCxx" H 7650 2075 50  0000 C CNN
+F 2 "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm_ThermalVias" H 7150 1725 50  0001 C CNN
+F 3 "http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf" H 6650 3275 50  0001 C CNN
+F 4 "C519278" H 7150 3075 50  0001 C CNN "LCSC"
+	1    7150 3075
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8050 3475 8450 3475
+Wire Wire Line
+	8050 3575 8450 3575
+Text Label 8450 3475 2    50   ~ 0
+UART_Rx
+Text Label 8450 3575 2    50   ~ 0
+UART_Tx
+NoConn ~ 8050 3175
+$Comp
+L PlantBuddy-rescue:R_Small-Device R4
+U 1 1 6047E951
+P 3350 6900
+F 0 "R4" H 3200 6950 50  0000 L CNN
+F 1 "10k" H 3175 6875 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 3350 6900 50  0001 C CNN
+F 3 "~" H 3350 6900 50  0001 C CNN
+F 4 "C25744" H 3350 6900 50  0001 C CNN "LCSC"
+	1    3350 6900
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2875 6800 3350 6800
+Connection ~ 3350 6800
+Wire Wire Line
+	3350 6800 3725 6800
+Wire Wire Line
+	2875 6900 2875 6800
+Wire Wire Line
+	2875 7200 2875 7300
+$Comp
+L PlantBuddy-rescue:R_Small-Device R1
+U 1 1 604A62C8
+P 6000 3575
+F 0 "R1" H 5850 3625 50  0000 L CNN
+F 1 "10k" H 5825 3550 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 6000 3575 50  0001 C CNN
+F 3 "~" H 6000 3575 50  0001 C CNN
+F 4 "C25744" H 6000 3575 50  0001 C CNN "LCSC"
+	1    6000 3575
+	-1   0    0    -1  
+$EndComp
+$Comp
+L PlantBuddy-rescue:+BATT-power #PWR0111
+U 1 1 604A80A0
+P 6000 3475
+F 0 "#PWR0111" H 6000 3325 50  0001 C CNN
+F 1 "+BATT" H 5850 3575 50  0000 C CNN
+F 2 "" H 6000 3475 50  0001 C CNN
+F 3 "" H 6000 3475 50  0001 C CNN
+	1    6000 3475
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6000 3675 6250 3675
+Text Label 10875 800  2    50   ~ 0
+UART_Rx
+Text Label 10875 900  2    50   ~ 0
+UART_Tx
+Wire Wire Line
+	10550 900  10875 900 
+Wire Wire Line
+	10550 800  10875 800 
 Wire Bus Line
 	2150 4500 2600 4500
 Wire Bus Line
