@@ -894,9 +894,9 @@ Text Label 8425 2775 2    50   ~ 0
 ~SOIL_EN~
 Text Label 8425 2875 2    50   ~ 0
 fHumidity
-Text Label 8275 3375 2    50   ~ 0
+Text Label 8275 3175 2    50   ~ 0
 SCL
-Text Label 8275 3275 2    50   ~ 0
+Text Label 8275 3075 2    50   ~ 0
 SDA
 Wire Wire Line
 	6250 3875 5975 3875
@@ -918,9 +918,9 @@ F 3 "" H 7150 2075 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8275 3375 8050 3375
+	8275 3175 8050 3175
 Wire Wire Line
-	8275 3275 8050 3275
+	8275 3075 8050 3075
 Wire Wire Line
 	7350 1875 7350 1800
 Wire Wire Line
@@ -1009,7 +1009,7 @@ Wire Wire Line
 	8425 2875 8050 2875
 Text Label 8425 2975 2    50   ~ 0
 LUX_INT
-Text Label 8450 3075 2    50   ~ 0
+Text Label 8450 3275 2    50   ~ 0
 LEDY
 Wire Wire Line
 	8425 2975 8050 2975
@@ -1056,12 +1056,12 @@ Connection ~ 1375 4800
 Wire Wire Line
 	875  4600 875  4800
 Wire Wire Line
-	8050 3075 8450 3075
+	8050 3275 8450 3275
 $Comp
 L PlantBuddy-rescue:nRF52810-QCxx-MCU_Nordic U2
 U 1 1 601392C1
 P 7150 3075
-F 0 "U2" H 6400 2075 50  0000 C CNN
+F 0 "U2" H 6425 2125 50  0000 C CNN
 F 1 "nRF52810-QCxx" H 7650 2075 50  0000 C CNN
 F 2 "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm_ThermalVias" H 7150 1725 50  0001 C CNN
 F 3 "http://infocenter.nordicsemi.com/pdf/nRF52810_PS_v1.1.pdf" H 6650 3275 50  0001 C CNN
@@ -1070,14 +1070,13 @@ F 4 "C519278" H 7150 3075 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8050 3475 8450 3475
-Wire Wire Line
 	8050 3575 8450 3575
-Text Label 8450 3475 2    50   ~ 0
-UART_Rx
+Wire Wire Line
+	8050 3475 8450 3475
 Text Label 8450 3575 2    50   ~ 0
+UART_Rx
+Text Label 8450 3475 2    50   ~ 0
 UART_Tx
-NoConn ~ 8050 3175
 $Comp
 L PlantBuddy-rescue:R_Small-Device R4
 U 1 1 6047E951
@@ -1132,6 +1131,16 @@ Wire Wire Line
 	10550 900  10875 900 
 Wire Wire Line
 	10550 800  10875 800 
+Connection ~ 6050 2575
+Wire Wire Line
+	5700 2575 5700 4075
+Connection ~ 7150 4075
+Wire Wire Line
+	5700 4075 7150 4075
+Wire Wire Line
+	5700 2575 6050 2575
+NoConn ~ 8050 3375
+NoConn ~ 8050 3675
 Wire Bus Line
 	2150 4500 2600 4500
 Wire Bus Line
