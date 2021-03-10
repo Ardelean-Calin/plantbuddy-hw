@@ -575,7 +575,7 @@ L PlantBuddy-rescue:C_Small-Device C11
 U 1 1 5F8E6679
 P 6825 5025
 F 0 "C11" H 6733 4979 50  0000 R CNN
-F 1 "12pF" H 6733 5070 50  0000 R CNN
+F 1 "22pF" H 6733 5070 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 6825 5025 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-0402CG120J500NT_C1547.pdf" H 6825 5025 50  0001 C CNN
 F 4 "C1547" H 6825 5025 50  0001 C CNN "LCSC"
@@ -587,7 +587,7 @@ L PlantBuddy-rescue:C_Small-Device C6
 U 1 1 5F8E556C
 P 6325 5025
 F 0 "C6" H 6234 4979 50  0000 R CNN
-F 1 "12pF" H 6234 5070 50  0000 R CNN
+F 1 "22pF" H 6234 5070 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 6325 5025 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-0402CG120J500NT_C1547.pdf" H 6325 5025 50  0001 C CNN
 F 4 "C1547" H 6325 5025 50  0001 C CNN "LCSC"
