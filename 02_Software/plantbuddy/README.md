@@ -1,4 +1,4 @@
-# mobile_app
+# plantbuddy
 
 A new Flutter project.
 
