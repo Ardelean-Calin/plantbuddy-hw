@@ -17,8 +17,12 @@
 static uint16_t      battery_voltage_mv;
 static sensor_data_t sensor_data;
 
-#define SENSORS_UPDATE_PERIOD_MS 2000 // We will call the different sensor update commands every this number of ms
-#define TWI_PENDING_TRANSACTIONS 3    // Size of TWI transactions queue
+#ifdef RELEASE
+#define SENSORS_UPDATE_PERIOD_MS 10000 // We will call the different sensor update commands every this number of ms
+#elif DEBUG
+#define SENSORS_UPDATE_PERIOD_MS 1000 // We will call the different sensor update commands every this number of ms
+#endif
+#define TWI_PENDING_TRANSACTIONS 3 // Size of TWI transactions queue
 
 APP_TIMER_DEF(m_sensors_periodic_timer);                      // App timer used by this module
 NRF_TWI_MNGR_DEF(m_twi_manager, TWI_PENDING_TRANSACTIONS, 0); // TWI Transaction manager

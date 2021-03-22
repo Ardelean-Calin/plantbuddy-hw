@@ -46,7 +46,10 @@
             "char_airtemp.h": "c",
             "char_airhum.h": "c",
             "char_pb_sensors.h": "c",
-            "app_util_platform.h": "c"
+            "app_util_platform.h": "c",
+            "nrf_drv_gpiote.h": "c",
+            "stdint.h": "c",
+            "stddef.h": "c"
         },
         "editor.fontSize": 16,
         "editor.formatOnSave": true,

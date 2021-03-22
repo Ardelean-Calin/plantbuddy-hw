@@ -285,6 +285,11 @@ CFLAGS += -DDEBUG
 ASMFLAGS += -DDEBUG
 endif
 
+ifdef RELEASE
+CFLAGS += -DRELEASE
+ASMFLAGS += -DRELEASE
+endif
+
 plant-buddy: CFLAGS += -D__HEAP_SIZE=2048
 plant-buddy: CFLAGS += -D__STACK_SIZE=2048
 plant-buddy: ASMFLAGS += -D__HEAP_SIZE=2048
