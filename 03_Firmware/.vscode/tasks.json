@@ -32,6 +32,7 @@
                 "Clean",
                 "Build (Debug)"
             ],
+            "dependsOrder": "sequence",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -46,6 +47,7 @@
                 "Clean",
                 "Build (Release)"
             ],
+            "dependsOrder": "sequence",
             "problemMatcher": []
         },
         {
@@ -89,7 +91,7 @@
             "label": "Update Bootloader",
             "detail": "Flashes the Secure Bootloader and its settings.",
             "dependsOn": [
-                "Bootloader (Rebuild)",
+                "Bootloader (Build)",
                 "Flash Bootloader",
                 "Flash Bootloader Settings"
             ],
@@ -114,7 +116,11 @@
         },
         {
             "label": "Flash App",
-            "dependsOn": "Build (Debug)",
+            "dependsOn": [
+                "Rebuild (Release)",
+                "Update Bootloader",
+            ],
+            "dependsOrder": "sequence",
             "detail": "Flashes the Application Firmware",
             "type": "shell",
             "command": "openocd -f ${workspaceFolder}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceFolder}/_build/plant-buddy.hex verify reset exit\"",
@@ -151,6 +157,7 @@
                 "Bootloader (Clean)",
                 "uECC (Link Library)"
             ],
+            "dependsOrder": "sequence",
             "command": "make -j6",
             "problemMatcher": []
         },
@@ -174,6 +181,7 @@
                 "Bootloader (Build)",
                 "Build Bootloader Settings"
             ],
+            "dependsOrder": "sequence",
             "type": "shell",
             "command": "mergehex --merge ${workspaceFolder}/secure_bootloader/_build/bootloader.hex ${workspaceFolder}/secure_bootloader/_build/bootloader_setting.hex --output ${workspaceRoot}/secure_bootloader/_build/bootloader-with-settings.hex",
             "problemMatcher": []
@@ -194,9 +202,19 @@
                 "Merge Bootloader + Settings",
                 "Package DFU (App)"
             ],
+            "dependsOrder": "sequence",
             "command": "nrfutil pkg generate --hw-version 52 --bootloader-version ${input:BootloaderVersion} --bootloader ./secure_bootloader/_build/bootloader-with-settings.hex --key-file secure_bootloader/private.key PlantBuddy_Bootloader_DFU.zip --sd-req 0x103",
             "problemMatcher": []
         },
+        {
+            "label": "DFU - Generate Private/Public Keys",
+            "detail": "Generates the private and public keys used by the bootloader.",
+            "type": "shell",
+            "command": [
+                "nrfutil keys generate ${workspaceRoot}/secure_bootloader/private.key && nrfutil keys display --key pk --format code ${workspaceRoot}/secure_bootloader/private.key --out_file ${workspaceRoot}/secure_bootloader/public_key.c"
+            ],
+            "problemMatcher": []
+        }
     ],
     "inputs": [
         {
