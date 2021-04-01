@@ -29,7 +29,10 @@
                 "NRF_DFU_TRANSPORT_BLE=1",
                 "DEBUG"
             ],
-            "compilerPath": "/bin/arm-none-eabi-gcc",
+            // Linux/OSX
+            // "compilerPath": "/bin/arm-none-eabi-gcc",
+            // Windows
+            "compilerPath": "C:/Users/Calin/scoop/apps/gcc-arm-none-eabi/current/bin/arm-none-eabi-gcc",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "linux-gcc-arm"
