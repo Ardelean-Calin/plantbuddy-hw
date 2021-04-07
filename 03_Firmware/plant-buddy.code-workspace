@@ -51,7 +51,6 @@
             "stdint.h": "c",
             "stddef.h": "c"
         },
-        "editor.fontSize": 16,
         "editor.formatOnSave": true,
         "editor.rulers": [
             119

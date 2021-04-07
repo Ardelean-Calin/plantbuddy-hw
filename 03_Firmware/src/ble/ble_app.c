@@ -41,9 +41,12 @@ BLE_CUS_PB_DEF(m_cus_pb);
 // Use UUIDs for service(s) used in your application.
 static ble_uuid_t m_adv_uuids[] = /**< Universally unique service identifiers. */
     {
+
         {BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE},
-        // {BLE_DFU_SERVICE_UUID, BLE_UUID_TYPE_BLE},
-        // {PB_SERVICE_UUID, BLE_UUID_TYPE_VENDOR_BEGIN},
+};
+
+static ble_uuid_t m_sr_uuids[] = {
+    {CUSTOM_SERVICE_UUID, BLE_UUID_TYPE_VENDOR_BEGIN},
 };
 
 static void advertising_start(bool erase_bonds);
@@ -235,14 +238,15 @@ static void services_init(void)
 
     ble_dfu_buttonless_init_t dfus_init = {.evt_handler = ble_dfu_buttonless_evt_handler};
 
-    err_code = ble_dfu_buttonless_init(&dfus_init);
-    APP_ERROR_CHECK(err_code);
-
     // Initialize CUS Service init structure to zero.
     cus_init.evt_handler = on_cus_evt;
 
     err_code = ble_cus_pb_init(&m_cus_pb, &cus_init);
     APP_ERROR_CHECK(err_code);
+
+    err_code = ble_dfu_buttonless_init(&dfus_init);
+    APP_ERROR_CHECK(err_code);
+
     /* YOUR_JOB: Add code to initialize the services used by the application.
        ble_xxs_init_t                     xxs_init;
        ble_yys_init_t                     yys_init;
@@ -496,11 +500,15 @@ static void advertising_init(void)
 
     memset(&init, 0, sizeof(init));
 
-    init.advdata.name_type              = BLE_ADVDATA_FULL_NAME;
-    init.advdata.flags                  = BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE;
-    init.srdata.include_appearance      = true;
-    init.srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
-    init.srdata.uuids_complete.p_uuids  = m_adv_uuids;
+    init.advdata.name_type               = BLE_ADVDATA_NO_NAME;
+    init.advdata.flags                   = BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE;
+    init.advdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
+    init.advdata.uuids_complete.p_uuids  = m_adv_uuids;
+
+    init.srdata.name_type               = BLE_ADVDATA_FULL_NAME;
+    init.srdata.include_appearance      = false;
+    init.srdata.uuids_complete.uuid_cnt = sizeof(m_sr_uuids) / sizeof(m_sr_uuids[0]);
+    init.srdata.uuids_complete.p_uuids  = m_sr_uuids;
 
     init.config.ble_adv_fast_enabled  = true;
     init.config.ble_adv_fast_interval = APP_ADV_INTERVAL;
