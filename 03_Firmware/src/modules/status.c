@@ -68,11 +68,9 @@ static void status_gpiote_init(void)
 
     // TODO: This should not be here but in some separate "status.c" module
     nrf_drv_gpiote_out_config_t config1 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
-    nrf_drv_gpiote_out_config_t config2 = NRFX_GPIOTE_CONFIG_OUT_SIMPLE(false);
 
     // Configure output pins
     nrf_drv_gpiote_out_init(PIN_OUT_LEDY, &config1);
-    nrf_drv_gpiote_out_init(PIN_OUT_LEDR, &config2);
 }
 
 /**

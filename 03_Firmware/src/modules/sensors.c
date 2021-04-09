@@ -1,7 +1,7 @@
 /* Nordic-specific includes */
 #include "app_timer.h"
-#include "nrf_drv_twi.h"
 #include "nrf_twi_mngr.h"
+#include "nrfx_twi.h"
 /* Drivers */
 #include "battery_sensor.h"
 #include "opt3001_driver.h"
@@ -22,7 +22,7 @@ static sensor_data_t sensor_data;
 #elif DEBUG
 #define SENSORS_UPDATE_PERIOD_MS 1000 // We will call the different sensor update commands every this number of ms
 #endif
-#define TWI_PENDING_TRANSACTIONS 3 // Size of TWI transactions queue
+#define TWI_PENDING_TRANSACTIONS 5 // Size of TWI transactions queue
 
 APP_TIMER_DEF(m_sensors_periodic_timer);                      // App timer used by this module
 NRF_TWI_MNGR_DEF(m_twi_manager, TWI_PENDING_TRANSACTIONS, 0); // TWI Transaction manager

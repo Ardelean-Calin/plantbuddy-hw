@@ -2,7 +2,7 @@ PROJECT_NAME     := secure_bootloader_ble_s112_pca10040e
 TARGETS          := bootloader
 OUTPUT_DIRECTORY := _build
 
-SDK_ROOT := ../lib/nrf-sdk/
+SDK_ROOT := ../lib/nrf-sdk
 PROJ_DIR := ./
 
 $(OUTPUT_DIRECTORY)/bootloader.out: \
@@ -10,8 +10,8 @@ $(OUTPUT_DIRECTORY)/bootloader.out: \
 
 # Source files common to all targets
 SRC_FILES += \
-  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52810.S \
-  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52810.c \
+  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52811.S \
+  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52811.c \
   $(SDK_ROOT)/components/libraries/util/app_error_weak.c \
   $(SDK_ROOT)/components/libraries/scheduler/app_scheduler.c \
   $(SDK_ROOT)/components/libraries/util/app_util_platform.c \
@@ -122,7 +122,7 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/toolchain/cmsis/include \
   $(SDK_ROOT)/components/libraries/balloc \
   $(SDK_ROOT)/components/libraries/atomic_fifo \
-  $(PROJ_DIR) \
+  $(PROJ_DIR)/inc \
   $(SDK_ROOT)/components/libraries/crypto/backend/nrf_sw \
   $(SDK_ROOT)/modules/nrfx/mdk \
   $(SDK_ROOT)/components/libraries/bootloader/ble_dfu \
@@ -148,7 +148,7 @@ CFLAGS += -DBOARD_PCA10040
 CFLAGS += -DCONFIG_GPIO_AS_PINRESET
 CFLAGS += -DDEVELOP_IN_NRF52832
 CFLAGS += -DFLOAT_ABI_SOFT
-CFLAGS += -DNRF52810_XXAA
+CFLAGS += -DNRF52811_XXAA
 CFLAGS += -DNRF52_PAN_74
 CFLAGS += -DNRFX_COREDEP_DELAY_US_LOOP_CYCLES=3
 CFLAGS += -DNRF_DFU_SETTINGS_VERSION=2
@@ -182,7 +182,7 @@ ASMFLAGS += -DBOARD_PCA10040
 ASMFLAGS += -DCONFIG_GPIO_AS_PINRESET
 ASMFLAGS += -DDEVELOP_IN_NRF52832
 ASMFLAGS += -DFLOAT_ABI_SOFT
-ASMFLAGS += -DNRF52810_XXAA
+ASMFLAGS += -DNRF52811_XXAA
 ASMFLAGS += -DNRF52_PAN_74
 ASMFLAGS += -DNRFX_COREDEP_DELAY_US_LOOP_CYCLES=3
 ASMFLAGS += -DNRF_DFU_SETTINGS_VERSION=2
