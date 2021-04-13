@@ -99,6 +99,7 @@ void sensors_init(void)
     drv_soilhum_init(&sensor_data.soil_humidity);
     batt_sensor_init(&battery_voltage_mv);
 
+    // TWI Manager is used by some sensors
     sensors_twi_mngr_init();
     // Finally, start the periodic app timer
     sensors_apptimer_init();

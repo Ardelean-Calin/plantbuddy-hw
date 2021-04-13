@@ -27,6 +27,7 @@
                 "BL_SETTINGS_ACCESS_ONLY",
                 "NRF_DFU_SVCI_ENABLED",
                 "NRF_DFU_TRANSPORT_BLE=1",
+                "STATIC_PASSKEY=\"123456\"",
                 "DEBUG"
             ],
             // Linux/OSX

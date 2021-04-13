@@ -7,14 +7,14 @@
             "label": "Build (Debug)",
             "detail": "Builds the PlantBuddy Hex with debug information.",
             "type": "shell",
-            "command": "make -j6 DEBUG=1",
+            "command": "make -j6 DEBUG=1 BLE_PASSKEY=654321",
             "problemMatcher": []
         },
         {
             "label": "Build (Release)",
             "detail": "Builds the PlantBuddy Hex with debug information.",
             "type": "shell",
-            "command": "make -j6 RELEASE=1",
+            "command": "make -j6 RELEASE=1 BLE_PASSKEY=654321",
             "problemMatcher": []
         },
         {

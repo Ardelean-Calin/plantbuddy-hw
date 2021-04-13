@@ -37,9 +37,9 @@ uint32_t char_pb_sensors_add_to_service(ble_cus_pb_t* p_cus)
     add_char_params.char_props.write  = 0;
     add_char_params.char_props.notify = 1;
 
-    add_char_params.read_access       = SEC_OPEN;
+    add_char_params.read_access       = SEC_MITM;
     add_char_params.write_access      = SEC_NO_ACCESS; // Not possible to write
-    add_char_params.cccd_write_access = SEC_OPEN;      // Obligatory for notifications to work!
+    add_char_params.cccd_write_access = SEC_MITM;      // Obligatory for notifications to work!
 
     // /* Initialize Characteristic Descriptor */
     memset(&add_char_user_desc, 0, sizeof(add_char_user_desc));
@@ -47,7 +47,7 @@ uint32_t char_pb_sensors_add_to_service(ble_cus_pb_t* p_cus)
     add_char_user_desc.size             = strlen(user_desc_text);
     add_char_user_desc.p_char_user_desc = (uint8_t*)user_desc_text;
     add_char_user_desc.is_var_len       = false;
-    add_char_user_desc.read_access      = SEC_OPEN;
+    add_char_user_desc.read_access      = SEC_MITM;
     add_char_user_desc.write_access     = SEC_NO_ACCESS;
 
     add_char_params.p_user_descr = &add_char_user_desc;

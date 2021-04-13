@@ -20,6 +20,7 @@
 #include "nrf_ble_gatt.h"
 #include "nrf_ble_qwr.h"
 #include "nrf_dfu_ble.h"
+#include "nrf_log.h"
 #include "nrf_pwr_mgmt.h"
 #include "nrf_sdh.h"
 #include "nrf_sdh_ble.h"
@@ -31,7 +32,8 @@ NRF_BLE_GATT_DEF(m_gatt);           /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);             /**< Context for the Queued Write module.*/
 BLE_ADVERTISING_DEF(m_advertising); /**< Advertising module instance. */
 
-static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID; /**< Handle of the current connection. */
+static pm_peer_id_t m_peer_to_be_deleted = PM_PEER_ID_INVALID;
+static uint16_t     m_conn_handle        = BLE_CONN_HANDLE_INVALID; /**< Handle of the current connection. */
 
 /* Declare all services structure your application is using
  *  BLE_XYZ_DEF(m_xyz);
@@ -73,11 +75,43 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t* p_file_name)
  */
 static void pm_evt_handler(pm_evt_t const* p_evt)
 {
+    ret_code_t err_code;
     pm_handler_on_pm_evt(p_evt);
     pm_handler_flash_clean(p_evt);
 
     switch (p_evt->evt_id)
     {
+    case PM_EVT_CONN_SEC_SUCCEEDED:
+    {
+        pm_conn_sec_status_t conn_sec_status;
+
+        // Check if the link is authenticated (meaning at least MITM).
+        err_code = pm_conn_sec_status_get(p_evt->conn_handle, &conn_sec_status);
+        APP_ERROR_CHECK(err_code);
+
+        if (conn_sec_status.mitm_protected)
+        {
+            NRF_LOG_INFO("Link secured. Role: %d. conn_handle: %d, Procedure: %d",
+                         ble_conn_state_role(p_evt->conn_handle),
+                         p_evt->conn_handle,
+                         p_evt->params.conn_sec_succeeded.procedure);
+        }
+        else
+        {
+            // The peer did not use MITM, disconnect.
+            NRF_LOG_INFO("Collector did not use MITM, disconnecting");
+            err_code = pm_peer_id_get(m_conn_handle, &m_peer_to_be_deleted);
+            APP_ERROR_CHECK(err_code);
+            err_code = sd_ble_gap_disconnect(m_conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+            APP_ERROR_CHECK(err_code);
+        }
+    }
+    break;
+
+    case PM_EVT_CONN_SEC_FAILED:
+        m_conn_handle = BLE_CONN_HANDLE_INVALID;
+        break;
+
     case PM_EVT_PEERS_DELETE_SUCCEEDED:
         advertising_start(false);
         break;
@@ -115,6 +149,12 @@ static void gap_params_init(void)
     gap_conn_params.conn_sup_timeout  = CONN_SUP_TIMEOUT;
 
     err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
+    APP_ERROR_CHECK(err_code);
+
+    // Add static pin:
+    uint8_t passkey[]                             = STATIC_PASSKEY;
+    m_static_pin_option.gap_opt.passkey.p_passkey = passkey;
+    err_code                                      = sd_ble_opt_set(BLE_GAP_OPT_PASSKEY, &m_static_pin_option);
     APP_ERROR_CHECK(err_code);
 }
 
@@ -377,23 +417,42 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
  */
 static void ble_evt_handler(ble_evt_t const* p_ble_evt, void* p_context)
 {
-    ret_code_t err_code = NRF_SUCCESS;
+    ret_code_t err_code;
+
+    pm_handler_secure_on_connection(p_ble_evt);
 
     switch (p_ble_evt->header.evt_id)
     {
     case BLE_GAP_EVT_DISCONNECTED:
-        // LED indication will be changed when advertising starts.
-        break;
+    {
+        NRF_LOG_INFO("Disconnected");
+        m_conn_handle = BLE_CONN_HANDLE_INVALID;
+        // Check if the last connected peer had not used MITM, if so, delete its bond information.
+        if (m_peer_to_be_deleted != PM_PEER_ID_INVALID)
+        {
+            err_code = pm_peer_delete(m_peer_to_be_deleted);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_DEBUG("Collector's bond deleted");
+            m_peer_to_be_deleted = PM_PEER_ID_INVALID;
+        }
+    }
+    break;
 
     case BLE_GAP_EVT_CONNECTED:
+    {
+        NRF_LOG_INFO("Connected");
+        m_peer_to_be_deleted = PM_PEER_ID_INVALID;
         APP_ERROR_CHECK(err_code);
         m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
         err_code      = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
         APP_ERROR_CHECK(err_code);
-        break;
+        // Start Security Request timer.
+    }
+    break;
 
     case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
     {
+        NRF_LOG_DEBUG("PHY update request.");
         ble_gap_phys_t const phys = {
             .rx_phys = BLE_GAP_PHY_AUTO,
             .tx_phys = BLE_GAP_PHY_AUTO,
@@ -405,6 +464,7 @@ static void ble_evt_handler(ble_evt_t const* p_ble_evt, void* p_context)
 
     case BLE_GATTC_EVT_TIMEOUT:
         // Disconnect on GATT Client timeout event.
+        NRF_LOG_DEBUG("GATT Client Timeout.");
         err_code =
             sd_ble_gap_disconnect(p_ble_evt->evt.gattc_evt.conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
         APP_ERROR_CHECK(err_code);
@@ -412,9 +472,41 @@ static void ble_evt_handler(ble_evt_t const* p_ble_evt, void* p_context)
 
     case BLE_GATTS_EVT_TIMEOUT:
         // Disconnect on GATT Server timeout event.
+        NRF_LOG_DEBUG("GATT Server Timeout.");
         err_code =
             sd_ble_gap_disconnect(p_ble_evt->evt.gatts_evt.conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
         APP_ERROR_CHECK(err_code);
+        break;
+
+    case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
+        NRF_LOG_DEBUG("BLE_GAP_EVT_SEC_PARAMS_REQUEST");
+        break;
+
+    case BLE_GAP_EVT_PASSKEY_DISPLAY:
+    {
+        char passkey[PASSKEY_LENGTH + 1];
+        memcpy(passkey, p_ble_evt->evt.gap_evt.params.passkey_display.passkey, PASSKEY_LENGTH);
+        passkey[PASSKEY_LENGTH] = 0;
+
+        NRF_LOG_INFO("Passkey: %s", nrf_log_push(passkey));
+    }
+    break;
+
+    case BLE_GAP_EVT_AUTH_KEY_REQUEST:
+        NRF_LOG_INFO("BLE_GAP_EVT_AUTH_KEY_REQUEST");
+        break;
+
+    case BLE_GAP_EVT_LESC_DHKEY_REQUEST:
+        NRF_LOG_INFO("BLE_GAP_EVT_LESC_DHKEY_REQUEST");
+        break;
+
+    case BLE_GAP_EVT_AUTH_STATUS:
+        NRF_LOG_INFO("BLE_GAP_EVT_AUTH_STATUS: status=0x%x bond=0x%x lv4: %d kdist_own:0x%x kdist_peer:0x%x",
+                     p_ble_evt->evt.gap_evt.params.auth_status.auth_status,
+                     p_ble_evt->evt.gap_evt.params.auth_status.bonded,
+                     p_ble_evt->evt.gap_evt.params.auth_status.sm1_levels.lv4,
+                     *((uint8_t*)&p_ble_evt->evt.gap_evt.params.auth_status.kdist_own),
+                     *((uint8_t*)&p_ble_evt->evt.gap_evt.params.auth_status.kdist_peer));
         break;
 
     default:

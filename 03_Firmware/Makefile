@@ -220,6 +220,7 @@ LIB_FILES += \
 OPT = -Os -g3
 # Uncomment the line below to enable link time optimization
 #OPT += -flto
+OPT += -DSTATIC_PASSKEY=\"$(BLE_PASSKEY)\"
 
 # C flags common to all targets
 CFLAGS += $(OPT)
