@@ -3,8 +3,11 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/lib/nrf-sdk/**"
+                "${workspaceFolder}/inc",
+                "${workspaceFolder}/lib/nrf-sdk/components/**",
+                "${workspaceFolder}/lib/nrf-sdk/external/**",
+                "${workspaceFolder}/lib/nrf-sdk/integration/**",
+                "${workspaceFolder}/lib/nrf-sdk/modules/**"
             ],
             "forcedInclude": [
                 "${workspaceFolder}/config/pb_config.h",
