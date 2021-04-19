@@ -59,6 +59,7 @@
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_saadc.h"
 #include "nrf_error.h"
+#include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 #include "nrf_pwr_mgmt.h"
@@ -101,10 +102,10 @@ static void app_softtimers_init(void)
  */
 static void idle_state_handle(void)
 {
-    // if (NRF_LOG_PROCESS() == false)
-    // {
-    nrf_pwr_mgmt_run();
-    // }
+    if (NRF_LOG_PROCESS() == false)
+    {
+        nrf_pwr_mgmt_run();
+    }
 }
 
 /**
@@ -150,7 +151,7 @@ static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event)
     switch (event)
     {
     case NRF_PWR_MGMT_EVT_PREPARE_DFU:
-        // NRF_LOG_INFO("Power management wants to reset to DFU mode\r\n");
+        NRF_LOG_INFO("Power management wants to reset to DFU mode\r\n");
         // Change this code to tailor to your reset strategy.
         // Returning false here means that the device is not ready to jump to DFU mode yet.
         //
@@ -168,7 +169,7 @@ static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event)
         //      -NRF_PWR_MGMT_EVT_PREPARE_RESET
         return true;
     }
-    // NRF_LOG_INFO("Power management allowed to reset to DFU mode\r\n");
+    NRF_LOG_INFO("Power management allowed to reset to DFU mode\r\n");
     return true;
 }
 
@@ -178,11 +179,6 @@ static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event)
 int main(void)
 {
     ret_code_t err_code;
-
-#if NRFX_CHECK(NRF_LOG_ENABLED)
-    NRF_LOG_INIT(NULL);
-    NRF_LOG_DEFAULT_BACKENDS_INIT();
-#endif
 
 #ifndef DEBUG
     // Initialize the async SVCI interface to bootloader before any interrupts are enabled.
@@ -196,6 +192,11 @@ int main(void)
     ppi_init();
     // Initialize app timer module
     app_timer_init();
+    // Initialize logging module
+#if NRFX_CHECK(NRF_LOG_ENABLED)
+    NRF_LOG_INIT(app_timer_cnt_get);
+    NRF_LOG_DEFAULT_BACKENDS_INIT();
+#endif
     // Initialize power manager
     power_management_init();
 

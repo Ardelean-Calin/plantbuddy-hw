@@ -4,6 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/inc",
+                "${workspaceFolder}/config",
+                "${workspaceFolder}/src/**",
                 "${workspaceFolder}/lib/nrf-sdk/components/**",
                 "${workspaceFolder}/lib/nrf-sdk/external/**",
                 "${workspaceFolder}/lib/nrf-sdk/integration/**",
@@ -12,7 +14,23 @@
             "forcedInclude": [
                 "${workspaceFolder}/config/pb_config.h",
                 "${workspaceFolder}/config/sdk_config.h",
-                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_error.h"
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_err.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_gap.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_gatt.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_gattc.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_gatts.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_hci.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_ranges.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble_types.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/ble.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_error.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_error_sdm.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_error_soc.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_nvic.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_sdm.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_soc.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_svc.h",
+                "${workspaceFolder}/lib/nrf-sdk/components/softdevice/s112/headers/nrf_sd_def.h"
             ],
             "defines": [
                 "APP_TIMER_V2",

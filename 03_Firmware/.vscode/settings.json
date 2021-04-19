@@ -1,4 +1,16 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
-    "files.exclude": {"lib/nrf-sdk/examples/": true, "lib/nrf-sdk/config/": true, "secure_bootloader/": true}
+    "files.exclude": {
+        "lib/nrf-sdk/examples/": true,
+        "lib/nrf-sdk/config/": true,
+        "secure_bootloader/": true,
+        "lib/nrf-sdk/components/softdevice/s113": true,
+        "lib/nrf-sdk/components/softdevice/s122": true,
+        "lib/nrf-sdk/components/softdevice/s132": true,
+        "lib/nrf-sdk/components/softdevice/s140": true,
+        "lib/nrf-sdk/components/softdevice/s212": true,
+        "lib/nrf-sdk/components/softdevice/s312": true,
+        "lib/nrf-sdk/components/softdevice/s332": true,
+        "lib/nrf-sdk/components/softdevice/s340": true,
+    }
 }
