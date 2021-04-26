@@ -75,9 +75,15 @@ static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
     UNUSED_PARAMETER(result);
     UNUSED_PARAMETER(p_user_data);
 
+    uint16_t raw_temp;
+    uint16_t raw_hum;
+
     // We read the raw data bytes from the sensor. Now we need to process them!
-    *shtc3_temp_ptr = (shtc3_read_buffer[0] << 8) + shtc3_read_buffer[1];
-    *shtc3_hum_ptr  = (shtc3_read_buffer[3] << 8) + shtc3_read_buffer[4];
+    raw_temp = (shtc3_read_buffer[0] << 8) + shtc3_read_buffer[1];
+    raw_hum  = (shtc3_read_buffer[3] << 8) + shtc3_read_buffer[4];
+
+    *shtc3_temp_ptr = SHTC3_RAW_TEMP_TO_PHYS(raw_temp);
+    *shtc3_hum_ptr  = SHTC3_RAW_HUM_TO_PHYS(raw_hum);
     // TODO: Checksum is the third byte of every packet, maybe check it and raise error if problem!
 }
 

@@ -60,14 +60,11 @@ typedef struct
 struct ble_cus_pb_s
 {
     ble_cus_pb_evt_handler_t evt_handler; /**< Event handler to be called for handling events in the Custom Service. */
-    uint16_t                 service_handle; /**< Handle of Custom Service (as provided by the BLE stack). */
-    uint8_t                  uuid_type;      /**< Service type */
-    uint16_t                 conn_handle;    /**< Handle of the current connection (as provided by the BLE stack, is
-                                                BLE_CONN_HANDLE_INVALID if not in a connection). */
-    ble_gatts_char_handles_t char_lumflux_handle; /**< Handle of the Luminous Flux characteristic. */
-    ble_gatts_char_handles_t char_soilhum_handle; /**< Handle of the Soil Humidity characteristic. */
-    ble_gatts_char_handles_t char_airtemp_handle; /**< Handle of the Air Temperature characteristic. */
-    ble_gatts_char_handles_t char_airhum_handle;  /**< Handle of the Air Humidity characteristic. */
+    uint16_t                 service_handle;     /**< Handle of Custom Service (as provided by the BLE stack). */
+    uint8_t                  uuid_type;          /**< Service type */
+    uint16_t                 conn_handle;        /**< Handle of the current connection (as provided by the BLE stack, is
+                                                    BLE_CONN_HANDLE_INVALID if not in a connection). */
+    ble_gatts_char_handles_t sensor_data_handle; /**< Handle of the sensor data characteristic. */
 };
 
 /**@brief Function for initializing the Custom Service.

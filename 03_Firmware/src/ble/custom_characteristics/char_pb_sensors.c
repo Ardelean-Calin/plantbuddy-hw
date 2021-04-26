@@ -53,7 +53,7 @@ uint32_t char_pb_sensors_add_to_service(ble_cus_pb_t* p_cus)
     add_char_params.p_user_descr = &add_char_user_desc;
 
     /* Register the characteristic */
-    err_code = characteristic_add(p_cus->service_handle, &add_char_params, &(p_cus->char_lumflux_handle));
+    err_code = characteristic_add(p_cus->service_handle, &add_char_params, &(p_cus->sensor_data_handle));
     VERIFY_SUCCESS(err_code);
 
     return err_code;
@@ -85,7 +85,7 @@ uint32_t char_pb_sensors_update(sensor_data_t new_sensor_data)
 
     // Update database.
     err_code =
-        sd_ble_gatts_value_set(p_cus_local->conn_handle, p_cus_local->char_lumflux_handle.value_handle, &gatts_value);
+        sd_ble_gatts_value_set(p_cus_local->conn_handle, p_cus_local->sensor_data_handle.value_handle, &gatts_value);
     if (err_code != NRF_SUCCESS)
     {
         return err_code;
@@ -98,7 +98,7 @@ uint32_t char_pb_sensors_update(sensor_data_t new_sensor_data)
 
         memset(&hvx_params, 0, sizeof(hvx_params));
 
-        hvx_params.handle = p_cus_local->char_lumflux_handle.value_handle;
+        hvx_params.handle = p_cus_local->sensor_data_handle.value_handle;
         hvx_params.type   = BLE_GATT_HVX_NOTIFICATION;
         hvx_params.offset = gatts_value.offset;
         hvx_params.p_len  = &gatts_value.len;

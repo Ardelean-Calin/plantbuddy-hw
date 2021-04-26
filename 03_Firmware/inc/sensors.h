@@ -9,6 +9,7 @@
 /* Stores all sensor measurement results to be transmitted bia BLE */
 typedef struct
 {
+    uint32_t        unix_epoch_time; // Timestamp of the data
     soilhum_t       soil_humidity;
     luminous_flux_t lum_flux;
     airhum_t        airhum_raw;

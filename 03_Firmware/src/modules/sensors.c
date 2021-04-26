@@ -13,6 +13,7 @@
 #include "ble_cus_pb.h"
 #include "pb_config.h"
 #include "sensors.h"
+#include "status.h"
 
 static uint16_t      battery_voltage_mv;
 static sensor_data_t sensor_data;
@@ -40,6 +41,8 @@ static void sensors_twi_mngr_init(void);
 static void sensors_apptimer_handler(void* p_context)
 {
     sensors_start_measurements();
+
+    sensor_data.unix_epoch_time = status_get_timestamp();
     char_pb_sensors_update(sensor_data);
 }
 

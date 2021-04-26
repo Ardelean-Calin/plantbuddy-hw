@@ -49,13 +49,13 @@ static void on_write(ble_cus_pb_t* p_cus, ble_evt_t const* p_ble_evt)
     ble_gatts_evt_write_t const* p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
 
     // Custom Value Characteristic Written to.
-    if (p_evt_write->handle == p_cus->char_lumflux_handle.value_handle)
+    if (p_evt_write->handle == p_cus->sensor_data_handle.value_handle)
     {
         // Do nothing
     }
 
     // Check if the Custom value CCCD is written to and that the value is the appropriate length, i.e 2 bytes.
-    // if ((p_evt_write->handle == p_cus->char_lumflux_handle.cccd_handle) && (p_evt_write->len == 2))
+    // if ((p_evt_write->handle == p_cus->sensor_data_handle.cccd_handle) && (p_evt_write->len == 2))
     // {
     //     // CCCD written, call application event handler
     //     if (p_cus->evt_handler != NULL)
