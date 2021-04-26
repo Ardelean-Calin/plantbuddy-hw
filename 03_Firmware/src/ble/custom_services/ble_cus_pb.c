@@ -123,21 +123,22 @@ uint32_t ble_cus_pb_init(ble_cus_pb_t* p_cus, const ble_cus_pb_init_t* p_cus_ini
 
     volatile uint32_t err_code;
     ble_uuid_t        service_uuid;
+    ble_uuid128_t     base_uuid = CUSTOM_SERVICE_UUID_BASE;
 
     // Initialize service structure
     p_cus->evt_handler = p_cus_init->evt_handler;
     p_cus->conn_handle = BLE_CONN_HANDLE_INVALID;
 
-    // Add Custom Service UUID
-    ble_uuid128_t base_uuid = {CUSTOM_SERVICE_UUID_BASE};
-
-    BLE_UUID_BLE_ASSIGN(service_uuid, CUSTOM_SERVICE_UUID);
-
-    // Add the Custom Service
-    err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &service_uuid, &(p_cus->service_handle));
+    // Add a custom base UUID
+    err_code = sd_ble_uuid_vs_add(&base_uuid, &p_cus->uuid_type);
     VERIFY_SUCCESS(err_code);
 
-    err_code = sd_ble_uuid_vs_add(&base_uuid, &service_uuid.type);
+    // Add Custom Service UUID
+    service_uuid.type = p_cus->uuid_type;
+    service_uuid.uuid = CUSTOM_SERVICE_UUID;
+
+    // Add the Custom Service
+    err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &service_uuid, &p_cus->service_handle);
     VERIFY_SUCCESS(err_code);
 
     // Add Sensor data characteristic

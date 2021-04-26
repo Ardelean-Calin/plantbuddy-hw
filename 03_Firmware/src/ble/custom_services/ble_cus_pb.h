@@ -17,10 +17,13 @@
     NRF_SDH_BLE_OBSERVER(_name##_obs, BLE_HRS_BLE_OBSERVER_PRIO, ble_cus_pb_on_ble_evt, &_name)
 
 // UUID: f4c2XXXX-6e5f-48a2-b9b2-a4f762791d85
-#define CUSTOM_SERVICE_UUID_BASE                                                                       \
-    {                                                                                                  \
-        0x85, 0x1D, 0x79, 0x62, 0xF7, 0xA4, 0xB2, 0xB9, 0xA2, 0x48, 0x5F, 0x6E, 0x00, 0x00, 0xC2, 0xF4 \
-    }
+// clang-format off
+#define CUSTOM_SERVICE_UUID_BASE                        \
+{{                                                      \
+    0x85, 0x1D, 0x79, 0x62, 0xF7, 0xA4, 0xB2, 0xB9,     \
+    0xA2, 0x48, 0x5F, 0x6E, 0x00, 0x00, 0xC2, 0xF4      \
+}}
+// clang-format on
 
 #define CUSTOM_SERVICE_UUID   0xABCD
 #define SENSOR_DATA_CHAR_UUID 0x0001

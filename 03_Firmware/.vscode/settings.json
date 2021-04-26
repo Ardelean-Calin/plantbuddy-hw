@@ -1,7 +1,6 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.exclude": {
-        "lib/nrf-sdk/examples/": true,
         "lib/nrf-sdk/config/": true,
         "secure_bootloader/": true,
         "lib/nrf-sdk/components/softdevice/s113": true,
