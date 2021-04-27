@@ -21,8 +21,8 @@ nrf_twi_mngr_transfer_t const shtc3_transfer_startmeas[] = {
 
 /* Locally-used, static variables */
 static nrf_twi_mngr_t* m_twi_manager_ptr;
-static airtemp_t*      shtc3_temp_ptr;
-static airhum_t*       shtc3_hum_ptr;
+static airtemp_t       shtc3_temp;
+static airhum_t        shtc3_hum;
 static uint8_t         shtc3_read_buffer[6];
 
 /* Locally-used, static functions */
@@ -82,22 +82,18 @@ static void drv_shtc3_meas_done_cb(ret_code_t result, void* p_user_data)
     raw_temp = (shtc3_read_buffer[0] << 8) + shtc3_read_buffer[1];
     raw_hum  = (shtc3_read_buffer[3] << 8) + shtc3_read_buffer[4];
 
-    *shtc3_temp_ptr = SHTC3_RAW_TEMP_TO_PHYS(raw_temp);
-    *shtc3_hum_ptr  = SHTC3_RAW_HUM_TO_PHYS(raw_hum);
+    shtc3_temp = SHTC3_RAW_TEMP_TO_PHYS(raw_temp);
+    shtc3_hum  = SHTC3_RAW_HUM_TO_PHYS(raw_hum);
     // TODO: Checksum is the third byte of every packet, maybe check it and raise error if problem!
 }
 
 /**
  * @brief Driver initialization function.
  * @param[in] twi_mngr_ptr Pointer to the global TWI Transaction Manager
- * @param[out] temperature Pointer to a memory location in which to store the read temperature.
- * @param[out] humidity Pointer to a memory location in which to store the read humidity.
  */
-void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr, airtemp_t* temperature, airhum_t* humidity)
+void drv_shtc3_init(nrf_twi_mngr_t* twi_mngr_ptr)
 {
     m_twi_manager_ptr = twi_mngr_ptr;
-    shtc3_temp_ptr    = temperature;
-    shtc3_hum_ptr     = humidity;
     // TODO: We will implement sensor reading and writing using TWI Transaction manager!
     drv_shtc3_apptimer_init();
 }
@@ -114,4 +110,22 @@ void drv_shtc3_meas_start(void)
 
     // Turns on an application timer! This will issue a read after X milliseconds
     app_timer_start(m_shtc3_apptimer, APP_TIMER_TICKS(SHTC3_MEAS_DELAY_MS), NULL);
+}
+
+/**
+ * @brief Get the latest measured air temperature.
+ * @return The latest air temperature (physical)
+ */
+airtemp_t drv_shtc3_get_airtemp(void)
+{
+    return shtc3_temp;
+}
+
+/**
+ * @brief Get the latest measured air humidity.
+ * @return The latest air humidity (physical)
+ */
+airhum_t drv_shtc3_get_airhum(void)
+{
+    return shtc3_hum;
 }

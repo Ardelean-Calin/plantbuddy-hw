@@ -14,7 +14,7 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data);
 /* Static and constant variables */
 static nrf_twi_mngr_t*  twi_mngr;
 static OPT3001_result_t opt3001_meas_result;
-static luminous_flux_t* lux_phys;
+static luminous_flux_t  lux_phys;
 
 /* TWI Transaction definitions */
 // Measurement start transaction
@@ -30,12 +30,10 @@ OPT3001_TRANSACTION_DEF(data_extract, tr_data_extract_trans, drv_opt3001_meas_do
 /**
  * @brief Initializes this module.
  * @param[in] twi_mngr_ptr Pointer to the global TWI Transaction Manager
- * @param[in] lux_ptr Pointer to a memory location store for the lux value
  */
-void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr, luminous_flux_t* lux_ptr)
+void drv_opt3001_init(nrf_twi_mngr_t* twi_mngr_ptr)
 {
     twi_mngr = twi_mngr_ptr;
-    lux_phys = lux_ptr;
 
     drv_opt3001_apptimer_init(); // Init apptimer used for timing i2c transactions
 }
@@ -49,6 +47,14 @@ void drv_opt3001_meas_start(void)
     nrf_twi_mngr_schedule(twi_mngr, &meas_start); // Writing to the configure register starts the operation
 
     app_timer_start(m_opt3001_apptimer, APP_TIMER_TICKS(OPT3001_CFG_CONVERSION_TIME_MS), NULL);
+}
+
+/**
+ * @brief Returns the latest measured luminous flux.
+ */
+luminous_flux_t drv_opt3001_get_lumflux(void)
+{
+    return lux_phys;
 }
 
 /* Public functions END*/
@@ -85,5 +91,5 @@ static void drv_opt3001_meas_done_cb(ret_code_t result, void* p_user_data)
     // Calculate the physical lux value from the raw one
     uint32_t exponent = 1 << OPT3001_EXP_EXTRACT(opt3001_meas_result.raw[0]);
     uint32_t reading  = ((opt3001_meas_result.raw[0] << 8) + opt3001_meas_result.raw[1]) & OPT3001_READ_MASK;
-    *lux_phys         = (luminous_flux_t)((reading * exponent) / 100);
+    lux_phys          = (luminous_flux_t)((reading * exponent) / 100);
 }

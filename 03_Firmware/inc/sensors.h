@@ -12,8 +12,8 @@ typedef struct
     uint32_t        unix_epoch_time; // Timestamp of the data
     soilhum_t       soil_humidity;
     luminous_flux_t lum_flux;
-    airhum_t        airhum_raw;
-    airtemp_t       airtemp_raw;
+    airhum_t        airhum_phys;
+    airtemp_t       airtemp_phys;
 } sensor_data_t;
 
 void sensors_init(void);

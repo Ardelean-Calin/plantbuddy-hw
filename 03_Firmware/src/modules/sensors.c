@@ -40,10 +40,19 @@ static void sensors_twi_mngr_init(void);
  */
 static void sensors_apptimer_handler(void* p_context)
 {
-    sensors_start_measurements();
-
+    // Current timestamp
     sensor_data.unix_epoch_time = status_get_timestamp();
+    // The measured variables
+    sensor_data.soil_humidity = drv_soilhum_get_frequency();
+    sensor_data.airhum_phys   = drv_shtc3_get_airhum();
+    sensor_data.airtemp_phys  = drv_shtc3_get_airtemp();
+    sensor_data.lum_flux      = drv_opt3001_get_lumflux();
+    // TODO: Battery voltage is not updated anywhere. I suggest implementing the Battery Service so that every device
+    // can read the battery level in a standardized way.
+    // Update BLE characteristic
     char_sensordata_update(sensor_data);
+    // Start new measurements
+    sensors_start_measurements();
 }
 
 /**
@@ -97,10 +106,10 @@ static void sensors_twi_mngr_init(void)
 void sensors_init(void)
 {
     /* Initialize the different environment sensors */
-    drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager, &sensor_data.airtemp_raw, &sensor_data.airhum_raw);
-    drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager, &sensor_data.lum_flux);
-    drv_soilhum_init(&sensor_data.soil_humidity);
-    batt_sensor_init(&battery_voltage_mv);
+    drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager);   // These two
+    drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager); // need i2c
+    drv_soilhum_init();
+    batt_sensor_init();
 
     // TWI Manager is used by some sensors
     sensors_twi_mngr_init();

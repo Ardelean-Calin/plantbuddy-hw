@@ -6,6 +6,7 @@
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
 #include "pb_config.h"
+#include "soilhum_types.h"
 #include <stdint.h>
 
 #define MEAS_DURATION_MS 100
@@ -14,11 +15,12 @@
 APP_TIMER_DEF(m_soilhum_sm_timer);
 
 // Holds the measured frequency
-soilhum_t* freqPointer;
+static soilhum_t frequency;
 
 static const nrf_drv_timer_t m_timer0 = NRF_DRV_TIMER_INSTANCE(1);
 static nrf_ppi_channel_t     m_ppi_channel1;
 
+/* Static functions */
 static void drv_soilhum_apptimer_handler(void* p_context);
 static void drv_soilhum_apptimer_init(void);
 static void drv_soilhum_cfg_ppi(void);
@@ -40,7 +42,7 @@ static void drv_soilhum_apptimer_handler(void* p_context)
     nrf_drv_timer_capture(&m_timer0, NRF_TIMER_CC_CHANNEL0);
     uint32_t counter_value = nrf_drv_timer_capture_get(&m_timer0, NRF_TIMER_CC_CHANNEL0);
     // And calculate and store the frequency in a variable!
-    *freqPointer = (APP_TIMER_TICKS(1000) * counter_value) / APP_TIMER_TICKS(MEAS_DURATION_MS);
+    frequency = (APP_TIMER_TICKS(1000) * counter_value) / APP_TIMER_TICKS(MEAS_DURATION_MS);
 }
 
 /**
@@ -109,11 +111,10 @@ static void drv_soilhum_timer_init(void)
 
 /**
  * @brief Initializes the Soil Humidity driver.
- * @param[in] freq Pointer to a memory location where the driver shall store the measurement result.
  */
-void drv_soilhum_init(soilhum_t* freq)
+void drv_soilhum_init()
 {
-    freqPointer = freq;
+    frequency = 0;
 
     drv_soilhum_gpio_init();
     drv_soilhum_timer_init();
@@ -134,4 +135,12 @@ void drv_soilhum_meas_start(void)
     /* Start the app timer as well */
     app_timer_start(m_soilhum_sm_timer, APP_TIMER_TICKS(MEAS_DURATION_MS), NULL);
     APP_ERROR_CHECK(err_code);
+}
+
+/**
+ * @brief Returns the latest soil humidity (actually, a frequency proportional to it).
+ */
+soilhum_t drv_soilhum_get_frequency(void)
+{
+    return frequency;
 }

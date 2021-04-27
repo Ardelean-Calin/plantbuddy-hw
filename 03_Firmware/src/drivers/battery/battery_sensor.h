@@ -1,4 +1,5 @@
 #pragma once
+#include "battery_sensor_types.h"
 #include <stdint.h>
 
 #define BATT_SENSOR_CFG_RES     1024
@@ -10,5 +11,6 @@
 
 #define SAADC_SAMPLES_IN_BUFFER 1
 
-void batt_sensor_init(uint16_t* p_voltage);
-void batt_sensor_meas_start(void);
+void              batt_sensor_init(void);
+void              batt_sensor_meas_start(void);
+battery_voltage_t batt_sensor_get_voltage(void);

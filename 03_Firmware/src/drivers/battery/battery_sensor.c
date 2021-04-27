@@ -1,9 +1,11 @@
 #include "battery_sensor.h"
 #include "app_error.h"
 #include "app_scheduler.h"
+#include "battery_sensor_types.h"
 #include "nrf_drv_saadc.h"
 
-nrf_saadc_value_t* p_voltage;
+/* Static variables */
+static battery_voltage_t batt_voltage_mv;
 
 static nrf_saadc_value_t m_buffer_pool[1][SAADC_SAMPLES_IN_BUFFER];
 
@@ -23,7 +25,7 @@ static void batt_sensor_convert_voltage(void* p_event_data, uint16_t event_size)
 
     nrf_drv_saadc_evt_t const* p_event = (nrf_drv_saadc_evt_t const*)p_event_data;
     nrf_drv_saadc_buffer_convert(p_event->data.done.p_buffer, SAADC_SAMPLES_IN_BUFFER);
-    *p_voltage = BATT_SENSOR_RAW_TO_PHYS(p_event->data.done.p_buffer[0]);
+    batt_voltage_mv = (battery_voltage_t)(BATT_SENSOR_RAW_TO_PHYS(p_event->data.done.p_buffer[0]));
     nrf_drv_saadc_uninit();
 }
 
@@ -61,11 +63,10 @@ static void batt_sensor_saadc_init(void)
 
 /**
  * @brief Initializes the battery voltage sensor.
- * @param[in] ptr_voltage Pointer where to put the converted ADC voltage.
  */
-void batt_sensor_init(uint16_t* ptr_voltage)
+void batt_sensor_init()
 {
-    p_voltage = ptr_voltage;
+    batt_voltage_mv = 3000;
 }
 
 /**
@@ -76,4 +77,12 @@ void batt_sensor_meas_start(void)
     batt_sensor_saadc_init();
     // Start ADC sampling!
     nrf_drv_saadc_sample();
+}
+
+/**
+ * @brief Returns the battery voltage in millivolts.
+ */
+battery_voltage_t batt_sensor_get_voltage(void)
+{
+    return batt_voltage_mv;
 }
