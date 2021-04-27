@@ -281,7 +281,8 @@ static void services_init(void)
     // Initialize CUS Service init structure to zero.
     cus_init.evt_handler = on_cus_evt;
 
-    err_code = ble_cus_pb_init(&m_cus_pb, &cus_init);
+    err_code             = ble_cus_pb_init(&m_cus_pb, &cus_init);
+    m_cus_pb.evt_handler = on_cus_evt;
     APP_ERROR_CHECK(err_code);
 
     err_code = ble_dfu_buttonless_init(&dfus_init);

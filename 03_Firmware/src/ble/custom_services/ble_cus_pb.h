@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <string.h>
 
-/**@brief   Macro for defining a ble_hrs instance.
+/**@brief   Macro for defining a ble_cus_pb instance.
  *
  * @param   _name   Name of the instance.
  * @hideinitializer
@@ -27,6 +27,7 @@
 
 #define CUSTOM_SERVICE_UUID   0xABCD
 #define SENSOR_DATA_CHAR_UUID 0x0001
+#define TIMESTAMP_CHAR_UUID   0x0002
 
 /**@brief Custom Service event type. */
 typedef enum
@@ -60,11 +61,12 @@ typedef struct
 struct ble_cus_pb_s
 {
     ble_cus_pb_evt_handler_t evt_handler; /**< Event handler to be called for handling events in the Custom Service. */
-    uint16_t                 service_handle;     /**< Handle of Custom Service (as provided by the BLE stack). */
-    uint8_t                  uuid_type;          /**< Service type */
-    uint16_t                 conn_handle;        /**< Handle of the current connection (as provided by the BLE stack, is
-                                                    BLE_CONN_HANDLE_INVALID if not in a connection). */
-    ble_gatts_char_handles_t sensor_data_handle; /**< Handle of the sensor data characteristic. */
+    uint16_t                 service_handle;    /**< Handle of Custom Service (as provided by the BLE stack). */
+    uint8_t                  uuid_type;         /**< Service type */
+    uint16_t                 conn_handle;       /**< Handle of the current connection (as provided by the BLE stack, is
+                                                   BLE_CONN_HANDLE_INVALID if not in a connection). */
+    ble_gatts_char_handles_t char_sensordata_h; /**< Handle of the sensor data characteristic. */
+    ble_gatts_char_handles_t char_timestamp_h;  /**< Handle of the timestamp characteristic. */
 };
 
 /**@brief Function for initializing the Custom Service.

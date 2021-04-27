@@ -5,6 +5,8 @@
 
 #include "ble_cus_pb.h"
 #include "char_sensordata.h"
+#include "char_timestamp.h"
+#include "status.h"
 
 /**@brief Function for handling the Connect event.
  *
@@ -49,13 +51,18 @@ static void on_write(ble_cus_pb_t* p_cus, ble_evt_t const* p_ble_evt)
     ble_gatts_evt_write_t const* p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
 
     // Custom Value Characteristic Written to.
-    if (p_evt_write->handle == p_cus->sensor_data_handle.value_handle)
+    if (p_evt_write->handle == p_cus->char_sensordata_h.value_handle)
     {
         // Do nothing
     }
+    if ((p_evt_write->handle == p_cus->char_timestamp_h.value_handle) && (p_evt_write->len == sizeof(uint32_t)))
+    {
+        uint32_t new_timestamp = uint32_decode(p_evt_write->data);
+        status_update_timestamp(new_timestamp);
+    }
 
     // Check if the Custom value CCCD is written to and that the value is the appropriate length, i.e 2 bytes.
-    // if ((p_evt_write->handle == p_cus->sensor_data_handle.cccd_handle) && (p_evt_write->len == 2))
+    // if ((p_evt_write->handle == p_cus->char_sensordata_h.cccd_handle) && (p_evt_write->len == 2))
     // {
     //     // CCCD written, call application event handler
     //     if (p_cus->evt_handler != NULL)
@@ -143,6 +150,10 @@ uint32_t ble_cus_pb_init(ble_cus_pb_t* p_cus, const ble_cus_pb_init_t* p_cus_ini
 
     // Add Sensor data characteristic
     err_code = char_sensordata_add_to_service(p_cus);
+    VERIFY_SUCCESS(err_code);
+
+    // Add timestamp characteristic
+    err_code = char_timestamp_add_to_service(p_cus);
     VERIFY_SUCCESS(err_code);
 
     return err_code;
