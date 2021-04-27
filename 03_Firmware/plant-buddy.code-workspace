@@ -45,7 +45,7 @@
             "char_lumflux.h": "c",
             "char_airtemp.h": "c",
             "char_airhum.h": "c",
-            "char_pb_sensors.h": "c",
+            "char_sensordata.h": "c",
             "app_util_platform.h": "c",
             "nrf_drv_gpiote.h": "c",
             "stdint.h": "c",

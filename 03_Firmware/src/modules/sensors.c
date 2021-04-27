@@ -8,7 +8,7 @@
 #include "shtc3_driver.h"
 #include "soilhum_driver.h"
 /* BLE Characteristics */
-#include "char_pb_sensors.h"
+#include "char_sensordata.h"
 /* Other includes */
 #include "ble_cus_pb.h"
 #include "pb_config.h"
@@ -43,7 +43,7 @@ static void sensors_apptimer_handler(void* p_context)
     sensors_start_measurements();
 
     sensor_data.unix_epoch_time = status_get_timestamp();
-    char_pb_sensors_update(sensor_data);
+    char_sensordata_update(sensor_data);
 }
 
 /**

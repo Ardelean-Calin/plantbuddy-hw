@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "ble_gattc.h"
-#include "char_pb_sensors.h"
+#include "char_sensordata.h"
 #include "sdk_common.h"
 #include "sdk_errors.h"
 
@@ -15,7 +15,7 @@ static ble_cus_pb_t* p_cus_local = NULL;
  *
  * @return      NRF_SUCCESS on success, otherwise an error code.
  */
-uint32_t char_pb_sensors_add_to_service(ble_cus_pb_t* p_cus)
+uint32_t char_sensordata_add_to_service(ble_cus_pb_t* p_cus)
 {
     ret_code_t               err_code;
     ble_add_char_params_t    add_char_params;
@@ -66,7 +66,7 @@ uint32_t char_pb_sensors_add_to_service(ble_cus_pb_t* p_cus)
  *
  * @return      NRF_SUCCESS on success, otherwise an error code.
  */
-uint32_t char_pb_sensors_update(sensor_data_t new_sensor_data)
+uint32_t char_sensordata_update(sensor_data_t new_sensor_data)
 {
     if (p_cus_local == NULL)
     {

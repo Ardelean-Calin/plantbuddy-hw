@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "ble_cus_pb.h"
-#include "char_pb_sensors.h"
+#include "char_sensordata.h"
 
 /**@brief Function for handling the Connect event.
  *
@@ -142,7 +142,7 @@ uint32_t ble_cus_pb_init(ble_cus_pb_t* p_cus, const ble_cus_pb_init_t* p_cus_ini
     VERIFY_SUCCESS(err_code);
 
     // Add Sensor data characteristic
-    err_code = char_pb_sensors_add_to_service(p_cus);
+    err_code = char_sensordata_add_to_service(p_cus);
     VERIFY_SUCCESS(err_code);
 
     return err_code;
