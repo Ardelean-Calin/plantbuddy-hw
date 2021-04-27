@@ -47,8 +47,9 @@ static void sensors_apptimer_handler(void* p_context)
     sensor_data.airhum_phys   = drv_shtc3_get_airhum();
     sensor_data.airtemp_phys  = drv_shtc3_get_airtemp();
     sensor_data.lum_flux      = drv_opt3001_get_lumflux();
-    // TODO: Battery voltage is not updated anywhere. I suggest implementing the Battery Service so that every device
-    // can read the battery level in a standardized way.
+    // TODO: I suggest implementing the Battery Service so that every device can read the battery level in a
+    // standardized way. For that we need to read more about BAS; might need to estimate SoC here
+    sensor_data.battery_mv = batt_sensor_get_voltage();
     // Update BLE characteristic
     char_sensordata_update(sensor_data);
     // Start new measurements

@@ -53,7 +53,8 @@
             "peer_manager_handler.h": "c",
             "nrf_dfu_ble.h": "c",
             "nrf_log.h": "c",
-            "battery_sensor_types.h": "c"
+            "battery_sensor_types.h": "c",
+            "soilhum_types.h": "c"
         },
         "editor.formatOnSave": true,
         "editor.rulers": [
