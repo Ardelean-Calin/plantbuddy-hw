@@ -103,7 +103,7 @@
             "label": "Build Bootloader Settings",
             "detail": "Creates the bootloader settings.",
             "type": "shell",
-            "command": "nrfutil settings generate --family NRF52810 --application D:/Documents/Projects/plant-buddy/03_Firmware/_build/plant-buddy.hex --application-version 0 --bootloader-version 0 --bl-settings-version 1 D:/Documents/Projects/plant-buddy/03_Firmware/secure_bootloader/_build/bootloader_setting.hex",
+            "command": "pipenv run nrfutil settings generate --family NRF52810 --application D:/Documents/Projects/plant-buddy/03_Firmware/_build/plant-buddy.hex --application-version 0 --bootloader-version 0 --bl-settings-version 1 D:/Documents/Projects/plant-buddy/03_Firmware/secure_bootloader/_build/bootloader_setting.hex",
             "problemMatcher": []
         },
         {
@@ -191,7 +191,7 @@
             "detail": "Create DFU Package for Application",
             "type": "shell",
             "dependsOn": "Rebuild (Release)",
-            "command": "nrfutil pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU_v${input:AppVersion}.zip --sd-req 0x103",
+            "command": "pipenv run nrfutil pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU_v${input:AppVersion}.zip --sd-req 0x103",
             "problemMatcher": []
         },
         {
@@ -203,7 +203,7 @@
                 "Package DFU (App)"
             ],
             "dependsOrder": "sequence",
-            "command": "nrfutil pkg generate --hw-version 52 --bootloader-version ${input:BootloaderVersion} --bootloader ./secure_bootloader/_build/bootloader-with-settings.hex --key-file secure_bootloader/private.key PlantBuddy_Bootloader_DFU.zip --sd-req 0x103",
+            "command": "pipenv run nrfutil pkg generate --hw-version 52 --bootloader-version ${input:BootloaderVersion} --bootloader ./secure_bootloader/_build/bootloader-with-settings.hex --key-file secure_bootloader/private.key PlantBuddy_Bootloader_DFU.zip --sd-req 0x103",
             "problemMatcher": []
         },
         {
@@ -211,7 +211,7 @@
             "detail": "Generates the private and public keys used by the bootloader.",
             "type": "shell",
             "command": [
-                "nrfutil keys generate ${workspaceRoot}/secure_bootloader/private.key && nrfutil keys display --key pk --format code ${workspaceRoot}/secure_bootloader/private.key --out_file ${workspaceRoot}/secure_bootloader/public_key.c"
+                "pipenv run nrfutil keys generate ${workspaceRoot}/secure_bootloader/private.key && pipenv run nrfutil keys display --key pk --format code ${workspaceRoot}/secure_bootloader/private.key --out_file ${workspaceRoot}/secure_bootloader/public_key.c"
             ],
             "problemMatcher": []
         }
