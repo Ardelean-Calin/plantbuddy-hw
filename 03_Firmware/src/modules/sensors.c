@@ -19,7 +19,7 @@ static uint16_t      battery_voltage_mv;
 static sensor_data_t sensor_data;
 
 #ifdef RELEASE
-#define SENSORS_UPDATE_PERIOD_MS 10000 // We will call the different sensor update commands every this number of ms
+#define SENSORS_UPDATE_PERIOD_MS 1000 // We will call the different sensor update commands every this number of ms
 #elif DEBUG
 #define SENSORS_UPDATE_PERIOD_MS 1000 // We will call the different sensor update commands every this number of ms
 #endif

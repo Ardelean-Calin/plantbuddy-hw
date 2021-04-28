@@ -7,7 +7,7 @@
 #ifdef DEBUG
 #define BLINK_EVERY_N_100ms 2
 #elif RELEASE
-#define BLINK_EVERY_N_100ms UINT32_MAX
+#define BLINK_EVERY_N_100ms 100
 #endif
 
 APP_TIMER_DEF(m_periodic_timer_100ms);  /**< Handler for repeated timer used to blink LEDs. */

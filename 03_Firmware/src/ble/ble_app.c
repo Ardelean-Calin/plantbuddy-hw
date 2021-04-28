@@ -152,10 +152,10 @@ static void gap_params_init(void)
     APP_ERROR_CHECK(err_code);
 
     // Add static pin:
-    uint8_t passkey[]                             = STATIC_PASSKEY;
-    m_static_pin_option.gap_opt.passkey.p_passkey = passkey;
-    err_code                                      = sd_ble_opt_set(BLE_GAP_OPT_PASSKEY, &m_static_pin_option);
-    APP_ERROR_CHECK(err_code);
+    // uint8_t passkey[]                             = STATIC_PASSKEY;
+    // m_static_pin_option.gap_opt.passkey.p_passkey = passkey;
+    // err_code                                      = sd_ble_opt_set(BLE_GAP_OPT_PASSKEY, &m_static_pin_option);
+    // APP_ERROR_CHECK(err_code);
 }
 
 /**@brief Function for initializing the GATT module.
