@@ -13,9 +13,8 @@
 #include "ble_cus_pb.h"
 #include "pb_config.h"
 #include "sensors.h"
-#include "status.h"
+#include "unix_time.h"
 
-static uint16_t      battery_voltage_mv;
 static sensor_data_t sensor_data;
 
 #ifdef RELEASE
@@ -41,7 +40,7 @@ static void sensors_twi_mngr_init(void);
 static void sensors_apptimer_handler(void* p_context)
 {
     // Current timestamp
-    sensor_data.unix_epoch_time = status_get_timestamp();
+    sensor_data.unix_epoch_time = unix_time_get_timestamp();
     // The measured variables
     sensor_data.soil_humidity = drv_soilhum_get_frequency();
     sensor_data.airhum_phys   = drv_shtc3_get_airhum();

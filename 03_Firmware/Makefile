@@ -21,6 +21,7 @@ SRC_FILES += \
   $(PROJ_DIR)/src/main.c \
   $(PROJ_DIR)/src/modules/sensors.c \
   $(PROJ_DIR)/src/modules/status.c \
+  $(PROJ_DIR)/src/modules/unix_time.c \
   $(SDK_ROOT)/components/ble/ble_advertising/ble_advertising.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_dfu/ble_dfu_unbonded.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_dfu/ble_dfu.c \
@@ -104,6 +105,7 @@ SRC_FILES += \
 # Include folders common to all targets
 INC_FOLDERS += \
   $(PROJ_DIR)/config \
+  $(PROJ_DIR)/src \
   $(PROJ_DIR)/src/ble \
   $(PROJ_DIR)/src/ble/custom_characteristics \
   $(PROJ_DIR)/src/ble/custom_services \
@@ -282,8 +284,8 @@ LDFLAGS += --specs=nano.specs
 LDFLAGS += -Wl,--print-memory-usage
 
 ifdef DEBUG
-CFLAGS += -DDEBUG -DDEBUG_NRF
-ASMFLAGS += -DDEBUG -DDEBUG_NRF
+CFLAGS += -DDEBUG
+ASMFLAGS += -DDEBUG
 endif
 
 ifdef RELEASE

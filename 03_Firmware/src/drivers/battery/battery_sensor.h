@@ -6,6 +6,7 @@
 #define BATT_SENSOR_CFG_VMAX_MV 600
 #define BATT_SENSOR_CFG_GAIN    6
 
+// Max range: 0-3.3V
 #define BATT_SENSOR_RAW_TO_PHYS(raw_val) \
     ((uint32_t)(raw_val * BATT_SENSOR_CFG_VMAX_MV * BATT_SENSOR_CFG_GAIN) / BATT_SENSOR_CFG_RES)
 

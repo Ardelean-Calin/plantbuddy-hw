@@ -66,6 +66,7 @@
 #include "nrf_soc.h"
 #include "sensors.h"
 #include "status.h"
+#include "unix_time.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -206,6 +207,7 @@ int main(void)
     /* Initialize our different modules */
     status_init();
     sensors_init();
+    unix_time_init();
 
     // Enable DC-DC converter for reduced power consumption!
     sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);

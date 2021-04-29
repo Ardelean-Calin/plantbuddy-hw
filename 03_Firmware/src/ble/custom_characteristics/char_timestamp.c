@@ -1,6 +1,7 @@
 #include "char_timestamp.h"
 #include "ble_gattc.h"
 #include "sdk_common.h"
+#include "unix_time.h"
 #include <stdint.h>
 #include <string.h>
 
@@ -28,9 +29,9 @@ uint32_t char_timestamp_add_to_service(ble_cus_pb_t* p_cus)
     memset(&add_char_params, 0, sizeof(add_char_params));
     add_char_params.uuid              = TIMESTAMP_CHAR_UUID;
     add_char_params.uuid_type         = p_cus->uuid_type;
-    add_char_params.init_len          = sizeof(uint32_t);
+    add_char_params.init_len          = sizeof(unix_time_t);
     add_char_params.p_init_value      = (uint8_t*)&initial_ena_val;
-    add_char_params.max_len           = sizeof(uint32_t);
+    add_char_params.max_len           = sizeof(unix_time_t);
     add_char_params.char_props.read   = 1;
     add_char_params.char_props.write  = 1;
     add_char_params.char_props.notify = 0;

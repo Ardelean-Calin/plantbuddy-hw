@@ -6,7 +6,7 @@
 #include "ble_cus_pb.h"
 #include "char_sensordata.h"
 #include "char_timestamp.h"
-#include "status.h"
+#include "unix_time.h"
 
 /**@brief Function for handling the Connect event.
  *
@@ -55,10 +55,11 @@ static void on_write(ble_cus_pb_t* p_cus, ble_evt_t const* p_ble_evt)
     {
         // Do nothing
     }
-    if ((p_evt_write->handle == p_cus->char_timestamp_h.value_handle) && (p_evt_write->len == sizeof(uint32_t)))
+    if ((p_evt_write->handle == p_cus->char_timestamp_h.value_handle) && (p_evt_write->len == sizeof(unix_time_t)))
     {
-        uint32_t new_timestamp = uint32_decode(p_evt_write->data);
-        status_update_timestamp(new_timestamp);
+        /* Update timestamp was called */
+        unix_time_t new_timestamp = uint32_decode(p_evt_write->data);
+        unix_time_update_timestamp(new_timestamp);
     }
 
     // Check if the Custom value CCCD is written to and that the value is the appropriate length, i.e 2 bytes.

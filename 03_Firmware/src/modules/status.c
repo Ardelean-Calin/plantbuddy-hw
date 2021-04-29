@@ -10,8 +10,7 @@
 #define BLINK_EVERY_N_100ms 100
 #endif
 
-APP_TIMER_DEF(m_periodic_timer_100ms);  /**< Handler for repeated timer used to blink LEDs. */
-APP_TIMER_DEF(m_periodic_timer_1000ms); /**< Handler for repeated timer used to keep UNIX epoch time. */
+APP_TIMER_DEF(m_periodic_timer_100ms); /**< Handler for repeated timer used to blink LEDs. */
 
 /* Static functions */
 static void status_app_timer_100ms_handler(void* p_context);
@@ -22,38 +21,18 @@ static void status_gpiote_init(void);
 
 /* Static variables */
 static uint32_t invocation;
-static uint32_t unix_epoch_time_s; /* current unix epoch time. TODO: update to uint64_t before 7 february 2106! */
 
 /**
  * @brief Initialize the status module
  */
 void status_init()
 {
-    invocation        = 0;
-    unix_epoch_time_s = 0;
+    invocation = 0;
     // Initialize GPIOTE for this module
     status_gpiote_init();
 
     status_app_timers_init();
     status_app_timers_start();
-}
-
-/**
- * @brief Get the current UNIX epoch time.
- */
-uint32_t status_get_timestamp()
-{
-    return unix_epoch_time_s;
-}
-
-/**
- * @brief Updates the internal UNIX timestamp.
- */
-void status_update_timestamp(uint32_t timestamp)
-{
-    app_timer_stop(m_periodic_timer_1000ms);
-    unix_epoch_time_s = timestamp;
-    app_timer_start(m_periodic_timer_1000ms, APP_TIMER_TICKS(1000), NULL);
 }
 
 /**
@@ -69,15 +48,6 @@ static void status_app_timer_100ms_handler(void* p_context)
 }
 
 /**
- * @brief Executes every second to keep the global UNIX time.
- */
-static void status_app_timer_1000ms_handler(void* p_context)
-{
-    /* Just increment uptime by one second! */
-    unix_epoch_time_s++;
-}
-
-/**
  * @brief Create an app timer that blinks our LED
  */
 static void status_app_timers_init()
@@ -86,8 +56,6 @@ static void status_app_timers_init()
 
     // Create timers
     err_code = app_timer_create(&m_periodic_timer_100ms, APP_TIMER_MODE_REPEATED, status_app_timer_100ms_handler);
-    APP_ERROR_CHECK(err_code);
-    err_code = app_timer_create(&m_periodic_timer_1000ms, APP_TIMER_MODE_REPEATED, status_app_timer_1000ms_handler);
     APP_ERROR_CHECK(err_code);
 }
 
@@ -100,8 +68,6 @@ static void status_app_timers_start()
 
     // Start timers
     err_code = app_timer_start(m_periodic_timer_100ms, APP_TIMER_TICKS(100), NULL); // 100ms timer
-    APP_ERROR_CHECK(err_code);
-    err_code = app_timer_start(m_periodic_timer_1000ms, APP_TIMER_TICKS(1000), NULL); // 1000ms timer
     APP_ERROR_CHECK(err_code);
 }
 
