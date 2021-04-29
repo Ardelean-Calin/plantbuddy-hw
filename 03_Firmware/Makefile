@@ -53,6 +53,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/fstorage/nrf_fstorage_sd.c \
   $(SDK_ROOT)/components/libraries/fstorage/nrf_fstorage.c \
   $(SDK_ROOT)/components/libraries/hardfault/hardfault_implementation.c \
+  $(SDK_ROOT)/components/libraries/hardfault/nrf52/handler/hardfault_handler_gcc.c \
   $(SDK_ROOT)/components/libraries/log/src/nrf_log_backend_rtt.c \
   $(SDK_ROOT)/components/libraries/log/src/nrf_log_backend_serial.c \
   $(SDK_ROOT)/components/libraries/log/src/nrf_log_backend_uart.c \
@@ -281,8 +282,8 @@ LDFLAGS += --specs=nano.specs
 LDFLAGS += -Wl,--print-memory-usage
 
 ifdef DEBUG
-CFLAGS += -DDEBUG
-ASMFLAGS += -DDEBUG
+CFLAGS += -DDEBUG -DDEBUG_NRF
+ASMFLAGS += -DDEBUG -DDEBUG_NRF
 endif
 
 ifdef RELEASE
