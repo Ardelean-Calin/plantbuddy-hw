@@ -1,4 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\Calin\\anaconda3\\envs\\FlivzNexxy\\python.exe",
-    "editor.formatOnSave": true
+    "python.pythonPath": "C:\\Users\\Calin\\.virtualenvs\\plant-buddy-WK0I6DKE\\Scripts\\python.exe",
+    "editor.formatOnSave": true,
+    "jupyter.jupyterServerType": "local"
 }
