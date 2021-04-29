@@ -104,7 +104,6 @@ SRC_FILES += \
 # Include folders common to all targets
 INC_FOLDERS += \
   $(PROJ_DIR)/config \
-  $(PROJ_DIR)/inc \
   $(PROJ_DIR)/src/ble \
   $(PROJ_DIR)/src/ble/custom_characteristics \
   $(PROJ_DIR)/src/ble/custom_services \
@@ -113,6 +112,7 @@ INC_FOLDERS += \
   $(PROJ_DIR)/src/drivers/opt3001 \
   $(PROJ_DIR)/src/drivers/shtc3 \
   $(PROJ_DIR)/src/drivers/soilhum \
+  $(PROJ_DIR)/src/modules \
   $(SDK_ROOT)/components \
   $(SDK_ROOT)/components/ble/ble_advertising \
   $(SDK_ROOT)/components/ble/ble_dtm \
