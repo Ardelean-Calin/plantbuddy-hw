@@ -283,14 +283,12 @@ LDFLAGS += --specs=nano.specs
 # Pretty-print memory usage
 LDFLAGS += -Wl,--print-memory-usage
 
-ifdef DEBUG
-CFLAGS += -DDEBUG
-ASMFLAGS += -DDEBUG
-endif
-
 ifdef RELEASE
 CFLAGS += -DRELEASE
 ASMFLAGS += -DRELEASE
+else
+CFLAGS += -DDEBUG
+ASMFLAGS += -DDEBUG
 endif
 
 plant-buddy: CFLAGS += -D__HEAP_SIZE=2048
