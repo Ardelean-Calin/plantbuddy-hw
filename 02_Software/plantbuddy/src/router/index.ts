@@ -9,6 +9,7 @@ const routes: Array<RouteConfig> = [
     path: "/",
     name: "LandingPage",
     component: LandingPage,
+    props: { count: 2 },
   },
   {
     path: "/about",
