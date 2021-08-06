@@ -4,17 +4,25 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Reset for debug",
+            "detail": "Puts the Plantbuddy in a state where it can be debugged. The bootloader is deleted as it only works in release mode and the Softdevice is flashed.",
+            "type": "shell",
+            "dependsOn": ["Clean", "Mass Erase", "Flash SoftDevice"],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
             "label": "Build (Debug)",
             "detail": "Builds the PlantBuddy Hex with debug information.",
             "type": "shell",
-            "command": "make -j6 DEBUG=1 BLE_PASSKEY=654321",
+            "command": "make -j6 DEBUG=1",
             "problemMatcher": []
         },
         {
             "label": "Build (Release)",
             "detail": "Builds the PlantBuddy Hex with debug information.",
             "type": "shell",
-            "command": "make -j6 RELEASE=1 BLE_PASSKEY=654321",
+            "command": "make -j6 RELEASE=1",
             "problemMatcher": []
         },
         {
@@ -61,7 +69,7 @@
             "label": "Flash SoftDevice",
             "detail": "Flashes the S112 SoftDevice without erasing the memory first.",
             "type": "shell",
-            "command": "openocd -f ${workspaceRoot}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceRoot}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.2.0_softdevice.hex verify reset exit\"",
+            "command": "openocd -f ${workspaceRoot}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceRoot}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.3.0_softdevice.hex verify reset exit\"",
             "problemMatcher": []
         },
         {
