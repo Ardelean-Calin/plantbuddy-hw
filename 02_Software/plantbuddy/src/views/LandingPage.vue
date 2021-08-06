@@ -26,7 +26,7 @@ export default class LandingPage extends Vue {
           ?.getPrimaryService("f4c2abcd-6e5f-48a2-b9b2-a4f762791d85")
           .then((service) => {
             service
-              .getCharacteristic("f4c20002-6e5f-48a2-b9b2-a4f762791d85")
+              .getCharacteristic("f4c20001-6e5f-48a2-b9b2-a4f762791d85")
               .then((characteristic) => {
                 characteristic.readValue().then((data) => {
                   console.log(new Uint16Array(data.buffer));

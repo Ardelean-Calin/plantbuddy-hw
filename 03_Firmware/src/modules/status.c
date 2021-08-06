@@ -1,22 +1,14 @@
-#include "app_scheduler.h"
-#include "app_timer.h"
 #include "nrf_drv_gpiote.h"
 #include "pb_config.h"
 #include <stdint.h>
 
 #ifdef DEBUG
-#define BLINK_EVERY_N_100ms 2
+#define BLINK_EVERY_N_100ms 5
 #elif RELEASE
 #define BLINK_EVERY_N_100ms 100
 #endif
 
-APP_TIMER_DEF(m_periodic_timer_100ms); /**< Handler for repeated timer used to blink LEDs. */
-
 /* Static functions */
-static void status_app_timer_100ms_handler(void* p_context);
-static void status_app_timer_1000ms_handler(void* p_context);
-static void status_app_timers_init(void);
-static void status_app_timers_start(void);
 static void status_gpiote_init(void);
 
 /* Static variables */
@@ -30,45 +22,15 @@ void status_init()
     invocation = 0;
     // Initialize GPIOTE for this module
     status_gpiote_init();
-
-    status_app_timers_init();
-    status_app_timers_start();
 }
 
-/**
- * @brief Executes every 100ms to check wether LED needs to be turned on or off.
- */
-static void status_app_timer_100ms_handler(void* p_context)
+void status_task()
 {
     /* Toggle LEDs to indicate status. Runs in thread mode! */
     if (invocation++ % BLINK_EVERY_N_100ms == 0)
         nrf_drv_gpiote_out_set(PIN_OUT_LEDY);
     else
         nrf_drv_gpiote_out_clear(PIN_OUT_LEDY);
-}
-
-/**
- * @brief Create an app timer that blinks our LED
- */
-static void status_app_timers_init()
-{
-    ret_code_t err_code;
-
-    // Create timers
-    err_code = app_timer_create(&m_periodic_timer_100ms, APP_TIMER_MODE_REPEATED, status_app_timer_100ms_handler);
-    APP_ERROR_CHECK(err_code);
-}
-
-/**
- * @brief Starts the previously created timers with given periodicity.
- */
-static void status_app_timers_start()
-{
-    ret_code_t err_code;
-
-    // Start timers
-    err_code = app_timer_start(m_periodic_timer_100ms, APP_TIMER_TICKS(100), NULL); // 100ms timer
-    APP_ERROR_CHECK(err_code);
 }
 
 /**

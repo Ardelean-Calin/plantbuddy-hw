@@ -22,3 +22,4 @@ typedef struct
 } sensor_data_t;                       // Total: 18 bytes
 
 void sensors_init(void);
+void sensors_task(void);

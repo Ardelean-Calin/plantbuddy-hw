@@ -52,6 +52,7 @@
 #include "app_timer.h"
 #include "ble_app.h"
 #include "ble_dfu.h"
+#include "datalogger.h"
 #include "nrf.h"
 #include "nrf_delay.h"
 #include "nrf_drv_clock.h"
@@ -66,6 +67,7 @@
 #include "nrf_soc.h"
 #include "sensors.h"
 #include "status.h"
+#include "task_scheduler.h"
 #include "unix_time.h"
 #include <stdbool.h>
 #include <stdint.h>
@@ -202,19 +204,25 @@ int main(void)
     // Initialize power manager
     power_management_init();
 
-    /* Initialize app scheduler */
+    // Enable DC-DC converter for reduced power consumption!
+    sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
+
+    /* Initialize app scheduler library */
     APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
     /* Initialize our different modules */
     status_init();
     sensors_init();
     unix_time_init();
+    /* Initialize the data logging module */
+    datalogger_init();
 
-    // Enable DC-DC converter for reduced power consumption!
-    sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
-
-    // Start the BLE Interface
+    /* Initialize and start the BLE Interface */
     ble_app_init();
+    /* Initialize and start our custom app scheduler */
+    scheduler_init();
+    scheduler_start();
+
     while (1)
     {
         // App scheduler manages items in the queue
