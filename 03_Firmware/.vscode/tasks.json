@@ -226,6 +226,13 @@
                 "util/nrfutil-linux keys generate ${workspaceRoot}/secure_bootloader/private.key && util/nrfutil-linux keys display --key pk --format code ${workspaceRoot}/secure_bootloader/private.key --out_file ${workspaceRoot}/secure_bootloader/public_key.c"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "Debug using serial port",
+            "detail": "Opens the serial port /dev/ttyACM1 and monitors the output. Useful when NRF_LOG is 1.",
+            "type": "shell",
+            "command": "screen ${config:bmp_uart_port} 115200",
+            "problemMatcher": []
         }
     ],
     "inputs": [

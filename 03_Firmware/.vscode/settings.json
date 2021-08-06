@@ -11,5 +11,6 @@
         "lib/nrf-sdk/components/softdevice/s332": true,
         "lib/nrf-sdk/components/softdevice/s340": true,
     },
-    "bmp_port": "/dev/ttyACM0"
+    "bmp_port": "/dev/ttyACM0",
+    "bmp_uart_port": "/dev/ttyACM1"
 }
