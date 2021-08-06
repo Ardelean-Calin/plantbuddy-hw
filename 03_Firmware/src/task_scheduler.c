@@ -91,9 +91,9 @@ static void scheduler_invoke_other_tasks(uint32_t count)
     }
 
     /* Reset the counter at 4 billion, this way we can go on forever */
-    if (count == 4000000000 + 1)
+    if (count == 4000000000)
     {
-        count = 1;
+        count = 0;
     }
 }
 /** Static function definitions END **/
