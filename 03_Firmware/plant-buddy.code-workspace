@@ -56,7 +56,8 @@
             "battery_sensor_types.h": "c",
             "soilhum_types.h": "c",
             "unix_time.h": "c",
-            "status.h": "c"
+            "status.h": "c",
+            "datalogger.h": "c"
         },
         "editor.formatOnSave": true,
         "editor.rulers": [

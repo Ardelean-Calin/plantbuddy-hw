@@ -23,3 +23,4 @@ typedef struct
 
 void sensors_init(void);
 void sensors_task(void);
+void sensors_get_latest(sensor_data_t* p_dest);

@@ -28,6 +28,15 @@ static void sensors_twi_mngr_init(void)
     nrf_twi_mngr_init(&m_twi_manager, &twi_config);
 }
 
+static void sensors_start_measurements(void)
+{
+    /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
+    drv_soilhum_meas_start();
+    drv_shtc3_meas_start();
+    drv_opt3001_meas_start();
+    batt_sensor_meas_start();
+}
+
 /**
  * @brief Initializes the different environmental sensors of PlantBuddy.
  */
@@ -41,6 +50,9 @@ void sensors_init(void)
 
     // TWI Manager is used by some sensors
     sensors_twi_mngr_init();
+
+    // As soon as PlantBuddy goes live, start a first measurement... This one is unfortunately not logged, though.
+    sensors_start_measurements();
 }
 
 /**
@@ -61,9 +73,13 @@ void sensors_task(void)
     // Update BLE characteristic
     char_sensordata_update(sensor_data);
 
-    /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
-    drv_soilhum_meas_start();
-    drv_shtc3_meas_start();
-    drv_opt3001_meas_start();
-    batt_sensor_meas_start();
+    sensors_start_measurements();
+}
+
+/**
+ * @brief Return the most recent sensor data.
+ */
+void sensors_get_latest(sensor_data_t* p_dest)
+{
+    *p_dest = sensor_data;
 }
