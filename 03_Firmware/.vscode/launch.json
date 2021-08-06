@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Cortex Debug",
+            "name": "Cortex Debug (Openocd)",
             "cwd": "${workspaceRoot}",
             "executable": "./_build/plant-buddy.out",
             "request": "launch",
@@ -14,6 +14,18 @@
             "configFiles": [
                 "./config/debugger/openocd.cfg"
             ]
+        },
+        {
+            "name": "Cortex Debug (BMP)",
+            "cwd": "${workspaceRoot}",
+            "executable": "./_build/plant-buddy.out",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "type": "cortex-debug",
+            "servertype": "bmp",
+            "svdFile": "./config/debugger/nrf52811.svd",
+            "runToMain": true,
+            "BMPGDBSerialPort": "${config:bmp_port}",
         }
     ],
     "compounds": []
