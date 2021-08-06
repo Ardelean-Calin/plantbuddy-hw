@@ -195,8 +195,9 @@ int main(void)
     app_timer_init();
     // Initialize logging module
 #if NRFX_CHECK(NRF_LOG_ENABLED)
-    NRF_LOG_INIT(app_timer_cnt_get);
+    NRF_LOG_INIT(NULL);
     NRF_LOG_DEFAULT_BACKENDS_INIT();
+    NRF_LOG_INFO("Logging backend enabled!");
 #endif
     // Initialize power manager
     power_management_init();
