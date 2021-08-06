@@ -1,18 +1,18 @@
+#include "task_scheduler.h"
 #include "app_timer.h"
 #include "sensors.h"
 #include "status.h"
-#include "task_scheduler.h"
 #include "unix_time.h"
 #include <stdint.h>
 
 APP_TIMER_DEF(m_periodic_timer); // App timer used by the scheduler
-uint64_t scheduler_counter;
+uint32_t scheduler_counter;
 
 /* Static function prototypes */
 static void scheduler_run_100ms(void* p_context);
 static void scheduler_run_1000ms();
 static void scheduler_run_10000ms();
-static void scheduler_invoke_other_tasks(uint64_t count);
+static void scheduler_invoke_other_tasks(uint32_t count);
 
 void scheduler_init()
 {
@@ -78,7 +78,7 @@ static void scheduler_run_10000ms()
 /**
  * @brief Decides whether other scheduling tasks need to be run.
  */
-static void scheduler_invoke_other_tasks(uint64_t count)
+static void scheduler_invoke_other_tasks(uint32_t count)
 {
     if (count % 10 == 0)
     {
@@ -88,6 +88,12 @@ static void scheduler_invoke_other_tasks(uint64_t count)
     if (count % 100 == 0)
     {
         scheduler_run_10000ms();
+    }
+
+    /* Reset the counter at 4 billion, this way we can go on forever */
+    if (count == 4000000000 + 1)
+    {
+        count = 1;
     }
 }
 /** Static function definitions END **/
