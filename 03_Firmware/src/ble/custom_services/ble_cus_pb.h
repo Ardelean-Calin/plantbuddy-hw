@@ -25,9 +25,11 @@
 }}
 // clang-format on
 
-#define CUSTOM_SERVICE_UUID   0xABCD
-#define SENSOR_DATA_CHAR_UUID 0x0001
-#define TIMESTAMP_CHAR_UUID   0x0002
+#define CUSTOM_SERVICE_UUID       0xABCD
+#define SENSOR_DATA_CHAR_UUID     0x0001
+#define TIMESTAMP_CHAR_UUID       0x0002
+#define DOWNLOADER_CTRL_CHAR_UUID 0x0005
+#define DOWNLOADER_READ_CHAR_UUID 0x0006
 
 /**@brief Custom Service event type. */
 typedef enum
@@ -67,6 +69,8 @@ struct ble_cus_pb_s
                                                    BLE_CONN_HANDLE_INVALID if not in a connection). */
     ble_gatts_char_handles_t char_sensordata_h; /**< Handle of the sensor data characteristic. */
     ble_gatts_char_handles_t char_timestamp_h;  /**< Handle of the timestamp characteristic. */
+    ble_gatts_char_handles_t char_downloader_ctrl_h; /**< Handle of the downloader control characteristic. */
+    ble_gatts_char_handles_t char_downloader_read_h; /**< Handle of the downloader read characteristic. */
 };
 
 /**@brief Function for initializing the Custom Service.

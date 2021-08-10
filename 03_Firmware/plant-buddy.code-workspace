@@ -57,7 +57,8 @@
             "soilhum_types.h": "c",
             "unix_time.h": "c",
             "status.h": "c",
-            "datalogger.h": "c"
+            "datalogger.h": "c",
+            "char_downloader.h": "c"
         },
         "editor.formatOnSave": true,
         "editor.rulers": [

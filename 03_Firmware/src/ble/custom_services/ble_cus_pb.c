@@ -55,11 +55,17 @@ static void on_write(ble_cus_pb_t* p_cus, ble_evt_t const* p_ble_evt)
     {
         // Do nothing
     }
+    // Timestamp characteristic
     if ((p_evt_write->handle == p_cus->char_timestamp_h.value_handle) && (p_evt_write->len == sizeof(unix_time_t)))
     {
         /* Update timestamp was called */
         unix_time_t new_timestamp = uint32_decode(p_evt_write->data);
         unix_time_update_timestamp(new_timestamp);
+    }
+    // Data downloader characteristic
+    if (p_evt_write->handle == p_cus->char_downloader_ctrl_h.value_handle)
+    {
+        // A control command has been received
     }
 
     // Check if the Custom value CCCD is written to and that the value is the appropriate length, i.e 2 bytes.

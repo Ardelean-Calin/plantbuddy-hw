@@ -1,5 +1,5 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.errorSquiggles": "Enabled",
     "files.exclude": {
         "lib/nrf-sdk/config/": true,
         "lib/nrf-sdk/components/softdevice/s113": true,

@@ -19,6 +19,7 @@ typedef struct
     airhum_t          airhum_phys;     // 2 bytes
     airtemp_t         airtemp_phys;    // 2 bytes
     battery_voltage_t battery_mv;      // 2 bytes
+    uint16_t          packet_id;       // 2 bytes => Used to identify the packets and request them
 } sensor_data_t;                       // Total: 18 bytes
 
 void sensors_init(void);
