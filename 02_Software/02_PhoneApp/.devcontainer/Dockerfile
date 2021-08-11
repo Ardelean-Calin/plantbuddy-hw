@@ -22,6 +22,7 @@ RUN mv cmdline-tools Android/sdk/cmdline-tools/latest
 RUN cd Android/sdk/cmdline-tools/latest/bin && yes | ./sdkmanager --licenses
 RUN cd Android/sdk/cmdline-tools/latest/bin && ./sdkmanager "build-tools;29.0.3" "platform-tools" "platforms;android-29" "sources;android-29"
 ENV PATH "$PATH:/opt/Android/sdk/platform-tools"
+ENV PATH "$PATH:/opt/Android/sdk/emulator"
 
 # Download Flutter SDK
 RUN git clone https://github.com/flutter/flutter.git -b stable
