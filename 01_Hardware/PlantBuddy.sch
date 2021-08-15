@@ -6,9 +6,9 @@ encoding utf-8
 Sheet 1 1
 Title "Plant Buddy"
 Date "2021-08-14"
-Rev "3"
+Rev "4"
 Comp "G&C"
-Comment1 "Rev3: Changed layout to use nRF52832 instead of nRF52811"
+Comment1 "Rev4: Changed layout to use nRF52832 instead of nRF52811. Improved capacitance sensing"
 Comment2 ""
 Comment3 ""
 Comment4 ""
@@ -365,27 +365,10 @@ Wire Wire Line
 	2875 7200 2875 7300
 Text Label 10925 1075 2    50   ~ 0
 ~RST
-$Comp
-L Connector_Generic:Conn_02x04_Odd_Even J101
-U 1 1 6117791F
-P 10300 975
-F 0 "J101" H 10350 1292 50  0000 C CNN
-F 1 "Debug" H 10350 1201 50  0000 C CNN
-F 2 "PlantBuddy:PinHeader_2x04_P1.27mm_Vertical" H 10300 975 50  0001 C CNN
-F 3 "~" H 10300 975 50  0001 C CNN
-	1    10300 975 
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	10100 1075 9825 1075
 Text Label 10925 875  2    50   ~ 0
 SWDIO
-Wire Wire Line
-	10100 975  9825 975 
 Text Label 10925 975  2    50   ~ 0
 SWCLK
-Wire Wire Line
-	9825 1175 10100 1175
 Wire Wire Line
 	10600 875  10925 875 
 $Comp
@@ -401,17 +384,6 @@ F 3 "" H 9825 875 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9825 875  10100 875 
-$Comp
-L PlantBuddy-rescue:GND-power #PWR0112
-U 1 1 6119F486
-P 9725 975
-F 0 "#PWR0112" H 9725 725 50  0001 C CNN
-F 1 "GND" H 9875 900 50  0001 C CNN
-F 2 "" H 9725 975 50  0001 C CNN
-F 3 "" H 9725 975 50  0001 C CNN
-	1    9725 975 
-	1    0    0    -1  
-$EndComp
 Text Notes 1950 7500 2    50   ~ 0
 0 to 83865 Lux Light sensor
 $Comp
@@ -1042,17 +1014,10 @@ Wire Wire Line
 	10600 975  10925 975 
 Text Label 10925 1175 2    50   ~ 0
 UART_Tx
-Text Label 9825 1175 0    50   ~ 0
-UART_Rx
 Wire Wire Line
 	10600 1175 10925 1175
 Wire Wire Line
 	10600 1075 10925 1075
-Wire Wire Line
-	9725 975  9825 975 
-Wire Wire Line
-	9825 975  9825 1075
-Connection ~ 9825 975 
 Wire Wire Line
 	7575 4475 7675 4475
 Wire Wire Line
@@ -1079,8 +1044,43 @@ NoConn ~ 7000 2275
 NoConn ~ 7000 2175
 NoConn ~ 7000 1975
 NoConn ~ 7000 1875
+Wire Wire Line
+	9825 975  9825 1075
+Wire Wire Line
+	10100 975  9825 975 
+Wire Wire Line
+	10100 1075 9825 1075
+Connection ~ 9825 975 
+Wire Wire Line
+	9725 975  9825 975 
+$Comp
+L PlantBuddy-rescue:GND-power #PWR0112
+U 1 1 6119F486
+P 9725 975
+F 0 "#PWR0112" H 9725 725 50  0001 C CNN
+F 1 "GND" H 9875 900 50  0001 C CNN
+F 2 "" H 9725 975 50  0001 C CNN
+F 3 "" H 9725 975 50  0001 C CNN
+	1    9725 975 
+	1    0    0    -1  
+$EndComp
 Wire Bus Line
 	2175 5325 2625 5325
 Wire Bus Line
 	2175 5325 2175 6650
+Text Label 9825 1175 0    50   ~ 0
+UART_Rx
+Wire Wire Line
+	9825 1175 10100 1175
+$Comp
+L Connector_Generic:Conn_02x04_Odd_Even J101
+U 1 1 6117791F
+P 10300 975
+F 0 "J101" H 10350 1292 50  0000 C CNN
+F 1 "Debug" H 10350 1201 50  0000 C CNN
+F 2 "PlantBuddy:PinHeader_2x04_P1.27mm_Vertical" H 10300 975 50  0001 C CNN
+F 3 "~" H 10300 975 50  0001 C CNN
+	1    10300 975 
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
