@@ -16,18 +16,16 @@ $EndDescr
 $Comp
 L PlantBuddy-rescue:+BATT-power #PWR010
 U 1 1 5F85BEB5
-P 1400 6450
-F 0 "#PWR010" H 1400 6300 50  0001 C CNN
-F 1 "+BATT" H 1275 6575 50  0000 C CNN
-F 2 "" H 1400 6450 50  0001 C CNN
-F 3 "" H 1400 6450 50  0001 C CNN
-	1    1400 6450
+P 1400 6350
+F 0 "#PWR010" H 1400 6200 50  0001 C CNN
+F 1 "+BATT" H 1225 6625 50  0000 C CNN
+F 2 "" H 1400 6350 50  0001 C CNN
+F 3 "" H 1400 6350 50  0001 C CNN
+	1    1400 6350
 	-1   0    0    -1  
 $EndComp
-Text Label 2075 6750 2    50   ~ 0
-SDA
 Text Label 2075 6650 2    50   ~ 0
-SCL
+SDA
 $Comp
 L PlantBuddy-rescue:GND-power #PWR0101
 U 1 1 5FBEAB3C
@@ -39,10 +37,10 @@ F 3 "" H 1400 7150 50  0001 C CNN
 	1    1400 7150
 	-1   0    0    -1  
 $EndComp
-Text Label 2150 6950 2    50   ~ 0
+Text Label 650  6750 0    50   ~ 0
 LUX_INT
 Wire Wire Line
-	2150 6950 1800 6950
+	650  6750 1000 6750
 $Comp
 L PlantBuddy-rescue:GND-power #PWR026
 U 1 1 5F7A91A0
@@ -110,8 +108,6 @@ $EndComp
 Wire Wire Line
 	1800 6650 2075 6650
 Wire Wire Line
-	1800 6750 2075 6750
-Wire Wire Line
 	2475 5125 2475 5225
 Entry Wire Line
 	2075 6650 2175 6550
@@ -152,24 +148,11 @@ Wire Wire Line
 Wire Wire Line
 	2375 5550 3075 5550
 Wire Wire Line
-	1400 7150 1000 7150
-Wire Wire Line
-	1000 6650 1000 6450
-Wire Wire Line
-	1000 6450 1400 6450
-Wire Wire Line
 	3725 7300 3550 7300
 Wire Wire Line
 	2875 7300 3150 7300
 Text Notes 2825 7675 0    50   ~ 0
 Reverse-voltage protection
-Wire Wire Line
-	1000 6850 1000 6950
-Connection ~ 1400 6450
-Connection ~ 1000 6950
-Wire Wire Line
-	1000 6950 1000 7150
-Connection ~ 1400 7150
 Text Notes 9825 5225 0    50   ~ 0
 Yellow status LED => short blinks\nto notify user of different actions
 $Comp
@@ -209,13 +192,13 @@ $EndComp
 $Comp
 L PlantBuddy-rescue:C_Small-Device C3
 U 1 1 5FC58638
-P 1000 6750
-F 0 "C3" H 850 6850 50  0000 L CNN
-F 1 "100nF" H 700 6700 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 1000 6750 50  0001 C CNN
-F 3 "~" H 1000 6750 50  0001 C CNN
-F 4 "C1525" H 1000 6750 50  0001 C CNN "LCSC"
-	1    1000 6750
+P 550 6750
+F 0 "C3" H 600 6900 50  0000 L CNN
+F 1 "100nF" H 600 6625 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 550 6750 50  0001 C CNN
+F 3 "~" H 550 6750 50  0001 C CNN
+F 4 "C1525" H 550 6750 50  0001 C CNN "LCSC"
+	1    550  6750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -265,18 +248,6 @@ F 2 "Resistor_SMD:R_0402_1005Metric" H 2475 5025 50  0001 C CNN
 F 3 "~" H 2475 5025 50  0001 C CNN
 F 4 "C25744" H 2475 5025 50  0001 C CNN "LCSC"
 	1    2475 5025
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy:OPT3001 U1
-U 1 1 5FD09708
-P 1400 7200
-F 0 "U1" H 1400 8221 50  0000 C CNN
-F 1 "OPT3001" H 1600 7900 50  0000 C CNN
-F 2 "Package_DFN_QFN:DFN-6-1EP_2x2mm_P0.65mm_EP1x1.6mm" H 1400 7200 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/opt3001.pdf" H 1400 7200 50  0001 C CNN
-F 4 "C90462" H 1600 7275 50  0001 C CNN "LCSC"
-	1    1400 7200
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -384,8 +355,8 @@ F 3 "" H 9825 875 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9825 875  10100 875 
-Text Notes 1950 7500 2    50   ~ 0
-0 to 83865 Lux Light sensor
+Text Notes 1850 7500 2    50   ~ 0
+0 to 65535 Lux Light sensor
 $Comp
 L PlantBuddy-rescue:C_Small-Device C11
 U 1 1 5F8E6679
@@ -1064,10 +1035,6 @@ F 3 "" H 9725 975 50  0001 C CNN
 	1    9725 975 
 	1    0    0    -1  
 $EndComp
-Wire Bus Line
-	2175 5325 2625 5325
-Wire Bus Line
-	2175 5325 2175 6650
 Text Label 9825 1175 0    50   ~ 0
 UART_Rx
 Wire Wire Line
@@ -1083,4 +1050,37 @@ F 3 "~" H 10300 975 50  0001 C CNN
 	1    10300 975 
 	1    0    0    -1  
 $EndComp
+Connection ~ 1400 6350
+$Comp
+L Sensor_Optical:LTR-303ALS-01 U102
+U 1 1 611AA492
+P 1400 6750
+F 0 "U102" H 1400 7331 50  0000 C CNN
+F 1 "LTR-303ALS-01" H 1050 6350 50  0000 C CNN
+F 2 "OptoDevice:Lite-On_LTR-303ALS-01" H 1400 7200 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS86-2013-0004/LTR-303ALS-01_DS_V1.pdf" H 1100 7100 50  0001 C CNN
+	1    1400 6750
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	550  6350 550  6650
+Wire Wire Line
+	550  6350 1400 6350
+Wire Wire Line
+	1400 7150 550  7150
+Wire Wire Line
+	550  6850 550  7150
+Connection ~ 1400 7150
+Text Label 2075 6750 2    50   ~ 0
+SCL
+Wire Wire Line
+	2075 6750 2025 6750
+Wire Wire Line
+	2025 6750 2025 6850
+Wire Wire Line
+	2025 6850 1800 6850
+Wire Bus Line
+	2175 5325 2625 5325
+Wire Bus Line
+	2175 5325 2175 6650
 $EndSCHEMATC
