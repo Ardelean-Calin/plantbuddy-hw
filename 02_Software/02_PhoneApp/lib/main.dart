@@ -1,5 +1,6 @@
 import 'package:build/view/plantCardSM.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -49,19 +50,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -72,76 +60,62 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 32),
-        child: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 32),
-            child: Column(
-              // Column is also a layout widget. It takes a list of children and
-              // arranges them vertically. By default, it sizes itself to fit its
-              // children horizontally, and tries to be as tall as its parent.
-              //
-              // Invoke "debug painting" (press "p" in the console, choose the
-              // "Toggle Debug Paint" action from the Flutter Inspector in Android
-              // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-              // to see the wireframe for each widget.
-              //
-              // Column has various properties to control how it sizes itself and
-              // how it positions its children. Here we use mainAxisAlignment to
-              // center the children vertically; the main axis here is the vertical
-              // axis because Columns are vertical (the cross axis would be
-              // horizontal).
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Your Plants",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 42,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: -2,
-                          color: Color(0xFF2B3674),
-                        ),
-                      ),
-                      Icon(
-                        Icons.nature_people_outlined,
-                        size: 42,
-                      )
-                    ]),
-                SizedBox(
-                  height: 38,
+      body: SafeArea(
+        child: Scrollbar(
+          interactive: true,
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 32,
                 ),
-                // PlantCardSmall(),
-                Expanded(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemBuilder: (_, index) => PlantCardSmall(
-                      imgPath: [
-                        "assets/img/kalanchoe.jpg",
-                        "assets/img/cyclamen_persicum.jpg",
-                        "assets/img/fittonia_albivenis.jpg"
-                      ][index],
-                      plantName: [
-                        "Kalanchoe Blossfeldiana",
-                        "Cyclamen Persicum",
-                        "Fittonia Albivenis"
-                      ][index],
-                      location: ["Living Room", "Balcony", "Balcony"][index],
-                    ),
-                    itemCount: 3,
-                    separatorBuilder: (_, __) => Divider(),
-                    padding: EdgeInsets.only(bottom: 80),
+              ),
+              SliverAppBar(
+                pinned: false,
+                snap: false,
+                floating: false,
+                backgroundColor: Theme.of(context).backgroundColor,
+                title: Text(
+                  "Your Plants",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 42,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -2,
+                    color: Color(0xFF2B3674),
                   ),
                 ),
-              ],
-            ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32.0, vertical: 16.0),
+                      child: PlantCardSmall(
+                        imgPath: [
+                          "assets/img/kalanchoe.jpg",
+                          "assets/img/cyclamen_persicum.jpg",
+                          "assets/img/fittonia_albivenis.jpg"
+                        ][index],
+                        plantName: [
+                          "Kalanchoe Blossfeldiana",
+                          "Cyclamen Persicum",
+                          "Fittonia Albivenis"
+                        ][index],
+                        location: ["Living Room", "Balcony", "Balcony"][index],
+                      ),
+                    );
+                  },
+                  childCount: 3,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 32,
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -153,7 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => HapticFeedback
+            .heavyImpact(), // There seems to be a bug; Heavy feedback is light feedback actually
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
