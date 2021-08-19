@@ -1,4 +1,5 @@
-import 'package:build/view/plantCardSM.dart';
+import 'package:build/models/Plant.dart';
+import 'package:build/view/components/PlantCardSmall.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.indigo,
         backgroundColor: Color(0xFFF4F7FE),
+        // backgroundColor: Colors.white,
         fontFamily: 'DMSans',
       ),
       home: MyHomePage(title: 'PlantBuddy'),
@@ -50,6 +52,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List plantList = [
+    Plant(
+      name: "Kalanchoe Blossfeldiana",
+      location: "Living Room",
+      conditions: null,
+      image: AssetImage("assets/img/kalanchoe.jpg"),
+    ),
+    Plant(
+      name: "Cyclamen Persicum",
+      location: "Balcony",
+      conditions: null,
+      image: AssetImage("assets/img/cyclamen_persicum.jpg"),
+    ),
+    Plant(
+      name: "Fittonia Albivenis",
+      location: "Balcony",
+      conditions: null,
+      image: AssetImage("assets/img/fittonia_albivenis.jpg"),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -67,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
             slivers: [
               SliverToBoxAdapter(
                 child: SizedBox(
-                  height: 32,
+                  height: 16,
                 ),
               ),
               SliverAppBar(
@@ -92,19 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32.0, vertical: 16.0),
-                      child: PlantCardSmall(
-                        imgPath: [
-                          "assets/img/kalanchoe.jpg",
-                          "assets/img/cyclamen_persicum.jpg",
-                          "assets/img/fittonia_albivenis.jpg"
-                        ][index],
-                        plantName: [
-                          "Kalanchoe Blossfeldiana",
-                          "Cyclamen Persicum",
-                          "Fittonia Albivenis"
-                        ][index],
-                        location: ["Living Room", "Balcony", "Balcony"][index],
-                      ),
+                      child: PlantCardSmall(plantObj: this.plantList[index]),
                     );
                   },
                   childCount: 3,
