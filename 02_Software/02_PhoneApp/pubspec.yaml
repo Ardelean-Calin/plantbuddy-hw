@@ -31,6 +31,7 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   line_icons: ^2.0.1
   font_awesome_flutter: ^9.1.0
+  fl_chart: ^0.36.4
 
 dev_dependencies:
   flutter_test:

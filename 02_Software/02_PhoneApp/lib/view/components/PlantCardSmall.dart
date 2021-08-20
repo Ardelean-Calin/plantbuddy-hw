@@ -70,16 +70,19 @@ class _PlantCardSmallState extends State<PlantCardSmall> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: 190,
-                    height: 190,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: widget.plantObj.image,
+                  Hero(
+                    tag: 'test',
+                    child: Container(
+                      width: 190,
+                      height: 190,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: widget.plantObj.image,
+                        ),
+                        // height: 130,
                       ),
-                      // height: 130,
                     ),
                   ),
                   Row(
