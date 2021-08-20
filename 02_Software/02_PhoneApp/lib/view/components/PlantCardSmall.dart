@@ -1,8 +1,8 @@
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:build/view/pages/PlantDetailsPage.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:build/models/Plant.dart';
 
@@ -27,7 +27,7 @@ class _PlantCardSmallState extends State<PlantCardSmall> {
       onTap: () => showCupertinoModalBottomSheet(
         context: context,
         backgroundColor: Theme.of(context).backgroundColor,
-        builder: (context) => PlantDetailsPage(imgObj: widget.plantObj.image),
+        builder: (context) => PlantDetailsPage(plant: widget.plantObj),
       ),
       child: SizedBox(
         height: 365,
@@ -119,19 +119,45 @@ class _PlantCardSmallState extends State<PlantCardSmall> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Air",
+                            "Temperature",
+                            style: TextStyle(
+                              color: Color(0xFFA3AED0),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            LineIcons.thermometerAlt2Full,
+                            color: Colors.amber,
+                            size: 32,
+                          ),
+                          Text(
+                            "24 °C",
                             style: TextStyle(
                               color: Color(0xFFA3AED0),
                               fontSize: 12,
                             ),
                           ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Humidity",
+                            style: TextStyle(
+                              color: Color(0xFFA3AED0),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           Icon(
-                            Icons.air,
-                            color: Colors.amber,
+                            LineIcons.wind,
+                            color: Colors.green,
                             size: 32,
                           ),
                           Text(
-                            "Warm",
+                            "55%",
                             style: TextStyle(
                               color: Color(0xFFA3AED0),
                               fontSize: 12,
@@ -147,11 +173,12 @@ class _PlantCardSmallState extends State<PlantCardSmall> {
                             style: TextStyle(
                               color: Color(0xFFA3AED0),
                               fontSize: 12,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           Icon(
-                            Icons.wb_sunny,
-                            color: Colors.lightGreen,
+                            LineIcons.sun,
+                            color: Colors.green,
                             size: 32,
                           ),
                           Text(
@@ -163,7 +190,31 @@ class _PlantCardSmallState extends State<PlantCardSmall> {
                           ),
                         ],
                       ),
-                      WaterTag(),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Water",
+                            style: TextStyle(
+                              color: Color(0xFFA3AED0),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            LineIcons.tint,
+                            color: Colors.green,
+                            size: 32,
+                          ),
+                          Text(
+                            "3d ago",
+                            style: TextStyle(
+                              color: Color(0xFFA3AED0),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   )
                 ],
@@ -173,40 +224,6 @@ class _PlantCardSmallState extends State<PlantCardSmall> {
           // color: Colors.red,
         ),
       ),
-    );
-  }
-}
-
-class WaterTag extends StatelessWidget {
-  const WaterTag({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Water",
-          style: TextStyle(
-            color: Color(0xFFA3AED0),
-            fontSize: 12,
-          ),
-        ),
-        Icon(
-          Icons.water,
-          color: Colors.lightGreen,
-          size: 32,
-        ),
-        Text(
-          "3d ago",
-          style: TextStyle(
-            color: Color(0xFFA3AED0),
-            fontSize: 12,
-          ),
-        ),
-      ],
     );
   }
 }

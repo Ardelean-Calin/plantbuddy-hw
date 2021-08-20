@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.indigo,
         backgroundColor: Color(0xFFF4F7FE),
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: Color(0xFF2B3674),
+              displayColor: Color(0xFF2B3674),
+            ),
         // backgroundColor: Colors.white,
         fontFamily: 'DMSans',
       ),
