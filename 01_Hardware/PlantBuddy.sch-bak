@@ -147,26 +147,10 @@ Wire Wire Line
 	2375 5550 2375 5325
 Wire Wire Line
 	2375 5550 3075 5550
-Wire Wire Line
-	3725 7300 3550 7300
-Wire Wire Line
-	2875 7300 3150 7300
 Text Notes 2825 7675 0    50   ~ 0
 Reverse-voltage protection
 Text Notes 9825 5225 0    50   ~ 0
 Yellow status LED => short blinks\nto notify user of different actions
-$Comp
-L PlantBuddy-rescue:Q_NMOS_GSD-Device Q2
-U 1 1 5FC7486C
-P 3350 7200
-F 0 "Q2" V 3599 7200 50  0000 C CNN
-F 1 "AO3400A" V 3690 7200 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 3550 7300 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/1811081213_Alpha-Omega-Semicon-AO3400A_C20917.pdf" H 3350 7200 50  0001 C CNN
-F 4 "C20917" V 3350 7200 50  0001 C CNN "LCSC"
-	1    3350 7200
-	0    -1   1    0   
-$EndComp
 $Comp
 L PlantBuddy-rescue:Conn_01x01-Connector_Generic J3
 U 1 1 5FC6BCF8
@@ -212,19 +196,6 @@ F 3 "https://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumen
 F 4 "C194656" H 1500 5325 50  0001 C CNN "LCSC"
 	1    1500 5325
 	-1   0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:Battery_Cell-Device BT1
-U 1 1 5FC5077F
-P 2875 7100
-F 0 "BT1" H 2993 7196 50  0000 L CNN
-F 1 "Li+" H 2993 7105 50  0000 L CNN
-F 2 "PlantBuddy:BatteryHolder_LCSC_2032" V 2875 7160 50  0001 C CNN
-F 3 "~" V 2875 7160 50  0001 C CNN
-F 4 "C70377" H 2875 7100 50  0001 C CNN "LCSC"
-F 5 "CR2032-BS-6-1" H 2875 7100 50  0001 C CNN "MFR"
-	1    2875 7100
-	1    0    0    -1  
 $EndComp
 $Comp
 L PlantBuddy-rescue:R_Small-Device R15
@@ -316,20 +287,15 @@ Wire Wire Line
 $Comp
 L PlantBuddy-rescue:R_Small-Device R4
 U 1 1 6047E951
-P 3350 6900
-F 0 "R4" H 3200 6950 50  0000 L CNN
-F 1 "10k" H 3175 6875 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 3350 6900 50  0001 C CNN
-F 3 "~" H 3350 6900 50  0001 C CNN
-F 4 "C25744" H 3350 6900 50  0001 C CNN "LCSC"
-	1    3350 6900
+P 3325 7200
+F 0 "R4" H 3175 7250 50  0000 L CNN
+F 1 "10k" H 3150 7175 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 3325 7200 50  0001 C CNN
+F 3 "~" H 3325 7200 50  0001 C CNN
+F 4 "C25744" H 3325 7200 50  0001 C CNN "LCSC"
+	1    3325 7200
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	2875 6800 3350 6800
-Connection ~ 3350 6800
-Wire Wire Line
-	3350 6800 3725 6800
 Wire Wire Line
 	2875 6900 2875 6800
 Wire Wire Line
@@ -355,7 +321,7 @@ F 3 "" H 9825 875 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9825 875  10100 875 
-Text Notes 1625 7775 2    50   ~ 0
+Text Notes 1850 7500 2    50   ~ 0
 0 to 65535 Lux Light sensor
 $Comp
 L PlantBuddy-rescue:C_Small-Device C11
@@ -500,7 +466,7 @@ F 3 "" H 5600 5925 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7375 3175 7000 3175
+	7375 3075 7000 3075
 Wire Wire Line
 	7375 3675 7000 3675
 Wire Wire Line
@@ -685,10 +651,10 @@ F 3 "" H 7375 2075 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7375 3075 7000 3075
-Text Label 7375 3175 2    50   ~ 0
-LEDY
+	7375 3175 7000 3175
 Text Label 7375 3075 2    50   ~ 0
+LEDY
+Text Label 7375 3175 2    50   ~ 0
 LUX_INT
 NoConn ~ 5700 1475
 Connection ~ 5600 1275
@@ -725,10 +691,10 @@ L PlantBuddy-rescue:C_Small-Device C15
 U 1 1 6030ABD4
 P 8425 1100
 F 0 "C15" H 8517 1146 50  0000 L CNN
-F 1 "4.7uF" H 8517 1055 50  0000 L CNN
+F 1 "1uF" H 8517 1055 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 8425 1100 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL05A475MP5NRNC_C23733.pdf" H 8425 1100 50  0001 C CNN
-F 4 "C23733" H 8425 1100 50  0001 C CNN "LCSC"
+F 3 "~" H 8425 1100 50  0001 C CNN
+F 4 "C52923" H 8425 1100 50  0001 C CNN "LCSC"
 	1    8425 1100
 	1    0    0    -1  
 $EndComp
@@ -1052,10 +1018,10 @@ F 3 "~" H 10300 975 50  0001 C CNN
 $EndComp
 Connection ~ 1400 6350
 $Comp
-L Sensor_Optical:LTR-303ALS-01 U?
+L Sensor_Optical:LTR-303ALS-01 U102
 U 1 1 611AA492
 P 1400 6750
-F 0 "U?" H 1400 7331 50  0000 C CNN
+F 0 "U102" H 1400 7331 50  0000 C CNN
 F 1 "LTR-303ALS-01" H 1050 6350 50  0000 C CNN
 F 2 "OptoDevice:Lite-On_LTR-303ALS-01" H 1400 7200 50  0001 C CNN
 F 3 "http://optoelectronics.liteon.com/upload/download/DS86-2013-0004/LTR-303ALS-01_DS_V1.pdf" H 1100 7100 50  0001 C CNN
@@ -1079,8 +1045,47 @@ Wire Wire Line
 	2025 6750 2025 6850
 Wire Wire Line
 	2025 6850 1800 6850
+Text Notes 9825 1500 0    50   ~ 0
+TODO: Can replace with a Tag-connect of 5 pins\nno UART_Rx necessary since we don't transmit data back
+Text Notes 9825 5500 0    50   ~ 0
+TODO: Consider micro-speaker with low-cost low-power driver
+$Comp
+L PlantBuddy-rescue:Battery_Cell-Device BT1
+U 1 1 5FC5077F
+P 2875 7100
+F 0 "BT1" H 2993 7196 50  0000 L CNN
+F 1 "Li+" H 2993 7105 50  0000 L CNN
+F 2 "PlantBuddy:BAT-HLD-001" V 2875 7160 50  0001 C CNN
+F 3 "~" V 2875 7160 50  0001 C CNN
+F 4 "" H 2875 7100 50  0001 C CNN "LCSC"
+F 5 "CR2032-BS-6-1" H 2875 7100 50  0001 C CNN "MFR"
+	1    2875 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:AO3401A Q101
+U 1 1 6134A6DD
+P 3325 6900
+F 0 "Q101" V 3667 6900 50  0000 C CNN
+F 1 "AO3401A" V 3576 6900 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3525 6825 50  0001 L CIN
+F 3 "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf" H 3325 6900 50  0001 L CNN
+	1    3325 6900
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3125 6800 2875 6800
+Wire Wire Line
+	3525 6800 3725 6800
+Wire Wire Line
+	2875 7300 3325 7300
+Wire Wire Line
+	3325 7300 3725 7300
+Connection ~ 3325 7300
 Wire Bus Line
 	2175 5325 2625 5325
 Wire Bus Line
 	2175 5325 2175 6650
+Text Notes 7875 2850 0    50   ~ 0
+TODO: Do we really need NFC?
 $EndSCHEMATC
