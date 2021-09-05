@@ -2,31 +2,56 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Cortex Debug (BMP)",
+            "name": "Plantbuddy Debug",
             "cwd": "${workspaceRoot}",
             "executable": "./_build/plant-buddy.out",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
             "type": "cortex-debug",
-            "servertype": "bmp",
+            "servertype": "jlink",
+            "serverpath": "/usr/bin/JLinkGDBServerCLExe",
+            "device": "nrf52811",
+            "interface": "swd",
             "svdFile": "./config/debugger/nrf52811.svd",
             "runToMain": true,
-            "BMPGDBSerialPort": "${config:bmp_port}",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            }
         },
-        {
-            "name": "Cortex Debug (Openocd)",
-            "cwd": "${workspaceRoot}",
-            "executable": "./_build/plant-buddy.out",
-            "request": "launch",
-            "preLaunchTask": "Build (Debug)",
-            "type": "cortex-debug",
-            "servertype": "openocd",
-            "svdFile": "./config/debugger/nrf52811.svd",
-            "runToMain": true,
-            "configFiles": [
-                "./config/debugger/openocd.cfg"
-            ]
-        },
+        // {
+        //     "name": "Cortex Debug (BMP)",
+        //     "cwd": "${workspaceRoot}",
+        //     "executable": "./_build/plant-buddy.out",
+        //     "request": "launch",
+        //     "preLaunchTask": "Build (Debug)",
+        //     "type": "cortex-debug",
+        //     "servertype": "bmp",
+        //     "svdFile": "./config/debugger/nrf52811.svd",
+        //     "runToMain": true,
+        //     "BMPGDBSerialPort": "${config:bmp_port}",
+        // },
+        // {
+        //     "name": "Cortex Debug (Openocd)",
+        //     "cwd": "${workspaceRoot}",
+        //     "executable": "./_build/plant-buddy.out",
+        //     "request": "launch",
+        //     "preLaunchTask": "Build (Debug)",
+        //     "type": "cortex-debug",
+        //     "servertype": "openocd",
+        //     "svdFile": "./config/debugger/nrf52811.svd",
+        //     "runToMain": true,
+        //     "configFiles": [
+        //         "./config/debugger/openocd.cfg"
+        //     ]
+        // },
     ],
     "compounds": []
 }

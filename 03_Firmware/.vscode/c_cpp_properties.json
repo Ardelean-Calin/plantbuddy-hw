@@ -48,7 +48,10 @@
                 "NRF_DFU_SVCI_ENABLED",
                 "NRF_DFU_TRANSPORT_BLE=1",
                 "STATIC_PASSKEY=\"123456\"",
-                "DEBUG"
+                "DEBUG",
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
             ],
             "compilerPath": "/work/gcc-arm-none-eabi-9-2019-q4-major/bin/arm-none-eabi-gcc",
             "cStandard": "gnu17",

@@ -8,7 +8,12 @@ WORKDIR /work
 
 # ** [Optional] Uncomment this section to install additional packages. **
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends make bzip2 libncurses5
+    && apt-get -y install --no-install-recommends make bzip2 libncurses5 udev
 
+# Download ARM-GCC
 RUN wget -qO- https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 | tar -xj
 ENV PATH "/work/gcc-arm-none-eabi-9-2019-q4-major/bin:$PATH"
+
+# Download J-Link debug tools
+RUN wget --post-data='accept_license_agreement=accepted' https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb
+RUN dpkg -i JLink_Linux_x86_64.deb
