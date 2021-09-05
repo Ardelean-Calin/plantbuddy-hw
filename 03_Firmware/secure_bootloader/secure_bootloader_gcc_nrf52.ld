@@ -3,14 +3,20 @@
 SEARCH_DIR(.)
 GROUP(-lgcc -lc -lnosys)
 
+/* For details regarding bootloader memory layout, see: 
+   https://infocenter.nordicsemi.com/index.jsp?topic=%2Fsdk_nrf5_v17.0.2%2Flib_bootloader.html 
+*/
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x28000, LENGTH = 0x6000
-  RAM (rwx) :  ORIGIN = 0x200022c8, LENGTH = 0x3d38
-  uicr_bootloader_start_address (r) : ORIGIN = 0x10001014, LENGTH = 0x4
+  FLASH (rx) : ORIGIN = 0x00038000, LENGTH = 0x6000 /* Bootloader is 24kB in size */
+  RAM (rwx) :  ORIGIN = 0x20001AE0, LENGTH = 0x6520 /* Start address only has to be higher than the maximum 
+                                                       address used by the softdevice. In our case: 0x1AE0. 
+                                                       We use the stame configuration as in the app, as application 
+                                                       and bootloader won't run at the same time. */
+  uicr_bootloader_start_address (r) : ORIGIN = 0x10001014, LENGTH = 0x4 /* These variables are stored in the UICR register */
   uicr_mbr_params_page (r) : ORIGIN = 0x10001018, LENGTH = 0x4
-  mbr_params_page (r) : ORIGIN = 0x0002E000, LENGTH = 0x1000
-  bootloader_settings_page (r) : ORIGIN = 0x0002F000, LENGTH = 0x1000
+  mbr_params_page (r) : ORIGIN = 0x0003E000, LENGTH = 0x1000 /* Second-to-last 4kB of ROM */
+  bootloader_settings_page (r) : ORIGIN = 0x0003F000, LENGTH = 0x1000 /* Last 4kB of ROM */
 }
 
 SECTIONS

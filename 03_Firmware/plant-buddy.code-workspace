@@ -58,7 +58,8 @@
             "unix_time.h": "c",
             "status.h": "c",
             "datalogger.h": "c",
-            "char_downloader.h": "c"
+            "char_downloader.h": "c",
+            "pca10040.h": "c"
         },
         "editor.formatOnSave": true,
         "editor.rulers": [

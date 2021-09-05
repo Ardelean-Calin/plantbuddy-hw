@@ -100,8 +100,8 @@ SRC_FILES += \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uart.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uarte.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/prs/nrfx_prs.c \
-  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52811.S \
-  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52811.c \
+  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52.S \
+  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52.c \
   $(SDK_ROOT)/modules/nrfx/soc/nrfx_atomic.c \
 
 # Include folders common to all targets
@@ -232,12 +232,11 @@ OPT = -Os -g3
 CFLAGS += $(OPT)
 CFLAGS += -DAPP_TIMER_V2
 CFLAGS += -DAPP_TIMER_V2_RTC1_ENABLED
-CFLAGS += -DBOARD_PCA10056
 CFLAGS += -DCONFIG_GPIO_AS_PINRESET
-CFLAGS += -DDEVELOP_IN_NRF52840
-CFLAGS += -DFLOAT_ABI_SOFT
-CFLAGS += -DNRF52811_XXAA
-CFLAGS += -DNRFX_COREDEP_DELAY_US_LOOP_CYCLES=3
+CFLAGS += -DFLOAT_ABI_HARD
+CFLAGS += -DNRF52
+CFLAGS += -DNRF52832_XXAA
+CFLAGS += -DNRF52_PAN_74
 CFLAGS += -DNRF_SD_BLE_API_VERSION=7
 CFLAGS += -DS112
 CFLAGS += -DSOFTDEVICE_PRESENT
@@ -247,7 +246,7 @@ CFLAGS += -DNRF_DFU_TRANSPORT_BLE=1
 CFLAGS += -mcpu=cortex-m4
 CFLAGS += -mthumb -mabi=aapcs
 # CFLAGS += -Wall -Werror
-CFLAGS += -mfloat-abi=soft
+CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 # keep every function in a separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
 CFLAGS += -fno-builtin -fshort-enums
@@ -258,15 +257,14 @@ CXXFLAGS += $(OPT)
 ASMFLAGS += -g3
 ASMFLAGS += -mcpu=cortex-m4
 ASMFLAGS += -mthumb -mabi=aapcs
-ASMFLAGS += -mfloat-abi=soft
+ASMFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 ASMFLAGS += -DAPP_TIMER_V2
 ASMFLAGS += -DAPP_TIMER_V2_RTC1_ENABLED
-ASMFLAGS += -DBOARD_PCA10056
 ASMFLAGS += -DCONFIG_GPIO_AS_PINRESET
-ASMFLAGS += -DDEVELOP_IN_NRF52840
-ASMFLAGS += -DFLOAT_ABI_SOFT
-ASMFLAGS += -DNRF52811_XXAA
-ASMFLAGS += -DNRFX_COREDEP_DELAY_US_LOOP_CYCLES=3
+ASMFLAGS += -DFLOAT_ABI_HARD
+ASMFLAGS += -DNRF52
+ASMFLAGS += -DNRF52832_XXAA
+ASMFLAGS += -DNRF52_PAN_74
 ASMFLAGS += -DNRF_SD_BLE_API_VERSION=7
 ASMFLAGS += -DBL_SETTINGS_ACCESS_ONLY
 ASMFLAGS += -DNRF_DFU_SVCI_ENABLED
@@ -278,6 +276,7 @@ ASMFLAGS += -DSOFTDEVICE_PRESENT
 LDFLAGS += $(OPT)
 LDFLAGS += -mthumb -mabi=aapcs -L$(SDK_ROOT)/modules/nrfx/mdk -T$(LINKER_SCRIPT)
 LDFLAGS += -mcpu=cortex-m4
+LDFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 # let linker dump unused sections
 LDFLAGS += -Wl,--gc-sections
 # use newlib in nano version
@@ -293,9 +292,9 @@ CFLAGS += -DDEBUG
 ASMFLAGS += -DDEBUG
 endif
 
-plant-buddy: CFLAGS += -D__HEAP_SIZE=2048
-plant-buddy: CFLAGS += -D__STACK_SIZE=2048
-plant-buddy: ASMFLAGS += -D__HEAP_SIZE=2048
+plant-buddy: CFLAGS += -D__HEAP_SIZE=2048 # Technically I could set this to 0 since I'm not using dynamic mem alloc.
+plant-buddy: CFLAGS += -D__STACK_SIZE=2048 
+plant-buddy: ASMFLAGS += -D__HEAP_SIZE=2048 # Technically I could set this to 0 since I'm not using dynamic mem alloc.
 plant-buddy: ASMFLAGS += -D__STACK_SIZE=2048
 
 # Add standard libraries at the very end of the linker input, after all objects

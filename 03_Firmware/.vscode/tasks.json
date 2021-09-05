@@ -7,7 +7,11 @@
             "label": "Reset for debug",
             "detail": "Puts the Plantbuddy in a state where it can be debugged. The bootloader is deleted as it only works in release mode and the Softdevice is flashed.",
             "type": "shell",
-            "dependsOn": ["Clean", "Mass Erase", "Flash SoftDevice"],
+            "dependsOn": [
+                "Clean",
+                "Mass Erase",
+                "Flash SoftDevice"
+            ],
             "dependsOrder": "sequence",
             "problemMatcher": []
         },
@@ -60,7 +64,7 @@
         },
         {
             "label": "Mass Erase",
-            "detail": "Erases the nrf52811",
+            "detail": "Erases the nrf52832",
             "type": "shell",
             "command": "arm-none-eabi-gdb -nx --batch -ex 'target extended-remote ${config:bmp_port}' -ex 'monitor swdp_scan' -ex 'attach 1' -ex 'mon erase_mass' -ex 'kill'",
             // "command": "openocd -f ${workspaceRoot}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"nrf5 mass_erase\" -c\"exit\"",
@@ -114,7 +118,7 @@
             "label": "Build Bootloader Settings",
             "detail": "Creates the bootloader settings.",
             "type": "shell",
-            "command": "util/nrfutil-linux settings generate --family NRF52810 --application ${workspaceRoot}/_build/plant-buddy.hex --application-version 0 --bootloader-version 0 --bl-settings-version 1 ${workspaceRoot}/secure_bootloader/_build/bootloader_settings.hex",
+            "command": "util/nrfutil-linux settings generate --family NRF52 --application ${workspaceRoot}/_build/plant-buddy.hex --application-version 0 --bootloader-version 0 --bl-settings-version 1 ${workspaceRoot}/secure_bootloader/_build/bootloader_settings.hex",
             "problemMatcher": []
         },
         {
