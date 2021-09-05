@@ -149,8 +149,6 @@ Wire Wire Line
 	2375 5550 3075 5550
 Text Notes 2825 7675 0    50   ~ 0
 Reverse-voltage protection
-Text Notes 9825 5225 0    50   ~ 0
-Yellow status LED => short blinks\nto notify user of different actions
 $Comp
 L PlantBuddy-rescue:Conn_01x01-Connector_Generic J3
 U 1 1 5FC6BCF8
@@ -222,47 +220,6 @@ F 4 "C25744" H 2475 5025 50  0001 C CNN "LCSC"
 	1    0    0    -1  
 $EndComp
 $Comp
-L PlantBuddy-rescue:LED_Small-Device D1
-U 1 1 5FC270B5
-P 10025 4700
-F 0 "D1" V 10071 4630 50  0000 R CNN
-F 1 "Y" V 9980 4630 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric" V 10025 4700 50  0001 C CNN
-F 3 "~" V 10025 4700 50  0001 C CNN
-F 4 "C72038" V 10025 4700 50  0001 C CNN "LCSC"
-	1    10025 4700
-	0    -1   -1   0   
-$EndComp
-$Comp
-L PlantBuddy-rescue:GND-power #PWR01
-U 1 1 5FC2781D
-P 10025 4800
-F 0 "#PWR01" H 10025 4550 50  0001 C CNN
-F 1 "GND" H 10030 4627 50  0000 C CNN
-F 2 "" H 10025 4800 50  0001 C CNN
-F 3 "" H 10025 4800 50  0001 C CNN
-	1    10025 4800
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:R_Small-Device R3
-U 1 1 5FC33886
-P 10025 4500
-F 0 "R3" V 9829 4500 50  0000 C CNN
-F 1 "1k" V 9920 4500 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 10025 4500 50  0001 C CNN
-F 3 "~" H 10025 4500 50  0001 C CNN
-F 4 "C11702" V 10025 4500 50  0001 C CNN "LCSC"
-	1    10025 4500
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	10025 4400 10025 4325
-Wire Wire Line
-	10025 4325 9850 4325
-Text Label 9850 4325 0    50   ~ 0
-LEDY
-$Comp
 L PlantBuddy-rescue:C_Small-Device C17
 U 1 1 60156A34
 P 900 5325
@@ -300,7 +257,7 @@ Wire Wire Line
 	2875 6900 2875 6800
 Wire Wire Line
 	2875 7200 2875 7300
-Text Label 10925 1075 2    50   ~ 0
+Text Label 10925 1275 2    50   ~ 0
 ~RST
 Text Label 10925 875  2    50   ~ 0
 SWDIO
@@ -468,10 +425,6 @@ $EndComp
 Wire Wire Line
 	7375 3075 7000 3075
 Wire Wire Line
-	7375 3675 7000 3675
-Wire Wire Line
-	7375 3575 7000 3575
-Wire Wire Line
 	7000 2875 7375 2875
 Wire Wire Line
 	7000 2775 7375 2775
@@ -631,10 +584,6 @@ F 4 "C25744" H 4950 3675 50  0001 C CNN "LCSC"
 	1    4950 3675
 	-1   0    0    -1  
 $EndComp
-Text Label 7375 3675 2    50   ~ 0
-UART_Tx
-Text Label 7375 3575 2    50   ~ 0
-UART_Rx
 Text Notes 7450 2150 0    50   ~ 0
 ADC configured with internal reference\nand gain 1/6 => 0 - 3.6V
 Wire Wire Line
@@ -653,7 +602,7 @@ $EndComp
 Wire Wire Line
 	7375 3175 7000 3175
 Text Label 7375 3075 2    50   ~ 0
-LEDY
+SPEAKER
 Text Label 7375 3175 2    50   ~ 0
 LUX_INT
 NoConn ~ 5700 1475
@@ -949,12 +898,8 @@ F 3 "" H 3725 2475 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	10600 975  10925 975 
-Text Label 10925 1175 2    50   ~ 0
-UART_Tx
 Wire Wire Line
-	10600 1175 10925 1175
-Wire Wire Line
-	10600 1075 10925 1075
+	10600 1275 10925 1275
 Wire Wire Line
 	7575 4475 7675 4475
 Wire Wire Line
@@ -972,7 +917,6 @@ NoConn ~ 7000 4075
 NoConn ~ 7000 3975
 NoConn ~ 7000 3875
 NoConn ~ 7000 3775
-NoConn ~ 7000 3475
 NoConn ~ 7000 3375
 NoConn ~ 7000 3275
 NoConn ~ 7000 2475
@@ -999,21 +943,6 @@ F 1 "GND" H 9875 900 50  0001 C CNN
 F 2 "" H 9725 975 50  0001 C CNN
 F 3 "" H 9725 975 50  0001 C CNN
 	1    9725 975 
-	1    0    0    -1  
-$EndComp
-Text Label 9825 1175 0    50   ~ 0
-UART_Rx
-Wire Wire Line
-	9825 1175 10100 1175
-$Comp
-L Connector_Generic:Conn_02x04_Odd_Even J101
-U 1 1 6117791F
-P 10300 975
-F 0 "J101" H 10350 1292 50  0000 C CNN
-F 1 "Debug" H 10350 1201 50  0000 C CNN
-F 2 "PlantBuddy:PinHeader_2x04_P1.27mm_Vertical" H 10300 975 50  0001 C CNN
-F 3 "~" H 10300 975 50  0001 C CNN
-	1    10300 975 
 	1    0    0    -1  
 $EndComp
 Connection ~ 1400 6350
@@ -1045,10 +974,8 @@ Wire Wire Line
 	2025 6750 2025 6850
 Wire Wire Line
 	2025 6850 1800 6850
-Text Notes 9825 1500 0    50   ~ 0
-TODO: Current debug connector is THT and non-standard.\nMake it SMD and standard.
 Text Notes 9825 5500 0    50   ~ 0
-TODO: Consider micro-speaker with low-cost low-power driver
+TODO: Consider micro-speaker with low-cost low-power driver\nNOTE: Piezo-electric speaker should be enough
 $Comp
 L PlantBuddy-rescue:Battery_Cell-Device BT1
 U 1 1 5FC5077F
@@ -1082,10 +1009,60 @@ Wire Wire Line
 Wire Wire Line
 	3325 7300 3725 7300
 Connection ~ 3325 7300
+Text Notes 7875 2850 0    50   ~ 0
+TODO: Do we really need NFC?
+Text Label 10925 1075 2    50   ~ 0
+SWO
+Wire Wire Line
+	10600 1075 10925 1075
+Text Label 7375 3475 2    50   ~ 0
+SWO
+Wire Wire Line
+	7375 3475 7000 3475
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J101
+U 1 1 6136EE02
+P 10300 1075
+F 0 "J101" H 10350 1492 50  0000 C CNN
+F 1 "J-Link SWD" H 10350 1401 50  0000 C CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD" H 10300 1075 50  0001 C CNN
+F 3 "~" H 10300 1075 50  0001 C CNN
+	1    10300 1075
+	1    0    0    -1  
+$EndComp
+NoConn ~ 10600 1175
+NoConn ~ 10100 1175
+Text Notes 9375 1200 0    50   ~ 0
+Non-existent ->
+$Comp
+L PlantBuddy-rescue:+BATT-power #PWR0121
+U 1 1 6137FB50
+P 9825 1275
+F 0 "#PWR0121" H 9825 1125 50  0001 C CNN
+F 1 "+BATT" H 9675 1400 50  0000 C CNN
+F 2 "" H 9825 1275 50  0001 C CNN
+F 3 "" H 9825 1275 50  0001 C CNN
+	1    9825 1275
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9825 1275 10100 1275
+NoConn ~ 7000 2975
+$Comp
+L Device:Speaker_Crystal LS101
+U 1 1 6138F133
+P 10325 3925
+F 0 "LS101" H 10500 3921 50  0000 L CNN
+F 1 "Speaker_Crystal" H 10500 3830 50  0000 L CNN
+F 2 "" H 10290 3875 50  0001 C CNN
+F 3 "~" H 10290 3875 50  0001 C CNN
+	1    10325 3925
+	1    0    0    -1  
+$EndComp
+NoConn ~ 7000 3575
+NoConn ~ 7000 3675
 Wire Bus Line
 	2175 5325 2625 5325
 Wire Bus Line
 	2175 5325 2175 6650
-Text Notes 7875 2850 0    50   ~ 0
-TODO: Do we really need NFC?
 $EndSCHEMATC
