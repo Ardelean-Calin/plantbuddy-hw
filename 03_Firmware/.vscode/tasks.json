@@ -16,33 +16,46 @@
             "problemMatcher": []
         },
         {
-            "label": "Build (Debug)",
+            "label": "Incremental Build",
             "detail": "Builds the PlantBuddy Hex with debug information.",
             "type": "shell",
-            "command": "make -j6 DEBUG=1",
+            "command": "make -j12 DEBUG=1",
             "problemMatcher": []
         },
         {
-            "label": "Build (Release)",
-            "detail": "Builds the PlantBuddy Hex with debug information.",
+            "label": "Release App",
+            "detail": "Releases the software. Builds everything necessary, including bootloader and DFU package.",
             "type": "shell",
-            "command": "make -j6 RELEASE=1",
+            "dependsOn": [
+                "Clean"
+            ],
+            "command": [
+                "make -j12 RELEASE=1",
+                "&&",
+                "pushd secure_bootloader/nrf52hf_armgcc/armgcc/ && make -j12 RELEASE=1 && popd && pushd secure_bootloader/ && make -j12", // Builds uECC and bootloader
+                "&&",
+                "popd && util/nrfutil-linux settings generate --family NRF52 --application ${workspaceRoot}/_build/plant-buddy.hex --application-version 0 --bootloader-version 0 --bl-settings-version 1 ${workspaceRoot}/secure_bootloader/_build/bootloader_settings.hex", // Generate bootloader settings
+                "&&",
+                "mergehex --merge ${workspaceRoot}/secure_bootloader/_build/bootloader.hex ${workspaceRoot}/secure_bootloader/_build/bootloader_settings.hex --output ${workspaceRoot}/secure_bootloader/_build/bootloader-with-settings.hex", // Merge bootloader hex
+                "&&",
+                "util/nrfutil-linux pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU_v${input:AppVersion}.zip --sd-req 0x126" // Generate DFU package
+            ],
             "problemMatcher": []
         },
         {
             "label": "Clean",
-            "detail": "Removes all build artifacts.",
+            "detail": "Removes all build artifacts from everywhere.",
             "type": "shell",
-            "command": "make clean",
+            "command": "make clean && pushd secure_bootloader && make clean && pushd nrf52hf_armgcc/armgcc/ && make clean",
             "problemMatcher": []
         },
         {
-            "label": "Rebuild (Debug)",
+            "label": "Rebuild",
             "detail": "Rebuilds the PlantBuddy Hex with debug information after running the 'Clean' task.",
             "type": "shell",
             "dependsOn": [
                 "Clean",
-                "Build (Debug)"
+                "Incremental Build"
             ],
             "dependsOrder": "sequence",
             "problemMatcher": [],
@@ -50,17 +63,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
-            "label": "Rebuild (Release)",
-            "detail": "Rebuilds the PlantBuddy Hex without debug information after running the 'Clean' task.",
-            "type": "shell",
-            "dependsOn": [
-                "Clean",
-                "Build (Release)"
-            ],
-            "dependsOrder": "sequence",
-            "problemMatcher": []
         },
         {
             "label": "Mass Erase",
@@ -90,124 +92,12 @@
             "label": "Reflash everything",
             "detail": "Flashes the Secure Bootloader and its settings, the S112 softdevice and our application.",
             "dependsOn": [
-                "Rebuild (Release)",
-                "Bootloader (Rebuild)",
-                "Mass Erase",
-                "Flash App",
                 "Flash SoftDevice",
                 "Flash Bootloader",
                 "Flash Bootloader Settings"
             ],
             "dependsOrder": "sequence",
             "type": "shell",
-            "problemMatcher": []
-        },
-        {
-            "label": "Update Bootloader",
-            "detail": "Flashes the Secure Bootloader and its settings.",
-            "dependsOn": [
-                "Bootloader (Build)",
-                "Flash Bootloader",
-                "Flash Bootloader Settings"
-            ],
-            "dependsOrder": "sequence",
-            "type": "shell",
-            "problemMatcher": []
-        },
-        {
-            "label": "Build Bootloader Settings",
-            "detail": "Creates the bootloader settings.",
-            "type": "shell",
-            "command": "util/nrfutil-linux settings generate --family NRF52 --application ${workspaceRoot}/_build/plant-buddy.hex --application-version 0 --bootloader-version 0 --bl-settings-version 1 ${workspaceRoot}/secure_bootloader/_build/bootloader_settings.hex",
-            "problemMatcher": []
-        },
-        {
-            "label": "Flash Bootloader Settings",
-            "dependsOn": "Build Bootloader Settings",
-            "detail": "Flashes the Secure Bootloader Settings without erasing the memory first.",
-            "type": "shell",
-            "command": "arm-none-eabi-gdb -nx --batch -ex 'target extended-remote ${config:bmp_port}' -ex 'monitor swdp_scan' -ex 'attach 1' -ex 'load' -ex 'compare-sections' -ex 'kill' ${workspaceRoot}/secure_bootloader/_build/bootloader_settings.hex",
-            "problemMatcher": []
-        },
-        {
-            "label": "Flash App",
-            "dependsOn": [
-                "Rebuild (Release)",
-                "Update Bootloader",
-            ],
-            "dependsOrder": "sequence",
-            "detail": "Flashes the Application Firmware",
-            "type": "shell",
-            "command": "arm-none-eabi-gdb -nx --batch -ex 'target extended-remote ${config:bmp_port}' -ex 'monitor swdp_scan' -ex 'attach 1' -ex 'load' -ex 'compare-sections' -ex 'kill' ${workspaceRoot}/_build/plant-buddy.hex",
-            // "command": "openocd -f ${workspaceRoot}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceRoot}/_build/plant-buddy.hex verify reset exit\"",
-            "problemMatcher": []
-        },
-        {
-            "label": "uECC (Link Library)",
-            "detail": "Links the uECC library!",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceRoot}/secure_bootloader/nrf52hf_armgcc/armgcc/"
-            },
-            "command": "make -j6",
-            "problemMatcher": []
-        },
-        {
-            "label": "Bootloader (Clean)",
-            "detail": "Cleans the bootloader artifacts.",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceRoot}/secure_bootloader/"
-            },
-            "command": "make clean",
-            "problemMatcher": []
-        },
-        {
-            "label": "Bootloader (Rebuild)",
-            "detail": "Builds the OTA bootloader.",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceRoot}/secure_bootloader/"
-            },
-            "dependsOn": [
-                "Bootloader (Clean)",
-                "uECC (Link Library)"
-            ],
-            "dependsOrder": "sequence",
-            "command": "make -j6",
-            "problemMatcher": []
-        },
-        {
-            "label": "Bootloader (Build)",
-            "detail": "Builds the OTA bootloader.",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceRoot}/secure_bootloader/"
-            },
-            "dependsOn": [
-                "uECC (Link Library)"
-            ],
-            "command": "make -j6",
-            "problemMatcher": []
-        },
-        {
-            "label": "Merge Bootloader + Settings",
-            "detail": "Merge Bootloader and Bootloader settings Hex",
-            "dependsOn": [
-                "Bootloader (Build)",
-                "Build Bootloader Settings"
-            ],
-            "dependsOrder": "sequence",
-            "type": "shell",
-            "command": "mergehex --merge ${workspaceRoot}/secure_bootloader/_build/bootloader.hex ${workspaceRoot}/secure_bootloader/_build/bootloader_setting.hex --output ${workspaceRoot}/secure_bootloader/_build/bootloader-with-settings.hex",
-            "problemMatcher": []
-        },
-        {
-            "label": "Package DFU (App)",
-            "detail": "Create DFU Package for Application",
-            "type": "shell",
-            "dependsOn": "Rebuild (Release)",
-            "command": "util/nrfutil-linux pkg generate --hw-version 52 --application-version ${input:AppVersion} --application ./_build/plant-buddy.hex --key-file secure_bootloader/private.key PlantBuddy_App_DFU_v${input:AppVersion}.zip --sd-req 0x103",
             "problemMatcher": []
         },
         {
@@ -219,7 +109,7 @@
                 "Package DFU (App)"
             ],
             "dependsOrder": "sequence",
-            "command": "util/nrfutil-linux pkg generate --hw-version 52 --bootloader-version ${input:BootloaderVersion} --bootloader ./secure_bootloader/_build/bootloader-with-settings.hex --key-file secure_bootloader/private.key PlantBuddy_Bootloader_DFU.zip --sd-req 0x103",
+            "command": "util/nrfutil-linux pkg generate --hw-version 52 --bootloader-version ${input:BootloaderVersion} --bootloader ./secure_bootloader/_build/bootloader-with-settings.hex --key-file secure_bootloader/private.key PlantBuddy_Bootloader_DFU.zip --sd-req 0x126",
             "problemMatcher": []
         },
         {
@@ -229,13 +119,6 @@
             "command": [
                 "util/nrfutil-linux keys generate ${workspaceRoot}/secure_bootloader/private.key && util/nrfutil-linux keys display --key pk --format code ${workspaceRoot}/secure_bootloader/private.key --out_file ${workspaceRoot}/secure_bootloader/public_key.c"
             ],
-            "problemMatcher": []
-        },
-        {
-            "label": "Debug using serial port",
-            "detail": "Opens the serial port /dev/ttyACM1 and monitors the output. Useful when NRF_LOG is 1.",
-            "type": "shell",
-            "command": "screen ${config:bmp_uart_port} 115200",
             "problemMatcher": []
         }
     ],
