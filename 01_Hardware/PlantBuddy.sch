@@ -429,7 +429,7 @@ Wire Wire Line
 Wire Wire Line
 	7000 2775 7375 2775
 Text Label 7100 4375 0    50   ~ 0
-Discharge
+Measure
 Text Label 7100 4475 0    50   ~ 0
 Charge
 $Comp
