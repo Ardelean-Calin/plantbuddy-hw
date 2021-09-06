@@ -48,6 +48,7 @@
  *
  */
 
+#include "main.h"
 #include "app_scheduler.h"
 #include "app_timer.h"
 #include "ble_app.h"

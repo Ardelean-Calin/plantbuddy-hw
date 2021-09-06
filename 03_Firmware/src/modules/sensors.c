@@ -5,7 +5,7 @@
 #include "battery_sensor.h"
 #include "opt3001_driver.h"
 #include "shtc3_driver.h"
-#include "soilhum_driver.h"
+// #include "soilhum_driver.h"
 /* BLE Characteristics */
 #include "char_sensordata.h"
 /* Other includes */
@@ -31,7 +31,7 @@ static void sensors_twi_mngr_init(void)
 static void sensors_start_measurements(void)
 {
     /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
-    drv_soilhum_meas_start();
+    // drv_soilhum_meas_start();
     drv_shtc3_meas_start();
     drv_opt3001_meas_start();
     batt_sensor_meas_start();
@@ -45,7 +45,7 @@ void sensors_init(void)
     /* Initialize the different environment sensors */
     drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager);   // These two
     drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager); // need i2c
-    drv_soilhum_init();
+    // drv_soilhum_init();
     batt_sensor_init();
 
     // TWI Manager is used by some sensors
@@ -63,7 +63,8 @@ void sensors_task(void)
     // Current timestamp
     sensor_data.unix_epoch_time = unix_time_get_timestamp();
     // The measured variables
-    sensor_data.soil_humidity = drv_soilhum_get_frequency();
+    // sensor_data.soil_humidity = drv_soilhum_get_frequency();
+    sensor_data.soil_humidity = 0xFFFFFFFF;
     sensor_data.airhum_phys   = drv_shtc3_get_airhum();
     sensor_data.airtemp_phys  = drv_shtc3_get_airtemp();
     sensor_data.lum_flux      = drv_opt3001_get_lumflux();
