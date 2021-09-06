@@ -51,6 +51,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/balloc/nrf_balloc.c \
   $(SDK_ROOT)/components/libraries/bootloader/dfu/nrf_dfu_svci.c \
   $(SDK_ROOT)/components/libraries/button/app_button.c \
+  $(SDK_ROOT)/components/libraries/csense_drv/nrf_drv_csense.c \
   $(SDK_ROOT)/components/libraries/experimental_section_vars/nrf_section_iter.c \
   $(SDK_ROOT)/components/libraries/fds/fds.c \
   $(SDK_ROOT)/components/libraries/fstorage/nrf_fstorage_sd.c \
