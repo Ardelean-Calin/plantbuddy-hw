@@ -10,16 +10,8 @@
 #include "soilhum_types.h"
 #include <stdint.h>
 
-#define MEAS_DURATION_MS 100
-
-// App timer used by this module
-APP_TIMER_DEF(m_soilhum_sm_timer);
-
 // Holds the measured frequency
 static soilhum_t frequency;
-
-static const nrf_drv_timer_t m_timer0 = NRF_DRV_TIMER_INSTANCE(1);
-static nrf_ppi_channel_t     m_ppi_channel1;
 
 /* Static functions */
 static void drv_soilhum_csense_handler(nrf_drv_csense_evt_t* p_event_struct);
@@ -33,6 +25,7 @@ static void drv_soilhum_csense_handler(nrf_drv_csense_evt_t* p_event_struct)
     volatile uint16_t value = p_event_struct->read_value;
     // Don't need to check channels since we only use one.
     // TODO: Change name and type of "frequency" variable
+    // TODO2: Does it make sense to use app scheduler here? This function is really short...
     frequency = value;
 }
 

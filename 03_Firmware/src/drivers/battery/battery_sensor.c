@@ -3,6 +3,7 @@
 #include "app_scheduler.h"
 #include "battery_sensor_types.h"
 #include "nrf_drv_saadc.h"
+#include "pb_config.h"
 
 /* Static variables */
 static battery_voltage_t batt_voltage_mv;
@@ -47,7 +48,7 @@ static void batt_sensor_saadc_callback(nrf_drv_saadc_evt_t const* p_event)
 static void batt_sensor_saadc_init(void)
 {
     ret_code_t                 err_code;
-    nrf_saadc_channel_config_t channel_config = NRF_DRV_SAADC_DEFAULT_CHANNEL_CONFIG_SE(NRF_SAADC_INPUT_AIN2);
+    nrf_saadc_channel_config_t channel_config = NRF_DRV_SAADC_DEFAULT_CHANNEL_CONFIG_SE(BATTV_ANALOG_CHANNEL);
     channel_config.reference                  = NRF_SAADC_REFERENCE_INTERNAL;
     channel_config.gain                       = NRF_SAADC_GAIN1_6;
     channel_config.burst                      = NRF_SAADC_BURST_ENABLED;
@@ -67,6 +68,7 @@ static void batt_sensor_saadc_init(void)
 void batt_sensor_init()
 {
     batt_voltage_mv = 3000;
+    nrf_drv_saadc_sample();
 }
 
 /**
