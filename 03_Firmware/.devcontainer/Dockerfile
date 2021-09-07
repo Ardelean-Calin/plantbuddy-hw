@@ -8,7 +8,7 @@ WORKDIR /work
 
 # ** [Optional] Uncomment this section to install additional packages. **
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends make bzip2 libncurses5 udev libusb-1.0.0 openjdk-11-jdk
+    && apt-get -y install --no-install-recommends make bzip2 libncurses5 udev libusb-1.0.0
 
 # Download ARM-GCC
 RUN wget -qO- https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 | tar -xj
