@@ -10,7 +10,7 @@
             "type": "cortex-debug",
             "servertype": "jlink",
             "serverpath": "/usr/bin/JLinkGDBServerCLExe",
-            "device": "nrf52832",
+            "device": "nrf52832_xxAB",
             "interface": "swd",
             "svdFile": "./config/debugger/nrf52832.svd",
             "runToMain": true,
