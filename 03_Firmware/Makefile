@@ -224,7 +224,15 @@ INC_FOLDERS += \
 LIB_FILES += \
 
 # Optimization flags
+ifdef RELEASE
 OPT = -Os -g3
+CFLAGS += -DRELEASE
+ASMFLAGS += -DRELEASE
+else
+OPT = -O0 -g3
+CFLAGS += -DDEBUG
+ASMFLAGS += -DDEBUG
+endif
 # Uncomment the line below to enable link time optimization
 #OPT += -flto
 # OPT += -DSTATIC_PASSKEY=\"$(BLE_PASSKEY)\"
@@ -284,14 +292,6 @@ LDFLAGS += -Wl,--gc-sections
 LDFLAGS += --specs=nano.specs
 # Pretty-print memory usage
 LDFLAGS += -Wl,--print-memory-usage
-
-ifdef RELEASE
-CFLAGS += -DRELEASE
-ASMFLAGS += -DRELEASE
-else
-CFLAGS += -DDEBUG
-ASMFLAGS += -DDEBUG
-endif
 
 plant-buddy: CFLAGS += -D__HEAP_SIZE=2048 # Technically I could set this to 0 since I'm not using dynamic mem alloc.
 plant-buddy: CFLAGS += -D__STACK_SIZE=2048 
