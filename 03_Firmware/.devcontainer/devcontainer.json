@@ -24,8 +24,8 @@
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	"runArgs": [
 		"--group-add=986", // This is the group id of the uucp group, which owns /dev/ttyACM0
-		// "--device=/dev/ttyACM0",
-		// "--device=/dev/ttyACM1"
+		"--privileged",
+		// "--device=/dev/ttyACM1",
 		"--net=host",
 	],
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
