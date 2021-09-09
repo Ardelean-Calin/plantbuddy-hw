@@ -25,7 +25,8 @@ static void drv_soilhum_csense_handler(nrf_drv_csense_evt_t* p_event_struct)
     volatile uint16_t value = p_event_struct->read_value;
     // Don't need to check channels since we only use one.
     // TODO: Change name and type of "frequency" variable
-    // TODO2: Does it make sense to use app scheduler here? This function is really short...
+    // TODO2: Does it make sense to use app scheduler here? This function is really short... Maybe if I add
+    // a "convert to capacitance" function, I would want that to not be executed in interrupt mode
     frequency = value;
 }
 
