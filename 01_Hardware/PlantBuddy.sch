@@ -429,19 +429,17 @@ F 4 "C25744" H 4950 3675 50  0001 C CNN "LCSC"
 	1    4950 3675
 	-1   0    0    -1  
 $EndComp
-Text Notes 7450 2150 0    50   ~ 0
+Text Notes 7975 2400 0    50   ~ 0
 ADC configured with internal reference\nand gain 1/6 => 0 - 3.6V
-Wire Wire Line
-	7375 2075 7000 2075
 $Comp
 L PlantBuddy-rescue:+BATT-power #PWR0119
 U 1 1 6045E4C9
-P 7375 2075
-F 0 "#PWR0119" H 7375 1925 50  0001 C CNN
-F 1 "+BATT" H 7390 2248 50  0000 C CNN
-F 2 "" H 7375 2075 50  0001 C CNN
-F 3 "" H 7375 2075 50  0001 C CNN
-	1    7375 2075
+P 8225 2175
+F 0 "#PWR0119" H 8225 2025 50  0001 C CNN
+F 1 "+BATT" H 8240 2348 50  0000 C CNN
+F 2 "" H 8225 2175 50  0001 C CNN
+F 3 "" H 8225 2175 50  0001 C CNN
+	1    8225 2175
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -746,8 +744,6 @@ NoConn ~ 7000 2475
 NoConn ~ 7000 2375
 NoConn ~ 7000 2275
 NoConn ~ 7000 2175
-NoConn ~ 7000 1975
-NoConn ~ 7000 1875
 Wire Wire Line
 	9825 975  9825 1075
 Wire Wire Line
@@ -797,8 +793,6 @@ Wire Wire Line
 	2025 6750 2025 6850
 Wire Wire Line
 	2025 6850 1800 6850
-Text Notes 9825 5500 0    50   ~ 0
-TODO: Consider micro-speaker with low-cost low-power driver\nNOTE: Piezo-electric speaker should be enough
 $Comp
 L PlantBuddy-rescue:Battery_Cell-Device BT1
 U 1 1 5FC5077F
@@ -859,12 +853,12 @@ NoConn ~ 7000 3175
 $Comp
 L Device:Speaker_Crystal LS101
 U 1 1 6138F133
-P 10325 3925
-F 0 "LS101" H 10500 3921 50  0000 L CNN
-F 1 "Speaker_Crystal" H 10500 3830 50  0000 L CNN
-F 2 "" H 10290 3875 50  0001 C CNN
-F 3 "~" H 10290 3875 50  0001 C CNN
-	1    10325 3925
+P 7300 1875
+F 0 "LS101" H 7475 1871 50  0000 L CNN
+F 1 "Speaker_Crystal" H 7475 1780 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 7265 1825 50  0001 C CNN
+F 3 "~" H 7265 1825 50  0001 C CNN
+	1    7300 1875
 	1    0    0    -1  
 $EndComp
 NoConn ~ 7000 3575
@@ -883,6 +877,16 @@ $EndComp
 NoConn ~ 10100 1275
 NoConn ~ 7000 2575
 NoConn ~ 7000 2675
+Wire Wire Line
+	7100 1875 7000 1875
+Wire Wire Line
+	7100 1975 7000 1975
+Wire Wire Line
+	7000 2075 7300 2075
+Wire Wire Line
+	7300 2075 7300 2175
+Wire Wire Line
+	7300 2175 8225 2175
 Wire Bus Line
 	2175 5325 2175 6650
 $EndSCHEMATC
