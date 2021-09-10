@@ -6096,7 +6096,7 @@
 // <e> NRF_CSENSE_ENABLED - nrf_csense - Capacitive sensor module
 //==========================================================
 #ifndef NRF_CSENSE_ENABLED
-#define NRF_CSENSE_ENABLED 0
+#define NRF_CSENSE_ENABLED 1
 #endif
 // <o> NRF_CSENSE_PAD_HYSTERESIS - Minimum value of change required to determine that a pad was touched.
 #ifndef NRF_CSENSE_PAD_HYSTERESIS

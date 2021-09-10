@@ -68,7 +68,7 @@ static void batt_sensor_saadc_init(void)
 void batt_sensor_init()
 {
     batt_voltage_mv = 3000;
-    nrf_drv_saadc_sample();
+    batt_sensor_meas_start();
 }
 
 /**

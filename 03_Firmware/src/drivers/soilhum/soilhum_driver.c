@@ -49,8 +49,7 @@ void drv_soilhum_init()
 
     nrf_drv_csense_channels_enable(PIN_SOILHUM_MEAS_CH_MASK);
 
-    err_code = nrf_drv_csense_sample();
-    APP_ERROR_CHECK(err_code);
+    drv_soilhum_meas_start();
 }
 
 /**
