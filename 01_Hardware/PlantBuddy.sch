@@ -54,12 +54,6 @@ F 3 "" H 1400 5625 50  0001 C CNN
 $EndComp
 Text Notes 1975 5875 2    50   ~ 0
 Temperature & Humidity\nReally cheap: 0.66$
-Wire Wire Line
-	2475 4875 2475 4925
-Wire Wire Line
-	2725 4925 2725 4875
-Wire Wire Line
-	2725 4875 2475 4875
 $Comp
 L PlantBuddy-rescue:+BATT-power #PWR0105
 U 1 1 5FC54A7F
@@ -83,18 +77,6 @@ F 3 "" H 3725 7300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PlantBuddy-rescue:+BATT-power #PWR0107
-U 1 1 5FC5A54D
-P 2475 4875
-F 0 "#PWR0107" H 2475 4725 50  0001 C CNN
-F 1 "+BATT" H 2490 5048 50  0000 C CNN
-F 2 "" H 2475 4875 50  0001 C CNN
-F 3 "" H 2475 4875 50  0001 C CNN
-	1    2475 4875
-	1    0    0    -1  
-$EndComp
-Connection ~ 2475 4875
-$Comp
 L PlantBuddy-rescue:+BATT-power #PWR0108
 U 1 1 5FC5ABA5
 P 1400 5025
@@ -107,8 +89,6 @@ F 3 "" H 1400 5025 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	1800 6650 2075 6650
-Wire Wire Line
-	2475 5125 2475 5225
 Entry Wire Line
 	2075 6650 2175 6550
 Entry Wire Line
@@ -125,77 +105,15 @@ Text Label 2000 5425 2    50   ~ 0
 SDA
 Text Label 2000 5225 2    50   ~ 0
 SCL
-Entry Wire Line
-	2625 5325 2725 5225
-Entry Wire Line
-	2375 5325 2475 5225
-Text Label 2475 5225 2    50   ~ 0
-SCL
-Text Label 2725 5225 2    50   ~ 0
-SDA
-Text Label 2900 5450 0    50   ~ 0
-SDA
-Text Label 2900 5550 0    50   ~ 0
-SCL
-Wire Wire Line
-	2725 5125 2725 5225
-Wire Wire Line
-	2625 5450 2625 5325
-Wire Wire Line
-	2625 5450 3075 5450
-Wire Wire Line
-	2375 5550 2375 5325
-Wire Wire Line
-	2375 5550 3075 5550
-Wire Wire Line
-	3725 7300 3550 7300
-Wire Wire Line
-	2875 7300 3150 7300
 Text Notes 2825 7675 0    50   ~ 0
 Reverse-voltage protection
-Text Notes 9825 5225 0    50   ~ 0
-Yellow status LED => short blinks\nto notify user of different actions
-$Comp
-L PlantBuddy-rescue:Q_NMOS_GSD-Device Q2
-U 1 1 5FC7486C
-P 3350 7200
-F 0 "Q2" V 3599 7200 50  0000 C CNN
-F 1 "AO3400A" V 3690 7200 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 3550 7300 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/1811081213_Alpha-Omega-Semicon-AO3400A_C20917.pdf" H 3350 7200 50  0001 C CNN
-F 4 "C20917" V 3350 7200 50  0001 C CNN "LCSC"
-	1    3350 7200
-	0    -1   1    0   
-$EndComp
-$Comp
-L PlantBuddy-rescue:Conn_01x01-Connector_Generic J3
-U 1 1 5FC6BCF8
-P 3275 5550
-F 0 "J3" H 3250 5375 50  0000 L CNN
-F 1 "Conn_I2C_SCL" H 3225 5450 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3275 5550 50  0001 C CNN
-F 3 "~" H 3275 5550 50  0001 C CNN
-	1    3275 5550
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:Conn_01x01-Connector_Generic J2
-U 1 1 5FC6B510
-P 3275 5450
-F 0 "J2" H 3250 5650 50  0000 L CNN
-F 1 "Conn_I2C_SDA" H 3225 5575 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3275 5450 50  0001 C CNN
-F 3 "~" H 3275 5450 50  0001 C CNN
-	1    3275 5450
-	1    0    0    -1  
-$EndComp
 $Comp
 L PlantBuddy-rescue:C_Small-Device C3
 U 1 1 5FC58638
 P 550 6750
 F 0 "C3" H 600 6900 50  0000 L CNN
 F 1 "100nF" H 600 6625 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 550 6750 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 550 6750 50  0001 C CNN
 F 3 "~" H 550 6750 50  0001 C CNN
 F 4 "C1525" H 550 6750 50  0001 C CNN "LCSC"
 	1    550  6750
@@ -214,90 +132,12 @@ F 4 "C194656" H 1500 5325 50  0001 C CNN "LCSC"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L PlantBuddy-rescue:Battery_Cell-Device BT1
-U 1 1 5FC5077F
-P 2875 7100
-F 0 "BT1" H 2993 7196 50  0000 L CNN
-F 1 "Li+" H 2993 7105 50  0000 L CNN
-F 2 "PlantBuddy:BatteryHolder_LCSC_2032" V 2875 7160 50  0001 C CNN
-F 3 "~" V 2875 7160 50  0001 C CNN
-F 4 "C70377" H 2875 7100 50  0001 C CNN "LCSC"
-F 5 "CR2032-BS-6-1" H 2875 7100 50  0001 C CNN "MFR"
-	1    2875 7100
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:R_Small-Device R15
-U 1 1 5F7AB23C
-P 2725 5025
-F 0 "R15" H 2784 5071 50  0000 L CNN
-F 1 "10k" H 2784 4980 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 2725 5025 50  0001 C CNN
-F 3 "~" H 2725 5025 50  0001 C CNN
-F 4 "C25744" H 2725 5025 50  0001 C CNN "LCSC"
-	1    2725 5025
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:R_Small-Device R14
-U 1 1 5F7AA80B
-P 2475 5025
-F 0 "R14" H 2534 5071 50  0000 L CNN
-F 1 "10k" H 2534 4980 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 2475 5025 50  0001 C CNN
-F 3 "~" H 2475 5025 50  0001 C CNN
-F 4 "C25744" H 2475 5025 50  0001 C CNN "LCSC"
-	1    2475 5025
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:LED_Small-Device D1
-U 1 1 5FC270B5
-P 10025 4700
-F 0 "D1" V 10071 4630 50  0000 R CNN
-F 1 "Y" V 9980 4630 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric" V 10025 4700 50  0001 C CNN
-F 3 "~" V 10025 4700 50  0001 C CNN
-F 4 "C72038" V 10025 4700 50  0001 C CNN "LCSC"
-	1    10025 4700
-	0    -1   -1   0   
-$EndComp
-$Comp
-L PlantBuddy-rescue:GND-power #PWR01
-U 1 1 5FC2781D
-P 10025 4800
-F 0 "#PWR01" H 10025 4550 50  0001 C CNN
-F 1 "GND" H 10030 4627 50  0000 C CNN
-F 2 "" H 10025 4800 50  0001 C CNN
-F 3 "" H 10025 4800 50  0001 C CNN
-	1    10025 4800
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:R_Small-Device R3
-U 1 1 5FC33886
-P 10025 4500
-F 0 "R3" V 9829 4500 50  0000 C CNN
-F 1 "1k" V 9920 4500 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 10025 4500 50  0001 C CNN
-F 3 "~" H 10025 4500 50  0001 C CNN
-F 4 "C11702" V 10025 4500 50  0001 C CNN "LCSC"
-	1    10025 4500
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	10025 4400 10025 4325
-Wire Wire Line
-	10025 4325 9850 4325
-Text Label 9850 4325 0    50   ~ 0
-LEDY
-$Comp
 L PlantBuddy-rescue:C_Small-Device C17
 U 1 1 60156A34
 P 900 5325
 F 0 "C17" H 750 5425 50  0000 L CNN
 F 1 "100nF" H 600 5275 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 900 5325 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 900 5325 50  0001 C CNN
 F 3 "~" H 900 5325 50  0001 C CNN
 F 4 "C1525" H 900 5325 50  0001 C CNN "LCSC"
 	1    900  5325
@@ -316,25 +156,20 @@ Wire Wire Line
 $Comp
 L PlantBuddy-rescue:R_Small-Device R4
 U 1 1 6047E951
-P 3350 6900
-F 0 "R4" H 3200 6950 50  0000 L CNN
-F 1 "10k" H 3175 6875 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 3350 6900 50  0001 C CNN
-F 3 "~" H 3350 6900 50  0001 C CNN
-F 4 "C25744" H 3350 6900 50  0001 C CNN "LCSC"
-	1    3350 6900
+P 3325 7200
+F 0 "R4" H 3175 7250 50  0000 L CNN
+F 1 "10k" H 3150 7175 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 3325 7200 50  0001 C CNN
+F 3 "~" H 3325 7200 50  0001 C CNN
+F 4 "C25744" H 3325 7200 50  0001 C CNN "LCSC"
+	1    3325 7200
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	2875 6800 3350 6800
-Connection ~ 3350 6800
-Wire Wire Line
-	3350 6800 3725 6800
 Wire Wire Line
 	2875 6900 2875 6800
 Wire Wire Line
 	2875 7200 2875 7300
-Text Label 10925 1075 2    50   ~ 0
+Text Label 10925 1275 2    50   ~ 0
 ~RST
 Text Label 10925 875  2    50   ~ 0
 SWDIO
@@ -363,7 +198,7 @@ U 1 1 5F8E6679
 P 5850 5825
 F 0 "C11" H 5758 5779 50  0000 R CNN
 F 1 "12pF" H 5758 5870 50  0000 R CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 5850 5825 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 5850 5825 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-0402CG120J500NT_C1547.pdf" H 5850 5825 50  0001 C CNN
 F 4 "C1547" H 5850 5825 50  0001 C CNN "LCSC"
 	1    5850 5825
@@ -376,7 +211,7 @@ U 1 1 5F8E556C
 P 5350 5825
 F 0 "C6" H 5259 5779 50  0000 R CNN
 F 1 "12pF" H 5259 5870 50  0000 R CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 5350 5825 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 5350 5825 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-0402CG120J500NT_C1547.pdf" H 5350 5825 50  0001 C CNN
 F 4 "C1547" H 5350 5825 50  0001 C CNN "LCSC"
 	1    5350 5825
@@ -421,7 +256,7 @@ U 1 1 5F96F125
 P 7125 5800
 F 0 "C14" H 7033 5754 50  0000 R CNN
 F 1 "12pF" H 7033 5845 50  0000 R CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 7125 5800 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 7125 5800 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-0402CG120J500NT_C1547.pdf" H 7125 5800 50  0001 C CNN
 F 4 "C1547" H 7125 5800 50  0001 C CNN "LCSC"
 	1    7125 5800
@@ -433,7 +268,7 @@ U 1 1 5F96F76E
 P 6675 5800
 F 0 "C13" H 6584 5754 50  0000 R CNN
 F 1 "12pF" H 6584 5845 50  0000 R CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 6675 5800 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6675 5800 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-0402CG120J500NT_C1547.pdf" H 6675 5800 50  0001 C CNN
 F 4 "C1547" H 6675 5800 50  0001 C CNN "LCSC"
 	1    6675 5800
@@ -500,17 +335,13 @@ F 3 "" H 5600 5925 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7375 3175 7000 3175
+	7375 3075 7000 3075
 Wire Wire Line
-	7375 3675 7000 3675
-Wire Wire Line
-	7375 3575 7000 3575
-Wire Wire Line
-	7000 2875 7375 2875
+	7000 2975 7375 2975
 Wire Wire Line
 	7000 2775 7375 2775
 Text Label 7100 4375 0    50   ~ 0
-Discharge
+Measure
 Text Label 7100 4475 0    50   ~ 0
 Charge
 $Comp
@@ -529,79 +360,12 @@ L Device:R_Small R101
 U 1 1 61260F94
 P 7475 4475
 F 0 "R101" H 7416 4429 50  0000 R CNN
-F 1 "100k" H 7416 4520 50  0000 R CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 7475 4475 50  0001 C CNN
+F 1 "3M3" H 7416 4520 50  0000 R CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 7475 4475 50  0001 C CNN
 F 3 "~" H 7475 4475 50  0001 C CNN
 F 4 "C25741" H 7475 4475 50  0001 C CNN "LCSC"
 	1    7475 4475
 	0    -1   -1   0   
-$EndComp
-$Comp
-L PlantBuddy-rescue:GND-power #PWR0113
-U 1 1 61255887
-P 7475 2375
-F 0 "#PWR0113" H 7475 2125 50  0001 C CNN
-F 1 "GND" H 7325 2325 50  0001 C CNN
-F 2 "" H 7475 2375 50  0001 C CNN
-F 3 "" H 7475 2375 50  0001 C CNN
-	1    7475 2375
-	-1   0    0    1   
-$EndComp
-$Comp
-L PlantBuddy-rescue:GND-power #PWR0115
-U 1 1 6125528E
-P 7475 2875
-F 0 "#PWR0115" H 7475 2625 50  0001 C CNN
-F 1 "GND" H 7625 2800 50  0001 C CNN
-F 2 "" H 7475 2875 50  0001 C CNN
-F 3 "" H 7475 2875 50  0001 C CNN
-	1    7475 2875
-	1    0    0    -1  
-$EndComp
-Connection ~ 7475 2675
-Wire Wire Line
-	7800 2675 7475 2675
-Connection ~ 7475 2575
-Wire Wire Line
-	7800 2575 7475 2575
-$Comp
-L Connector_Generic:Conn_01x02 J102
-U 1 1 6124EEAB
-P 8000 2575
-F 0 "J102" H 8080 2567 50  0000 L CNN
-F 1 "NFC Antenna" H 8080 2476 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 8000 2575 50  0001 C CNN
-F 3 "~" H 8000 2575 50  0001 C CNN
-	1    8000 2575
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7475 2575 7000 2575
-Wire Wire Line
-	7000 2675 7475 2675
-$Comp
-L PlantBuddy-rescue:C_Small-Device C102
-U 1 1 61247050
-P 7475 2775
-F 0 "C102" H 7567 2821 50  0000 L CNN
-F 1 "N/P" H 7567 2730 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 7475 2775 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/YAGEO-CQ0402ARNPO9BNR80_C326068.pdf" H 7475 2775 50  0001 C CNN
-F 4 "C326068" H 7475 2775 50  0001 C CNN "LCSC"
-	1    7475 2775
-	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:C_Small-Device C101
-U 1 1 612463B5
-P 7475 2475
-F 0 "C101" H 7567 2521 50  0000 L CNN
-F 1 "N/P" H 7567 2430 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 7475 2475 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/YAGEO-CQ0402ARNPO9BNR80_C326068.pdf" H 7475 2475 50  0001 C CNN
-F 4 "C326068" H 7475 2475 50  0001 C CNN "LCSC"
-	1    7475 2475
-	1    0    0    -1  
 $EndComp
 Connection ~ 6100 4875
 Wire Wire Line
@@ -659,36 +423,30 @@ U 1 1 604A62C8
 P 4950 3675
 F 0 "R1" H 4800 3725 50  0000 L CNN
 F 1 "10k" H 4775 3650 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 4950 3675 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 4950 3675 50  0001 C CNN
 F 3 "~" H 4950 3675 50  0001 C CNN
 F 4 "C25744" H 4950 3675 50  0001 C CNN "LCSC"
 	1    4950 3675
 	-1   0    0    -1  
 $EndComp
-Text Label 7375 3675 2    50   ~ 0
-UART_Tx
-Text Label 7375 3575 2    50   ~ 0
-UART_Rx
-Text Notes 7450 2150 0    50   ~ 0
+Text Notes 7975 2400 0    50   ~ 0
 ADC configured with internal reference\nand gain 1/6 => 0 - 3.6V
-Wire Wire Line
-	7375 2075 7000 2075
 $Comp
 L PlantBuddy-rescue:+BATT-power #PWR0119
 U 1 1 6045E4C9
-P 7375 2075
-F 0 "#PWR0119" H 7375 1925 50  0001 C CNN
-F 1 "+BATT" H 7390 2248 50  0000 C CNN
-F 2 "" H 7375 2075 50  0001 C CNN
-F 3 "" H 7375 2075 50  0001 C CNN
-	1    7375 2075
+P 8225 2175
+F 0 "#PWR0119" H 8225 2025 50  0001 C CNN
+F 1 "+BATT" H 8240 2348 50  0000 C CNN
+F 2 "" H 8225 2175 50  0001 C CNN
+F 3 "" H 8225 2175 50  0001 C CNN
+	1    8225 2175
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7375 3075 7000 3075
-Text Label 7375 3175 2    50   ~ 0
-LEDY
+	7375 2875 7000 2875
 Text Label 7375 3075 2    50   ~ 0
+SPEAKER
+Text Label 7375 2875 2    50   ~ 0
 LUX_INT
 NoConn ~ 5700 1475
 Connection ~ 5600 1275
@@ -725,10 +483,10 @@ L PlantBuddy-rescue:C_Small-Device C15
 U 1 1 6030ABD4
 P 8425 1100
 F 0 "C15" H 8517 1146 50  0000 L CNN
-F 1 "4.7uF" H 8517 1055 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8425 1100 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL05A475MP5NRNC_C23733.pdf" H 8425 1100 50  0001 C CNN
-F 4 "C23733" H 8425 1100 50  0001 C CNN "LCSC"
+F 1 "1uF" H 8517 1055 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8425 1100 50  0001 C CNN
+F 3 "~" H 8425 1100 50  0001 C CNN
+F 4 "C52923" H 8425 1100 50  0001 C CNN "LCSC"
 	1    8425 1100
 	1    0    0    -1  
 $EndComp
@@ -793,7 +551,7 @@ Wire Wire Line
 	5200 3975 4925 3975
 Text Label 7375 2775 2    50   ~ 0
 SDA
-Text Label 7375 2875 2    50   ~ 0
+Text Label 7375 2975 2    50   ~ 0
 SCL
 Wire Wire Line
 	5025 3375 5200 3375
@@ -889,23 +647,12 @@ F 3 "~" H 7675 4575 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PlantBuddy-rescue:Antenna_Shield-Device AE1
-U 1 1 5F7B40C5
-P 3825 2275
-F 0 "AE1" H 3969 2314 50  0000 L CNN
-F 1 "2.45GHz PCB antenna" H 3969 2223 50  0000 L CNN
-F 2 "RF_Antenna:Texas_SWRA117D_2.4GHz_Right" H 3825 2375 50  0001 C CNN
-F 3 "~" H 3825 2375 50  0001 C CNN
-	1    3825 2275
-	-1   0    0    -1  
-$EndComp
-$Comp
 L PlantBuddy-rescue:C_Small-Device C10
 U 1 1 5F89342A
 P 8000 1100
 F 0 "C10" H 8125 1150 50  0000 L CNN
 F 1 "100nF" H 8100 1075 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8000 1100 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8000 1100 50  0001 C CNN
 F 3 "~" H 8000 1100 50  0001 C CNN
 F 4 "C1525" H 8000 1100 50  0001 C CNN "LCSC"
 	1    8000 1100
@@ -917,7 +664,7 @@ U 1 1 5F9CA7B8
 P 7575 1100
 F 0 "C12" H 7700 1150 50  0000 L CNN
 F 1 "100nF" H 7675 1075 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 7575 1100 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 7575 1100 50  0001 C CNN
 F 3 "~" H 7575 1100 50  0001 C CNN
 F 4 "C1525" H 7575 1100 50  0001 C CNN "LCSC"
 	1    7575 1100
@@ -941,7 +688,7 @@ U 1 1 5FC9BF20
 P 5600 1375
 F 0 "C5" H 5692 1421 50  0000 L CNN
 F 1 "100nF" H 5692 1330 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 5600 1375 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 5600 1375 50  0001 C CNN
 F 3 "~" H 5600 1375 50  0001 C CNN
 F 4 "C1525" H 5600 1375 50  0001 C CNN "LCSC"
 	1    5600 1375
@@ -953,7 +700,7 @@ U 1 1 5FC9C991
 P 6300 1100
 F 0 "C16" H 6392 1146 50  0000 L CNN
 F 1 "1uF" H 6392 1055 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 6300 1100 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6300 1100 50  0001 C CNN
 F 3 "~" H 6300 1100 50  0001 C CNN
 F 4 "C52923" H 6300 1100 50  0001 C CNN "LCSC"
 	1    6300 1100
@@ -970,25 +717,10 @@ F 3 "" H 7575 1000 50  0001 C CNN
 	1    7575 1000
 	1    0    0    -1  
 $EndComp
-$Comp
-L PlantBuddy-rescue:GND-power #PWR038
-U 1 1 5F8EDD3C
-P 3725 2475
-F 0 "#PWR038" H 3725 2225 50  0001 C CNN
-F 1 "GND" H 3730 2302 50  0000 C CNN
-F 2 "" H 3725 2475 50  0001 C CNN
-F 3 "" H 3725 2475 50  0001 C CNN
-	1    3725 2475
-	-1   0    0    -1  
-$EndComp
 Wire Wire Line
 	10600 975  10925 975 
-Text Label 10925 1175 2    50   ~ 0
-UART_Tx
 Wire Wire Line
-	10600 1175 10925 1175
-Wire Wire Line
-	10600 1075 10925 1075
+	10600 1275 10925 1275
 Wire Wire Line
 	7575 4475 7675 4475
 Wire Wire Line
@@ -1006,15 +738,12 @@ NoConn ~ 7000 4075
 NoConn ~ 7000 3975
 NoConn ~ 7000 3875
 NoConn ~ 7000 3775
-NoConn ~ 7000 3475
 NoConn ~ 7000 3375
 NoConn ~ 7000 3275
 NoConn ~ 7000 2475
 NoConn ~ 7000 2375
 NoConn ~ 7000 2275
 NoConn ~ 7000 2175
-NoConn ~ 7000 1975
-NoConn ~ 7000 1875
 Wire Wire Line
 	9825 975  9825 1075
 Wire Wire Line
@@ -1033,21 +762,6 @@ F 1 "GND" H 9875 900 50  0001 C CNN
 F 2 "" H 9725 975 50  0001 C CNN
 F 3 "" H 9725 975 50  0001 C CNN
 	1    9725 975 
-	1    0    0    -1  
-$EndComp
-Text Label 9825 1175 0    50   ~ 0
-UART_Rx
-Wire Wire Line
-	9825 1175 10100 1175
-$Comp
-L Connector_Generic:Conn_02x04_Odd_Even J101
-U 1 1 6117791F
-P 10300 975
-F 0 "J101" H 10350 1292 50  0000 C CNN
-F 1 "Debug" H 10350 1201 50  0000 C CNN
-F 2 "PlantBuddy:PinHeader_2x04_P1.27mm_Vertical" H 10300 975 50  0001 C CNN
-F 3 "~" H 10300 975 50  0001 C CNN
-	1    10300 975 
 	1    0    0    -1  
 $EndComp
 Connection ~ 1400 6350
@@ -1079,8 +793,100 @@ Wire Wire Line
 	2025 6750 2025 6850
 Wire Wire Line
 	2025 6850 1800 6850
-Wire Bus Line
-	2175 5325 2625 5325
+$Comp
+L PlantBuddy-rescue:Battery_Cell-Device BT1
+U 1 1 5FC5077F
+P 2875 7100
+F 0 "BT1" H 2993 7196 50  0000 L CNN
+F 1 "Li+" H 2993 7105 50  0000 L CNN
+F 2 "PlantBuddy:BAT-HLD-001" V 2875 7160 50  0001 C CNN
+F 3 "~" V 2875 7160 50  0001 C CNN
+F 4 "" H 2875 7100 50  0001 C CNN "LCSC"
+F 5 "CR2032-BS-6-1" H 2875 7100 50  0001 C CNN "MFR"
+	1    2875 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:AO3401A Q101
+U 1 1 6134A6DD
+P 3325 6900
+F 0 "Q101" V 3667 6900 50  0000 C CNN
+F 1 "AO3401A" V 3576 6900 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3525 6825 50  0001 L CIN
+F 3 "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf" H 3325 6900 50  0001 L CNN
+	1    3325 6900
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3125 6800 2875 6800
+Wire Wire Line
+	3525 6800 3725 6800
+Wire Wire Line
+	2875 7300 3325 7300
+Wire Wire Line
+	3325 7300 3725 7300
+Connection ~ 3325 7300
+Text Label 10925 1075 2    50   ~ 0
+SWO
+Wire Wire Line
+	10600 1075 10925 1075
+Text Label 7375 3475 2    50   ~ 0
+SWO
+Wire Wire Line
+	7375 3475 7000 3475
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J101
+U 1 1 6136EE02
+P 10300 1075
+F 0 "J101" H 10350 1492 50  0000 C CNN
+F 1 "J-Link SWD" H 10350 1401 50  0000 C CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD" H 10300 1075 50  0001 C CNN
+F 3 "~" H 10300 1075 50  0001 C CNN
+	1    10300 1075
+	1    0    0    -1  
+$EndComp
+NoConn ~ 10600 1175
+NoConn ~ 10100 1175
+Text Notes 9375 1200 0    50   ~ 0
+Non-existent ->
+NoConn ~ 7000 3175
+$Comp
+L Device:Speaker_Crystal LS101
+U 1 1 6138F133
+P 7300 1875
+F 0 "LS101" H 7475 1871 50  0000 L CNN
+F 1 "Speaker_Crystal" H 7475 1780 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 7265 1825 50  0001 C CNN
+F 3 "~" H 7265 1825 50  0001 C CNN
+	1    7300 1875
+	1    0    0    -1  
+$EndComp
+NoConn ~ 7000 3575
+NoConn ~ 7000 3675
+$Comp
+L Device:Antenna AE101
+U 1 1 613B6725
+P 3825 2275
+F 0 "AE101" H 3625 2275 50  0000 L CNN
+F 1 "Antenna" H 3500 2175 50  0000 L CNN
+F 2 "PlantBuddy:monopole" H 3825 2275 50  0001 C CNN
+F 3 "~" H 3825 2275 50  0001 C CNN
+	1    3825 2275
+	1    0    0    -1  
+$EndComp
+NoConn ~ 10100 1275
+NoConn ~ 7000 2575
+NoConn ~ 7000 2675
+Wire Wire Line
+	7100 1875 7000 1875
+Wire Wire Line
+	7100 1975 7000 1975
+Wire Wire Line
+	7000 2075 7300 2075
+Wire Wire Line
+	7300 2075 7300 2175
+Wire Wire Line
+	7300 2175 8225 2175
 Wire Bus Line
 	2175 5325 2175 6650
 $EndSCHEMATC
