@@ -804,17 +804,6 @@ F 3 "~" H 7675 4575 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PlantBuddy-rescue:Antenna_Shield-Device AE1
-U 1 1 5F7B40C5
-P 3825 2275
-F 0 "AE1" H 3969 2314 50  0000 L CNN
-F 1 "2.45GHz PCB antenna" H 3969 2223 50  0000 L CNN
-F 2 "RF_Antenna:Texas_SWRA117D_2.4GHz_Right" H 3825 2375 50  0001 C CNN
-F 3 "~" H 3825 2375 50  0001 C CNN
-	1    3825 2275
-	-1   0    0    -1  
-$EndComp
-$Comp
 L PlantBuddy-rescue:C_Small-Device C10
 U 1 1 5F89342A
 P 8000 1100
@@ -884,17 +873,6 @@ F 2 "" H 7575 1000 50  0001 C CNN
 F 3 "" H 7575 1000 50  0001 C CNN
 	1    7575 1000
 	1    0    0    -1  
-$EndComp
-$Comp
-L PlantBuddy-rescue:GND-power #PWR038
-U 1 1 5F8EDD3C
-P 3725 2475
-F 0 "#PWR038" H 3725 2225 50  0001 C CNN
-F 1 "GND" H 3730 2302 50  0000 C CNN
-F 2 "" H 3725 2475 50  0001 C CNN
-F 3 "" H 3725 2475 50  0001 C CNN
-	1    3725 2475
-	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	10600 975  10925 975 
@@ -1061,6 +1039,17 @@ F 3 "~" H 10290 3875 50  0001 C CNN
 $EndComp
 NoConn ~ 7000 3575
 NoConn ~ 7000 3675
+$Comp
+L Device:Antenna AE101
+U 1 1 613B6725
+P 3825 2275
+F 0 "AE101" H 3625 2275 50  0000 L CNN
+F 1 "Antenna" H 3500 2175 50  0000 L CNN
+F 2 "PlantBuddy:monopole" H 3825 2275 50  0001 C CNN
+F 3 "~" H 3825 2275 50  0001 C CNN
+	1    3825 2275
+	1    0    0    -1  
+$EndComp
 Wire Bus Line
 	2175 5325 2625 5325
 Wire Bus Line
