@@ -67,7 +67,6 @@
 #include "nrf_pwr_mgmt.h"
 #include "nrf_soc.h"
 #include "sensors.h"
-#include "status.h"
 #include "task_scheduler.h"
 #include "unix_time.h"
 #include <stdbool.h>
@@ -212,7 +211,6 @@ int main(void)
     APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
     /* Initialize our different modules */
-    status_init();
     sensors_init();
     unix_time_init();
     /* Initialize the data logging module */

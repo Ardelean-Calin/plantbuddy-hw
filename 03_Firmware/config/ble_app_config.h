@@ -6,7 +6,7 @@
 #ifndef DEBUG
 #define DEVICE_NAME "FlivzNexxy" /**< Name of device. Will be included in the advertising data. */
 #else
-#define DEVICE_NAME "FlivzDbg" /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME "FlivzNexxyD" /**< Name of device. Will be included in the advertising data. */
 #endif
 #define MANUFACTURER_NAME "G&C" /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL \

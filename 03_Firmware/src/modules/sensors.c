@@ -33,7 +33,7 @@ static void sensors_start_measurements(void)
     /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
     drv_soilhum_meas_start();
     drv_shtc3_meas_start();
-    drv_opt3001_meas_start();
+    // drv_opt3001_meas_start();
     // batt_sensor_meas_start();
 }
 
@@ -43,8 +43,8 @@ static void sensors_start_measurements(void)
 void sensors_init(void)
 {
     /* Initialize the different environment sensors */
-    drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager);   // These two
-    drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager); // need i2c
+    drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager); // These two
+    // drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager); // need i2c
     drv_soilhum_init();
     // TODO: Problem: I cannot use CSense together with SAADC => Will need to:
     // 1) Init saadc, start measurement, end measurement, deinit then =>

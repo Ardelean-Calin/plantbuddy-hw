@@ -2,7 +2,6 @@
 #include "app_timer.h"
 #include "datalogger.h"
 #include "sensors.h"
-#include "status.h"
 #include "unix_time.h"
 #include <stdint.h>
 
@@ -50,9 +49,6 @@ void scheduler_stop()
  */
 static void scheduler_run_100ms(void* p_context)
 {
-    /* Run our 100ms tasks */
-    status_task();
-
     /* Invoke the 1s and 10s tasks as needed */
     scheduler_counter++;
     scheduler_invoke_other_tasks(scheduler_counter);
@@ -65,7 +61,7 @@ static void scheduler_run_1000ms()
 {
     /* Run our 1000ms tasks */
     unix_time_task();
-    datalogger_task();
+    // datalogger_task();
 };
 
 /**

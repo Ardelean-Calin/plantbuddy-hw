@@ -21,7 +21,6 @@ SRC_FILES += \
   $(PROJ_DIR)/src/main.c \
   $(PROJ_DIR)/src/task_scheduler.c \
   $(PROJ_DIR)/src/modules/sensors.c \
-  $(PROJ_DIR)/src/modules/status.c \
   $(PROJ_DIR)/src/modules/unix_time.c \
   $(PROJ_DIR)/src/modules/datalogger.c \
   $(SDK_ROOT)/components/ble/ble_advertising/ble_advertising.c \
