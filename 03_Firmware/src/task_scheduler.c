@@ -1,6 +1,7 @@
 #include "task_scheduler.h"
 #include "app_timer.h"
 #include "datalogger.h"
+#include "ltr303.h"
 #include "sensors.h"
 #include "unix_time.h"
 #include <stdint.h>
@@ -9,7 +10,8 @@ APP_TIMER_DEF(m_periodic_timer); // App timer used by the scheduler
 uint32_t scheduler_counter;
 
 /* Static function prototypes */
-static void scheduler_run_100ms(void* p_context);
+static void scheduler_run_10ms(void* p_context);
+static void scheduler_run_100ms();
 static void scheduler_run_1000ms();
 static void scheduler_run_10000ms();
 static void scheduler_invoke_other_tasks(uint32_t count);
@@ -20,7 +22,7 @@ void scheduler_init()
     scheduler_counter = 0;
 
     // Create apptimer
-    err_code = app_timer_create(&m_periodic_timer, APP_TIMER_MODE_REPEATED, scheduler_run_100ms);
+    err_code = app_timer_create(&m_periodic_timer, APP_TIMER_MODE_REPEATED, scheduler_run_10ms);
     APP_ERROR_CHECK(err_code);
 }
 
@@ -29,7 +31,7 @@ void scheduler_start()
     ret_code_t err_code;
 
     // Start timer
-    err_code = app_timer_start(m_periodic_timer, APP_TIMER_TICKS(100), NULL); // 100ms timer
+    err_code = app_timer_start(m_periodic_timer, APP_TIMER_TICKS(10), NULL); // 100Hz
     APP_ERROR_CHECK(err_code);
 }
 
@@ -45,13 +47,22 @@ void scheduler_stop()
 /** Static function definitions BEGIN **/
 
 /**
- * @brief Run the periodic tasks with a period of 100ms
+ * @brief Run the periodic tasks with a period of 10ms
  */
-static void scheduler_run_100ms(void* p_context)
+static void scheduler_run_10ms(void* p_context)
 {
-    /* Invoke the 1s and 10s tasks as needed */
+    /* Invoke the 100ms, 1s and 10s tasks as needed */
     scheduler_counter++;
     scheduler_invoke_other_tasks(scheduler_counter);
+    /* Invoke LTR303 state machine */
+    ltr303_statemachine_tick();
+};
+
+/**
+ * @brief Run the periodic tasks with a period of 100ms
+ */
+static void scheduler_run_100ms(){
+    /* This stuff runs every 100ms */
 };
 
 /**

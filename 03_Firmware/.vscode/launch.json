@@ -24,7 +24,8 @@
                         "type": "console"
                     }
                 ]
-            }
+            },
+            "postDebugTask": "Reset",
         },
         // {
         //     "name": "Cortex Debug (BMP)",

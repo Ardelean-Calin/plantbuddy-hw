@@ -5,7 +5,7 @@
 #define AIN_4 4
 
 /* Pin defines */
-#define PIN_INTERRUPT_LUX 14
+#define PIN_INTERRUPT_LUX 12
 
 // I2C Pins
 #define PIN_I2C_SCL 13

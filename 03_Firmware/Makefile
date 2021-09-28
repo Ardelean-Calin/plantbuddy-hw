@@ -18,6 +18,8 @@ SRC_FILES += \
   $(PROJ_DIR)/src/drivers/opt3001/opt3001_driver.c \
   $(PROJ_DIR)/src/drivers/shtc3/shtc3_driver.c \
   $(PROJ_DIR)/src/drivers/soilhum/soilhum_driver.c \
+  $(PROJ_DIR)/src/drivers/ltr303/ltr303.c \
+  $(PROJ_DIR)/src/drivers/i2c_common.c \
   $(PROJ_DIR)/src/main.c \
   $(PROJ_DIR)/src/task_scheduler.c \
   $(PROJ_DIR)/src/modules/sensors.c \
@@ -116,6 +118,7 @@ INC_FOLDERS += \
   $(PROJ_DIR)/src/drivers/opt3001 \
   $(PROJ_DIR)/src/drivers/shtc3 \
   $(PROJ_DIR)/src/drivers/soilhum \
+  $(PROJ_DIR)/src/drivers/ltr303 \
   $(PROJ_DIR)/src/modules \
   $(SDK_ROOT)/components \
   $(SDK_ROOT)/components/ble/ble_advertising \

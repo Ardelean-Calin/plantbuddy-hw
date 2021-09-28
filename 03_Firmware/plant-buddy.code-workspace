@@ -59,7 +59,10 @@
             "status.h": "c",
             "datalogger.h": "c",
             "char_downloader.h": "c",
-            "pca10040.h": "c"
+            "pca10040.h": "c",
+            "ltr303.h": "c",
+            "i2c_common.h": "c",
+            "nrf_drv_twi.h": "c"
         },
         "editor.formatOnSave": true,
         "editor.rulers": [

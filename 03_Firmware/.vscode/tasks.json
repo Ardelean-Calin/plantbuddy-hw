@@ -65,10 +65,17 @@
             }
         },
         {
+            "label": "Reset",
+            "detail": "Reset the nRF52 so that it no longer is in programming mode.",
+            "type": "shell",
+            "command": "nrfjprog -f nrf52 --reset",
+            "problemMatcher": []
+        },
+        {
             "label": "Mass Erase",
             "detail": "Erases the nrf52832",
             "type": "shell",
-            "command": "arm-none-eabi-gdb -nx --batch -ex 'target extended-remote ${config:bmp_port}' -ex 'monitor swdp_scan' -ex 'attach 1' -ex 'mon erase_mass' -ex 'kill'",
+            "command": "nrfjprog -f nrf52 --eraseall",
             // "command": "openocd -f ${workspaceRoot}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"nrf5 mass_erase\" -c\"exit\"",
             "problemMatcher": []
         },

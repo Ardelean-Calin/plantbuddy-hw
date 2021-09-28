@@ -1,8 +1,8 @@
 /* Nordic-specific includes */
-#include "nrf_twi_mngr.h"
-#include "nrfx_twi.h"
+#include "nrf_drv_twi.h"
 /* Drivers */
 #include "battery_sensor.h"
+#include "ltr303.h"
 #include "opt3001_driver.h"
 #include "shtc3_driver.h"
 #include "soilhum_driver.h"
@@ -14,25 +14,37 @@
 #include "sensors.h"
 #include "unix_time.h"
 
-#define TWI_PENDING_TRANSACTIONS 5                            // Size of TWI transactions queue
-NRF_TWI_MNGR_DEF(m_twi_manager, TWI_PENDING_TRANSACTIONS, 0); // TWI Transaction manager
+/* TWI instance. */
+static const nrf_drv_twi_t m_twi = NRF_DRV_TWI_INSTANCE(0);
 
 static sensor_data_t sensor_data;
 
-static void sensors_twi_mngr_init(void)
+static void sensors_i2c_handler(nrf_drv_twi_evt_t const* p_event, void* p_context)
 {
-    nrf_drv_twi_config_t twi_config = NRF_DRV_TWI_DEFAULT_CONFIG;
-    twi_config.scl                  = PIN_I2C_SCL;
-    twi_config.sda                  = PIN_I2C_SDA;
+}
 
-    nrf_twi_mngr_init(&m_twi_manager, &twi_config);
+static void sensors_i2c_init(void)
+{
+    ret_code_t err_code;
+
+    const nrf_drv_twi_config_t twi_config = {.scl                = PIN_I2C_SCL,
+                                             .sda                = PIN_I2C_SDA,
+                                             .frequency          = NRF_DRV_TWI_FREQ_100K,
+                                             .interrupt_priority = APP_IRQ_PRIORITY_HIGH,
+                                             .clear_bus_init     = true};
+
+    err_code = nrf_drv_twi_init(&m_twi, &twi_config, NULL, NULL);
+    APP_ERROR_CHECK(err_code);
+
+    nrf_drv_twi_enable(&m_twi);
 }
 
 static void sensors_start_measurements(void)
 {
     /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
     drv_soilhum_meas_start();
-    drv_shtc3_meas_start();
+    // drv_shtc3_meas_start();
+    // ltr303_meas_start();
     // drv_opt3001_meas_start();
     // batt_sensor_meas_start();
 }
@@ -42,8 +54,11 @@ static void sensors_start_measurements(void)
  */
 void sensors_init(void)
 {
+    /* Initialize i2c peripheral used by sensors */
+    sensors_i2c_init();
     /* Initialize the different environment sensors */
-    drv_shtc3_init((nrf_twi_mngr_t*)&m_twi_manager); // These two
+    ltr303_init(); /* Ambient light sensor */
+    // drv_shtc3_init(); // These two
     // drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager); // need i2c
     drv_soilhum_init();
     // TODO: Problem: I cannot use CSense together with SAADC => Will need to:
@@ -53,7 +68,7 @@ void sensors_init(void)
     // batt_sensor_init();
 
     // TWI Manager is used by some sensors
-    sensors_twi_mngr_init();
+    // sensors_twi_mngr_init();
 
     // As soon as PlantBuddy goes live, start a first measurement... This one is unfortunately not logged, though.
     sensors_start_measurements();
