@@ -76,15 +76,15 @@
             "label": "Flash SoftDevice",
             "detail": "Flashes the S112 SoftDevice without erasing the memory first.",
             "type": "shell",
-            "command": "arm-none-eabi-gdb -nx --batch -ex 'target extended-remote ${config:bmp_port}' -ex 'monitor swdp_scan' -ex 'attach 1' -ex 'load' -ex 'compare-sections' -ex 'kill' ${workspaceRoot}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.3.0_softdevice.hex",
-            // "command": "arm-none-eabi-gdb -nx --batch -ex 'target extended-remote ${config:bmp_port}' -ex 'monitor swdp_scan' -ex 'attach 1' -ex 'load' -ex 'compare-sections' -ex 'kill' ${workspaceRoot}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.3.0_softdevice.hex",
+            "command": "nrfjprog -f nrf52 --program ${workspaceRoot}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.3.0_softdevice.hex --sectorerase && nrfjprog -f nrf52 --reset",
+            // "command": "nrfjprog -f nrf52 --program ${workspaceRoot}/lib/nrf-sdk/components/softdevice/s112/hex/s112_nrf52_7.3.0_softdevice.hex --sectorerase && nrfjprog -f nrf52 --reset",
             "problemMatcher": []
         },
         {
             "label": "Flash Bootloader",
             "detail": "Flashes the Secure Bootloader without erasing the memory first.",
             "type": "shell",
-            "command": "arm-none-eabi-gdb -nx --batch -ex 'target extended-remote ${config:bmp_port}' -ex 'monitor swdp_scan' -ex 'attach 1' -ex 'load' -ex 'compare-sections' -ex 'kill' ${workspaceRoot}/secure_bootloader/_build/bootloader.hex",
+            "command": "nrfjprog -f nrf52 --program ${workspaceRoot}/secure_bootloader/_build/bootloader.hex --sectorerase && nrfjprog -f nrf52 --reset",
             // "command": "openocd -f ${workspaceRoot}/config/debugger/openocd.cfg -c init -c \"reset init\" -c halt -c \"program ${workspaceRoot}/secure_bootloader/_build/bootloader.hex verify reset exit\"",
             "problemMatcher": []
         },
