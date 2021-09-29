@@ -4,7 +4,7 @@
 #include "battery_sensor.h"
 #include "ltr303.h"
 #include "shtc3.h"
-#include "soilhum_driver.h"
+#include "soilhum.h"
 /* BLE Characteristics */
 #include "char_sensordata.h"
 /* Other includes */
@@ -41,8 +41,8 @@ static void sensors_i2c_init(void)
 static void sensors_start_measurements(void)
 {
     /* One by one start a new measurement. TODO: Make it smart => don't start if ongoing! */
-    drv_soilhum_meas_start();
-    // drv_shtc3_meas_start();
+    soilhum_meas_start();
+    // shtc3_meas_start();
     // ltr303_meas_start();
     // batt_sensor_meas_start();
 }
@@ -56,8 +56,8 @@ void sensors_init(void)
     sensors_i2c_init();
     /* Initialize the different environment sensors */
     ltr303_init(); /* Ambient light sensor */
-    drv_shtc3_init();
-    drv_soilhum_init();
+    shtc3_init();
+    soilhum_init();
     // TODO: Problem: I cannot use CSense together with SAADC => Will need to:
     // 1) Init saadc, start measurement, end measurement, deinit then =>
     // 2) Init csense, start measurement, end measurement, deinit...
@@ -76,9 +76,9 @@ void sensors_task(void)
     // Current timestamp
     sensor_data.unix_epoch_time = unix_time_get_timestamp();
     // The measured variables
-    sensor_data.soil_humidity = drv_soilhum_get_frequency();
-    sensor_data.airhum_phys   = drv_shtc3_get_airhum();
-    sensor_data.airtemp_phys  = drv_shtc3_get_airtemp();
+    sensor_data.soil_humidity = soilhum_get_frequency();
+    sensor_data.airhum_phys   = shtc3_get_airhum();
+    sensor_data.airtemp_phys  = shtc3_get_airtemp();
     sensor_data.lum_flux      = ltr303_get_luminous_flux();
     // TODO: I suggest implementing the Battery Service so that every device can read the battery level in a
     // standardized way. For that we need to read more about BAS; might need to estimate SoC here

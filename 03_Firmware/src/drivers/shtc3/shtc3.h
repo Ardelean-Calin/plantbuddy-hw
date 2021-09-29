@@ -33,7 +33,7 @@ typedef enum SHTC3_State
 #define SHTC3_RAW_HUM_TO_PHYS(raw)  (airhum_t)(ROUNDED_DIV(10000 * (uint32_t)raw, 1 << 16))
 #define SHTC3_RAW_TEMP_TO_PHYS(raw) (airtemp_t)(ROUNDED_DIV(17500 * (uint32_t)raw, 1 << 16) - 4500)
 
-void      drv_shtc3_init();
-void      drv_shtc3_sm_tick();
-airtemp_t drv_shtc3_get_airtemp(void);
-airhum_t  drv_shtc3_get_airhum(void);
+void      shtc3_init();
+void      shtc3_sm_tick();
+airtemp_t shtc3_get_airtemp(void);
+airhum_t  shtc3_get_airhum(void);

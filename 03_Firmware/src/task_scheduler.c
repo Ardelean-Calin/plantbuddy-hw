@@ -57,7 +57,7 @@ static void scheduler_run_10ms(void* p_context)
     scheduler_invoke_other_tasks(scheduler_counter);
     /* Invoke LTR303 state machine */
     ltr303_sm_tick();
-    drv_shtc3_sm_tick();
+    shtc3_sm_tick();
 };
 
 /**

@@ -27,19 +27,19 @@ static uint8_t   shtc3_product_id_buffer[4];
 static uint16_t  shtc3_product_id;
 
 /* Locally-used, static functions */
-static void    drv_shtc3_apptimer_handler(void* p_context);
-static void    drv_shtc3_update_phys();
-static uint8_t drv_shtc3_calculate_crc8(uint8_t* pBuffer, uint8_t length);
+static void    shtc3_apptimer_handler(void* p_context);
+static void    shtc3_update_phys();
+static uint8_t shtc3_calculate_crc8(uint8_t* pBuffer, uint8_t length);
 
 /**
  * @brief Driver initialization function.
  */
-void drv_shtc3_init()
+void shtc3_init()
 {
     ret_code_t err_code = NRF_SUCCESS;
 
     /* First we create an app timer that this module will use to read stuff */
-    err_code = app_timer_create(&m_shtc3_apptimer, APP_TIMER_MODE_SINGLE_SHOT, drv_shtc3_apptimer_handler);
+    err_code = app_timer_create(&m_shtc3_apptimer, APP_TIMER_MODE_SINGLE_SHOT, shtc3_apptimer_handler);
     APP_ERROR_CHECK(err_code);
 
     /* Then we initialize our other variables. */
@@ -52,7 +52,7 @@ void drv_shtc3_init()
 /**
  * @brief State machine tick.
  */
-void drv_shtc3_sm_tick()
+void shtc3_sm_tick()
 {
     switch (currentState)
     {
@@ -97,7 +97,7 @@ void drv_shtc3_sm_tick()
     case SHTC3_SM_MEAS_READ:
         i2c_read_bytes(SHTC3_I2C_ADDR, shtc3_read_buffer, 6);
         // Decode the received data
-        drv_shtc3_update_phys();
+        shtc3_update_phys();
         // Proceed further in state machine
         currentState = SHTC3_SM_GOTO_SLEEP;
         break;
@@ -125,7 +125,7 @@ void drv_shtc3_sm_tick()
  * @brief Get the latest measured air temperature.
  * @return The latest air temperature (physical)
  */
-airtemp_t drv_shtc3_get_airtemp(void)
+airtemp_t shtc3_get_airtemp(void)
 {
     return shtc3_temp;
 }
@@ -134,7 +134,7 @@ airtemp_t drv_shtc3_get_airtemp(void)
  * @brief Get the latest measured air humidity.
  * @return The latest air humidity (physical)
  */
-airhum_t drv_shtc3_get_airhum(void)
+airhum_t shtc3_get_airhum(void)
 {
     return shtc3_hum;
 }
@@ -143,7 +143,7 @@ airhum_t drv_shtc3_get_airhum(void)
  * @brief Handler for the single-shot timer.
  * @param[in] p_context Pointer to the next state of the state machine.
  */
-static void drv_shtc3_apptimer_handler(void* p_context)
+static void shtc3_apptimer_handler(void* p_context)
 {
     currentState = *((eSHTC3_State*)p_context);
 }
@@ -151,7 +151,7 @@ static void drv_shtc3_apptimer_handler(void* p_context)
 /**
  * @brief Updates the physical value of air temperature and humidity.
  */
-static void drv_shtc3_update_phys()
+static void shtc3_update_phys()
 {
     uint16_t raw_temp;
     uint16_t raw_hum;
@@ -170,7 +170,7 @@ static void drv_shtc3_update_phys()
 /**
  * @brief Calculates the CRC-8 according to the SHTC3 datasheet.
  */
-static uint8_t drv_shtc3_calculate_crc8(uint8_t* pBuffer, uint8_t length)
+static uint8_t shtc3_calculate_crc8(uint8_t* pBuffer, uint8_t length)
 {
     uint8_t crc = 0xFF;
     while (length--)

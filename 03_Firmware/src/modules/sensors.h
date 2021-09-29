@@ -4,7 +4,7 @@
 #include "battery_sensor_types.h"
 #include "ltr303.h"
 #include "shtc3.h"
-#include "soilhum_types.h"
+#include "soilhum.h"
 #include "unix_time.h"
 
 /**

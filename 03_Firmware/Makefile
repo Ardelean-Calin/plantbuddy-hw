@@ -16,7 +16,7 @@ SRC_FILES += \
   $(PROJ_DIR)/src/ble/custom_characteristics/char_timestamp.c \
   $(PROJ_DIR)/src/drivers/battery/battery_sensor.c \
   $(PROJ_DIR)/src/drivers/shtc3/shtc3.c \
-  $(PROJ_DIR)/src/drivers/soilhum/soilhum_driver.c \
+  $(PROJ_DIR)/src/drivers/soilhum/soilhum.c \
   $(PROJ_DIR)/src/drivers/ltr303/ltr303.c \
   $(PROJ_DIR)/src/drivers/i2c_common.c \
   $(PROJ_DIR)/src/main.c \

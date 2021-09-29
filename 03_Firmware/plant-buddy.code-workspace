@@ -22,7 +22,7 @@
             "nrf.h": "c",
             "bsp.h": "c",
             "app_timer.h": "c",
-            "soilhum_driver.h": "c",
+            "soilhum.h": "c",
             "sensors.h": "c",
             "app_scheduler.h": "c",
             "shtc3_driver.h": "c",
