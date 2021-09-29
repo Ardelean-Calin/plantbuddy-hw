@@ -15,8 +15,7 @@ SRC_FILES += \
   $(PROJ_DIR)/src/ble/custom_characteristics/char_sensordata.c \
   $(PROJ_DIR)/src/ble/custom_characteristics/char_timestamp.c \
   $(PROJ_DIR)/src/drivers/battery/battery_sensor.c \
-  $(PROJ_DIR)/src/drivers/opt3001/opt3001_driver.c \
-  $(PROJ_DIR)/src/drivers/shtc3/shtc3_driver.c \
+  $(PROJ_DIR)/src/drivers/shtc3/shtc3.c \
   $(PROJ_DIR)/src/drivers/soilhum/soilhum_driver.c \
   $(PROJ_DIR)/src/drivers/ltr303/ltr303.c \
   $(PROJ_DIR)/src/drivers/i2c_common.c \
@@ -115,7 +114,6 @@ INC_FOLDERS += \
   $(PROJ_DIR)/src/ble/custom_services \
   $(PROJ_DIR)/src/drivers \
   $(PROJ_DIR)/src/drivers/battery \
-  $(PROJ_DIR)/src/drivers/opt3001 \
   $(PROJ_DIR)/src/drivers/shtc3 \
   $(PROJ_DIR)/src/drivers/soilhum \
   $(PROJ_DIR)/src/drivers/ltr303 \

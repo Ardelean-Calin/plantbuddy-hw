@@ -2,8 +2,8 @@
 
 #include "app_util_platform.h"
 #include "battery_sensor_types.h"
-#include "opt3001_types.h"
-#include "shtc3_types.h"
+#include "ltr303.h"
+#include "shtc3.h"
 #include "soilhum_types.h"
 #include "unix_time.h"
 

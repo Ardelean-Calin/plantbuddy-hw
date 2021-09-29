@@ -62,7 +62,8 @@
             "pca10040.h": "c",
             "ltr303.h": "c",
             "i2c_common.h": "c",
-            "nrf_drv_twi.h": "c"
+            "nrf_drv_twi.h": "c",
+            "shtc3.h": "c"
         },
         "editor.formatOnSave": true,
         "editor.rulers": [

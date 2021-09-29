@@ -15,14 +15,13 @@ static void ltr303_interrupt_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polari
 static void ltr303_lux_rawtophys();
 static void ltr303_timer_expired_handler(void* p_context);
 
-static uint8_t  tx_buffer[] = {0, 0};
 static uint8_t  rx_buffer[] = {0, 0, 0, 0};
 static uint16_t ch1_raw;
 static uint16_t ch0_raw;
 static float    lux_phys;
 
-eLTR303_STATE currentState;
-eLTR303_STATE nextState;
+static eLTR303_STATE currentState;
+static eLTR303_STATE nextState;
 
 void ltr303_init()
 {
@@ -49,7 +48,10 @@ void ltr303_init()
     app_timer_create(&m_single_shot, APP_TIMER_MODE_SINGLE_SHOT, ltr303_timer_expired_handler);
 }
 
-void ltr303_statemachine_tick()
+/**
+ * @brief LTR303 State machine tick function.
+ */
+void ltr303_sm_tick()
 {
     uint8_t*   p_rx_buffer;
     ret_code_t ret;
@@ -57,15 +59,15 @@ void ltr303_statemachine_tick()
 
     switch (currentState)
     {
-    case IDLE:
+    case LTR303_SM_IDLE:
         break;
     case LTR303_STARTUP:
         /* Invoke a SW reset */
         i2c_write_register8(LTR303_ADDRESS, LTR303_REG_CONTROL, 0b00000010);
         /* Here we need to wait 100ms until sensor startup. */
-        nextState = LTR303_READ_IDS;
+        nextState    = LTR303_READ_IDS;
+        currentState = LTR303_SM_IDLE;
         app_timer_start(m_single_shot, APP_TIMER_TICKS(100), &nextState);
-        currentState = IDLE;
         break;
 
     case LTR303_READ_IDS:
@@ -134,9 +136,9 @@ void ltr303_statemachine_tick()
         break;
 
     case LTR303_SLEEP:
-        nextState = LTR303_START;
+        nextState    = LTR303_START;
+        currentState = LTR303_SM_IDLE;
         app_timer_start(m_single_shot, APP_TIMER_TICKS(LTR303_MEAS_PERIOD_MS), &nextState);
-        currentState = IDLE;
         break;
 
     case LTR303_ERROR:
@@ -147,6 +149,11 @@ void ltr303_statemachine_tick()
     default:
         break;
     }
+}
+
+luminous_flux_t ltr303_get_luminous_flux()
+{
+    return (luminous_flux_t)lux_phys;
 }
 
 static void ltr303_lux_rawtophys()

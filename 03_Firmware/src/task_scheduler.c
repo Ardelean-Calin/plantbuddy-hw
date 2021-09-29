@@ -3,6 +3,7 @@
 #include "datalogger.h"
 #include "ltr303.h"
 #include "sensors.h"
+#include "shtc3.h"
 #include "unix_time.h"
 #include <stdint.h>
 
@@ -55,7 +56,8 @@ static void scheduler_run_10ms(void* p_context)
     scheduler_counter++;
     scheduler_invoke_other_tasks(scheduler_counter);
     /* Invoke LTR303 state machine */
-    ltr303_statemachine_tick();
+    ltr303_sm_tick();
+    drv_shtc3_sm_tick();
 };
 
 /**
@@ -63,7 +65,7 @@ static void scheduler_run_10ms(void* p_context)
  */
 static void scheduler_run_100ms(){
     /* This stuff runs every 100ms */
-    // ltr303_statemachine_tick();
+    // ltr303_sm_tick();
 };
 
 /**

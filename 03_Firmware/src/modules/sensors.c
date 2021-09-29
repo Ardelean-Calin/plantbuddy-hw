@@ -3,8 +3,7 @@
 /* Drivers */
 #include "battery_sensor.h"
 #include "ltr303.h"
-#include "opt3001_driver.h"
-#include "shtc3_driver.h"
+#include "shtc3.h"
 #include "soilhum_driver.h"
 /* BLE Characteristics */
 #include "char_sensordata.h"
@@ -45,7 +44,6 @@ static void sensors_start_measurements(void)
     drv_soilhum_meas_start();
     // drv_shtc3_meas_start();
     // ltr303_meas_start();
-    // drv_opt3001_meas_start();
     // batt_sensor_meas_start();
 }
 
@@ -58,17 +56,13 @@ void sensors_init(void)
     sensors_i2c_init();
     /* Initialize the different environment sensors */
     ltr303_init(); /* Ambient light sensor */
-    // drv_shtc3_init(); // These two
-    // drv_opt3001_init((nrf_twi_mngr_t*)&m_twi_manager); // need i2c
+    drv_shtc3_init();
     drv_soilhum_init();
     // TODO: Problem: I cannot use CSense together with SAADC => Will need to:
     // 1) Init saadc, start measurement, end measurement, deinit then =>
     // 2) Init csense, start measurement, end measurement, deinit...
     // Anyways it's not elegant, we need also some kind of semaphore mechanism
     // batt_sensor_init();
-
-    // TWI Manager is used by some sensors
-    // sensors_twi_mngr_init();
 
     // As soon as PlantBuddy goes live, start a first measurement... This one is unfortunately not logged, though.
     sensors_start_measurements();
@@ -85,7 +79,7 @@ void sensors_task(void)
     sensor_data.soil_humidity = drv_soilhum_get_frequency();
     sensor_data.airhum_phys   = drv_shtc3_get_airhum();
     sensor_data.airtemp_phys  = drv_shtc3_get_airtemp();
-    sensor_data.lum_flux      = drv_opt3001_get_lumflux();
+    sensor_data.lum_flux      = ltr303_get_luminous_flux();
     // TODO: I suggest implementing the Battery Service so that every device can read the battery level in a
     // standardized way. For that we need to read more about BAS; might need to estimate SoC here
     sensor_data.battery_mv = batt_sensor_get_voltage();

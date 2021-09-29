@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 #define LTR303_MEAS_PERIOD_MS 5000
 #define LTR303_PFACTOR        1.0f
 
@@ -20,7 +22,7 @@
 
 typedef enum LTR303_STATE
 {
-    IDLE = 0,
+    LTR303_SM_IDLE = 0,
     LTR303_STARTUP,
     LTR303_READ_IDS,
     LTR303_CONFIG,
@@ -28,9 +30,11 @@ typedef enum LTR303_STATE
     LTR303_WAIT_MEAS,
     LTR303_MEAS_DONE,
     LTR303_SLEEP,
-    LTR303_WAKEUP,
     LTR303_ERROR
 } eLTR303_STATE;
 
-void ltr303_init();
-void ltr303_statemachine_tick();
+typedef uint32_t luminous_flux_t;
+
+void            ltr303_init();
+void            ltr303_sm_tick();
+luminous_flux_t ltr303_get_luminous_flux();
