@@ -6,6 +6,7 @@
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
+#include "nrf_log.h"
 #include "pb_config.h"
 #include "soilhum_types.h"
 #include <stdint.h>
@@ -28,6 +29,7 @@ static void drv_soilhum_csense_handler(nrf_drv_csense_evt_t* p_event_struct)
     // TODO2: Does it make sense to use app scheduler here? This function is really short... Maybe if I add
     // a "convert to capacitance" function, I would want that to not be executed in interrupt mode
     frequency = value;
+    NRF_LOG_INFO("Measured soil humidity: %u", frequency);
 }
 
 /**

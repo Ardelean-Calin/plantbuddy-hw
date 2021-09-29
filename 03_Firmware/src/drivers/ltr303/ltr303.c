@@ -7,9 +7,13 @@
 #include "nrf_log.h"
 #include "pb_config.h"
 
+/* Two apptimers used for timing single-shot events */
+APP_TIMER_DEF(m_single_shot);
+
 /* Static functions */
 static void ltr303_interrupt_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action);
-static void ltr303_lux_rawtophys(void* p_event_data, uint16_t event_size);
+static void ltr303_lux_rawtophys();
+static void ltr303_timer_expired_handler(void* p_context);
 
 static uint8_t  tx_buffer[] = {0, 0};
 static uint8_t  rx_buffer[] = {0, 0, 0, 0};
@@ -18,14 +22,13 @@ static uint16_t ch0_raw;
 static float    lux_phys;
 
 eLTR303_STATE currentState;
-uint32_t      prevTick;
+eLTR303_STATE nextState;
 
 void ltr303_init()
 {
     ret_code_t err_code;
 
     currentState = LTR303_STARTUP;
-    prevTick     = app_timer_cnt_get();
     ch1_raw      = 0U;
     ch0_raw      = 0U;
 
@@ -42,26 +45,27 @@ void ltr303_init()
     APP_ERROR_CHECK(err_code);
 
     nrf_drv_gpiote_in_event_enable(PIN_INTERRUPT_LUX, true);
+
+    app_timer_create(&m_single_shot, APP_TIMER_MODE_SINGLE_SHOT, ltr303_timer_expired_handler);
 }
 
 void ltr303_statemachine_tick()
 {
-    uint32_t   currTick;
     uint8_t*   p_rx_buffer;
     ret_code_t ret;
     uint8_t    byte;
 
     switch (currentState)
     {
+    case IDLE:
+        break;
     case LTR303_STARTUP:
+        /* Invoke a SW reset */
+        i2c_write_register8(LTR303_ADDRESS, LTR303_REG_CONTROL, 0b00000010);
         /* Here we need to wait 100ms until sensor startup. */
-        currTick = app_timer_cnt_get();
-        if (app_timer_cnt_diff_compute(currTick, prevTick) > APP_TIMER_TICKS(100))
-        {
-            /* 100ms have passed, sensor is initialized */
-            prevTick     = currTick;
-            currentState = LTR303_READ_IDS;
-        }
+        nextState = LTR303_READ_IDS;
+        app_timer_start(m_single_shot, APP_TIMER_TICKS(100), &nextState);
+        currentState = IDLE;
         break;
 
     case LTR303_READ_IDS:
@@ -80,10 +84,10 @@ void ltr303_statemachine_tick()
             currentState = LTR303_ERROR;
         }
 
-        currentState = LTR303_INIT;
+        currentState = LTR303_CONFIG;
         break;
 
-    case LTR303_INIT:
+    case LTR303_CONFIG:
         /* Set interrupt thresholds */
         i2c_write_register8(LTR303_ADDRESS, LTR303_THRES_UP_0, 0x00);
         i2c_write_register8(LTR303_ADDRESS, LTR303_THRES_UP_1, 0x00);
@@ -94,10 +98,13 @@ void ltr303_statemachine_tick()
         /* Activate interrupts */
         i2c_write_register8(LTR303_ADDRESS, LTR303_REG_INTERRUPT, 0b00000010);
 
+        /* Go to wait for measurement */
+        currentState = LTR303_START;
+        break;
+
+    case LTR303_START:
         /* Set gain and go to active measurement mode */
         i2c_write_register8(LTR303_ADDRESS, LTR303_REG_CONTROL, 0b00000001);
-
-        /* Go to wait for measurement */
         currentState = LTR303_WAIT_MEAS;
         break;
 
@@ -117,39 +124,23 @@ void ltr303_statemachine_tick()
         i2c_read_register8(LTR303_ADDRESS, LTR303_DATA_CH0_1, p_rx_buffer);
         ch0_raw = rx_buffer[0] + (rx_buffer[1] << 8);
 
-        /* TODO: Schedule a data extraction routine to convert to physical lux value */
-        app_sched_event_put(NULL, sizeof(NULL), ltr303_lux_rawtophys);
+        /* Data extraction to convert to physical lux value */
+        ltr303_lux_rawtophys();
 
         /* Go to sleep/standby */
-        // i2c_write_register8(LTR303_ADDRESS, LTR303_REG_CONTROL, 0b00000000);
+        i2c_write_register8(LTR303_ADDRESS, LTR303_REG_CONTROL, 0b00000000);
 
-        // currentState = LTR303_SLEEP;
-        currentState = LTR303_WAIT_MEAS;
+        currentState = LTR303_SLEEP;
         break;
 
-        // case LTR303_SLEEP:
-        //     currTick = app_timer_cnt_get();
-        //     // Sleep for LTR303_MEAS_PERIOD_MS milliseconds
-        //     if (app_timer_cnt_diff_compute(currTick, prevTick) > APP_TIMER_TICKS(LTR303_MEAS_PERIOD_MS))
-        //     {
-        //         /* Enough time has passed, start a new measurement */
-        //         prevTick     = currTick;
-        //         currentState = LTR303_WAKEUP;
-        //     }
-        //     break;
-
-        // case LTR303_WAKEUP:
-        //     currentState = LTR303_INIT;
-        //     i2c_write_register8(LTR303_ADDRESS, LTR303_REG_CONTROL, 0b00000001);
-        //     currentState = LTR303_WAIT_MEAS;
-        //     break;
+    case LTR303_SLEEP:
+        nextState = LTR303_START;
+        app_timer_start(m_single_shot, APP_TIMER_TICKS(LTR303_MEAS_PERIOD_MS), &nextState);
+        currentState = IDLE;
+        break;
 
     case LTR303_ERROR:
         NRF_LOG_ERROR("LTR303_ERROR");
-        i2c_write_register8(LTR303_ADDRESS, LTR303_REG_CONTROL, 0b00000010);
-
-        /* Save the previous tick as we will need to wait 100ms */
-        prevTick     = app_timer_cnt_get();
         currentState = LTR303_STARTUP;
         break;
 
@@ -158,7 +149,7 @@ void ltr303_statemachine_tick()
     }
 }
 
-static void ltr303_lux_rawtophys(void* p_event_data, uint16_t event_size)
+static void ltr303_lux_rawtophys()
 {
     float ratio = ch1_raw / (ch0_raw + ch1_raw);
     if (ratio < 0.45)
@@ -183,4 +174,10 @@ static void ltr303_lux_rawtophys(void* p_event_data, uint16_t event_size)
 static void ltr303_interrupt_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 {
     currentState = LTR303_MEAS_DONE;
+}
+
+static void ltr303_timer_expired_handler(void* p_context)
+{
+    /* Set the current state to the next state */
+    currentState = *((eLTR303_STATE*)p_context);
 }

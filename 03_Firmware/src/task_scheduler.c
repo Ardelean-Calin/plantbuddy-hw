@@ -63,6 +63,7 @@ static void scheduler_run_10ms(void* p_context)
  */
 static void scheduler_run_100ms(){
     /* This stuff runs every 100ms */
+    // ltr303_statemachine_tick();
 };
 
 /**
@@ -90,6 +91,11 @@ static void scheduler_run_10000ms()
 static void scheduler_invoke_other_tasks(uint32_t count)
 {
     if (count % 10 == 0)
+    {
+        scheduler_run_100ms();
+    }
+
+    if (count % 100 == 0)
     {
         scheduler_run_1000ms();
     }
