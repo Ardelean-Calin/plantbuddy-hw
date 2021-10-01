@@ -1,8 +1,9 @@
 #pragma once
 
+#include "pb_config.h"
 #include <stdint.h>
 
-#define LTR303_MEAS_PERIOD_MS 5000
+#define LTR303_MEAS_PERIOD_MS SENSORS_MEAS_PERIOD_MS
 #define LTR303_PFACTOR        1.0f
 
 #define LTR303_ADDRESS       0x29U
@@ -33,7 +34,7 @@ typedef enum LTR303_STATE
     LTR303_ERROR
 } eLTR303_STATE;
 
-typedef uint32_t luminous_flux_t;
+typedef float luminous_flux_t;
 
 void            ltr303_init();
 void            ltr303_sm_tick();

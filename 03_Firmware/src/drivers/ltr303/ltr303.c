@@ -15,10 +15,10 @@ static void ltr303_interrupt_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polari
 static void ltr303_lux_rawtophys();
 static void ltr303_timer_expired_handler(void* p_context);
 
-static uint8_t  rx_buffer[] = {0, 0, 0, 0};
-static uint16_t ch1_raw;
-static uint16_t ch0_raw;
-static float    lux_phys;
+static uint8_t         rx_buffer[] = {0, 0, 0, 0};
+static uint16_t        ch1_raw;
+static uint16_t        ch0_raw;
+static luminous_flux_t lux_phys;
 
 static eLTR303_STATE currentState;
 static eLTR303_STATE nextState;
@@ -175,7 +175,6 @@ static void ltr303_lux_rawtophys()
     {
         lux_phys = 0.0;
     }
-    NRF_LOG_INFO("Measured Lux: " NRF_LOG_FLOAT_MARKER "\r\n", NRF_LOG_FLOAT(lux_phys));
 }
 
 static void ltr303_interrupt_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)

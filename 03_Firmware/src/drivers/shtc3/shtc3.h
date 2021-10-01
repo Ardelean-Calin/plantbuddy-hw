@@ -2,6 +2,7 @@
 
 #include "app_util.h"
 #include "nrf_twi_mngr.h"
+#include "pb_config.h"
 #include <stdint.h>
 
 /* Typedefs BEGIN */
@@ -25,9 +26,9 @@ typedef enum SHTC3_State
 
 #define SHTC3_I2C_ADDR 0x70
 
-#define SHTC3_MEAS_DELAY_MS  13   // 12.1ms max as per datasheet
-#define SHTC3_WKUP_DELAY_US  240  // 240us as per datasheet
-#define SHTC3_MEAS_PERIOD_MS 1000 // milliseconds between measurements
+#define SHTC3_MEAS_DELAY_MS  13                     // 12.1ms max as per datasheet
+#define SHTC3_WKUP_DELAY_US  240                    // 240us as per datasheet
+#define SHTC3_MEAS_PERIOD_MS SENSORS_MEAS_PERIOD_MS // milliseconds between measurements
 
 // Converts to a physical integer where each value is 1/100 th of a %.
 #define SHTC3_RAW_HUM_TO_PHYS(raw)  (airhum_t)(ROUNDED_DIV(10000 * (uint32_t)raw, 1 << 16))

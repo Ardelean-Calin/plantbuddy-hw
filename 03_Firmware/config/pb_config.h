@@ -1,5 +1,7 @@
 #pragma once
 
+#define SENSORS_MEAS_PERIOD_MS 1000
+
 /* Analog channels used by our application */
 #define AIN_2 2
 #define AIN_4 4

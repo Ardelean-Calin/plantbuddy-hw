@@ -1249,7 +1249,7 @@
 // <e> COMP_ENABLED - nrf_drv_comp - COMP peripheral driver - legacy layer
 //==========================================================
 #ifndef COMP_ENABLED
-#define COMP_ENABLED 0
+#define COMP_ENABLED 1
 #endif
 // <o> COMP_CONFIG_REF  - Reference voltage
 
@@ -1279,7 +1279,7 @@
 // <2=> High speed
 
 #ifndef COMP_CONFIG_SPEED_MODE
-#define COMP_CONFIG_SPEED_MODE 2
+#define COMP_CONFIG_SPEED_MODE 0
 #endif
 
 // <o> COMP_CONFIG_HYST  - Hystheresis
@@ -1299,7 +1299,7 @@
 // <3=> 10 uA
 
 #ifndef COMP_CONFIG_ISOURCE
-#define COMP_CONFIG_ISOURCE 0
+#define COMP_CONFIG_ISOURCE 1
 #endif
 
 // <o> COMP_CONFIG_INPUT  - Analog input
@@ -1727,7 +1727,7 @@
 // <e> NRFX_COMP_ENABLED - nrfx_comp - COMP peripheral driver
 //==========================================================
 #ifndef NRFX_COMP_ENABLED
-#define NRFX_COMP_ENABLED 0
+#define NRFX_COMP_ENABLED 1
 #endif
 // <o> NRFX_COMP_CONFIG_REF  - Reference voltage
 
@@ -1757,7 +1757,7 @@
 // <2=> High speed
 
 #ifndef NRFX_COMP_CONFIG_SPEED_MODE
-#define NRFX_COMP_CONFIG_SPEED_MODE 2
+#define NRFX_COMP_CONFIG_SPEED_MODE 0
 #endif
 
 // <o> NRFX_COMP_CONFIG_HYST  - Hystheresis
@@ -1777,7 +1777,7 @@
 // <3=> 10 uA
 
 #ifndef NRFX_COMP_CONFIG_ISOURCE
-#define NRFX_COMP_CONFIG_ISOURCE 0
+#define NRFX_COMP_CONFIG_ISOURCE 1
 #endif
 
 // <o> NRFX_COMP_CONFIG_INPUT  - Analog input
@@ -3184,7 +3184,7 @@
 // <e> NRFX_TIMER_ENABLED - nrfx_timer - TIMER periperal driver
 //==========================================================
 #ifndef NRFX_TIMER_ENABLED
-#define NRFX_TIMER_ENABLED 0
+#define NRFX_TIMER_ENABLED 1
 #endif
 // <q> NRFX_TIMER0_ENABLED  - Enable TIMER0 instance
 
@@ -3195,13 +3195,13 @@
 // <q> NRFX_TIMER1_ENABLED  - Enable TIMER1 instance
 
 #ifndef NRFX_TIMER1_ENABLED
-#define NRFX_TIMER1_ENABLED 0
+#define NRFX_TIMER1_ENABLED 1
 #endif
 
 // <q> NRFX_TIMER2_ENABLED  - Enable TIMER2 instance
 
 #ifndef NRFX_TIMER2_ENABLED
-#define NRFX_TIMER2_ENABLED 0
+#define NRFX_TIMER2_ENABLED 1
 #endif
 
 // <o> NRFX_TIMER_DEFAULT_CONFIG_FREQUENCY  - Timer frequency if in Timer mode
@@ -4774,7 +4774,7 @@
 // <q> TIMER2_ENABLED  - Enable TIMER2 instance
 
 #ifndef TIMER2_ENABLED
-#define TIMER2_ENABLED 0
+#define TIMER2_ENABLED 1
 #endif
 
 // <q> TIMER3_ENABLED  - Enable TIMER3 instance
@@ -6143,7 +6143,7 @@
 // <i> Due to Anomaly 84, COMP I_SOURCE is not functional. It has too high a varation.
 //==========================================================
 #ifndef USE_COMP
-#define USE_COMP 0
+#define USE_COMP 1
 #endif
 // <o> TIMER0_FOR_CSENSE - First TIMER instance used by the driver (not used on nRF51).
 #ifndef TIMER0_FOR_CSENSE

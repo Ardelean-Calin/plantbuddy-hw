@@ -3,6 +3,7 @@
 #include "app_scheduler.h"
 #include "battery_sensor_types.h"
 #include "nrf_drv_saadc.h"
+#include "nrf_log.h"
 #include "pb_config.h"
 
 /* Static variables */

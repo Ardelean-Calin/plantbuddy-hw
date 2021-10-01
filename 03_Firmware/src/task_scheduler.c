@@ -1,5 +1,6 @@
 #include "task_scheduler.h"
 #include "app_timer.h"
+#include "battery_sensor.h"
 #include "datalogger.h"
 #include "ltr303.h"
 #include "sensors.h"
@@ -55,17 +56,17 @@ static void scheduler_run_10ms(void* p_context)
     /* Invoke the 100ms, 1s and 10s tasks as needed */
     scheduler_counter++;
     scheduler_invoke_other_tasks(scheduler_counter);
-    /* Invoke LTR303 state machine */
-    ltr303_sm_tick();
-    shtc3_sm_tick();
 };
 
 /**
  * @brief Run the periodic tasks with a period of 100ms
  */
-static void scheduler_run_100ms(){
+static void scheduler_run_100ms()
+{
     /* This stuff runs every 100ms */
-    // ltr303_sm_tick();
+    /* Invoke LTR303 and SHTC3 state machines */
+    ltr303_sm_tick();
+    shtc3_sm_tick();
 };
 
 /**
@@ -75,16 +76,18 @@ static void scheduler_run_1000ms()
 {
     /* Run our 1000ms tasks */
     unix_time_task();
+    soilhum_sm_tick();
+    batt_sensor_meas_start();
     // datalogger_task();
+    sensors_task();
 };
 
 /**
  * @brief Run the periodic tasks with a period of 10000ms
  */
-static void scheduler_run_10000ms()
-{
+static void scheduler_run_10000ms(){
     /* Run our 10000ms tasks */
-    sensors_task();
+    // sensors_task();
 };
 
 /**
@@ -102,7 +105,7 @@ static void scheduler_invoke_other_tasks(uint32_t count)
         scheduler_run_1000ms();
     }
 
-    if (count % 100 == 0)
+    if (count % 1000 == 0)
     {
         scheduler_run_10000ms();
     }

@@ -162,8 +162,6 @@ static void shtc3_update_phys()
 
     shtc3_temp = SHTC3_RAW_TEMP_TO_PHYS(raw_temp);
     shtc3_hum  = SHTC3_RAW_HUM_TO_PHYS(raw_hum);
-    NRF_LOG_INFO("Air temperature: %u", shtc3_temp);
-    NRF_LOG_INFO("Air humidity: %u", shtc3_hum);
     // TODO: Checksum is the third byte of every packet, maybe check it and raise error if problem?
 }
 
