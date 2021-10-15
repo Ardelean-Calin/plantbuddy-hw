@@ -887,6 +887,8 @@ Wire Wire Line
 	7300 2075 7300 2175
 Wire Wire Line
 	7300 2175 8225 2175
+Text Notes 7175 4300 0    50   ~ 0
+TODO: Add a jumper to be possible to switch between COMP based and\nnon-COMP based solution
 Wire Bus Line
 	2175 5325 2175 6650
 $EndSCHEMATC
