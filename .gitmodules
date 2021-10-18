@@ -1,6 +1,6 @@
 [submodule "03_Firmware/lib/nrf-sdk"]
 	path = 03_Firmware/lib/nrf-sdk
-	url = git@github.com:Ardelean-Calin/nrf-sdk.git
+	url = git@gitlab.com:acpcalin/nrf-sdk.git
 [submodule "03_Firmware/secure_bootloader/micro-ecc"]
 	path = 03_Firmware/secure_bootloader/micro-ecc
-	url = https://github.com/kmackay/micro-ecc.git
+	url = git@gitlab.com:acpcalin/micro-ecc.git
