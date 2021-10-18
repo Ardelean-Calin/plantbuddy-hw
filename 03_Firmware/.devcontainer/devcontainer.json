@@ -16,7 +16,8 @@
 		"ms-vscode.cpptools",
 		"marus25.cortex-debug",
 		"trond-snekvik.gnu-mapfiles",
-		"eamodio.gitlens"
+		"eamodio.gitlens",
+		"ms-azuretools.vscode-docker"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
