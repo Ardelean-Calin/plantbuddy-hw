@@ -6,4 +6,4 @@
 	url = git@gitlab.com:acpcalin/micro-ecc.git
 [submodule "02_Software/02_PhoneApp"]
 	path = 02_Software/02_PhoneApp
-	url = git@gitlab.com:acpcalin/plantbuddy-app.git
+	url = git@gitlab.com:p2124/plantbuddy-app.git
