@@ -1,5 +1,0 @@
-(sym_lib_table
-  (lib (name PlantBuddy)(type Legacy)(uri ${KIPRJMOD}/lib/sym/PlantBuddy.lib)(options "")(descr ""))
-  (lib (name OPT3001)(type Legacy)(uri ${KIPRJMOD}/lib/sym/OPT3001.lib)(options "")(descr ""))
-  (lib (name PlantBuddy-rescue)(type Legacy)(uri ${KIPRJMOD}/PlantBuddy-rescue.lib)(options "")(descr ""))
-)

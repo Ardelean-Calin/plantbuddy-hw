@@ -1,0 +1,33 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP CN3063
+F https://datasheet.lcsc.com/szlcsc/ShangHai-Consonance-Elec-CN3063_C28078.pdf
+$ENDCMP
+#
+$CMP DAC101C081CIMK
+D 10-bit Micropower DAC with I2C-Compatible Interface, SOT-23-6
+K I2C DAC 10-bit
+F http://www.ti.com/lit/ds/symlink/dac101c081.pdf
+$ENDCMP
+#
+$CMP DAC121C081CIMK
+D 12-bit Micropower DAC with I2C-Compatible Interface, SOT-23-6
+K I2C DAC 12-bit
+F http://www.ti.com/lit/ds/symlink/dac121c081.pdf
+$ENDCMP
+#
+$CMP DAC5311IDCKR
+D 8-bit Micropower DAC with SPI-Compatible Interface, SOT-363
+K SPI DAC 8-bit
+F https://www.ti.com/lit/ds/symlink/dac5311.pdf?ts=1631272570195&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FDAC5311%253FHQS%253DTI-null-null-octopart-df-pf-null-wwe
+$ENDCMP
+#
+$CMP OPT3001
+F https://www.ti.com/lit/ds/symlink/opt3001.pdf
+$ENDCMP
+#
+$CMP SHT20
+F https://datasheet.lcsc.com/szlcsc/Sensirion-SHT20_C53865.pdf
+$ENDCMP
+#
+#End Doc Library
