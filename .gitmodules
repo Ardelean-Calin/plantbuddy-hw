@@ -1,6 +1,6 @@
-[submodule "03_Firmware"]
-	path = 03_Firmware
-	url = git@gitlab.com:p2124/plantbuddy-embedded.git
 [submodule "02_Software/02_PhoneApp"]
 	path = 02_Software/02_PhoneApp
 	url = git@gitlab.com:p2124/plantbuddy-app.git
+[submodule "03_Firmware"]
+	path = 03_Firmware
+	url = git@gitlab.com:p2124/plantbuddy-embedded.git
