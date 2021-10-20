@@ -1,9 +1,6 @@
-[submodule "03_Firmware/lib/nrf-sdk"]
-	path = 03_Firmware/lib/nrf-sdk
-	url = git@gitlab.com:acpcalin/nrf-sdk.git
-[submodule "03_Firmware/secure_bootloader/micro-ecc"]
-	path = 03_Firmware/secure_bootloader/micro-ecc
-	url = git@gitlab.com:acpcalin/micro-ecc.git
+[submodule "03_Firmware"]
+	path = 03_Firmware
+	url = git@gitlab.com:p2124/plantbuddy-embedded.git
 [submodule "02_Software/02_PhoneApp"]
 	path = 02_Software/02_PhoneApp
 	url = git@gitlab.com:p2124/plantbuddy-app.git
