@@ -4,3 +4,6 @@
 [submodule "03_Firmware/secure_bootloader/micro-ecc"]
 	path = 03_Firmware/secure_bootloader/micro-ecc
 	url = git@gitlab.com:acpcalin/micro-ecc.git
+[submodule "02_Software/02_PhoneApp"]
+	path = 02_Software/02_PhoneApp
+	url = git@gitlab.com:acpcalin/plantbuddy-app.git
