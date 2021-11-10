@@ -1,5 +1,10 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP AHT21
+D Temperature and humidity sensor.
+F https://aosong.com/userfiles/files/media/AHT21%E4%BA%A7%E5%93%81%E8%A7%84%E6%A0%BC%E4%B9%A6(%E8%8B%B1%E6%96%87%E7%89%88)%20A3.pdf
+$ENDCMP
+#
 $CMP CN3063
 F https://datasheet.lcsc.com/szlcsc/ShangHai-Consonance-Elec-CN3063_C28078.pdf
 $ENDCMP
