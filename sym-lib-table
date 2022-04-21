@@ -1,5 +1,7 @@
 (sym_lib_table
-  (lib (name PlantBuddy)(type Legacy)(uri ${KIPRJMOD}/lib/sym/PlantBuddy.lib)(options "")(descr ""))
-  (lib (name OPT3001)(type Legacy)(uri ${KIPRJMOD}/lib/sym/OPT3001.lib)(options "")(descr ""))
-  (lib (name PlantBuddy-rescue)(type Legacy)(uri ${KIPRJMOD}/PlantBuddy-rescue.lib)(options "")(descr ""))
+  (lib (name "PlantBuddy")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/PlantBuddy.lib")(options "")(descr ""))
+  (lib (name "OPT3001")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/OPT3001.lib")(options "")(descr ""))
+  (lib (name "PlantBuddy-rescue")(type "Legacy")(uri "${KIPRJMOD}/PlantBuddy-rescue.lib")(options "")(descr ""))
+  (lib (name "ESP32-C3-MINI-1-N4")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ESP32-C3-MINI-1-N4.lib")(options "")(descr ""))
+  (lib (name "ADP150AUJZ-2.0-R7")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ADP150AUJZ-2.0-R7.lib")(options "")(descr ""))
 )

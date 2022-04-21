@@ -1,3 +1,7 @@
 (fp_lib_table
-  (lib (name PlantBuddy)(type KiCad)(uri ${KIPRJMOD}/lib/footprints/PlantBuddy.pretty)(options "")(descr ""))
+  (lib (name "PlantBuddy")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/PlantBuddy.pretty")(options "")(descr ""))
+  (lib (name "ESP32")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ESP32.pretty")(options "")(descr ""))
+  (lib (name "ADP150")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ADP150.pretty")(options "")(descr ""))
+  (lib (name "TYPE-C-31-M-12")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/TYPE-C-31-M-12.pretty")(options "")(descr ""))
+  (lib (name "SHTC3")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/SHTC3.pretty")(options "")(descr ""))
 )
