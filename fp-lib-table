@@ -4,4 +4,5 @@
   (lib (name "ADP150")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ADP150.pretty")(options "")(descr ""))
   (lib (name "TYPE-C-31-M-12")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/TYPE-C-31-M-12.pretty")(options "")(descr ""))
   (lib (name "SHTC3")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/SHTC3.pretty")(options "")(descr ""))
+  (lib (name "Tooling")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/Tooling.pretty")(options "")(descr ""))
 )
