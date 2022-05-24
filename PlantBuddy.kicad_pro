@@ -60,10 +60,7 @@
           "width": 0.25
         }
       ],
-      "drc_exclusions": [
-        "silk_over_copper|100794080|46141171|66826529-87b6-42a1-b6fe-832ef634742a|3e92d65f-aa92-43fa-b45b-e0f93a36117e",
-        "silk_over_copper|100794080|54781171|3c7b9e2a-79ba-4dc3-97cc-705a9cf91e06|2822bca8-30aa-4ab2-8bfe-35bd6bca2a80"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "filename": "board_design_settings.json",
         "version": 2
@@ -94,7 +91,7 @@
         "padstack": "error",
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
-        "silk_over_copper": "warning",
+        "silk_over_copper": "ignore",
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "through_hole_pad_without_hole": "error",
@@ -129,6 +126,8 @@
       },
       "track_widths": [
         0.0,
+        0.1524,
+        0.2,
         0.25,
         0.3,
         1.05
