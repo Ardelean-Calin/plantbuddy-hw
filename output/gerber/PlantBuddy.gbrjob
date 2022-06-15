@@ -3,9 +3,9 @@
     "GenerationSoftware": {
       "Vendor": "KiCad",
       "Application": "Pcbnew",
-      "Version": "6.0.0-d3dd2cf0fa~116~ubuntu20.04.1"
+      "Version": "6.0.5-a6ca702e91~116~ubuntu20.04.1"
     },
-    "CreationDate": "2022-05-06T06:53:09+00:00"
+    "CreationDate": "2022-06-15T15:16:03+00:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
@@ -27,7 +27,9 @@
       "PadToPad": 0.09,
       "PadToTrack": 0.09,
       "TrackToTrack": 0.152,
-      "MinLineWidth": 0.2
+      "MinLineWidth": 0.2,
+      "TrackToRegion": 0.2,
+      "RegionToRegion": 0.2
     },
     {
       "Layers": "Inner",
@@ -82,6 +84,11 @@
     {
       "Path": "PlantBuddy-EdgeCuts.gm1",
       "FileFunction": "Profile",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "PlantBuddy-CmtUser.gbr",
+      "FileFunction": "Other,User",
       "FilePolarity": "Positive"
     },
     {
