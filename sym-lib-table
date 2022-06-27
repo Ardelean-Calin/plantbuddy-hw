@@ -4,4 +4,5 @@
   (lib (name "PlantBuddy-rescue")(type "Legacy")(uri "${KIPRJMOD}/PlantBuddy-rescue.lib")(options "")(descr ""))
   (lib (name "ESP32-C3-MINI-1-N4")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ESP32-C3-MINI-1-N4.lib")(options "")(descr ""))
   (lib (name "ADP150AUJZ-2.0-R7")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ADP150AUJZ-2.0-R7.lib")(options "")(descr ""))
+  (lib (name "ESP32-S3-WROOM-1-N8R8")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ESP32-S3-WROOM-1-N8R8.lib")(options "")(descr ""))
 )
