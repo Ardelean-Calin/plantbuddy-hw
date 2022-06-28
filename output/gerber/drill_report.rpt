@@ -1,5 +1,5 @@
 Drill report for PlantBuddy.kicad_pcb
-Created on Wed Jun 15 15:16:03 2022
+Created on Tue Jun 28 17:03:59 2022
 
 Copper Layer Stackup:
     =============================================================
@@ -12,17 +12,17 @@ Copper Layer Stackup:
 Drill file 'PlantBuddy.drl' contains
     plated through holes:
     =============================================================
-    T1  0.250mm  0.0098"  (69 holes)
-    T2  0.500mm  0.0197"  (2 holes)
-    T3  0.600mm  0.0236"  (4 holes)  (with 4 slots)
+    T1  0.200mm  0.0079"  (12 holes)
+    T2  0.250mm  0.0098"  (2 holes)
+    T3  0.300mm  0.0118"  (83 holes)
+    T4  0.600mm  0.0236"  (4 holes)  (with 4 slots)
 
-    Total plated holes count 75
+    Total plated holes count 101
 
 
 Not plated through holes are merged with plated holes
     unplated through holes:
     =============================================================
-    T4  0.650mm  0.0256"  (2 holes)
-    T5  1.152mm  0.0454"  (2 holes)
+    T5  1.152mm  0.0454"  (3 holes)
 
-    Total unplated holes count 4
+    Total unplated holes count 3
