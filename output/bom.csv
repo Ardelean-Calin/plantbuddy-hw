@@ -6,7 +6,7 @@ Li+,BT1,Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal,C
 Green,D4,LED_SMD:LED_0603_1608Metric,C72043
 ToolingHole,"H1,H2,H3",Tooling:JLCPCB_Tooling_hole,
 USB_C_Receptacle_USB2.0,J1,Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12,C165948
-Expansion Header,J4,Mezzanine-pb:HRS_DF12NB-20DS-0.5V(51),C2904117
+Expansion Header,J4,Mezzanine-pb:AXK5F20547YG,C2917018
 Speaker_Crystal,LS1,Piezo:Piezo,
 5k1,"R1,R2",Resistor_SMD:R_0603_1608Metric,C23186
 10k,"R3,R4,R7,R9,R10",Resistor_SMD:R_0603_1608Metric,C25804
