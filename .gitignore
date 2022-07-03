@@ -26,5 +26,8 @@ fp-info-cache
 # Exported BOM files
 *.xml
 
-output/*.zip
+output/*
+!output/gerbers.zip
+!output/bom.csv
+!output/pos.csv
 PlantBuddy-backups
