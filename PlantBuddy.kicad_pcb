@@ -804,10 +804,10 @@
       (net 6 "GND") (pinfunction "SHIELD") (pintype "passive") (tstamp d9fa845e-2918-40b1-a78d-8dcbee552ad2))
     (pad "S1" thru_hole oval (at -4.32 1.05 270) (size 1 1.6) (drill oval 0.6 1.2) (layers *.Cu *.Mask)
       (net 6 "GND") (pinfunction "SHIELD") (pintype "passive") (tstamp fbc6d142-d2fd-49d5-8479-6c6d5e3b8199))
-    (model "${KICAD6_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.wrl"
-      (offset (xyz 0 0 0))
+    (model "${KIPRJMOD}/lib/3d/TYPE-C-31-M-12.step"
+      (offset (xyz 0 -1.1 0))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz -90 0 0))
     )
   )
 
