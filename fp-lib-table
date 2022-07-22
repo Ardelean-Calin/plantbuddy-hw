@@ -8,4 +8,5 @@
   (lib (name "Piezo")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/Piezo.pretty")(options "")(descr ""))
   (lib (name "ESP32-S3")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ESP32-S3.pretty")(options "")(descr ""))
   (lib (name "Mezzanine-pb")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/Mezzanine-pb.pretty")(options "")(descr ""))
+  (lib (name "Neopixel")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/Neopixel.pretty")(options "")(descr ""))
 )
