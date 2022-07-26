@@ -33,9 +33,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
-          "height": 1.45,
-          "width": 0.6
+          "drill": 0.25,
+          "height": 0.5,
+          "width": 0.5
         },
         "silk_line_width": 0.12,
         "silk_text_italic": false,
@@ -92,7 +92,7 @@
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
         "silk_over_copper": "ignore",
-        "silk_overlap": "ignore",
+        "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "through_hole_pad_without_hole": "error",
         "too_many_vias": "error",
@@ -111,7 +111,7 @@
         "allow_blind_buried_vias": false,
         "allow_microvias": false,
         "max_error": 0.005,
-        "min_clearance": 0.127,
+        "min_clearance": 0.09,
         "min_copper_edge_clearance": 0.19999999999999998,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
@@ -121,7 +121,7 @@
         "min_through_hole_diameter": 0.19999999999999998,
         "min_track_width": 0.127,
         "min_via_annular_width": 0.13,
-        "min_via_diameter": 0.39999999999999997,
+        "min_via_diameter": 0.41,
         "use_height_for_length_calcs": true
       },
       "track_widths": [
@@ -382,7 +382,7 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.152,
+        "track_width": 0.2,
         "via_diameter": 0.6,
         "via_drill": 0.25,
         "wire_width": 6.0
@@ -418,7 +418,6 @@
         "nets": [
           "+3V3",
           "+BATT",
-          "/VGND",
           "GND",
           "Net-(J2-Pad1)",
           "VBUS",
@@ -434,9 +433,9 @@
       {
         "bus_width": 12.0,
         "clearance": 0.1524,
-        "diff_pair_gap": 0.1524,
+        "diff_pair_gap": 0.127,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.23,
+        "diff_pair_width": 0.6,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -465,7 +464,7 @@
       "netlist": "",
       "specctra_dsn": "",
       "step": "PlantBuddy.step",
-      "vrml": "PlantBuddy.wrl"
+      "vrml": ""
     },
     "page_layout_descr_file": ""
   },
