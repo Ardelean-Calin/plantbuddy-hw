@@ -92,7 +92,7 @@
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
         "silk_over_copper": "ignore",
-        "silk_overlap": "warning",
+        "silk_overlap": "ignore",
         "skew_out_of_range": "error",
         "through_hole_pad_without_hole": "error",
         "too_many_vias": "error",
@@ -418,6 +418,7 @@
         "nets": [
           "+3V3",
           "+BATT",
+          "/VGND",
           "GND",
           "Net-(J2-Pad1)",
           "VBUS",

@@ -4,14 +4,14 @@ Li+,BT1,Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal,C
 4.7u,"C5,C6,C10,C11",Capacitor_SMD:C_0603_1608Metric,C19666
 10u,C9,Capacitor_SMD:C_0603_1608Metric,C19702
 XL-3528RGBW-WS2812B,D1,Neopixel:XL-3528RGBW-WS2812B,C2890364
-ToolingHole,"H1,H2,H3",Tooling:JLCPCB_Tooling_hole,
+ToolingHole,"H1,H3",Tooling:JLCPCB_Tooling_hole,
 USB_C_Receptacle_USB2.0,J1,Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12,C165948
-Expansion Header,J4,Mezzanine-pb:AXK5F20547YG,C2917018
+External,J4,Connector_FFC-FPC:Hirose_FH12-10S-0.5SH_1x10-1MP_P0.50mm_Horizontal,C506791
 Speaker_Crystal,LS1,Piezo:Piezo,
-DMG1012T,Q1,Package_TO_SOT_SMD:SOT-523,C20512
+DMG1012T,"Q1,Q2",Package_TO_SOT_SMD:SOT-523,C20512
 5k1,"R1,R2,R3,R4,R7,R10",Resistor_SMD:R_0603_1608Metric,C23186
 2k2,R5,Resistor_SMD:R_0603_1608Metric,C4190
-15k,"R6,R8,R9",Resistor_SMD:R_0603_1608Metric,C22809
+15k,"R6,R8,R9,R12",Resistor_SMD:R_0603_1608Metric,C22809
 100m,R11,Resistor_SMD:R_0603_1608Metric,C247025
 2M,"R13,R14",Resistor_SMD:R_0603_1608Metric,C22976
 SW_Push,SW1,Button_Switch_SMD:Panasonic_EVQPUK_EVQPUB,C526225
