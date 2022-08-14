@@ -426,7 +426,6 @@
           "+3V3",
           "+BATT",
           "GND",
-          "Net-(J2-Pad1)",
           "VBUS",
           "VCC"
         ],
