@@ -7,4 +7,5 @@
   (lib (name "ESP32-S3-WROOM-1-N8R8")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ESP32-S3-WROOM-1-N8R8.lib")(options "")(descr ""))
   (lib (name "neopixel")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/neopixel.kicad_sym")(options "")(descr ""))
   (lib (name "tps2051")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/tps2051.kicad_sym")(options "")(descr ""))
+  (lib (name "ESP32-S3-MINI-1-N8")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ESP32-S3-MINI-1-N8.lib")(options "")(descr ""))
 )
