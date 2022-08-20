@@ -8,4 +8,6 @@
   (lib (name "neopixel")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/neopixel.kicad_sym")(options "")(descr ""))
   (lib (name "tps2051")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/tps2051.kicad_sym")(options "")(descr ""))
   (lib (name "ESP32-S3-MINI-1-N8")(type "Legacy")(uri "${KIPRJMOD}/lib/sym/ESP32-S3-MINI-1-N8.lib")(options "")(descr ""))
+  (lib (name "fs8205A")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/fs8205A.kicad_sym")(options "")(descr ""))
+  (lib (name "XB5350A")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/XB5350A.kicad_sym")(options "")(descr ""))
 )
