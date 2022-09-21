@@ -5733,10 +5733,10 @@
   (symbol (lib_id "MCU_Nordic:nRF52832-QFxx") (at 104.775 198.755 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 77149749-28f7-48a0-89a9-bfe419d97e75)
-    (property "Reference" "U102" (id 0) (at 106.7944 241.935 0)
+    (property "Reference" "U102" (id 0) (at 106.7944 242.57 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "nRF52832-QFxx" (id 1) (at 106.7944 244.475 0)
+    (property "Value" "nRF52832-QFAA" (id 1) (at 106.7944 245.11 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Package_DFN_QFN:QFN-48-1EP_6x6mm_P0.4mm_EP4.6x4.6mm" (id 2) (at 104.775 252.095 0)
@@ -7425,7 +7425,7 @@
       (reference "U101") (unit 1) (value "RT9080-33GJ5") (footprint "Package_TO_SOT_SMD:SOT-23-5")
     )
     (path "/77149749-28f7-48a0-89a9-bfe419d97e75"
-      (reference "U102") (unit 1) (value "nRF52832-QFxx") (footprint "Package_DFN_QFN:QFN-48-1EP_6x6mm_P0.4mm_EP4.6x4.6mm")
+      (reference "U102") (unit 1) (value "nRF52832-QFAA") (footprint "Package_DFN_QFN:QFN-48-1EP_6x6mm_P0.4mm_EP4.6x4.6mm")
     )
     (path "/dff537c4-3af9-41c9-9fd5-981d59d391bc"
       (reference "U104") (unit 1) (value "XB5350A") (footprint "Package_TO_SOT_SMD:SOT-23-5")
