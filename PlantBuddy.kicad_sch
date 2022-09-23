@@ -2835,6 +2835,7 @@
   (no_connect (at 162.56 64.135) (uuid 6d0fdc00-f3ab-47f6-97e5-2de37431ea67))
   (no_connect (at 162.56 66.675) (uuid 6d0fdc00-f3ab-47f6-97e5-2de37431ea68))
   (no_connect (at 387.223 116.586) (uuid 8d043057-9f80-465f-bcf7-5862295ce4a0))
+  (no_connect (at 127.635 178.435) (uuid a8ce8929-0433-479e-b2ba-fc63d8a744ce))
   (no_connect (at 162.56 43.815) (uuid af0ab026-9f2a-42ec-bf1a-9766a87d85b2))
   (no_connect (at 162.56 51.435) (uuid af0ab026-9f2a-42ec-bf1a-9766a87d85b3))
   (no_connect (at 162.56 53.975) (uuid af0ab026-9f2a-42ec-bf1a-9766a87d85b4))
@@ -4153,7 +4154,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid ccde25d2-5f27-4fde-af44-483e34438258)
   )
-  (text "1) I am using the nRF52832 in LDO-only mode and without external LF Oscillator"
+  (text "1) I am using the nRF52832 in DCDC mode and without external LF Oscillator"
     (at 337.185 171.45 0)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid dc766fb8-3da3-41b8-8544-a9da53a5d5c7)
@@ -4307,6 +4308,10 @@
   (label "DEC3" (at 115.57 125.095 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 64bdbecb-0689-494e-8baa-aeecb7d3aa5a)
+  )
+  (label "Tsense" (at 302.26 42.545 0)
+    (effects (font (size 0.5 0.5)) (justify left bottom))
+    (uuid 664bcf59-ccc1-4157-af7b-3c8a52b67249)
   )
   (label "UART_Tx" (at 137.795 224.155 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
