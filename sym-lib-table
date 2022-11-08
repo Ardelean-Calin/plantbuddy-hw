@@ -11,4 +11,5 @@
   (lib (name "fs8205A")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/fs8205A.kicad_sym")(options "")(descr ""))
   (lib (name "XB5350A")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/XB5350A.kicad_sym")(options "")(descr ""))
   (lib (name "LMS33460")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/LMS33460.kicad_sym")(options "")(descr ""))
+  (lib (name "wch-bluetooth")(type "KiCad")(uri "${KIPRJMOD}/lib/sym/wch-bluetooth.kicad_sym")(options "")(descr ""))
 )
