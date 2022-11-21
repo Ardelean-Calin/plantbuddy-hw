@@ -1,0 +1,3 @@
+[submodule "plantbuddy-probe"]
+	path = plantbuddy-probe
+	url = git@github.com:Ardelean-Calin/pb-mr-probe.git
