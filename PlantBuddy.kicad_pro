@@ -45,7 +45,7 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
-          "min_clearance": 0.0
+          "min_clearance": 0.19999999999999998
         }
       },
       "diff_pair_dimensions": [
@@ -61,13 +61,22 @@
         }
       ],
       "drc_exclusions": [
-        "clearance|148755100|118630700|6a9207b9-518e-4afc-8f72-68780fd8816b|dd5dfa16-bc4c-4da4-8a6e-27e66610db02",
-        "clearance|148755100|118630700|70485127-d1f5-4f41-88db-14ab79214919|dd5dfa16-bc4c-4da4-8a6e-27e66610db02",
-        "clearance|150242600|118478200|4bff4e4d-4da0-455d-987d-5abfa2c119c3|ef47559b-290f-4bbc-932f-db1cbf4949d8",
+        "clearance|105575000|61949000|f1abd1d1-e8be-4e38-83b8-ca70b552ac2b|b8ee2e56-305f-43e9-9889-a258803bb0e8",
+        "clearance|105575000|61949000|fd2be692-6db1-45bc-81b7-acd27e7e4ef7|b8ee2e56-305f-43e9-9889-a258803bb0e8",
+        "clearance|105727500|63436500|bc459539-1a50-4014-87be-fbedea0a95cb|911506ae-cf92-47c7-8828-af5f6cfcf501",
+        "clearance|105727500|63436500|ddf5dda6-7e89-49cc-be1a-739237cdb696|911506ae-cf92-47c7-8828-af5f6cfcf501",
+        "clearance|105727500|63436500|dff9b15a-dd32-4e6f-8757-7437d74c63ca|911506ae-cf92-47c7-8828-af5f6cfcf501",
+        "clearance|105778200|61949000|f28fef9a-0b34-4cd6-8fb6-e8a7d95ef77d|b8ee2e56-305f-43e9-9889-a258803bb0e8",
+        "clearance|105778200|61949000|fd2be692-6db1-45bc-81b7-acd27e7e4ef7|b8ee2e56-305f-43e9-9889-a258803bb0e8",
+        "clearance|105791000|63500000|1d98fd19-7420-4555-bb09-26134a8936bb|911506ae-cf92-47c7-8828-af5f6cfcf501",
+        "clearance|105791000|63500000|9eca912c-356f-4b80-a3ef-516c99fa4f12|911506ae-cf92-47c7-8828-af5f6cfcf501",
+        "clearance|105827495|61976000|322b979a-ec30-4267-9edb-753ed8e70505|b8ee2e56-305f-43e9-9889-a258803bb0e8",
+        "clearance|105827495|63500000|86d11a90-9704-46ad-9404-10091c9e829e|911506ae-cf92-47c7-8828-af5f6cfcf501",
+        "clearance|105930700|63436500|ddf5dda6-7e89-49cc-be1a-739237cdb696|911506ae-cf92-47c7-8828-af5f6cfcf501",
+        "clearance|106030695|61976000|322b979a-ec30-4267-9edb-753ed8e70505|b8ee2e56-305f-43e9-9889-a258803bb0e8",
+        "courtyards_overlap|118075201|53297201|96c917fb-496a-4b58-a977-7b8cdc2c90a2|b0e4dddc-f6c0-4f55-a6e8-0c6640ee8298",
+        "courtyards_overlap|118704477|54414801|b0e4dddc-f6c0-4f55-a6e8-0c6640ee8298|d7d47f07-7f2f-497d-9830-664d62f4f9a3",
         "courtyards_overlap|123232605|120407755|08f24401-4c84-490a-922f-94bebc79d886|f73b7ee8-0abf-4bf4-b2ea-d764ff28811d",
-        "courtyards_overlap|154998801|128278001|b0e4dddc-f6c0-4f55-a6e8-0c6640ee8298|d7d47f07-7f2f-497d-9830-664d62f4f9a3",
-        "courtyards_overlap|154998801|128278001|d7d47f07-7f2f-497d-9830-664d62f4f9a3|b0e4dddc-f6c0-4f55-a6e8-0c6640ee8298",
-        "courtyards_overlap|156065601|128286001|96c917fb-496a-4b58-a977-7b8cdc2c90a2|b0e4dddc-f6c0-4f55-a6e8-0c6640ee8298",
         "silk_overlap|146256108|68944399|f577b7e2-01be-46a1-8617-12ed672d1f6c|048acc15-06d5-4bae-91c3-f104846f8a8f",
         "silk_overlap|146256108|68944399|f577b7e2-01be-46a1-8617-12ed672d1f6c|58b14380-d6ac-494b-859e-7240d61da924",
         "silk_overlap|146256108|68944399|f577b7e2-01be-46a1-8617-12ed672d1f6c|fb578753-610e-4a26-b870-6edfdd8a7122",
@@ -145,7 +154,6 @@
         0.25,
         0.3,
         0.5,
-        0.6096,
         1.05
       ],
       "via_dimensions": [
@@ -158,7 +166,7 @@
           "drill": 0.2
         },
         {
-          "diameter": 0.6,
+          "diameter": 0.55,
           "drill": 0.3
         }
       ],
@@ -405,26 +413,6 @@
       },
       {
         "bus_width": 12.0,
-        "clearance": 0.154,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "Antenna",
-        "nets": [
-          "/FEED"
-        ],
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.29337,
-        "via_diameter": 0.6,
-        "via_drill": 0.25,
-        "wire_width": 6.0
-      },
-      {
-        "bus_width": 12.0,
         "clearance": 0.152,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
@@ -450,12 +438,30 @@
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
+        "name": "Feedline",
+        "nets": [
+          "/FEED2"
+        ],
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.29337,
+        "via_diameter": 0.6,
+        "via_drill": 0.25,
+        "wire_width": 6.0
+      },
+      {
+        "bus_width": 12.0,
+        "clearance": 0.154,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
         "name": "Power",
         "nets": [
-          "+BATT",
           "GND",
-          "VBUS",
-          "VCC"
+          "VBUS"
         ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
@@ -498,7 +504,7 @@
       "netlist": "",
       "specctra_dsn": "",
       "step": "PlantBuddy.step",
-      "vrml": "PlantBuddy.wrl"
+      "vrml": ""
     },
     "page_layout_descr_file": ""
   },

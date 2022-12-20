@@ -12,4 +12,5 @@
   (lib (name "ESP32-S3-mini")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ESP32-S3-mini.pretty")(options "")(descr ""))
   (lib (name "Keystone-2450")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/Keystone-2450.pretty")(options "")(descr ""))
   (lib (name "wch-antenna")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/wch-antenna.pretty")(options "")(descr ""))
+  (lib (name "MM8130-2600RA2")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/MM8130-2600RA2.pretty")(options "")(descr ""))
 )
