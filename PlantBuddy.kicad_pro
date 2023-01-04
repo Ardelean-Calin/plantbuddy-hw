@@ -504,7 +504,7 @@
       "netlist": "",
       "specctra_dsn": "",
       "step": "PlantBuddy.step",
-      "vrml": ""
+      "vrml": "PlantBuddy.wrl"
     },
     "page_layout_descr_file": ""
   },
