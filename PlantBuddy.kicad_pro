@@ -61,28 +61,10 @@
         }
       ],
       "drc_exclusions": [
-        "clearance|105575000|61949000|f1abd1d1-e8be-4e38-83b8-ca70b552ac2b|b8ee2e56-305f-43e9-9889-a258803bb0e8",
-        "clearance|105575000|61949000|fd2be692-6db1-45bc-81b7-acd27e7e4ef7|b8ee2e56-305f-43e9-9889-a258803bb0e8",
-        "clearance|105727500|63436500|bc459539-1a50-4014-87be-fbedea0a95cb|911506ae-cf92-47c7-8828-af5f6cfcf501",
-        "clearance|105727500|63436500|ddf5dda6-7e89-49cc-be1a-739237cdb696|911506ae-cf92-47c7-8828-af5f6cfcf501",
-        "clearance|105727500|63436500|dff9b15a-dd32-4e6f-8757-7437d74c63ca|911506ae-cf92-47c7-8828-af5f6cfcf501",
-        "clearance|105778200|61949000|f28fef9a-0b34-4cd6-8fb6-e8a7d95ef77d|b8ee2e56-305f-43e9-9889-a258803bb0e8",
+        "clearance|105740200|63449200|955d2e2c-f710-4511-b8e1-97f56cb2e6ed|911506ae-cf92-47c7-8828-af5f6cfcf501",
         "clearance|105778200|61949000|fd2be692-6db1-45bc-81b7-acd27e7e4ef7|b8ee2e56-305f-43e9-9889-a258803bb0e8",
-        "clearance|105791000|63500000|1d98fd19-7420-4555-bb09-26134a8936bb|911506ae-cf92-47c7-8828-af5f6cfcf501",
-        "clearance|105791000|63500000|9eca912c-356f-4b80-a3ef-516c99fa4f12|911506ae-cf92-47c7-8828-af5f6cfcf501",
-        "clearance|105827495|61976000|322b979a-ec30-4267-9edb-753ed8e70505|b8ee2e56-305f-43e9-9889-a258803bb0e8",
-        "clearance|105827495|63500000|86d11a90-9704-46ad-9404-10091c9e829e|911506ae-cf92-47c7-8828-af5f6cfcf501",
         "clearance|105930700|63436500|ddf5dda6-7e89-49cc-be1a-739237cdb696|911506ae-cf92-47c7-8828-af5f6cfcf501",
-        "clearance|106030695|61976000|322b979a-ec30-4267-9edb-753ed8e70505|b8ee2e56-305f-43e9-9889-a258803bb0e8",
-        "courtyards_overlap|118075201|53297201|96c917fb-496a-4b58-a977-7b8cdc2c90a2|b0e4dddc-f6c0-4f55-a6e8-0c6640ee8298",
-        "courtyards_overlap|118704477|54414801|b0e4dddc-f6c0-4f55-a6e8-0c6640ee8298|d7d47f07-7f2f-497d-9830-664d62f4f9a3",
-        "courtyards_overlap|123232605|120407755|08f24401-4c84-490a-922f-94bebc79d886|f73b7ee8-0abf-4bf4-b2ea-d764ff28811d",
-        "silk_overlap|146256108|68944399|f577b7e2-01be-46a1-8617-12ed672d1f6c|048acc15-06d5-4bae-91c3-f104846f8a8f",
-        "silk_overlap|146256108|68944399|f577b7e2-01be-46a1-8617-12ed672d1f6c|58b14380-d6ac-494b-859e-7240d61da924",
-        "silk_overlap|146256108|68944399|f577b7e2-01be-46a1-8617-12ed672d1f6c|fb578753-610e-4a26-b870-6edfdd8a7122",
-        "silk_overlap|149698651|66537999|f577b7e2-01be-46a1-8617-12ed672d1f6c|048acc15-06d5-4bae-91c3-f104846f8a8f",
-        "silk_overlap|149698651|66537999|f577b7e2-01be-46a1-8617-12ed672d1f6c|fb578753-610e-4a26-b870-6edfdd8a7122",
-        "silk_overlap|149752880|66600971|58b14380-d6ac-494b-859e-7240d61da924|f577b7e2-01be-46a1-8617-12ed672d1f6c"
+        "clearance|106030695|63449200|e5112de9-6a4e-4c33-a553-7992f064c89b|911506ae-cf92-47c7-8828-af5f6cfcf501"
       ],
       "meta": {
         "filename": "board_design_settings.json",
@@ -439,7 +421,9 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "Feedline",
-        "nets": [],
+        "nets": [
+          "/FEED2"
+        ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.29337,
