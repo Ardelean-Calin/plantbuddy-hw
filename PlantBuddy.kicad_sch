@@ -10642,7 +10642,7 @@
     (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 52.07 160.655 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 52.07 160.655 0)
+    (property "Datasheet" "https://datasheet.lcsc.com/lcsc/2206010216_UNI-ROYAL-Uniroyal-Elec-0402WGF0000TCE_C17168.pdf" (at 52.07 160.655 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "LCSC" "C17168" (at 52.07 160.655 0)
