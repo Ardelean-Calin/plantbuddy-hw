@@ -193,6 +193,7 @@
         0.1778,
         0.2,
         0.254,
+        0.29337,
         0.508
       ],
       "via_dimensions": [
@@ -472,7 +473,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.127,
+        "clearance": 0.88011,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
