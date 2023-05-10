@@ -1,4 +1,5 @@
 (fp_lib_table
+  (version 7)
   (lib (name "PlantBuddy")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/PlantBuddy.pretty")(options "")(descr ""))
   (lib (name "ESP32")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ESP32.pretty")(options "")(descr ""))
   (lib (name "ADP150")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ADP150.pretty")(options "")(descr ""))
@@ -14,4 +15,5 @@
   (lib (name "wch-antenna")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/wch-antenna.pretty")(options "")(descr ""))
   (lib (name "MM8130-2600RA2")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/MM8130-2600RA2.pretty")(options "")(descr ""))
   (lib (name "opt3001")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/opt3001.pretty")(options "")(descr ""))
+  (lib (name "ESP32-C3")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints/ESP32-C3.pretty")(options "")(descr ""))
 )
