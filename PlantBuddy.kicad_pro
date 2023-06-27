@@ -541,6 +541,10 @@
       {
         "netclass": "USB Data",
         "pattern": "/D-"
+      },
+      {
+        "netclass": "Feedline",
+        "pattern": "/FEED1"
       }
     ]
   },
